@@ -1,0 +1,36 @@
+{
+  "name": "kiwi-suite/admin-backend",
+  "description": "Kiwi Admin API module",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "kiwi suite"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": "^7.1",
+    "kiwi-suite/servicemanager": "dev-develop",
+    "kiwi-suite/admin-frontend": "dev-develop",
+    "kiwi-suite/application": "dev-develop"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.0.6",
+    "friendsofphp/php-cs-fixer": "^2.0",
+    "php-coveralls/php-coveralls": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "KiwiSuite\\Admin\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "KiwiSuiteTest\\Admin\\": "tests/src/",
+      "KiwiSuiteMisc\\Admin\\": "tests/misc/"
+    }
+  }
+}
+
