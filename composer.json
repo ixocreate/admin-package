@@ -1,6 +1,6 @@
 {
-  "name": "kiwi-suite/admin-backend",
-  "description": "Kiwi Admin API module",
+  "name": "kiwi-suite/admin",
+  "description": "Kiwi Admin",
   "type": "library",
   "license": "MIT",
   "authors": [

@@ -1,1 +1,1 @@
-# Kiwi Admin API Module
+# Kiwi Admin
