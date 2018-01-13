@@ -1,36 +1,41 @@
 {
-  "name": "kiwi-suite/admin",
-  "description": "Kiwi Admin",
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Lucas Seinfeld (luchaos)"
+    "name": "kiwi-suite/admin",
+    "description": "Kiwi Admin",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lucas Seinfeld (luchaos)"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.1",
+        "kiwi-suite/admin-frontend": "dev-develop",
+        "kiwi-suite/application": "dev-develop",
+        "kiwi-suite/application-console": "dev-develop",
+        "kiwi-suite/application-http": "dev-develop",
+        "kiwi-suite/servicemanager": "dev-develop"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0.6",
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "php-coveralls/php-coveralls": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "KiwiSuite\\Admin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KiwiSuiteTest\\Admin\\": "tests/src/",
+            "KiwiSuiteMisc\\Admin\\": "tests/misc/"
+        }
+    },
+    "scripts" : {
+        "fix-cs": "vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix"
     }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require": {
-    "php": "^7.1",
-    "kiwi-suite/servicemanager": "dev-develop",
-    "kiwi-suite/admin-frontend": "dev-develop",
-    "kiwi-suite/application": "dev-develop"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^6.0.6",
-    "friendsofphp/php-cs-fixer": "^2.0",
-    "php-coveralls/php-coveralls": "^2.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "KiwiSuite\\Admin\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "KiwiSuiteTest\\Admin\\": "tests/src/",
-      "KiwiSuiteMisc\\Admin\\": "tests/misc/"
-    }
-  }
 }
 
