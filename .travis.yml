@@ -5,6 +5,9 @@ php:
 cache:
   directories:
   - "$HOME/.composer/cache"
+branches:
+  only:
+  - master
 before_script:
 - composer install --prefer-dist --no-interaction
 - composer require --dev satooshi/php-coveralls
