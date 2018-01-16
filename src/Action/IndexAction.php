@@ -28,7 +28,7 @@ class IndexAction implements MiddlewareInterface
         // TODO: read, cache and share contents of admin-frontend assets folder (scripts & css file names)
         // TODO: read project config for white labeling / deep merge with default config
 
-        $data = array_merge($this->assetsPaths(), $this->config());
+        $data = \array_merge($this->assetsPaths(), $this->config());
 
         return new HtmlResponse($this->templateRenderer->render('admin::index', $data));
     }
@@ -101,7 +101,7 @@ class IndexAction implements MiddlewareInterface
                 if (\in_array($assetName, \array_keys($scripts))) {
                     $scripts[$assetName] = $fileInfo->getFilename();
                 }
-            } else if ($fileInfo->getExtension() === 'css') {
+            } elseif ($fileInfo->getExtension() === 'css') {
                 $assetName = \explode('.', $fileInfo->getFilename())[0] ?? null;
                 if (\in_array($assetName, \array_keys($styles))) {
                     $styles[$assetName] = $fileInfo->getFilename();
