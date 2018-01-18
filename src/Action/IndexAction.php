@@ -6,6 +6,7 @@ namespace KiwiSuite\Admin\Action;
 use FilesystemIterator;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
+use KiwiSuite\Config\Config;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use SplFileInfo;
@@ -14,51 +15,36 @@ use Zend\Expressive\Plates\PlatesRenderer;
 
 class IndexAction implements MiddlewareInterface
 {
-    protected $templateRenderer;
+    /**
+     * @var PlatesRenderer
+     */
+    protected $renderer;
 
-    public function __construct()
+    /**
+     * @var Config
+     */
+    protected $config;
+
+    public function __construct(Config $config, PlatesRenderer $renderer)
     {
+        $this->renderer = $renderer;
+        $this->config = $config;
+
         // TODO: inject a TemplateRendererInterface
-        $this->templateRenderer = new PlatesRenderer();
-        $this->templateRenderer->addPath(__DIR__ . '/../../templates/admin', 'admin');
+        $this->renderer->addPath(__DIR__ . '/../../templates/admin', 'admin');
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // TODO: read, cache and share contents of admin-frontend assets folder (scripts & css file names)
-        // TODO: read project config for white labeling / deep merge with default config
+        $data = \array_merge($this->assetsPaths(), $this->config->get('admin'));
 
-        $data = \array_merge($this->assetsPaths(), $this->config());
-
-        return new HtmlResponse($this->templateRenderer->render('admin::index', $data));
+        return new HtmlResponse($this->renderer->render('admin::index', $data));
     }
 
     /**
-     * @return array
-     */
-    private function config()
-    {
-        return [
-            'title'       => 'Kiwi CMF',
-            'description' => 'Kiwi CMF Admin Area',
-            'author'      => 'kiwi suite GmbH',
-            'baseUrl'     => '/admin/',
-            'assetsUrl'   => '/assets/admin/',
-            'config'      => [
-                'apiUrl'     => 'https://kiwi.test/api/',
-                'configPath' => 'config',
-                'authPath'   => 'auth',
-                'project'    => [
-                    'name'      => 'Kiwi CMF',
-                    'copyright' => '2018 kiwi suite GmbH',
-                    'poweredBy' => true,
-                ],
-            ],
-        ];
-    }
-
-    /**
-     * automatically grab angular asset names from build directory
+     * automatically read contents of admin-frontend assets folder (scripts & css file names)
+     *
+     * TODO: cache
      *
      * @return array
      */
