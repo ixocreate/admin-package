@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin;
 
+use KiwiSuite\Admin\ConfiguratorItem\PipeConfiguratorItem;
+use KiwiSuite\Admin\ConfiguratorItem\RouteConfiguratorItem;
 use KiwiSuite\Admin\Plates\PlatesRendererFactory;
 use KiwiSuite\Application\ConfiguratorItem\ConfiguratorRegistry;
 use KiwiSuite\Application\Module\ModuleInterface;
@@ -33,7 +35,10 @@ class Module implements ModuleInterface
      */
     public function getConfiguratorItems(): ?array
     {
-        return null;
+        return [
+            PipeConfiguratorItem::class,
+            RouteConfiguratorItem::class
+        ];
     }
 
     /**
@@ -57,7 +62,7 @@ class Module implements ModuleInterface
      */
     public function getBootstrapDirectory(): ?string
     {
-        return null;
+        return __DIR__ . '/../bootstrap/';
     }
 
     /**
