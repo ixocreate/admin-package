@@ -6,6 +6,9 @@
     "authors": [
         {
             "name": "Lucas Seinfeld (luchaos)"
+        },
+        {
+            "name": "Thomas Payer"
         }
     ],
     "minimum-stability": "dev",
@@ -16,7 +19,8 @@
         "kiwi-suite/application": "dev-develop",
         "kiwi-suite/application-console": "dev-develop",
         "kiwi-suite/application-http": "dev-develop",
-        "kiwi-suite/servicemanager": "dev-develop"
+        "kiwi-suite/servicemanager": "dev-develop",
+        "kiwi-suite/template": "dev-develop"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0.6",
