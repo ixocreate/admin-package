@@ -1,15 +1,24 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package   kiwi-suite/admin
+ * @see       https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license   MIT License
+ */
+
 declare(strict_types=1);
 
 namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\ConfiguratorItem\PipeConfiguratorItem;
 use KiwiSuite\Admin\ConfiguratorItem\RouteConfiguratorItem;
-use KiwiSuite\Admin\Plates\PlatesRendererFactory;
 use KiwiSuite\Application\ConfiguratorItem\ConfiguratorRegistry;
 use KiwiSuite\Application\Module\ModuleInterface;
 use KiwiSuite\Application\Service\ServiceRegistry;
 use KiwiSuite\ServiceManager\ServiceManager;
+use KiwiSuite\Template\Plates\PlatesRendererFactory;
 use Zend\Expressive\Plates\PlatesRenderer;
 
 class Module implements ModuleInterface
@@ -37,7 +46,7 @@ class Module implements ModuleInterface
     {
         return [
             PipeConfiguratorItem::class,
-            RouteConfiguratorItem::class
+            RouteConfiguratorItem::class,
         ];
     }
 

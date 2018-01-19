@@ -1,9 +1,22 @@
 <?php
+$header = <<<'EOF'
+kiwi-suite/admin (https://github.com/kiwi-suite/admin)
 
+@package kiwi-suite/admin
+@link https://github.com/kiwi-suite/admin
+@copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+@license MIT License
+EOF;
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
         '@PSR2'                             => true,
+        'header_comment'                  => [
+            'header' => $header,
+            'commentType' => 'PHPDoc',
+            'location' => 'after_open',
+            'separate' => 'bottom'
+        ],
         'combine_consecutive_unsets'        => true,
         'concat_space'                      => ['spacing' => 'one'],
         'hash_to_slash_comment'             => true,
