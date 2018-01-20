@@ -9,6 +9,7 @@
  */
 
 declare(strict_types=1);
+
 namespace KiwiSuite\Admin\ConfiguratorItem;
 
 use KiwiSuite\Admin\Route\RouteConfig;

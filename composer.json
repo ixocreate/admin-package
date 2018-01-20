@@ -20,6 +20,7 @@
         "kiwi-suite/application-console": "dev-develop",
         "kiwi-suite/application-http": "dev-develop",
         "kiwi-suite/servicemanager": "dev-develop",
+        "kiwi-suite/template": "dev-develop",
         "firebase/php-jwt": "^5.0",
         "ramsey/uuid": "^3.7",
         "dflydev/fig-cookies": "^1.0"
