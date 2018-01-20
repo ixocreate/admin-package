@@ -1,25 +1,31 @@
 <?php
-declare(strict_types=1);
-
-namespace Admin\Middleware;
+namespace KiwiSuite\Admin\Action\Api\Auth;
 
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
+use KiwiSuite\Admin\Entity\User;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\JsonResponse;
 
-class AuthMiddleware implements MiddlewareInterface
+final class UserAction implements MiddlewareInterface
 {
+
     /**
      * Process an incoming server request and return a response, optionally delegating
      * response creation to a handler.
-     *
-     * @param ServerRequestInterface  $request
-     * @param RequestHandlerInterface $handler
-     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return $handler->handle($request);
+        $user = new User([
+            'id' => 1,
+            'email' => 'test@kiwi-suite.test',
+            'password' => 'test',
+        ]);
+
+        return new JsonResponse([
+            'success' => true,
+            'payload' => $user->toArray(),
+        ]);
     }
 }

@@ -7,7 +7,10 @@ namespace KiwiSuite\Admin;
 use Interop\Http\Server\MiddlewareInterface;
 use KiwiSuite\Admin\Middleware\AdminMiddleware;
 use KiwiSuite\Admin\Middleware\Factory\AdminApplicationFactory;
+use KiwiSuite\Admin\Middleware\Factory\JsonBodyParamsFactory;
+use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 $middlewareConfigurator->addFactory(AdminMiddleware::class, AdminApplicationFactory::class);
+$middlewareConfigurator->addFactory(BodyParamsMiddleware::class, JsonBodyParamsFactory::class);
 $middlewareConfigurator->addDirectory(__DIR__ . '/../src/Action', true, [MiddlewareInterface::class]);
 $middlewareConfigurator->addDirectory(__DIR__ . '/../src/Middleware', true, [MiddlewareInterface::class]);

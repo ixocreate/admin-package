@@ -1,0 +1,44 @@
+<?php
+namespace KiwiSuite\Admin\Middleware\Api;
+
+use Firebase\JWT\JWT;
+use Interop\Http\Server\MiddlewareInterface;
+use Interop\Http\Server\RequestHandlerInterface;
+use KiwiSuite\Admin\Entity\SessionData;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\JsonResponse;
+
+final class SessionDataMiddleware implements MiddlewareInterface
+{
+
+    /**
+     * Process an incoming server request and return a response, optionally delegating
+     * response creation to a handler.
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        if (empty($request->getCookieParams()['kiwiSid'])) {
+            return $this->createInvalidSidResponse();
+        }
+
+        try {
+            $jwt = JWT::decode($request->getCookieParams()['kiwiSid'], 'secret_key', ['HS512']);
+
+            $sessionData = new SessionData((array) $jwt->data);
+        } catch (\Throwable $e) {
+            return $this->createInvalidSidResponse();
+        }
+
+        return $handler->handle($request->withAttribute(SessionData::class, $sessionData));
+    }
+
+    private function createInvalidSidResponse() : JsonResponse
+    {
+        return new JsonResponse([
+            'success' => false,
+            'message' => 'session.invalid'
+        ], 406);
+    }
+}
+
