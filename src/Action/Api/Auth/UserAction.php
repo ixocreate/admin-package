@@ -4,9 +4,9 @@ namespace KiwiSuite\Admin\Action\Api\Auth;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Entity\User;
+use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\JsonResponse;
 
 final class UserAction implements MiddlewareInterface
 {
@@ -23,9 +23,6 @@ final class UserAction implements MiddlewareInterface
             'password' => 'test',
         ]);
 
-        return new JsonResponse([
-            'success' => true,
-            'payload' => $user->toArray(),
-        ]);
+        return new ApiSuccessResponse($user->toArray());
     }
 }

@@ -7,10 +7,11 @@ use Firebase\JWT\JWT;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Entity\SessionData;
+use KiwiSuite\Admin\Response\ApiErrorResponse;
+use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Ramsey\Uuid\Uuid;
-use Zend\Diactoros\Response\JsonResponse;
 
 final class LoginAction implements MiddlewareInterface
 {
@@ -19,15 +20,10 @@ final class LoginAction implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
         if (empty($data['email']) || empty($data['password']) || $data['email'] !== 'test@kiwi-suite.test' || $data['password'] !== 'test') {
-            return new JsonResponse([
-                'success' => false,
-                'message' => 'credentials.invalid'
-            ]);
+            return new ApiErrorResponse("credentials.invalid");
         }
 
-        $response = new JsonResponse([
-            'success' => true,
-        ]);
+        $response = new ApiSuccessResponse();
 
         $sessionData = new SessionData([
             'xsrfToken' => Uuid::uuid4()->toString(),

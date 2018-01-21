@@ -4,9 +4,9 @@ namespace KiwiSuite\Admin\Middleware\Api;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Entity\SessionData;
+use KiwiSuite\Admin\Response\ApiErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\JsonResponse;
 
 final class AuthorizationGuardMiddleware implements MiddlewareInterface
 {
@@ -19,22 +19,18 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
     {
         $sessionData = $request->getAttribute(SessionData::class);
         if (!($sessionData instanceof SessionData)) {
-            return $this->createNotAuthorizedResponse([]);
+            return $this->createNotAuthorizedResponse();
         }
 
         if ($sessionData->getUserId() !== 1) {
-            return $this->createNotAuthorizedResponse($sessionData->toArray());
+            return $this->createNotAuthorizedResponse();
         }
 
         return $handler->handle($request);
     }
 
-    private function createNotAuthorizedResponse(array $result) : JsonResponse
+    private function createNotAuthorizedResponse() : ApiErrorResponse
     {
-        return new JsonResponse([
-            'success' => false,
-            'message' => 'auth.not-authorized',
-            'result' => $result
-        ], 401);
+        return new ApiErrorResponse('auth.not-authorized', [], 401);
     }
 }

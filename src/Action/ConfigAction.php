@@ -14,9 +14,9 @@ namespace Admin\Action;
 
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
+use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\JsonResponse;
 
 class ConfigAction implements MiddlewareInterface
 {
@@ -30,7 +30,7 @@ class ConfigAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return new JsonResponse([
+        return new ApiSuccessResponse([
             'key' => 'value',
         ]);
     }

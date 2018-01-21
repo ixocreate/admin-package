@@ -7,19 +7,17 @@ use Firebase\JWT\JWT;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Entity\SessionData;
+use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Ramsey\Uuid\Uuid;
-use Zend\Diactoros\Response\JsonResponse;
 
 final class LogoutAction implements MiddlewareInterface
 {
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $response = new JsonResponse([
-            'success' => true,
-        ]);
+        $response = new ApiSuccessResponse();
 
         $sessionData = new SessionData([
             'xsrfToken' => Uuid::uuid4()->toString(),

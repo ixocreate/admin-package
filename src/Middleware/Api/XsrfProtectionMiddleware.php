@@ -4,9 +4,9 @@ namespace KiwiSuite\Admin\Middleware\Api;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Entity\SessionData;
+use KiwiSuite\Admin\Response\ApiErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\JsonResponse;
 
 final class XsrfProtectionMiddleware implements MiddlewareInterface
 {
@@ -43,11 +43,8 @@ final class XsrfProtectionMiddleware implements MiddlewareInterface
         return $handler->handle($request);
     }
 
-    private function createInvalidXsrfTokenResponse() : JsonResponse
+    private function createInvalidXsrfTokenResponse() : ApiErrorResponse
     {
-        return new JsonResponse([
-            'success' => false,
-            'message' => 'xsrf-token.invalid'
-        ], 406);
+        return new ApiErrorResponse("xsrf-token.invalid", [], 406);
     }
 }

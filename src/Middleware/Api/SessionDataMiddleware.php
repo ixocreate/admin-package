@@ -5,9 +5,9 @@ use Firebase\JWT\JWT;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Entity\SessionData;
+use KiwiSuite\Admin\Response\ApiErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\JsonResponse;
 
 final class SessionDataMiddleware implements MiddlewareInterface
 {
@@ -33,12 +33,9 @@ final class SessionDataMiddleware implements MiddlewareInterface
         return $handler->handle($request->withAttribute(SessionData::class, $sessionData));
     }
 
-    private function createInvalidSidResponse() : JsonResponse
+    private function createInvalidSidResponse() : ApiErrorResponse
     {
-        return new JsonResponse([
-            'success' => false,
-            'message' => 'session.invalid'
-        ], 406);
+        return new ApiErrorResponse('session.invalid', [], 406);
     }
 }
 
