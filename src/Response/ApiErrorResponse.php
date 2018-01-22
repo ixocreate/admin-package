@@ -8,7 +8,7 @@ final class ApiErrorResponse extends JsonResponse
     public function __construct(string $errorCode, array $messages = [], int $status = 400)
     {
         $payload = [
-            'success' => true,
+            'success' => false,
             'errorCode' => $errorCode,
             'errorMessages' => $messages,
         ];
