@@ -4,7 +4,6 @@ namespace KiwiSuite\Admin\Action\Api\Config;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Helper\ServerUrlHelper;
-use KiwiSuite\Admin\Helper\UrlHelper;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\Admin\Route\RouteConfig;
 use Psr\Http\Message\ResponseInterface;
