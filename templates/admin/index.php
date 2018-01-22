@@ -21,8 +21,8 @@
 <script>
     window.__theme = 'bs4';
     window.__kiwi =<?= json_encode([
-            'apiUrl' => (string) $adminConfig->getUri() . $adminConfig->getApiBasePath(),
-            'configPath' => 'config',
+            'apiUrl' => (string) $adminConfig->getUri() . '/api',
+            'configUrl' => (string) $adminConfig->getUri() . '/api/config', //TODO use url helper
             'project' => $adminConfig->getProject()
     ]) ?>;
 </script>

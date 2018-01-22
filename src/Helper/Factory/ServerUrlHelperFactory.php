@@ -1,13 +1,12 @@
 <?php
-namespace KiwiSuite\Admin\Config\Factory;
+namespace KiwiSuite\Admin\Helper\Factory;
 
 use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Config\Config;
+use KiwiSuite\Admin\Helper\ServerUrlHelper;
 use KiwiSuite\ServiceManager\FactoryInterface;
 use KiwiSuite\ServiceManager\ServiceManagerInterface;
-use Zend\Diactoros\Uri;
 
-final class AdminConfigFactory implements FactoryInterface
+final class ServerUrlHelperFactory implements FactoryInterface
 {
 
     /**
@@ -20,12 +19,9 @@ final class AdminConfigFactory implements FactoryInterface
      */
     public function __invoke(ServiceManagerInterface $container, $requestedName, array $options = null)
     {
-        /** @var Config $config */
-        $config = $container->get(Config::class);
+        $serverUrlHelper = new ServerUrlHelper();
+        $serverUrlHelper->setUri($container->get(AdminConfig::class)->getUri());
 
-        return new AdminConfig(
-            new Uri($config->get("admin.uri")),
-            $config->get("admin.project")
-        );
+        return $serverUrlHelper;
     }
 }

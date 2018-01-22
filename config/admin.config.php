@@ -1,7 +1,6 @@
 <?php
 return [
     'uri' => '',
-    'apiBasePath' => '/api',
     'project' => [
         'title'       => 'Kiwi',
         'description' => 'Kiwi Admin Area',

@@ -11,22 +11,15 @@ final class AdminConfig
     private $uri;
 
     /**
-     * @var string
-     */
-    private $apiBasePath;
-
-    /**
      * @var array
      */
     private $project;
 
     public function __construct(
         UriInterface $uri,
-        string $apiBasePath,
         array $project
     ) {
         $this->uri = $uri;
-        $this->apiBasePath = '/' . trim($apiBasePath, '/');
         $this->project = $project;
     }
 
@@ -36,14 +29,6 @@ final class AdminConfig
     public function getUri(): UriInterface
     {
         return $this->uri;
-    }
-
-    /**
-     * @return string
-     */
-    public function getApiBasePath(): string
-    {
-        return $this->apiBasePath;
     }
 
     /**
