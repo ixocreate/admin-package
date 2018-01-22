@@ -15,6 +15,7 @@ namespace KiwiSuite\Admin\Action;
 use FilesystemIterator;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
+use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Config\Config;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -34,7 +35,7 @@ class IndexAction implements MiddlewareInterface
      */
     protected $config;
 
-    public function __construct(Config $config, PlatesRenderer $renderer)
+    public function __construct(AdminConfig $config, PlatesRenderer $renderer)
     {
         $this->renderer = $renderer;
         $this->config = $config;
@@ -45,9 +46,11 @@ class IndexAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $data = \array_merge($this->assetsPaths(), $this->config->get('admin'));
-
-        return new HtmlResponse($this->renderer->render('admin::index', $data));
+        return new HtmlResponse($this->renderer->render('admin::index', [
+            'assets' => $this->assetsPaths(),
+            'assetsUrl' => 'assets/admin/',
+            'adminConfig' => $this->config
+        ]));
     }
 
     /**
