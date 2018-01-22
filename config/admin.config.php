@@ -1,12 +1,11 @@
 <?php
 return [
-    'uri' => '',
+    'uri'     => 'admin',
     'project' => [
-        'title'       => 'Kiwi',
-        'description' => 'Kiwi Admin Area',
+        'name'        => 'Kiwi',
+        'description' => 'Kiwi Admin',
         'author'      => 'kiwi suite GmbH',
-        'name'      => 'Kiwi',
-        'copyright' => '2018 kiwi suite GmbH',
-        'poweredBy' => true,
+        'copyright'   => '2018 kiwi suite GmbH',
+        'poweredBy'   => true,
     ],
 ];
