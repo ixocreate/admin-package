@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Action\Api\Config;
 
 use Interop\Http\Server\MiddlewareInterface;
@@ -35,7 +46,7 @@ final class ConfigAction implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         return new ApiSuccessResponse([
-            'routes' => $this->getRoutes()
+            'routes' => $this->getRoutes(),
         ]);
     }
 
@@ -46,7 +57,7 @@ final class ConfigAction implements MiddlewareInterface
         //TODO Login Check / Permission Check
 
         foreach ($this->routeConfig->getRoutes() as $route) {
-            if (substr($route['path'], 0, 4) !== "/api") {
+            if (\mb_substr($route['path'], 0, 4) !== "/api") {
                 continue;
             }
             $routes[$route['name']] = $this->serverUrlHelper->generate($route['path']);

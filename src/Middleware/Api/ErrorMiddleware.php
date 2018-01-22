@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Middleware\Api;
 
 use Interop\Http\Server\MiddlewareInterface;
@@ -10,10 +21,9 @@ use Zend\Stratigility\Exception\MissingResponseException;
 
 final class ErrorMiddleware implements MiddlewareInterface
 {
-
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        set_error_handler($this->createErrorHandler());
+        \set_error_handler($this->createErrorHandler());
 
         try {
             $response = $handler->handle($request);
@@ -25,7 +35,7 @@ final class ErrorMiddleware implements MiddlewareInterface
             $response = $this->handleThrowable($e, $request);
         }
 
-        restore_error_handler();
+        \restore_error_handler();
 
         return $response;
     }
@@ -38,7 +48,7 @@ final class ErrorMiddleware implements MiddlewareInterface
     private function createErrorHandler() : callable
     {
         return function (int $errno, string $errstr, string $errfile, int $errline) : void {
-            if (! (error_reporting() & $errno)) {
+            if (! (\error_reporting() & $errno)) {
                 return;
             }
             throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);

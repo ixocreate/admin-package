@@ -49,7 +49,7 @@ class IndexAction implements MiddlewareInterface
         return new HtmlResponse($this->renderer->render('admin::index', [
             'assets' => $this->assetsPaths(),
             'assetsUrl' => 'assets/admin/',
-            'adminConfig' => $this->config
+            'adminConfig' => $this->config,
         ]));
     }
 

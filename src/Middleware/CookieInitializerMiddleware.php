@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Middleware;
 
 use Dflydev\FigCookies\FigResponseCookies;
@@ -39,12 +50,12 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
     {
         $jwt = JWT::encode(
             [
-                'iat'  => time(),
-                'jti'  => base64_encode(random_bytes(32)),
+                'iat'  => \time(),
+                'jti'  => \base64_encode(\random_bytes(32)),
                 'iss'  => $request->getUri()->getHost(),
-                'nbf'  => time(),
-                'exp'  => time() + 31536000,
-                'data' => $sessionData->toArray()
+                'nbf'  => \time(),
+                'exp'  => \time() + 31536000,
+                'data' => $sessionData->toArray(),
             ],
             'secret_key',
             'HS512'
@@ -55,7 +66,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
             ->withValue($jwt)
             ->withDomain($request->getUri()->getHost())
             ->withHttpOnly(true)
-            ->withSecure(( $request->getUri()->getScheme() === "https"));
+            ->withSecure(($request->getUri()->getScheme() === "https"));
 
         return FigResponseCookies::set($response, $cookie);
     }
@@ -67,7 +78,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
             ->withValue($sessionData->getXsrfToken())
             ->withDomain($request->getUri()->getHost())
             ->withHttpOnly(false)
-            ->withSecure(( $request->getUri()->getScheme() === "https"));
+            ->withSecure(($request->getUri()->getScheme() === "https"));
 
         return FigResponseCookies::set($response, $cookie);
     }

@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Middleware\Api;
 
 use Interop\Http\Server\MiddlewareInterface;
@@ -10,7 +21,6 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class XsrfProtectionMiddleware implements MiddlewareInterface
 {
-
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (\in_array($request->getMethod(), ['HEAD', 'OPTIONS', 'GET'])) {
@@ -25,7 +35,7 @@ final class XsrfProtectionMiddleware implements MiddlewareInterface
             return $this->createInvalidXsrfTokenResponse();
         }
 
-        $xsrfToken = implode("", $request->getHeader("X-XSRF-TOKEN"));
+        $xsrfToken = \implode("", $request->getHeader("X-XSRF-TOKEN"));
 
         if ($request->getCookieParams()['XSRF-TOKEN'] !== $xsrfToken) {
             return $this->createInvalidXsrfTokenResponse();
