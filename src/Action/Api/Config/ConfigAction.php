@@ -60,7 +60,10 @@ final class ConfigAction implements MiddlewareInterface
             if (\mb_substr($route['path'], 0, 4) !== "/api") {
                 continue;
             }
-            $routes[$route['name']] = $this->serverUrlHelper->generate($route['path']);
+            // dot notation to camelCase
+            $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', $route['name'])));
+            $routeName[0] = \mb_strtolower($routeName[0]);
+            $routes[$routeName] = $this->serverUrlHelper->generate($route['path']);
         }
 
         return $routes;
