@@ -24,14 +24,21 @@ use Ramsey\Uuid\Uuid;
 
 final class CookieInitializerMiddleware implements MiddlewareInterface
 {
-
     /**
      * Process an incoming server request and return a response, optionally delegating
      * response creation to a handler.
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $handler->handle($request);
+
+        if ($request->getMethod() === 'OPTIONS') {
+            return $response;
+        }
+
         if (!empty($request->getCookieParams()['kiwiSid']) && !empty($request->getCookieParams()['XSRF-TOKEN'])) {
             return $response;
         }
@@ -54,7 +61,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
                 'jti'  => \base64_encode(\random_bytes(32)),
                 'iss'  => $request->getUri()->getHost(),
                 'nbf'  => \time(),
-                'exp'  => \time() + 31536000,
+                'exp'  => \time() + 36000,
                 'data' => $sessionData->toArray(),
             ],
             'secret_key',
@@ -66,6 +73,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
             ->withValue($jwt)
             ->withDomain($request->getUri()->getHost())
             ->withHttpOnly(true)
+            ->withExpires(\time() + 36000)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 
         return FigResponseCookies::set($response, $cookie);
@@ -78,6 +86,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
             ->withValue($sessionData->getXsrfToken())
             ->withDomain($request->getUri()->getHost())
             ->withHttpOnly(false)
+            ->withExpires(\time() + 36000)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 
         return FigResponseCookies::set($response, $cookie);

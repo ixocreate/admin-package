@@ -32,7 +32,11 @@ final class ConfigAction implements MiddlewareInterface
      */
     private $serverUrlHelper;
 
-
+    /**
+     * ConfigAction constructor.
+     * @param RouteConfig $routeConfig
+     * @param ServerUrlHelper $serverUrlHelper
+     */
     public function __construct(RouteConfig $routeConfig, ServerUrlHelper $serverUrlHelper)
     {
         $this->routeConfig = $routeConfig;
@@ -40,8 +44,9 @@ final class ConfigAction implements MiddlewareInterface
     }
 
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * response creation to a handler.
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -50,6 +55,9 @@ final class ConfigAction implements MiddlewareInterface
         ]);
     }
 
+    /**
+     * @return array
+     */
     private function getRoutes() : array
     {
         $routes = [];

@@ -20,7 +20,6 @@ use Zend\Expressive\Application;
 
 final class AdminApplicationFactory implements FactoryInterface
 {
-
     /**
      * @param ServiceManagerInterface $container
      * @param $requestedName

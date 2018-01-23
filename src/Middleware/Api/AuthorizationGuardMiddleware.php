@@ -21,10 +21,10 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class AuthorizationGuardMiddleware implements MiddlewareInterface
 {
-
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * response creation to a handler.
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -40,8 +40,8 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
         return $handler->handle($request);
     }
 
-    private function createNotAuthorizedResponse() : ApiErrorResponse
+    private function createNotAuthorizedResponse(): ApiErrorResponse
     {
-        return new ApiErrorResponse('auth.not-authorized', [], 401);
+        return new ApiErrorResponse('unauthorized', [], 401);
     }
 }

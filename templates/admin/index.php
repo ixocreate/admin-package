@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <title><?= $adminConfig->getProject()['name'] ?? 'Kiwi' ?></title>
-    <base href="<?= (string) $adminConfig->getUri() ?? '/' ?>">
+    <base href="<?= $adminConfig->getUri() ?? '/' ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta name="description" content="<?= $adminConfig->getProject()['name'] ?? 'Kiwi' ?>">
@@ -21,9 +21,10 @@
 <script>
     window.__theme = 'bs4';
     window.__kiwi =<?= json_encode([
-        'apiUrl'    => $adminConfig->getUri() . '/api',
+        'apiUrl' => $adminConfig->getUri() . '/api',
+        'sessionUrl' => $adminConfig->getUri() . '/session',
         'configUrl' => $adminConfig->getUri() . '/api/config', //TODO use url helper
-        'project'   => $adminConfig->getProject(),
+        'project' => $adminConfig->getProject(),
     ]) ?>;
 </script>
 <?php foreach ($assets['scripts'] as $script): ?>

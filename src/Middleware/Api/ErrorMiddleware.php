@@ -21,6 +21,11 @@ use Zend\Stratigility\Exception\MissingResponseException;
 
 final class ErrorMiddleware implements MiddlewareInterface
 {
+    /**
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         \set_error_handler($this->createErrorHandler());
@@ -42,7 +47,8 @@ final class ErrorMiddleware implements MiddlewareInterface
 
     private function handleThrowable(\Throwable $e, ServerRequestInterface $request) : ResponseInterface
     {
-        return new ApiErrorResponse("server.error", [], 500);
+        // TODO: only expose error message in local env
+        return new ApiErrorResponse("server-error", [$e->getMessage()], 500);
     }
 
     private function createErrorHandler() : callable

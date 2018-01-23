@@ -20,7 +20,6 @@ use Zend\Diactoros\Uri;
 
 final class AdminConfigFactory implements FactoryInterface
 {
-
     /**
      * @param ServiceManagerInterface $container
      * @param $requestedName

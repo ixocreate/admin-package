@@ -35,6 +35,11 @@ class IndexAction implements MiddlewareInterface
      */
     protected $config;
 
+    /**
+     * IndexAction constructor.
+     * @param AdminConfig $config
+     * @param PlatesRenderer $renderer
+     */
     public function __construct(AdminConfig $config, PlatesRenderer $renderer)
     {
         $this->renderer = $renderer;
@@ -44,6 +49,11 @@ class IndexAction implements MiddlewareInterface
         $this->renderer->addPath(__DIR__ . '/../../templates/admin', 'admin');
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         return new HtmlResponse($this->renderer->render('admin::index', [

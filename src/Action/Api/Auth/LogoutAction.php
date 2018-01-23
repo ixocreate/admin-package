@@ -25,6 +25,11 @@ use Ramsey\Uuid\Uuid;
 
 final class LogoutAction implements MiddlewareInterface
 {
+    /**
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = new ApiSuccessResponse();
@@ -39,6 +44,12 @@ final class LogoutAction implements MiddlewareInterface
         return $response;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param SessionData $sessionData
+     * @return ResponseInterface
+     */
     private function writeSessionCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData) : ResponseInterface
     {
         $jwt = JWT::encode(
@@ -64,6 +75,12 @@ final class LogoutAction implements MiddlewareInterface
         return FigResponseCookies::set($response, $cookie);
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @param SessionData $sessionData
+     * @return ResponseInterface
+     */
     private function writeXsrfCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData) : ResponseInterface
     {
         $cookie = SetCookie::create("XSRF-TOKEN")

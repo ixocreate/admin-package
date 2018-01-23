@@ -22,13 +22,17 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class SessionDataMiddleware implements MiddlewareInterface
 {
-
     /**
-     * Process an incoming server request and return a response, optionally delegating
-     * response creation to a handler.
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        if ($request->getMethod() === 'OPTIONS') {
+            return $handler->handle($request);
+        }
+
         if (empty($request->getCookieParams()['kiwiSid'])) {
             return $this->createInvalidSidResponse();
         }

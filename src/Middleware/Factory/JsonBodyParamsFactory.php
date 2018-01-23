@@ -19,7 +19,6 @@ use Zend\Expressive\Helper\BodyParams\JsonStrategy;
 
 final class JsonBodyParamsFactory implements FactoryInterface
 {
-
     /**
      * @param ServiceManagerInterface $container
      * @param $requestedName

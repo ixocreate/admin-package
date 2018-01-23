@@ -26,10 +26,13 @@ final class AdminConfig
      */
     private $project;
 
-    public function __construct(
-        UriInterface $uri,
-        array $project
-    ) {
+    /**
+     * AdminConfig constructor.
+     * @param UriInterface $uri
+     * @param array $project
+     */
+    public function __construct(UriInterface $uri, array $project)
+    {
         $this->uri = $uri;
         $this->project = $project;
     }

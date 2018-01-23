@@ -21,6 +21,11 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class XsrfProtectionMiddleware implements MiddlewareInterface
 {
+    /**
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         if (\in_array($request->getMethod(), ['HEAD', 'OPTIONS', 'GET'])) {
