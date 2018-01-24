@@ -84,6 +84,10 @@ class IndexAction implements MiddlewareInterface
         ];
 
         /**
+         * TODO: get build/dist of frontend by config
+         */
+
+        /**
          * admin and admin-frontend are siblings in a vendor folder
          */
         $embeddedPath = \realpath(__DIR__ . '/../../../admin-frontend/build');
