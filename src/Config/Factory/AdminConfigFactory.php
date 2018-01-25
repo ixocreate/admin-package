@@ -14,6 +14,7 @@ namespace KiwiSuite\Admin\Config\Factory;
 
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Config\Config;
+use KiwiSuite\ProjectUri\ProjectUri;
 use KiwiSuite\ServiceManager\FactoryInterface;
 use KiwiSuite\ServiceManager\ServiceManagerInterface;
 use Zend\Diactoros\Uri;
@@ -33,10 +34,15 @@ final class AdminConfigFactory implements FactoryInterface
         /** @var Config $config */
         $config = $container->get(Config::class);
 
-        $uri = new Uri($config->get("admin.uri"));
+        /** @var ProjectUri $projectUri */
+        $projectUri = $container->get(ProjectUri::class);
 
+        /**
+         * make sure it's an absolute url
+         */
+        $uri = new Uri($config->get("admin.uri"));
         if (empty($uri->getHost())) {
-            // TODO: make it a full url here
+            $uri = new Uri($projectUri->getMainUrl().$uri);
         }
 
         return new AdminConfig($uri, $config->get("admin.project"));

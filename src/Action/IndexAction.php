@@ -17,6 +17,7 @@ use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Config\Config;
+use KiwiSuite\ProjectUri\ProjectUri;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use SplFileInfo;
@@ -33,17 +34,18 @@ class IndexAction implements MiddlewareInterface
     /**
      * @var Config
      */
-    protected $config;
+    protected $adminConfig;
 
     /**
      * IndexAction constructor.
-     * @param AdminConfig $config
+     * @param AdminConfig $adminConfig
      * @param PlatesRenderer $renderer
      */
-    public function __construct(AdminConfig $config, PlatesRenderer $renderer)
+    public function __construct(AdminConfig $adminConfig, ProjectUri $projectUri, PlatesRenderer $renderer)
     {
+        $this->adminConfig = $adminConfig;
+        $this->projectUri = $projectUri;
         $this->renderer = $renderer;
-        $this->config = $config;
 
         // TODO: inject a TemplateRendererInterface
         $this->renderer->addPath(__DIR__ . '/../../templates/admin', 'admin');
@@ -58,8 +60,8 @@ class IndexAction implements MiddlewareInterface
     {
         return new HtmlResponse($this->renderer->render('admin::index', [
             'assets' => $this->assetsPaths(),
-            'assetsUrl' => 'assets/admin/',
-            'adminConfig' => $this->config,
+            'assetsUrl' => $this->projectUri->getMainUrl().'/assets/admin/',
+            'adminConfig' => $this->adminConfig,
         ]));
     }
 
@@ -73,10 +75,10 @@ class IndexAction implements MiddlewareInterface
     private function assetsPaths()
     {
         $scripts = [
-            'inline'    => null,
+            'inline' => null,
             'polyfills' => null,
-            'scripts'   => null,
-            'main'      => null,
+            'scripts' => null,
+            'main' => null,
         ];
 
         $styles = [
