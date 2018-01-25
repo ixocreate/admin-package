@@ -14,6 +14,7 @@ namespace KiwiSuite\Admin\Action\Api\Config;
 
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
+use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Helper\ServerUrlHelper;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\Admin\Route\RouteConfig;
@@ -34,11 +35,13 @@ final class ConfigAction implements MiddlewareInterface
 
     /**
      * ConfigAction constructor.
+     * @param AdminConfig $adminConfig
      * @param RouteConfig $routeConfig
      * @param ServerUrlHelper $serverUrlHelper
      */
-    public function __construct(RouteConfig $routeConfig, ServerUrlHelper $serverUrlHelper)
+    public function __construct(AdminConfig $adminConfig, RouteConfig $routeConfig, ServerUrlHelper $serverUrlHelper)
     {
+        $this->adminConfig = $adminConfig;
         $this->routeConfig = $routeConfig;
         $this->serverUrlHelper = $serverUrlHelper;
     }
@@ -62,7 +65,7 @@ final class ConfigAction implements MiddlewareInterface
     {
         $routes = [];
 
-        //TODO Login Check / Permission Check
+        // TODO Login Check / Permission Check
 
         foreach ($this->routeConfig->getRoutes() as $route) {
             if (\mb_substr($route['path'], 0, 4) !== "/api") {
@@ -71,7 +74,7 @@ final class ConfigAction implements MiddlewareInterface
             // dot notation to camelCase
             $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', $route['name'])));
             $routeName[0] = \mb_strtolower($routeName[0]);
-            $routes[$routeName] = $this->serverUrlHelper->generate($route['path']);
+            $routes[$routeName] = $this->adminConfig->getUri().$route['path'];
         }
 
         return $routes;
