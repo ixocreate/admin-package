@@ -33,7 +33,7 @@ final class ErrorMiddleware implements MiddlewareInterface
         try {
             $response = $handler->handle($request);
 
-            if (! $response instanceof ResponseInterface) {
+            if (!$response instanceof ResponseInterface) {
                 throw new MissingResponseException('Application did not return a response');
             }
         } catch (\Throwable $e) {
@@ -45,16 +45,16 @@ final class ErrorMiddleware implements MiddlewareInterface
         return $response;
     }
 
-    private function handleThrowable(\Throwable $e, ServerRequestInterface $request) : ResponseInterface
+    private function handleThrowable(\Throwable $e, ServerRequestInterface $request): ResponseInterface
     {
         // TODO: only expose error message in local env
         return new ApiErrorResponse("server-error", [$e->getMessage()], 500);
     }
 
-    private function createErrorHandler() : callable
+    private function createErrorHandler(): callable
     {
-        return function (int $errno, string $errstr, string $errfile, int $errline) : void {
-            if (! (\error_reporting() & $errno)) {
+        return function (int $errno, string $errstr, string $errfile, int $errline): void {
+            if (!(\error_reporting() & $errno)) {
                 return;
             }
             throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);

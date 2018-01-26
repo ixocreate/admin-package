@@ -24,6 +24,11 @@ use Psr\Http\Message\ServerRequestInterface;
 final class ConfigAction implements MiddlewareInterface
 {
     /**
+     * @var AdminConfig
+     */
+    private $adminConfig;
+
+    /**
      * @var RouteConfig
      */
     private $routeConfig;
@@ -61,20 +66,20 @@ final class ConfigAction implements MiddlewareInterface
     /**
      * @return array
      */
-    private function getRoutes() : array
+    private function getRoutes(): array
     {
         $routes = [];
 
         // TODO Login Check / Permission Check
 
         foreach ($this->routeConfig->getRoutes() as $route) {
-            if (\mb_substr($route['path'], 0, 4) !== "/api") {
-                continue;
-            }
+            // if (\mb_substr($route['path'], 0, 4) !== "/api") {
+            //     continue;
+            // }
             // dot notation to camelCase
             $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', $route['name'])));
             $routeName[0] = \mb_strtolower($routeName[0]);
-            $routes[$routeName] = $this->adminConfig->getUri().$route['path'];
+            $routes[$routeName] = $this->adminConfig->getUri() . $route['path'];
         }
 
         return $routes;

@@ -23,5 +23,5 @@ $adminRouteConfigurator->addPost('/api/auth/login', LoginAction::class, "auth.lo
 $adminRouteConfigurator->addGet('/api/auth/user', UserAction::class, "auth.user", [AuthorizationGuardMiddleware::class]);
 $adminRouteConfigurator->addPost('/api/auth/logout', LogoutAction::class, "auth.logout", [AuthorizationGuardMiddleware::class]);
 
-$adminRouteConfigurator->addGet('[/[{path}]]', \KiwiSuite\Admin\Action\IndexAction::class, "admin", [CookieInitializerMiddleware::class]);
+$adminRouteConfigurator->addGet('[/{any:.*}]', \KiwiSuite\Admin\Action\IndexAction::class, "admin", [CookieInitializerMiddleware::class]);
 

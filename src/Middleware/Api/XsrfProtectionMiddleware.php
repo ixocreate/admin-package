@@ -58,7 +58,7 @@ final class XsrfProtectionMiddleware implements MiddlewareInterface
         return $handler->handle($request);
     }
 
-    private function createInvalidXsrfTokenResponse() : ApiErrorResponse
+    private function createInvalidXsrfTokenResponse(): ApiErrorResponse
     {
         return new ApiErrorResponse("xsrf-token.invalid", [], 406);
     }

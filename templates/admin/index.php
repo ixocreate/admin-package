@@ -21,10 +21,11 @@
 <script>
     window.__theme = 'bs4';
     window.__kiwi =<?= json_encode([
-        'apiUrl' => $adminConfig->getUri() . '/api',
-        'sessionUrl' => $adminConfig->getUri() . '/session',
-        'configUrl' => $adminConfig->getUri() . '/api/config', //TODO use url helper
         'project' => $adminConfig->getProject(),
+        'routes' => [
+            'session' => $adminConfig->getUri() . '/session',
+            'config' => $adminConfig->getUri() . '/api/config', //TODO use url helper
+        ]
     ]) ?>;
 </script>
 <?php foreach ($assets['scripts'] as $script): ?>

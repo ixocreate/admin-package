@@ -32,13 +32,19 @@ class IndexAction implements MiddlewareInterface
     protected $renderer;
 
     /**
-     * @var Config
+     * @var AdminConfig
      */
     protected $adminConfig;
 
     /**
+     * @var ProjectUri
+     */
+    protected $projectUri;
+
+    /**
      * IndexAction constructor.
      * @param AdminConfig $adminConfig
+     * @param ProjectUri $projectUri
      * @param PlatesRenderer $renderer
      */
     public function __construct(AdminConfig $adminConfig, ProjectUri $projectUri, PlatesRenderer $renderer)
@@ -60,7 +66,7 @@ class IndexAction implements MiddlewareInterface
     {
         return new HtmlResponse($this->renderer->render('admin::index', [
             'assets' => $this->assetsPaths(),
-            'assetsUrl' => $this->projectUri->getMainUrl().'/assets/admin/',
+            'assetsUrl' => $this->projectUri->getMainUrl() . '/assets/admin/',
             'adminConfig' => $this->adminConfig,
         ]));
     }

@@ -40,7 +40,7 @@ final class SessionDataMiddleware implements MiddlewareInterface
         try {
             $jwt = JWT::decode($request->getCookieParams()['kiwiSid'], 'secret_key', ['HS512']);
 
-            $sessionData = new SessionData((array) $jwt->data);
+            $sessionData = new SessionData((array)$jwt->data);
         } catch (\Throwable $e) {
             return $this->createInvalidSidResponse();
         }
@@ -48,7 +48,7 @@ final class SessionDataMiddleware implements MiddlewareInterface
         return $handler->handle($request->withAttribute(SessionData::class, $sessionData));
     }
 
-    private function createInvalidSidResponse() : ApiErrorResponse
+    private function createInvalidSidResponse(): ApiErrorResponse
     {
         return new ApiErrorResponse('session.invalid', [], 406);
     }
