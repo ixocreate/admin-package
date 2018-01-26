@@ -41,9 +41,9 @@ final class AdminConfigFactory implements FactoryInterface
          * make sure it's an absolute url
          */
         $uri = new Uri($config->get("admin.uri"));
-        if (empty($uri->getHost())) {
-            $uri = new Uri($projectUri->getMainUrl() . $uri);
-        }
+        // if (empty($uri->getHost())) {
+        //     $uri = new Uri($projectUri->getMainUrl() . $uri);
+        // }
 
         return new AdminConfig($uri, $config->get("admin.project"));
     }

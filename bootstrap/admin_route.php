@@ -6,7 +6,6 @@ namespace KiwiSuite\Admin;
 /** @var \KiwiSuite\ApplicationHttp\Route\RouteConfigurator $adminRouteConfigurator */
 use KiwiSuite\Admin\Action\Api\Auth\LoginAction;
 use KiwiSuite\Admin\Action\Api\Auth\LogoutAction;
-use KiwiSuite\Admin\Action\Api\Auth\NoopAction;
 use KiwiSuite\Admin\Action\Api\Auth\UserAction;
 use KiwiSuite\Admin\Action\Api\Config\ConfigAction;
 use KiwiSuite\Admin\Action\Api\Session\SessionAction;
