@@ -60,6 +60,6 @@ final class XsrfProtectionMiddleware implements MiddlewareInterface
 
     private function createInvalidXsrfTokenResponse(): ApiErrorResponse
     {
-        return new ApiErrorResponse("xsrf-token.invalid", [], 406);
+        return new ApiErrorResponse("invalid_xsrf", [], 401);
     }
 }

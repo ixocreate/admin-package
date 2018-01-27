@@ -30,7 +30,7 @@ final class LoginAction implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
         if (empty($data['email']) || empty($data['password']) || $data['email'] !== 'test@kiwi-suite.test' || $data['password'] !== 'test') {
-            return new ApiErrorResponse("credentials.invalid");
+            return new ApiErrorResponse("invalid_credentials", 401);
         }
 
         $response = new ApiSuccessResponse();
