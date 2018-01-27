@@ -21,6 +21,7 @@
 <script>
     window.__theme = 'bs4';
     window.__kiwi =<?= json_encode([
+        'assetsUrl' => $assetsUrl,
         'project' => $adminConfig->getProject(),
         'routes' => [
             'session' => $adminConfig->getUri() . '/session',

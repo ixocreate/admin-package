@@ -79,6 +79,7 @@ final class LoginAction implements MiddlewareInterface
             ->withValue($sessionData->getXsrfToken())
             ->withPath("/")
             ->withDomain($request->getUri()->getHost())
+            // ->withDomain('localhost')
             ->withHttpOnly(false)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 
