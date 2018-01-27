@@ -53,6 +53,7 @@ final class LoginAction implements MiddlewareInterface
                 'iat'  => \time(),
                 'jti'  => \base64_encode(\random_bytes(32)),
                 'iss'  => $request->getUri()->getHost(),
+                // 'iss'  => 'localhost',
                 'nbf'  => \time(),
                 'exp'  => \time() + 31536000,
                 'data' => $sessionData->toArray(),
@@ -65,6 +66,7 @@ final class LoginAction implements MiddlewareInterface
             ->withValue($jwt)
             ->withPath("/")
             ->withDomain($request->getUri()->getHost())
+            // ->withDomain('localhost')
             ->withHttpOnly(true)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 

@@ -60,6 +60,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
                 'iat'  => \time(),
                 'jti'  => \base64_encode(\random_bytes(32)),
                 'iss'  => $request->getUri()->getHost(),
+                // 'iss'  => 'localhost',
                 'nbf'  => \time(),
                 'exp'  => \time() + 36000,
                 'data' => $sessionData->toArray(),
@@ -72,6 +73,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
             ->withPath("/")
             ->withValue($jwt)
             ->withDomain($request->getUri()->getHost())
+            // ->withDomain('localhost')
             ->withHttpOnly(true)
             ->withExpires(\time() + 36000)
             ->withSecure(($request->getUri()->getScheme() === "https"));
@@ -85,6 +87,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
             ->withPath("/")
             ->withValue($sessionData->getXsrfToken())
             ->withDomain($request->getUri()->getHost())
+            // ->withDomain('localhost')
             ->withHttpOnly(false)
             ->withExpires(\time() + 36000)
             ->withSecure(($request->getUri()->getScheme() === "https"));
