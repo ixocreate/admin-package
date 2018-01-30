@@ -17,6 +17,7 @@ use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
+use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Entity\SessionData;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
@@ -26,6 +27,25 @@ use Ramsey\Uuid\Uuid;
 
 final class LoginAction implements MiddlewareInterface
 {
+    /**
+     * @var AdminConfig
+     */
+    private $adminConfig;
+
+    /**
+     * LoginAction constructor.
+     * @param AdminConfig $adminConfig
+     */
+    public function __construct(AdminConfig $adminConfig)
+    {
+        $this->adminConfig = $adminConfig;
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $data = $request->getParsedBody();
@@ -46,16 +66,15 @@ final class LoginAction implements MiddlewareInterface
         return $response;
     }
 
-    private function writeSessionCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData) : ResponseInterface
+    private function writeSessionCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData): ResponseInterface
     {
         $jwt = JWT::encode(
             [
-                'iat'  => \time(),
-                'jti'  => \base64_encode(\random_bytes(32)),
-                'iss'  => $request->getUri()->getHost(),
-                // 'iss'  => 'localhost',
-                'nbf'  => \time(),
-                'exp'  => \time() + 31536000,
+                'iat' => \time(),
+                'jti' => \base64_encode(\random_bytes(32)),
+                'iss' => $this->adminConfig->getSessionDomain($request->getUri()->getHost()),
+                'nbf' => \time(),
+                'exp' => \time() + 31536000,
                 'data' => $sessionData->toArray(),
             ],
             'secret_key',
@@ -65,21 +84,19 @@ final class LoginAction implements MiddlewareInterface
         $cookie = SetCookie::create("kiwiSid")
             ->withValue($jwt)
             ->withPath("/")
-            ->withDomain($request->getUri()->getHost())
-            // ->withDomain('localhost')
+            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(true)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 
         return FigResponseCookies::set($response, $cookie);
     }
 
-    private function writeXsrfCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData) : ResponseInterface
+    private function writeXsrfCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData): ResponseInterface
     {
         $cookie = SetCookie::create("XSRF-TOKEN")
             ->withValue($sessionData->getXsrfToken())
             ->withPath("/")
-            ->withDomain($request->getUri()->getHost())
-            // ->withDomain('localhost')
+            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(false)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 

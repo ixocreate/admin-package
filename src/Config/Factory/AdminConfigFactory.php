@@ -35,16 +35,17 @@ final class AdminConfigFactory implements FactoryInterface
         $config = $container->get(Config::class);
 
         /** @var ProjectUri $projectUri */
-        $projectUri = $container->get(ProjectUri::class);
+        // $projectUri = $container->get(ProjectUri::class);
 
         /**
-         * make sure it's an absolute url
+         * ~~make sure it's an absolute url~~
+         * TODO: no absolute url until session domain is variable
          */
         $uri = new Uri($config->get("admin.uri"));
         // if (empty($uri->getHost())) {
         //     $uri = new Uri($projectUri->getMainUrl() . $uri);
         // }
 
-        return new AdminConfig($uri, $config->get("admin.project"));
+        return new AdminConfig($config->get("admin"), $uri);
     }
 }

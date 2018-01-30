@@ -60,6 +60,7 @@ final class ConfigAction implements MiddlewareInterface
     {
         return new ApiSuccessResponse([
             'routes' => $this->getRoutes(),
+            'sessionDomain' => $this->adminConfig->getSessionDomain($request->getUri()->getHost()),
         ]);
     }
 

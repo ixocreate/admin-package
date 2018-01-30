@@ -17,6 +17,7 @@ use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
+use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Entity\SessionData;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -24,6 +25,20 @@ use Ramsey\Uuid\Uuid;
 
 final class CookieInitializerMiddleware implements MiddlewareInterface
 {
+    /**
+     * @var AdminConfig
+     */
+    protected $adminConfig;
+
+    /**
+     * CookieInitializerMiddleware constructor.
+     * @param AdminConfig $adminConfig
+     */
+    public function __construct(AdminConfig $adminConfig)
+    {
+        $this->adminConfig = $adminConfig;
+    }
+
     /**
      * Process an incoming server request and return a response, optionally delegating
      * response creation to a handler.
@@ -59,8 +74,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
             [
                 'iat'  => \time(),
                 'jti'  => \base64_encode(\random_bytes(32)),
-                'iss'  => $request->getUri()->getHost(),
-                // 'iss'  => 'localhost',
+                'iss'  => $this->adminConfig->getSessionDomain($request->getUri()->getHost()),
                 'nbf'  => \time(),
                 'exp'  => \time() + 36000,
                 'data' => $sessionData->toArray(),
@@ -72,8 +86,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
         $cookie = SetCookie::create("kiwiSid")
             ->withPath("/")
             ->withValue($jwt)
-            ->withDomain($request->getUri()->getHost())
-            // ->withDomain('localhost')
+            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(true)
             ->withExpires(\time() + 36000)
             ->withSecure(($request->getUri()->getScheme() === "https"));
@@ -86,8 +99,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
         $cookie = SetCookie::create("XSRF-TOKEN")
             ->withPath("/")
             ->withValue($sessionData->getXsrfToken())
-            ->withDomain($request->getUri()->getHost())
-            // ->withDomain('localhost')
+            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(false)
             ->withExpires(\time() + 36000)
             ->withSecure(($request->getUri()->getScheme() === "https"));

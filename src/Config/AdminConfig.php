@@ -17,9 +17,9 @@ use Psr\Http\Message\UriInterface;
 final class AdminConfig
 {
     /**
-     * @var UriInterface
+     * @var array
      */
-    private $uri;
+    private $config;
 
     /**
      * @var array
@@ -27,14 +27,19 @@ final class AdminConfig
     private $project;
 
     /**
-     * AdminConfig constructor.
-     * @param UriInterface $uri
-     * @param array $project
+     * @var UriInterface
      */
-    public function __construct(UriInterface $uri, array $project)
+    private $uri;
+
+    /**
+     * AdminConfig constructor.
+     * @param array $config
+     * @param UriInterface $uri
+     */
+    public function __construct(array $config, UriInterface $uri)
     {
+        $this->config = $config;
         $this->uri = $uri;
-        $this->project = $project;
     }
 
     /**
@@ -50,6 +55,18 @@ final class AdminConfig
      */
     public function getProject(): array
     {
-        return $this->project;
+        return $this->config['project'];
+    }
+
+    /**
+     * @param $requestHost
+     * @return string
+     */
+    public function getSessionDomain(string $requestHost)
+    {
+        if (empty($this->config['security']['domain'])) {
+            return $requestHost;
+        }
+        return $this->config['security']['domain'];
     }
 }

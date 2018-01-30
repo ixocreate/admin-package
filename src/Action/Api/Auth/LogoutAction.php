@@ -17,6 +17,7 @@ use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
 use Interop\Http\Server\MiddlewareInterface;
 use Interop\Http\Server\RequestHandlerInterface;
+use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Entity\SessionData;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -25,6 +26,20 @@ use Ramsey\Uuid\Uuid;
 
 final class LogoutAction implements MiddlewareInterface
 {
+    /**
+     * @var AdminConfig
+     */
+    protected $adminConfig;
+
+    /**
+     * LogoutAction constructor.
+     * @param AdminConfig $adminConfig
+     */
+    public function __construct(AdminConfig $adminConfig)
+    {
+        $this->adminConfig = $adminConfig;
+    }
+
     /**
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
@@ -68,7 +83,7 @@ final class LogoutAction implements MiddlewareInterface
         $cookie = SetCookie::create("kiwiSid")
             ->withValue($jwt)
             ->withPath("/")
-            ->withDomain($request->getUri()->getHost())
+            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(true)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 
@@ -86,7 +101,7 @@ final class LogoutAction implements MiddlewareInterface
         $cookie = SetCookie::create("XSRF-TOKEN")
             ->withValue($sessionData->getXsrfToken())
             ->withPath("/")
-            ->withDomain($request->getUri()->getHost())
+            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(false)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 
