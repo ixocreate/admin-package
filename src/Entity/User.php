@@ -28,12 +28,15 @@ final class User implements EntityInterface
 
     private $password;
 
+    private $username;
+
     private function createDefinitions() : DefinitionCollection
     {
         return new DefinitionCollection([
             new Definition("id", TypeInterface::TYPE_INT, false, true),
             new Definition("email", TypeInterface::TYPE_STRING, false, true),
             new Definition("password", TypeInterface::TYPE_STRING, false, false),
+            new Definition("username", TypeInterface::TYPE_STRING, false, true),
         ]);
     }
 }

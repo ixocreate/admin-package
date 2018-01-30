@@ -19,7 +19,6 @@ return [
          * specify hosts that are allowed to access the api e.g. the local admin development host
          * add 'http://localhost:port' => true for local admin development
          * these will be added to the CorsMiddleware
-         * TODO: add to CorsMiddleware
          */
         'allow' => [
             'http://localhost:4200' => true,
