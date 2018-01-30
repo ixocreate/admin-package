@@ -62,12 +62,7 @@ final class CorsMiddleware implements MiddlewareInterface
                 Settings::KEY_SERVER_ORIGIN_SCHEME => $this->projectUri->getMainUrl()->getScheme(),
                 Settings::KEY_SERVER_ORIGIN_HOST => $this->projectUri->getMainUrl()->getHost(),
             ],
-            /**
-             * TODO $this->config->get('admin.security.allow')
-             */
-            Settings::KEY_ALLOWED_ORIGINS => [
-                'http://localhost:4200' => true,
-            ],
+            Settings::KEY_ALLOWED_ORIGINS => $this->config->get('admin.security.allow'),
             Settings::KEY_ALLOWED_METHODS => [
                 'GET' => true,
                 'POST' => true,

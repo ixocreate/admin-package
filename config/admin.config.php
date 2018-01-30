@@ -2,26 +2,27 @@
 return [
     /**
      * where the admin resides at
-     * default: admin
-     *
-     * TODO: transform this into an absolute url by default if it is not already in the project's admin config
+     * default: 'admin'
      */
     'uri' => 'admin',
 
     'security' => [
 
         /**
-         * default requested host
-         * set to 'localhost' for local admin development
+         * set session domain to 'localhost' for local admin development
+         * default: requested host
          */
-        // 'domain' => 'localhost',
-        'domain' => null,
+        'domain' => 'localhost',
+        // 'domain' => null,
 
         /**
          * specify hosts that are allowed to access the api e.g. the local admin development host
+         * add 'http://localhost:port' => true for local admin development
+         * these will be added to the CorsMiddleware
+         * TODO: add to CorsMiddleware
          */
         'allow' => [
-            // localhost:4200,
+            'http://localhost:4200' => true,
         ],
     ],
 
