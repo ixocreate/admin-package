@@ -23,7 +23,7 @@ final class PipeConfiguratorItem implements ConfiguratorItemInterface
      */
     public function getConfigurator()
     {
-        $pipeConfigurator = new PipeConfigurator(PipeConfig::class);
+        $pipeConfigurator = new PipeConfigurator();
 
         return $pipeConfigurator;
     }
@@ -50,6 +50,6 @@ final class PipeConfiguratorItem implements ConfiguratorItemInterface
      */
     public function getService($configurator): \Serializable
     {
-        return $configurator->getPipeConfig();
+        return new PipeConfig($configurator);
     }
 }

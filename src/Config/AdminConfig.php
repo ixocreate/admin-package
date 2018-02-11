@@ -22,11 +22,6 @@ final class AdminConfig
     private $config;
 
     /**
-     * @var array
-     */
-    private $project;
-
-    /**
      * @var UriInterface
      */
     private $uri;
@@ -56,17 +51,5 @@ final class AdminConfig
     public function getProject(): array
     {
         return $this->config['project'];
-    }
-
-    /**
-     * @param $requestHost
-     * @return string
-     */
-    public function getSessionDomain(string $requestHost)
-    {
-        if (empty($this->config['security']['domain'])) {
-            return $requestHost;
-        }
-        return $this->config['security']['domain'];
     }
 }

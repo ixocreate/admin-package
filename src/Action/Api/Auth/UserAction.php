@@ -12,12 +12,12 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Action\Api\Auth;
 
-use Interop\Http\Server\MiddlewareInterface;
-use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 final class UserAction implements MiddlewareInterface
 {

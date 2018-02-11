@@ -12,11 +12,12 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Middleware\Factory;
 
+use KiwiSuite\Admin\Router\AdminRouter;
+use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
+use KiwiSuite\ApplicationHttp\Middleware\SegmentMiddlewarePipe;
 use KiwiSuite\ApplicationHttp\Pipe\PipeConfig;
-use KiwiSuite\ApplicationHttp\Route\RouteConfig;
 use KiwiSuite\ServiceManager\FactoryInterface;
 use KiwiSuite\ServiceManager\ServiceManagerInterface;
-use Zend\Expressive\Application;
 
 final class AdminApplicationFactory implements FactoryInterface
 {
@@ -30,9 +31,9 @@ final class AdminApplicationFactory implements FactoryInterface
      */
     public function __invoke(ServiceManagerInterface $container, $requestedName, array $options = null)
     {
-        return $container->build(Application::class, [
+        return $container->get(MiddlewareSubManager::class)->build(SegmentMiddlewarePipe::class, [
             PipeConfig::class => $container->get(\KiwiSuite\Admin\Pipe\PipeConfig::class),
-            RouteConfig::class => $container->get(\KiwiSuite\Admin\Route\RouteConfig::class),
+            'router' => AdminRouter::class,
         ]);
     }
 }

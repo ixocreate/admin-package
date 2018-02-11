@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\ConfiguratorItem\PipeConfiguratorItem;
-use KiwiSuite\Admin\ConfiguratorItem\RouteConfiguratorItem;
 use KiwiSuite\Application\ConfiguratorItem\ConfiguratorRegistry;
 use KiwiSuite\Application\Module\ModuleInterface;
 use KiwiSuite\Application\Service\ServiceRegistry;
@@ -46,7 +45,6 @@ class Module implements ModuleInterface
     {
         return [
             PipeConfiguratorItem::class,
-            RouteConfiguratorItem::class,
         ];
     }
 
@@ -80,5 +78,13 @@ class Module implements ModuleInterface
     public function getConfigDirectory(): ?string
     {
         return __DIR__ . '/../config/';
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getBootstrapItems(): ?array
+    {
+        return null;
     }
 }

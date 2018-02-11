@@ -15,14 +15,14 @@ namespace KiwiSuite\Admin\Action\Api\Auth;
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
-use Interop\Http\Server\MiddlewareInterface;
-use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Entity\SessionData;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Ramsey\Uuid\Uuid;
 
 final class LoginAction implements MiddlewareInterface
@@ -72,7 +72,7 @@ final class LoginAction implements MiddlewareInterface
             [
                 'iat' => \time(),
                 'jti' => \base64_encode(\random_bytes(32)),
-                'iss' => $this->adminConfig->getSessionDomain($request->getUri()->getHost()),
+                'iss' => $request->getUri()->getHost(),
                 'nbf' => \time(),
                 'exp' => \time() + 31536000,
                 'data' => $sessionData->toArray(),
@@ -84,7 +84,7 @@ final class LoginAction implements MiddlewareInterface
         $cookie = SetCookie::create("kiwiSid")
             ->withValue($jwt)
             ->withPath("/")
-            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
+            //->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(true)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 
@@ -96,7 +96,7 @@ final class LoginAction implements MiddlewareInterface
         $cookie = SetCookie::create("XSRF-TOKEN")
             ->withValue($sessionData->getXsrfToken())
             ->withPath("/")
-            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
+            //->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(false)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 

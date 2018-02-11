@@ -5,23 +5,52 @@ namespace KiwiSuite\Admin;
 
 /** @var \KiwiSuite\ApplicationHttp\Pipe\PipeConfigurator $adminPipeConfigurator */
 
+use KiwiSuite\Admin\Action\Api\Auth\LoginAction;
+use KiwiSuite\Admin\Action\Api\Auth\LogoutAction;
+use KiwiSuite\Admin\Action\Api\Auth\UserAction;
+use KiwiSuite\Admin\Action\Api\Config\ConfigAction;
+use KiwiSuite\Admin\Action\Api\Session\SessionAction;
+use KiwiSuite\Admin\Action\IndexAction;
+use KiwiSuite\Admin\Middleware\Api\AuthorizationGuardMiddleware;
 use KiwiSuite\Admin\Middleware\Api\EnforceApiResponseMiddleware;
 use KiwiSuite\Admin\Middleware\Api\ErrorMiddleware;
 use KiwiSuite\Admin\Middleware\Api\SessionDataMiddleware;
 use KiwiSuite\Admin\Middleware\Api\XsrfProtectionMiddleware;
+use KiwiSuite\Admin\Middleware\CookieInitializerMiddleware;
 use KiwiSuite\Admin\Middleware\CorsMiddleware;
+use KiwiSuite\ApplicationHttp\Pipe\GroupPipeConfigurator;
+use KiwiSuite\ApplicationHttp\Pipe\PipeConfigurator;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 use Zend\Expressive\Middleware\ImplicitHeadMiddleware;
 use Zend\Expressive\Middleware\ImplicitOptionsMiddleware;
 
-$adminPipeConfigurator->addGlobalMiddleware(CorsMiddleware::class);
-$adminPipeConfigurator->addRoutingMiddleware(ImplicitHeadMiddleware::class);
-$adminPipeConfigurator->addRoutingMiddleware(ImplicitOptionsMiddleware::class);
+$adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigurator) {
+    $pipeConfigurator->pipe(EnforceApiResponseMiddleware::class);
+    $pipeConfigurator->pipe(ErrorMiddleware::class);
+    $pipeConfigurator->pipe(SessionDataMiddleware::class);
+    $pipeConfigurator->pipe(XsrfProtectionMiddleware::class);
+    $pipeConfigurator->pipe(BodyParamsMiddleware::class);
 
-$adminPipeConfigurator->addPathMiddlewarePipe('/api', [
-    EnforceApiResponseMiddleware::class,
-    ErrorMiddleware::class,
-    SessionDataMiddleware::class,
-    XsrfProtectionMiddleware::class,
-    BodyParamsMiddleware::class,
-]);
+    //Unauthorized routes
+    $pipeConfigurator->group(function (GroupPipeConfigurator $groupPipeConfigurator) {
+        $groupPipeConfigurator->get('/config', ConfigAction::class, "admin.api.config");
+        $groupPipeConfigurator->post('/auth/login', LoginAction::class, "admin.api.auth.login");
+    });
+
+    //Authorized routes
+    $pipeConfigurator->group(function (GroupPipeConfigurator $groupPipeConfigurator) {
+        $groupPipeConfigurator->before(AuthorizationGuardMiddleware::class);
+
+        $groupPipeConfigurator->get('/auth/user', UserAction::class, "admin.api.auth.user");
+        $groupPipeConfigurator->post('/auth/logout', LogoutAction::class, "admin.api.auth.logout");
+
+    });
+});
+
+//initializer routes
+$adminPipeConfigurator->group(function (GroupPipeConfigurator $groupPipeConfigurator) {
+    $groupPipeConfigurator->before(CookieInitializerMiddleware::class);
+    $groupPipeConfigurator->get('/session', SessionAction::class, "admin.session");
+    $groupPipeConfigurator->get('[/{any:.*}]', IndexAction::class, "admin.admin");
+});
+

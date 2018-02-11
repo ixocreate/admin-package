@@ -13,13 +13,12 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Action;
 
 use FilesystemIterator;
-use Interop\Http\Server\MiddlewareInterface;
-use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Config\Config;
 use KiwiSuite\ProjectUri\ProjectUri;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use SplFileInfo;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Expressive\Plates\PlatesRenderer;

@@ -15,12 +15,12 @@ namespace KiwiSuite\Admin\Middleware;
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
-use Interop\Http\Server\MiddlewareInterface;
-use Interop\Http\Server\RequestHandlerInterface;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Entity\SessionData;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Ramsey\Uuid\Uuid;
 
 final class CookieInitializerMiddleware implements MiddlewareInterface
@@ -74,7 +74,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
             [
                 'iat'  => \time(),
                 'jti'  => \base64_encode(\random_bytes(32)),
-                'iss'  => $this->adminConfig->getSessionDomain($request->getUri()->getHost()),
+                'iss'  => $request->getUri()->getHost(),
                 'nbf'  => \time(),
                 'exp'  => \time() + 36000,
                 'data' => $sessionData->toArray(),
@@ -86,7 +86,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
         $cookie = SetCookie::create("kiwiSid")
             ->withPath("/")
             ->withValue($jwt)
-            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
+            //->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(true)
             ->withExpires(\time() + 36000)
             ->withSecure(($request->getUri()->getScheme() === "https"));
@@ -99,7 +99,7 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
         $cookie = SetCookie::create("XSRF-TOKEN")
             ->withPath("/")
             ->withValue($sessionData->getXsrfToken())
-            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
+            //->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(false)
             ->withExpires(\time() + 36000)
             ->withSecure(($request->getUri()->getScheme() === "https"));

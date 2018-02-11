@@ -12,6 +12,6 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Pipe;
 
-class PipeConfig extends \KiwiSuite\ApplicationHttp\Pipe\PipeConfig
+final class PipeConfig extends \KiwiSuite\ApplicationHttp\Pipe\PipeConfig
 {
 }
