@@ -83,7 +83,7 @@ final class LogoutAction implements MiddlewareInterface
         $cookie = SetCookie::create("kiwiSid")
             ->withValue($jwt)
             ->withPath("/")
-            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
+            // ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(true)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 
@@ -101,7 +101,7 @@ final class LogoutAction implements MiddlewareInterface
         $cookie = SetCookie::create("XSRF-TOKEN")
             ->withValue($sessionData->getXsrfToken())
             ->withPath("/")
-            ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
+            // ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
             ->withHttpOnly(false)
             ->withSecure(($request->getUri()->getScheme() === "https"));
 
