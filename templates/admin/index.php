@@ -5,13 +5,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Kiwi [dev]</title>
+    <title><?= $adminConfig->getProject()['name'] ?></title>
     <base href="/<?= ltrim($adminConfig->getUri()->getPath(), '/')?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <meta name="description" content="kiwi [development]">
-    <meta name="author" content="kiwi suite GmbH">
-    <link rel="shortcut icon" href="<?= $assetsUrl ?>assets/img/icon.png">
+    <meta name="description" content="<?= $adminConfig->getProject()['description'] ?>">
+    <meta name="author" content="<?= $adminConfig->getProject()['author'] ?>">
+    <link rel="shortcut icon" href="<?= $assetsUrl ?>assets/img/favicon.png">
     <?php foreach ($assets['styles'] as $style): ?>
         <link href="<?= $assetsUrl . $style ?>" rel="stylesheet"/>
     <?php endforeach ?>

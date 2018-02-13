@@ -6,7 +6,7 @@ return [
      */
     'project' => [
         'author' => 'kiwi suite GmbH',
-        'copyright' => '2018 kiwi suite GmbH',
+        'copyright' => '2018',
         'description' => 'Kiwi Admin',
         'name' => 'Kiwi',
         'poweredBy' => true,
