@@ -2,7 +2,7 @@
 return [
     'uri' => 'admin',
     /**
-     * project specific settings for white labeling
+     * project specific settings (white label)
      */
     'project' => [
         'author' => 'kiwi suite GmbH',
