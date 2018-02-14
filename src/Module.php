@@ -14,9 +14,11 @@ namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\ConfiguratorItem\PipeConfiguratorItem;
 use KiwiSuite\Application\ConfiguratorItem\ConfiguratorRegistry;
+use KiwiSuite\Application\ConfiguratorItem\ServiceManagerConfiguratorItem;
 use KiwiSuite\Application\Module\ModuleInterface;
 use KiwiSuite\Application\Service\ServiceRegistry;
 use KiwiSuite\ServiceManager\ServiceManager;
+use KiwiSuite\ServiceManager\ServiceManagerConfigurator;
 use KiwiSuite\Template\Plates\PlatesRendererFactory;
 use Zend\Expressive\Plates\PlatesRenderer;
 
@@ -27,7 +29,10 @@ class Module implements ModuleInterface
      */
     public function configure(ConfiguratorRegistry $configuratorRegistry): void
     {
-        $configuratorRegistry->getConfigurator('serviceManagerConfigurator')->addFactory(PlatesRenderer::class, PlatesRendererFactory::class);
+        /** @var ServiceManagerConfigurator $serviceManagerConfigurator */
+        $serviceManagerConfigurator = $configuratorRegistry->get(ServiceManagerConfiguratorItem::class);
+
+        $serviceManagerConfigurator->addFactory(PlatesRenderer::class, PlatesRendererFactory::class);
     }
 
     /**

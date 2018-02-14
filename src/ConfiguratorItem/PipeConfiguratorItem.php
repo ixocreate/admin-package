@@ -31,7 +31,7 @@ final class PipeConfiguratorItem implements ConfiguratorItemInterface
     /**
      * @return string
      */
-    public function getConfiguratorName(): string
+    public function getVariableName(): string
     {
         return 'adminPipeConfigurator';
     }
@@ -39,7 +39,7 @@ final class PipeConfiguratorItem implements ConfiguratorItemInterface
     /**
      * @return string
      */
-    public function getConfiguratorFileName(): string
+    public function getFileName(): string
     {
         return 'admin_pipe.php';
     }
