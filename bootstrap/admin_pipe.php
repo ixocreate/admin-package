@@ -7,6 +7,8 @@ namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\Action\Api\Auth\LoginAction;
 use KiwiSuite\Admin\Action\Api\Auth\LogoutAction;
+use KiwiSuite\Admin\Action\Api\Auth\PasswordEmailAction;
+use KiwiSuite\Admin\Action\Api\Auth\PasswordResetAction;
 use KiwiSuite\Admin\Action\Api\Auth\UserAction;
 use KiwiSuite\Admin\Action\Api\Config\ConfigAction;
 use KiwiSuite\Admin\Action\Api\Session\SessionAction;
@@ -35,6 +37,8 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
     $pipeConfigurator->group(function (GroupPipeConfigurator $groupPipeConfigurator) {
         $groupPipeConfigurator->get('/config', ConfigAction::class, "admin.api.config");
         $groupPipeConfigurator->post('/auth/login', LoginAction::class, "admin.api.auth.login");
+        $groupPipeConfigurator->post('/password/email', PasswordEmailAction::class, "admin.api.password.email");
+        $groupPipeConfigurator->post('/password/reset', PasswordResetAction::class, "admin.api.password.reset");
     });
 
     //Authorized routes
@@ -43,7 +47,6 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
 
         $groupPipeConfigurator->get('/auth/user', UserAction::class, "admin.api.auth.user");
         $groupPipeConfigurator->post('/auth/logout', LogoutAction::class, "admin.api.auth.logout");
-
     });
 });
 
