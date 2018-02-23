@@ -51,7 +51,7 @@ final class XsrfProtectionMiddleware implements MiddlewareInterface
             return $this->createInvalidXsrfTokenResponse();
         }
 
-        if ($sessionData->getXsrfToken() !== $xsrfToken) {
+        if ((string) $sessionData->xsrfToken()->getValue() !== $xsrfToken) {
             return $this->createInvalidXsrfTokenResponse();
         }
 

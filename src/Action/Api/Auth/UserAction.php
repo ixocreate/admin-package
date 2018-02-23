@@ -28,15 +28,6 @@ final class UserAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $user = new User([
-            'email' => 'test@kiwi-suite.test',
-            'id' => 1,
-            'password' => 'HIDE ME',
-            'username' => 'test.kiwi-suite',
-        ]);
-
-        // TODO: Entitiy::toArray() should respect Entitiy\Definition::$public flag
-
-        return new ApiSuccessResponse($user->toArray());
+        return new ApiSuccessResponse($request->getAttribute(User::class)->toPublicArray());
     }
 }

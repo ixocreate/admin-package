@@ -12,12 +12,10 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Action\Api\Auth;
 
-use Dflydev\FigCookies\FigResponseCookies;
-use Dflydev\FigCookies\SetCookie;
-use Firebase\JWT\JWT;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Entity\SessionData;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
+use KiwiSuite\Admin\Session\SessionCookie;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -53,58 +51,10 @@ final class LogoutAction implements MiddlewareInterface
             'xsrfToken' => Uuid::uuid4()->toString(),
         ]);
 
-        $response = $this->writeSessionCookie($request, $response, $sessionData);
-        $response = $this->writeXsrfCookie($request, $response, $sessionData);
+        $sessionCookie = new SessionCookie();
+        $response = $sessionCookie->createSessionCookie($request, $response, $sessionData);
+        $response = $sessionCookie->createXsrfCookie($request, $response, $sessionData);
 
         return $response;
-    }
-
-    /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param SessionData $sessionData
-     * @return ResponseInterface
-     */
-    private function writeSessionCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData) : ResponseInterface
-    {
-        $jwt = JWT::encode(
-            [
-                'iat'  => \time(),
-                'jti'  => \base64_encode(\random_bytes(32)),
-                'iss'  => $request->getUri()->getHost(),
-                'nbf'  => \time(),
-                'exp'  => \time() + 31536000,
-                'data' => $sessionData->toArray(),
-            ],
-            'secret_key',
-            'HS512'
-        );
-
-        $cookie = SetCookie::create("kiwiSid")
-            ->withValue($jwt)
-            ->withPath("/")
-            // ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
-            ->withHttpOnly(true)
-            ->withSecure(($request->getUri()->getScheme() === "https"));
-
-        return FigResponseCookies::set($response, $cookie);
-    }
-
-    /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param SessionData $sessionData
-     * @return ResponseInterface
-     */
-    private function writeXsrfCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData) : ResponseInterface
-    {
-        $cookie = SetCookie::create("XSRF-TOKEN")
-            ->withValue($sessionData->getXsrfToken())
-            ->withPath("/")
-            // ->withDomain($this->adminConfig->getSessionDomain($request->getUri()->getHost()))
-            ->withHttpOnly(false)
-            ->withSecure(($request->getUri()->getScheme() === "https"));
-
-        return FigResponseCookies::set($response, $cookie);
     }
 }

@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Entity;
 
+use KiwiSuite\CommonTypes\Entity\DateTimeType;
+use KiwiSuite\CommonTypes\Entity\EmailType;
+use KiwiSuite\CommonTypes\Entity\UuidType;
 use KiwiSuite\Entity\Entity\Definition;
 use KiwiSuite\Entity\Entity\DefinitionCollection;
 use KiwiSuite\Entity\Entity\EntityInterface;
@@ -28,15 +31,67 @@ final class User implements EntityInterface
 
     private $password;
 
-    private $username;
+    private $hash;
+
+    private $role;
+
+    private $avatar;
+
+    private $createdAt;
+
+    private $lastLoginAt;
+
+    public function id(): UuidType
+    {
+        return $this->id;
+    }
+
+    public function email(): EmailType
+    {
+        return $this->email;
+    }
+
+    public function password(): string
+    {
+        return $this->password;
+    }
+
+    public function hash(): UuidType
+    {
+        return $this->hash;
+    }
+
+    public function role(): string
+    {
+        return $this->role;
+    }
+
+    public function avatar(): string
+    {
+        return $this->avatar;
+    }
+
+    public function createdAt(): DateTimeType
+    {
+        return $this->createdAt;
+    }
+
+    public function lastLoginAt():? DateTimeType
+    {
+        return $this->lastLoginAt;
+    }
 
     private function createDefinitions() : DefinitionCollection
     {
         return new DefinitionCollection([
-            new Definition("id", TypeInterface::TYPE_INT, false, true),
-            new Definition("email", TypeInterface::TYPE_STRING, false, true),
+            new Definition("id", UuidType::class, false, true),
+            new Definition("email", EmailType::class, false, true),
             new Definition("password", TypeInterface::TYPE_STRING, false, false),
-            new Definition("username", TypeInterface::TYPE_STRING, false, true),
+            new Definition("hash", UuidType::class, false, false),
+            new Definition("role", TypeInterface::TYPE_STRING, false, false),
+            new Definition("avatar", TypeInterface::TYPE_STRING, false, false),
+            new Definition("createdAt", DateTimeType::class, false, true),
+            new Definition("lastLoginAt", DateTimeType::class, true, true),
         ]);
     }
 }

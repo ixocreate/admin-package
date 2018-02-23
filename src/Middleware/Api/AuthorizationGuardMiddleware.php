@@ -13,7 +13,10 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Middleware\Api;
 
 use KiwiSuite\Admin\Entity\SessionData;
+use KiwiSuite\Admin\Entity\User;
+use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
+use KiwiSuite\CommonTypes\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -21,6 +24,20 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class AuthorizationGuardMiddleware implements MiddlewareInterface
 {
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
+     * AuthorizationGuardMiddleware constructor.
+     * @param UserRepository $userRepository
+     */
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     /**
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
@@ -33,9 +50,16 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
             return $this->createNotAuthorizedResponse();
         }
 
-        if ($sessionData->getUserId() !== 1) {
+        if (!($sessionData->userId() instanceof UuidType)) {
             return $this->createNotAuthorizedResponse();
         }
+
+        $user = $this->userRepository->findOneBy(['id' => $sessionData->userId()]);
+        if (empty($user)) {
+            return $this->createNotAuthorizedResponse();
+        }
+
+        $request = $request->withAttribute(User::class, $user);
 
         return $handler->handle($request);
     }
