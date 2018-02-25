@@ -88,8 +88,8 @@ final class User implements EntityInterface
             new Definition("email", EmailType::class, false, true),
             new Definition("password", TypeInterface::TYPE_STRING, false, false),
             new Definition("hash", UuidType::class, false, false),
-            new Definition("role", TypeInterface::TYPE_STRING, false, false),
-            new Definition("avatar", TypeInterface::TYPE_STRING, false, false),
+            new Definition("role", TypeInterface::TYPE_STRING, false, true),
+            new Definition("avatar", TypeInterface::TYPE_STRING, false, true),
             new Definition("createdAt", DateTimeType::class, false, true),
             new Definition("lastLoginAt", DateTimeType::class, true, true),
         ]);
