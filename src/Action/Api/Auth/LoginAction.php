@@ -65,6 +65,10 @@ final class LoginAction implements MiddlewareInterface
             return new ApiErrorResponse("invalid_credentials", [], 401);
         }
 
+        if (!password_verify($data['password'], $user->password())) {
+            return new ApiErrorResponse("invalid_credentials", [], 401);
+        }
+
         $response = new ApiSuccessResponse();
 
         $sessionData = new SessionData([
