@@ -1,6 +1,7 @@
 <?php
 namespace KiwiSuite\Admin\Action\Handler;
 
+use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\CommandBus\CommandBus;
@@ -54,8 +55,10 @@ final class HandlerAction implements MiddlewareInterface
 
         $metadata = $routeResult->getMatchedParams();
         if (empty($metadata)) {
-            $metadata = null;
+            $metadata = [];
         }
+
+        $metadata[User::class] = $request->getAttribute(User::class, null);
 
         $message = $message->inject($body, $metadata);
 
