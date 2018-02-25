@@ -32,7 +32,7 @@ final class CreateUserHandler implements HandlerInterface
         $password = password_hash("12345", PASSWORD_DEFAULT);
 
         $identicion = new Identicon(new SvgGenerator());
-        $avatar = $identicion->getImageData((string) $message->uuid()->getValue());
+        $avatar = $identicion->getImageData((string) $message->email()->getValue());
 
         $hash = Uuid::uuid4()->toString();
 
