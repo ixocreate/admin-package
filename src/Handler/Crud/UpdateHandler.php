@@ -8,7 +8,7 @@ use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;
 
-final class EditHandler implements HandlerInterface
+final class UpdateHandler implements HandlerInterface
 {
     /**
      * @var RepositorySubManager
