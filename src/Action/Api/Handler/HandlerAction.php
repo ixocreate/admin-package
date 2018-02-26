@@ -59,6 +59,9 @@ final class HandlerAction implements MiddlewareInterface
         }
 
         $metadata[User::class] = $request->getAttribute(User::class, null);
+        if (!empty($metadata[User::class])) {
+            $metadata[User::class] = $metadata[User::class]->id();
+        }
 
         $message = $message->inject($body, $metadata);
 

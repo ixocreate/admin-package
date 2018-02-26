@@ -8,7 +8,7 @@ use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;
 
-final class UpdateHandler implements HandlerInterface
+final class DeleteHandler implements HandlerInterface
 {
     /**
      * @var RepositorySubManager
@@ -39,6 +39,7 @@ final class UpdateHandler implements HandlerInterface
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($repositoryName);
 
-        $repository->flush($repository->save($entity));
+        $repository->remove($entity);
+        $repository->flush($entity);
     }
 }

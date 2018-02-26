@@ -50,7 +50,7 @@ final class ChangePasswordMessage implements MessageInterface, CrudMessageInterf
     public function fetchEntity(): EntityInterface
     {
         /** @var User $user */
-        $user = $this->userRepository->findOneBy(['id' => $this->metadata[User::class]->id()]);
+        $user = $this->userRepository->findOneBy(['id' => $this->metadata[User::class]]);
         return $user->with('password', password_hash($this->password(), PASSWORD_DEFAULT));
     }
 
