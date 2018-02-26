@@ -14,6 +14,7 @@ namespace KiwiSuite\Admin\Middleware\Api;
 
 use KiwiSuite\Admin\Entity\SessionData;
 use KiwiSuite\Admin\Entity\User;
+use KiwiSuite\Admin\Permission\Permission;
 use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\CommonTypes\Entity\UuidType;
@@ -21,6 +22,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Expressive\Router\RouteResult;
 
 final class AuthorizationGuardMiddleware implements MiddlewareInterface
 {
@@ -60,6 +62,17 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
         }
 
         $request = $request->withAttribute(User::class, $user);
+
+        $permission = new Permission($user);
+
+        $request = $request->withAttribute(Permission::class, $permission);
+
+        /** @var RouteResult $routeResult */
+        $routeResult = $request->getAttribute(RouteResult::class);
+        if (!$permission->can($routeResult->getMatchedRouteName())) {
+            return $this->createNotAuthorizedResponse();
+        }
+
 
         return $handler->handle($request);
     }
