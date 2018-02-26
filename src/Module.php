@@ -13,6 +13,9 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\ConfiguratorItem\PipeConfiguratorItem;
+use KiwiSuite\Admin\ConfiguratorItem\RoleConfiguratorItem;
+use KiwiSuite\Admin\Role\Factory\RoleSubManagerFactory;
+use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\Application\ConfiguratorItem\ConfiguratorRegistry;
 use KiwiSuite\Application\ConfiguratorItem\ServiceManagerConfiguratorItem;
 use KiwiSuite\Application\Module\ModuleInterface;
@@ -31,6 +34,7 @@ class Module implements ModuleInterface
     {
         /** @var ServiceManagerConfigurator $serviceManagerConfigurator */
         $serviceManagerConfigurator = $configuratorRegistry->get(ServiceManagerConfiguratorItem::class);
+        $serviceManagerConfigurator->addSubManager(RoleSubManager::class, RoleSubManagerFactory::class);
 
         $serviceManagerConfigurator->addFactory(PlatesRenderer::class, PlatesRendererFactory::class);
     }
@@ -50,6 +54,7 @@ class Module implements ModuleInterface
     {
         return [
             PipeConfiguratorItem::class,
+            RoleConfiguratorItem::class,
         ];
     }
 

@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Entity;
 
+use KiwiSuite\Admin\Type\RoleType;
 use KiwiSuite\CommonTypes\Entity\DateTimeType;
 use KiwiSuite\CommonTypes\Entity\EmailType;
 use KiwiSuite\CommonTypes\Entity\UuidType;
@@ -61,7 +62,7 @@ final class User implements EntityInterface
         return $this->hash;
     }
 
-    public function role(): string
+    public function role(): RoleType
     {
         return $this->role;
     }
@@ -88,7 +89,7 @@ final class User implements EntityInterface
             new Definition("email", EmailType::class, false, true),
             new Definition("password", TypeInterface::TYPE_STRING, false, false),
             new Definition("hash", UuidType::class, false, false),
-            new Definition("role", TypeInterface::TYPE_STRING, false, true),
+            new Definition("role", RoleType::class, false, true),
             new Definition("avatar", TypeInterface::TYPE_STRING, false, true),
             new Definition("createdAt", DateTimeType::class, false, true),
             new Definition("lastLoginAt", DateTimeType::class, true, true),

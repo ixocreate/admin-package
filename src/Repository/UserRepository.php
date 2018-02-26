@@ -4,6 +4,7 @@ namespace KiwiSuite\Admin\Repository;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use KiwiSuite\Admin\Entity\User;
+use KiwiSuite\Admin\Type\RoleType;
 use KiwiSuite\CommonTypes\Entity\DateTimeType;
 use KiwiSuite\CommonTypes\Entity\EmailType;
 use KiwiSuite\CommonTypes\Entity\UuidType;
@@ -31,7 +32,7 @@ final class UserRepository extends AbstractRepository
         $metadata->addField('email', EmailType::class);
         $metadata->addField('password', Type::STRING);
         $metadata->addField('hash', UuidType::class);
-        $metadata->addField('role', Type::STRING);
+        $metadata->addField('role', RoleType::class);
         $metadata->addField('avatar', Type::TEXT);
         $metadata->addField('createdAt', DateTimeType::class);
         $metadata->addField('lastLoginAt', DateTimeType::class);
