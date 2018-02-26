@@ -14,16 +14,11 @@ namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\ConfiguratorItem\PipeConfiguratorItem;
 use KiwiSuite\Admin\ConfiguratorItem\RoleConfiguratorItem;
-use KiwiSuite\Admin\Role\Factory\RoleSubManagerFactory;
-use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\Application\ConfiguratorItem\ConfiguratorRegistry;
-use KiwiSuite\Application\ConfiguratorItem\ServiceManagerConfiguratorItem;
 use KiwiSuite\Application\Module\ModuleInterface;
 use KiwiSuite\Application\Service\ServiceRegistry;
 use KiwiSuite\ServiceManager\ServiceManager;
-use KiwiSuite\ServiceManager\ServiceManagerConfigurator;
-use KiwiSuite\Template\Plates\PlatesRendererFactory;
-use Zend\Expressive\Plates\PlatesRenderer;
+
 
 class Module implements ModuleInterface
 {
@@ -32,11 +27,7 @@ class Module implements ModuleInterface
      */
     public function configure(ConfiguratorRegistry $configuratorRegistry): void
     {
-        /** @var ServiceManagerConfigurator $serviceManagerConfigurator */
-        $serviceManagerConfigurator = $configuratorRegistry->get(ServiceManagerConfiguratorItem::class);
-        $serviceManagerConfigurator->addSubManager(RoleSubManager::class, RoleSubManagerFactory::class);
 
-        $serviceManagerConfigurator->addFactory(PlatesRenderer::class, PlatesRendererFactory::class);
     }
 
     /**
