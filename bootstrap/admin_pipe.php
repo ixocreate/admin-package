@@ -56,7 +56,7 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
         $groupPipeConfigurator->post('/auth/logout', LogoutAction::class, "admin.api.auth.logout");
 
         $groupPipeConfigurator->patch(
-            '/user/manage/change-email',
+            '/account/email',
             HandlerAction::class,
             'admin.api.account.email',
             function (RouteConfigurator $routeConfigurator) {
@@ -65,7 +65,7 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
         );
 
         $groupPipeConfigurator->patch(
-            '/user/manage/change-password',
+            '/account/password',
             HandlerAction::class,
             'admin.api.account.password',
             function (RouteConfigurator $routeConfigurator) {
