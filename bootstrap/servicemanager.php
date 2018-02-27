@@ -10,6 +10,8 @@ use KiwiSuite\Admin\Helper\Factory\ServerUrlHelperFactory;
 use KiwiSuite\Admin\Helper\Factory\UrlHelperFactory;
 use KiwiSuite\Admin\Helper\ServerUrlHelper;
 use KiwiSuite\Admin\Helper\UrlHelper;
+use KiwiSuite\Admin\Resource\Factory\ResourceSubManagerFactory;
+use KiwiSuite\Admin\Resource\ResourceSubManager;
 use KiwiSuite\Admin\Role\Factory\RoleSubManagerFactory;
 use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\Admin\Router\AdminRouter;
@@ -24,3 +26,4 @@ $serviceManagerConfigurator->addFactory(UrlHelper::class, UrlHelperFactory::clas
 $serviceManagerConfigurator->addFactory(PlatesRenderer::class, PlatesRendererFactory::class);
 
 $serviceManagerConfigurator->addSubManager(RoleSubManager::class, RoleSubManagerFactory::class);
+$serviceManagerConfigurator->addSubManager(ResourceSubManager::class, ResourceSubManagerFactory::class);

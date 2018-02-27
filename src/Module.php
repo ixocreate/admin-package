@@ -13,7 +13,9 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\ConfiguratorItem\PipeConfiguratorItem;
+use KiwiSuite\Admin\ConfiguratorItem\ResourceConfiguratorItem;
 use KiwiSuite\Admin\ConfiguratorItem\RoleConfiguratorItem;
+use KiwiSuite\Admin\Resource\RoutingSetup;
 use KiwiSuite\Application\ConfiguratorItem\ConfiguratorRegistry;
 use KiwiSuite\Application\Module\ModuleInterface;
 use KiwiSuite\Application\Service\ServiceRegistry;
@@ -27,7 +29,11 @@ class Module implements ModuleInterface
      */
     public function configure(ConfiguratorRegistry $configuratorRegistry): void
     {
-
+        $routingSetup = new RoutingSetup();
+        $routingSetup->setup(
+            $configuratorRegistry->get(PipeConfiguratorItem::class),
+            (new ResourceConfiguratorItem())->getService($configuratorRegistry->get(ResourceConfiguratorItem::class))
+        );
     }
 
     /**
@@ -46,6 +52,7 @@ class Module implements ModuleInterface
         return [
             PipeConfiguratorItem::class,
             RoleConfiguratorItem::class,
+            ResourceConfiguratorItem::class,
         ];
     }
 
