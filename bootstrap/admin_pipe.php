@@ -58,7 +58,7 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
         $groupPipeConfigurator->patch(
             '/user/manage/change-email',
             HandlerAction::class,
-            'admin.api.user.manage.changeEmail',
+            'admin.api.account.email',
             function (RouteConfigurator $routeConfigurator) {
                 $routeConfigurator->addOption(MessageInterface::class, ChangeEmailMessage::class);
             }
@@ -67,7 +67,7 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
         $groupPipeConfigurator->patch(
             '/user/manage/change-password',
             HandlerAction::class,
-            'admin.api.user.manage.changePassword',
+            'admin.api.account.password',
             function (RouteConfigurator $routeConfigurator) {
                 $routeConfigurator->addOption(MessageInterface::class, ChangePasswordMessage::class);
             }
