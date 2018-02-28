@@ -4,6 +4,9 @@ namespace KiwiSuite\Admin\Resource;
 use KiwiSuite\Admin\Action\Api\Crud\DetailAction;
 use KiwiSuite\Admin\Action\Api\Crud\IndexAction;
 use KiwiSuite\Admin\Action\Handler\HandlerAction;
+use KiwiSuite\Admin\Message\Crud\CreateMessage;
+use KiwiSuite\Admin\Message\Crud\DeleteMessage;
+use KiwiSuite\Admin\Message\Crud\UpdateMessage;
 use KiwiSuite\Admin\Middleware\Api\AuthorizationGuardMiddleware;
 use KiwiSuite\Admin\Middleware\Api\EnforceApiResponseMiddleware;
 use KiwiSuite\Admin\Middleware\Api\ErrorMiddleware;
@@ -12,6 +15,7 @@ use KiwiSuite\Admin\Middleware\Api\XsrfProtectionMiddleware;
 use KiwiSuite\ApplicationHttp\Pipe\GroupPipeConfigurator;
 use KiwiSuite\ApplicationHttp\Pipe\PipeConfigurator;
 use KiwiSuite\ApplicationHttp\Pipe\RouteConfigurator;
+use KiwiSuite\CommandBus\Message\MessageInterface;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 final class RoutingSetup
@@ -56,6 +60,7 @@ final class RoutingSetup
                         HandlerAction::class,
                         'admin.api.' . $resourceName . '.update',
                         function (RouteConfigurator $routeConfigurator) use ($resource){
+                            $routeConfigurator->addOption(MessageInterface::class, UpdateMessage::class);
                             $routeConfigurator->addOption(ResourceInterface::class, $resource);
                         }
                     );
@@ -65,6 +70,7 @@ final class RoutingSetup
                         HandlerAction::class,
                         'admin.api.' . $resourceName . '.create',
                         function (RouteConfigurator $routeConfigurator) use ($resource){
+                            $routeConfigurator->addOption(MessageInterface::class, CreateMessage::class);
                             $routeConfigurator->addOption(ResourceInterface::class, $resource);
                         }
                     );
@@ -74,6 +80,7 @@ final class RoutingSetup
                         HandlerAction::class,
                         'admin.api.' . $resourceName . '.delete',
                         function (RouteConfigurator $routeConfigurator) use ($resource){
+                            $routeConfigurator->addOption(MessageInterface::class, DeleteMessage::class);
                             $routeConfigurator->addOption(ResourceInterface::class, $resource);
                         }
                     );

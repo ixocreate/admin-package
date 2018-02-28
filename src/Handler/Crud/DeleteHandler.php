@@ -1,6 +1,7 @@
 <?php
 namespace KiwiSuite\Admin\Handler\Crud;
 
+use KiwiSuite\Admin\Message\CrudMessageInterface;
 use KiwiSuite\CommandBus\Handler\HandlerInterface;
 use KiwiSuite\CommandBus\Message\MessageInterface;
 use KiwiSuite\Database\Repository\EntityRepositoryMapping;
@@ -30,8 +31,16 @@ final class DeleteHandler implements HandlerInterface
         $this->entityRepositoryMapping = $entityRepositoryMapping;
     }
 
+    /**
+     * @param MessageInterface $message
+     * @throws \Exception
+     */
     public function __invoke(MessageInterface $message)
     {
+        if (!($message instanceof CrudMessageInterface)) {
+            throw new \Exception("invalid message");
+        }
+
         /** @var EntityInterface $entity */
         $entity = $message->fetchEntity();
         $repositoryName = $this->entityRepositoryMapping->getRepositoryByEntity(get_class($entity));
