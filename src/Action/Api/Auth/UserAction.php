@@ -28,6 +28,8 @@ final class UserAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return new ApiSuccessResponse($request->getAttribute(User::class)->toPublicArray());
+        $user = $request->getAttribute(User::class)->toPublicArray();
+        $user['permissions'] = $request->getAttribute(User::class)->role()->getRole()->getPermissions();
+        return new ApiSuccessResponse($user);
     }
 }
