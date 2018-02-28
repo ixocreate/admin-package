@@ -47,7 +47,6 @@ final class CreateHandler implements HandlerInterface
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($repositoryName);
 
-        $repository->persist($entity);
-        $repository->flush($entity);
+        $repository->save($entity);
     }
 }
