@@ -8,4 +8,12 @@ interface ResourceInterface
     public function repository(): string;
 
     public function icon(): string;
+
+    public function createMessage(): ?string;
+
+    public function updateMessage(): ?string;
+
+    public function deleteMessage(): ?string;
+
+    public function indexAction(): ?string;
 }

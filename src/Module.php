@@ -16,6 +16,7 @@ use KiwiSuite\Admin\ConfiguratorItem\PipeConfiguratorItem;
 use KiwiSuite\Admin\ConfiguratorItem\ResourceConfiguratorItem;
 use KiwiSuite\Admin\ConfiguratorItem\RoleConfiguratorItem;
 use KiwiSuite\Admin\Resource\RoutingSetup;
+use KiwiSuite\Admin\Resource\UserResource;
 use KiwiSuite\Application\ConfiguratorItem\ConfiguratorRegistry;
 use KiwiSuite\Application\Module\ModuleInterface;
 use KiwiSuite\Application\Service\ServiceRegistry;
@@ -29,6 +30,7 @@ class Module implements ModuleInterface
      */
     public function configure(ConfiguratorRegistry $configuratorRegistry): void
     {
+        $configuratorRegistry->get(ResourceConfiguratorItem::class)->addFactory(UserResource::class);
         $routingSetup = new RoutingSetup();
         $routingSetup->setup(
             $configuratorRegistry->get(PipeConfiguratorItem::class),

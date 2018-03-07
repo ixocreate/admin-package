@@ -2,9 +2,11 @@
 namespace KiwiSuite\Admin\Action\Api\Crud;
 
 use App\Admin\Entity\Tag;
+use Doctrine\Common\Collections\Criteria;
 use KiwiSuite\Admin\Resource\ResourceInterface;
 use KiwiSuite\Admin\Resource\ResourceSubManager;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
+use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -24,10 +26,16 @@ final class IndexAction implements MiddlewareInterface
      */
     private $repositorySubManager;
 
-    public function __construct(ResourceSubManager $resourceSubManager, RepositorySubManager $repositorySubManager)
+    /**
+     * @var MiddlewareSubManager
+     */
+    private $middlewareSubManager;
+
+    public function __construct(ResourceSubManager $resourceSubManager, RepositorySubManager $repositorySubManager, MiddlewareSubManager $middlewareSubManager)
     {
         $this->resourceSubManager = $resourceSubManager;
         $this->repositorySubManager = $repositorySubManager;
+        $this->middlewareSubManager = $middlewareSubManager;
     }
 
 
@@ -41,14 +49,55 @@ final class IndexAction implements MiddlewareInterface
         $routeResult = $request->getAttribute(RouteResult::class);
         $resourceKey = $routeResult->getMatchedRoute()->getOptions()[ResourceInterface::class];
 
-
         /** @var ResourceInterface $resource */
         $resource = $this->resourceSubManager->get($resourceKey);
+
+        if (!empty($resource->indexAction())) {
+            /** @var MiddlewareInterface $action */
+            $action = $this->middlewareSubManager->get($resource->indexAction());
+
+            return $action->process($request, $handler);
+        }
 
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
 
-        $result = $repository->findAll();
+        $criteria = new Criteria();
+        //?sortColumn1=ASC&sortColumn2=DESC&filterColumn1=test&filterColumn2=foobar
+        $queryParams = $request->getQueryParams();
+        foreach ($queryParams as $key => $value) {
+            if (substr($key, 0, 4) === "sort") {
+                //filter
+
+                continue;
+            }
+
+            if (substr($key, 0, 6) === "filter") {
+                //filter
+
+                continue;
+            }
+
+            if ($key === "offset") {
+                $value = (int) $value;
+                if (!empty($value)) {
+                    $criteria->setFirstResult($value);
+                }
+
+                continue;
+            }
+
+            if ($key === "limit") {
+                $value = (int) $value;
+                if (!empty($value)) {
+                    $criteria->setMaxResults($value);
+                }
+
+                continue;
+            }
+        }
+
+        $result = $repository->matching($criteria);
 
         $response = [];
         //TODO Collection

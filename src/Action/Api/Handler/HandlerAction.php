@@ -2,7 +2,11 @@
 namespace KiwiSuite\Admin\Action\Handler;
 
 use KiwiSuite\Admin\Entity\User;
+use KiwiSuite\Admin\Message\Crud\CreateMessage;
+use KiwiSuite\Admin\Message\Crud\DeleteMessage;
+use KiwiSuite\Admin\Message\Crud\UpdateMessage;
 use KiwiSuite\Admin\Resource\ResourceInterface;
+use KiwiSuite\Admin\Resource\ResourceSubManager;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\CommandBus\CommandBus;
@@ -27,10 +31,19 @@ final class HandlerAction implements MiddlewareInterface
      */
     private $commandBus;
 
-    public function __construct(MessageSubManager $messageSubManager, CommandBus $commandBus)
-    {
+    /**
+     * @var ResourceSubManager
+     */
+    private $resourceSubManager;
+
+    public function __construct(
+        MessageSubManager $messageSubManager,
+        CommandBus $commandBus,
+        ResourceSubManager $resourceSubManager
+    ) {
         $this->messageSubManager = $messageSubManager;
         $this->commandBus = $commandBus;
+        $this->resourceSubManager = $resourceSubManager;
     }
 
     /**
@@ -46,8 +59,27 @@ final class HandlerAction implements MiddlewareInterface
             throw new \Exception("invalid message");
         }
 
+        $messageClass = $options[MessageInterface::class];
+        if (!empty($routeResult->getMatchedRoute()->getOptions()[ResourceInterface::class])) {
+            $resourceKey = $routeResult->getMatchedRoute()->getOptions()[ResourceInterface::class];
+
+            /** @var ResourceInterface $resource */
+            $resource = $this->resourceSubManager->get($resourceKey);
+            switch ($messageClass) {
+                case UpdateMessage::class:
+                    $messageClass = $resource->updateMessage() ?? $messageClass;
+                    break;
+                case CreateMessage::class:
+                    $messageClass = $resource->createMessage() ?? $messageClass;
+                    break;
+                case DeleteMessage::class:
+                    $messageClass = $resource->deleteMessage() ?? $messageClass;
+                    break;
+            }
+        }
+
         /** @var MessageInterface $message */
-        $message = $this->messageSubManager->build($options[MessageInterface::class]);
+        $message = $this->messageSubManager->build($messageClass);
 
         $body = $request->getParsedBody();
         if (empty($body)) {
