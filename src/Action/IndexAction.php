@@ -89,25 +89,11 @@ class IndexAction implements MiddlewareInterface
         $styles = [
             'styles' => null,
         ];
-
-        /**
-         * TODO: get build/dist of frontend by config
-         */
-
-        /**
-         * admin and admin-frontend are siblings in a vendor folder
-         */
-        $embeddedPath = \realpath(__DIR__ . '/../../../admin-frontend/build');
-
-        /**
-         * admin-frontend is a local dependency of admin for development
-         */
-        $standalonePath = \realpath(__DIR__ . '/../../vendor/kiwi-suite/admin-frontend/build');
-
+        
         /**
          * prefer embedded path
          */
-        $path = \file_exists($embeddedPath) ? $embeddedPath : $standalonePath;
+        $path = getcwd() . '/templates/admin';
 
         /**
          * look up assets by name
