@@ -80,7 +80,7 @@ final class ChangePasswordMessage implements MessageInterface, CrudMessageInterf
             $result->addError("password_do_not_match");
         }
 
-        $user = $this->userRepository->findOneBy(['id' => $this->metadata[User::class]->id()]);
+        $user = $this->userRepository->findOneBy(['id' => $this->metadata[User::class]]);
         if (!password_verify($this->data['passwordRepeat'], $user->password())){
             $result->addError("invalid_old_password");
         }
