@@ -38,7 +38,10 @@ final class Permission
             $checkPermission = [];
             for ($j = 0; $j <= $i; $j++) {
                 $checkPermission[] = $permissionParts[$j];
-                if (isset($role->getPermissions()[\implode('.', $checkPermission) . '*'])) {
+                if (in_array(\implode('.', $checkPermission), $role->getPermissions())) {
+                    return true;
+                }
+                if (in_array(\implode('.', $checkPermission) . '.*', $role->getPermissions())) {
                     return true;
                 }
             }
