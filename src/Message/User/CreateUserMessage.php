@@ -3,6 +3,8 @@ namespace KiwiSuite\Admin\Message;
 
 use KiwiSuite\Admin\Handler\User\CreateUserHandler;
 use KiwiSuite\Admin\Repository\UserRepository;
+use KiwiSuite\Admin\Role\RoleServiceManagerConfig;
+use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\CommandBus\Message\MessageInterface;
 use KiwiSuite\CommandBus\Message\MessageTrait;
 use KiwiSuite\CommandBus\Message\Validation\Result;
@@ -23,10 +25,17 @@ final class CreateUserMessage implements MessageInterface
      */
     private $email;
 
-    public function __construct(UserRepository $userRepository)
+    /**
+     * @var RoleSubManager
+     */
+    private $roleSubManager;
+
+
+    public function __construct(UserRepository $userRepository, RoleSubManager $roleSubManager)
     {
 
         $this->userRepository = $userRepository;
+        $this->roleSubManager = $roleSubManager;
     }
 
     /**
@@ -53,6 +62,11 @@ final class CreateUserMessage implements MessageInterface
         return $this->data['role'];
     }
 
+    public function password(): string
+    {
+        return $this->data['password'];
+    }
+
     /**
      * @param Result $result
      * @throws \Assert\AssertionFailedException
@@ -73,8 +87,21 @@ final class CreateUserMessage implements MessageInterface
             $result->addError("email_already_in_use");
         }
 
-        if ($this->data['role'] !== 'admin') {
+        /** @var RoleServiceManagerConfig $roleServiceManagerConfig */
+        $roleServiceManagerConfig = $this->roleSubManager->getServiceManagerConfig();
+
+        if (empty($roleServiceManagerConfig->getRoleMapping()[$this->data['role']])) {
             $result->addError("invalid_role");
+        }
+
+        if (empty($this->data['password']) || empty($this->data['passwordRepeat'])) {
+            $result->addError("invalid_password");
+
+            return;
+        }
+
+        if ($this->data['password'] !== $this->data['passwordRepeat']) {
+            $result->addError("password_dont_match");
         }
     }
 }

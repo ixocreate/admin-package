@@ -44,11 +44,15 @@ final class CreateUserCommand extends Command implements CommandInterface
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
+        $password = substr(base64_encode(sha1(uniqid())), 0, 8);
+
         /** @var CreateUserMessage $message */
         $message = $this->messageSubManager->build(CreateUserMessage::class);
         $message = $message->inject([
             'email' => $input->getArgument("email"),
             'role' => $input->getArgument("role"),
+            'password' => $password,
+            'passwordRepeat' => $password,
         ]);
         $result = $message->validate();
         if (!$result->isSuccessful()) {
@@ -56,6 +60,8 @@ final class CreateUserCommand extends Command implements CommandInterface
         }
 
         $this->commandBus->handle($message);
+
+        $output->writeln("Password: ". $password);
     }
 
     public static function getCommandName()

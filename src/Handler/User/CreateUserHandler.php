@@ -29,7 +29,7 @@ final class CreateUserHandler implements HandlerInterface
     {
         /** @var CreateUserMessage $message */
 
-        $password = password_hash("12345", PASSWORD_DEFAULT);
+        $password = password_hash($message->password(), PASSWORD_DEFAULT);
 
         $identicion = new Identicon(new SvgGenerator());
         $avatar = $identicion->getImageData((string) $message->email()->getValue());

@@ -14,7 +14,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Router\RouteResult;
 
-final class IndexAction implements MiddlewareInterface
+final class EmailAction implements MiddlewareInterface
 {
 
     /**

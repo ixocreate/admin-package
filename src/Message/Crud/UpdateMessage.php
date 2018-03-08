@@ -47,6 +47,10 @@ final class UpdateMessage extends AbstractCrudMessage
             /** @var Definition $definition */
             $definition = $definitionCollection->get($key);
 
+            if (empty($value) && $definition->isNullAble()) {
+                continue;
+            }
+
             try {
                 Type::create($this->data()[$definition->getName()], $definition->getType());
             } catch (\Exception $e) {

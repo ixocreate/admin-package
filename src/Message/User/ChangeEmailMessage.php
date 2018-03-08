@@ -49,8 +49,12 @@ final class ChangeEmailMessage implements MessageInterface, CrudMessageInterface
 
     public function fetchEntity(): EntityInterface
     {
+        $id = $this->metadata[User::class];
+        if (!empty($this->metadata['id'])) {
+            $id = $this->metadata['id'];
+        }
         /** @var User $user */
-        $user = $this->userRepository->findOneBy(['id' => $this->metadata[User::class]]);
+        $user = $this->userRepository->findOneBy(['id' => $id]);
         return $user->with('email', $this->email());
     }
 

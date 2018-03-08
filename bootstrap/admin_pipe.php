@@ -42,10 +42,6 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
     $pipeConfigurator->group(function (GroupPipeConfigurator $groupPipeConfigurator) {
         $groupPipeConfigurator->get('/config', ConfigAction::class, "admin.api.config");
         $groupPipeConfigurator->post('/auth/login', LoginAction::class, "admin.api.auth.login");
-
-
-        $groupPipeConfigurator->post('/password/email', PasswordEmailAction::class, "admin.api.password.email");
-        $groupPipeConfigurator->post('/password/reset', PasswordResetAction::class, "admin.api.password.reset");
     });
 
     //Authorized routes
@@ -59,6 +55,15 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
             '/account/email',
             HandlerAction::class,
             'admin.api.account.email',
+            function (RouteConfigurator $routeConfigurator) {
+                $routeConfigurator->addOption(MessageInterface::class, ChangeEmailMessage::class);
+            }
+        );
+
+        $groupPipeConfigurator->patch(
+            '/user/email/{id}',
+            HandlerAction::class,
+            'admin.api.user.email',
             function (RouteConfigurator $routeConfigurator) {
                 $routeConfigurator->addOption(MessageInterface::class, ChangeEmailMessage::class);
             }
