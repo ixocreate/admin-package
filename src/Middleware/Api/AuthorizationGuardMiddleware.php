@@ -70,7 +70,7 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
         /** @var RouteResult $routeResult */
         $routeResult = $request->getAttribute(RouteResult::class);
         if (!$permission->can($routeResult->getMatchedRouteName())) {
-            return $this->createNotAuthorizedResponse();
+            return new ApiErrorResponse('forbidden', [], 403);
         }
 
 
