@@ -6,6 +6,7 @@ use KiwiSuite\Admin\Repository\UserRepository;
 
 final class UserResource implements ResourceInterface
 {
+    use ResourceTrait;
 
     public static function name(): string
     {
@@ -22,23 +23,8 @@ final class UserResource implements ResourceInterface
         return "fa";
     }
 
-    public function createMessage(): ?string
+    public function createMessage(): string
     {
         return CreateUserMessage::class;
-    }
-
-    public function updateMessage(): ?string
-    {
-        return null;
-    }
-
-    public function deleteMessage(): ?string
-    {
-        return null;
-    }
-
-    public function indexAction(): ?string
-    {
-        return null;
     }
 }

@@ -54,32 +54,9 @@ final class HandlerAction implements MiddlewareInterface
     {
         /** @var RouteResult $routeResult */
         $routeResult = $request->getAttribute(RouteResult::class);
-        $options = $routeResult->getMatchedRoute()->getOptions();
-        if (empty($options[MessageInterface::class])) {
-            throw new \Exception("invalid message");
-        }
-
-        $messageClass = $options[MessageInterface::class];
-        if (!empty($routeResult->getMatchedRoute()->getOptions()[ResourceInterface::class])) {
-            $resourceKey = $routeResult->getMatchedRoute()->getOptions()[ResourceInterface::class];
-
-            /** @var ResourceInterface $resource */
-            $resource = $this->resourceSubManager->get($resourceKey);
-            switch ($messageClass) {
-                case UpdateMessage::class:
-                    $messageClass = $resource->updateMessage() ?? $messageClass;
-                    break;
-                case CreateMessage::class:
-                    $messageClass = $resource->createMessage() ?? $messageClass;
-                    break;
-                case DeleteMessage::class:
-                    $messageClass = $resource->deleteMessage() ?? $messageClass;
-                    break;
-            }
-        }
 
         /** @var MessageInterface $message */
-        $message = $this->messageSubManager->build($messageClass);
+        $message = $request->getAttribute(MessageInterface::class);
 
         $body = $request->getParsedBody();
         if (empty($body)) {
@@ -96,8 +73,8 @@ final class HandlerAction implements MiddlewareInterface
             $metadata[User::class] = $metadata[User::class]->id();
         }
 
-        if (!empty($routeResult->getMatchedRoute()->getOptions()[ResourceInterface::class])) {
-            $metadata[ResourceInterface::class] = $routeResult->getMatchedRoute()->getOptions()[ResourceInterface::class];
+        if ($request->getAttribute(ResourceInterface::class)) {
+            $metadata[ResourceInterface::class] = get_class($request->getAttribute(ResourceInterface::class));
             $metadata['id'] = $request->getAttribute('id', null);
         }
 

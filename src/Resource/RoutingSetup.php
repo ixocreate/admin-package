@@ -25,12 +25,6 @@ final class RoutingSetup
         $resourceMapping = $resourceServiceManagerConfig->getResourceMapping();
 
         $pipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigurator) use ($resourceMapping){
-            $pipeConfigurator->pipe(EnforceApiResponseMiddleware::class);
-            $pipeConfigurator->pipe(ErrorMiddleware::class);
-            $pipeConfigurator->pipe(SessionDataMiddleware::class);
-            $pipeConfigurator->pipe(XsrfProtectionMiddleware::class);
-            $pipeConfigurator->pipe(BodyParamsMiddleware::class);
-
 
             //Authorized routes
             $pipeConfigurator->group(function (GroupPipeConfigurator $groupPipeConfigurator) use ($resourceMapping){
@@ -60,7 +54,6 @@ final class RoutingSetup
                         HandlerAction::class,
                         'admin.api.' . $resourceName . '.update',
                         function (RouteConfigurator $routeConfigurator) use ($resource){
-                            $routeConfigurator->addOption(MessageInterface::class, UpdateMessage::class);
                             $routeConfigurator->addOption(ResourceInterface::class, $resource);
                         }
                     );
@@ -70,7 +63,6 @@ final class RoutingSetup
                         HandlerAction::class,
                         'admin.api.' . $resourceName . '.create',
                         function (RouteConfigurator $routeConfigurator) use ($resource){
-                            $routeConfigurator->addOption(MessageInterface::class, CreateMessage::class);
                             $routeConfigurator->addOption(ResourceInterface::class, $resource);
                         }
                     );
@@ -80,7 +72,6 @@ final class RoutingSetup
                         HandlerAction::class,
                         'admin.api.' . $resourceName . '.delete',
                         function (RouteConfigurator $routeConfigurator) use ($resource){
-                            $routeConfigurator->addOption(MessageInterface::class, DeleteMessage::class);
                             $routeConfigurator->addOption(ResourceInterface::class, $resource);
                         }
                     );

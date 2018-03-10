@@ -24,8 +24,9 @@ final class CreateUserHandler implements HandlerInterface
 
     /**
      * @param MessageInterface $message
+     * @return MessageInterface
      */
-    public function __invoke(MessageInterface $message)
+    public function __invoke(MessageInterface $message): MessageInterface
     {
         /** @var CreateUserMessage $message */
 
@@ -48,5 +49,7 @@ final class CreateUserHandler implements HandlerInterface
 
         $user = $this->userRepository->save($user);
         $this->userRepository->flush($user);
+
+        return $message;
     }
 }

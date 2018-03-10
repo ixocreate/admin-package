@@ -9,10 +9,12 @@ use KiwiSuite\Entity\Type\Type;
 
 final class CreateMessage extends AbstractCrudMessage
 {
-
-    public static function getHandler(): string
+    /**
+     * @return array
+     */
+    public function handlers(): array
     {
-        return CreateHandler::class;
+        return $this->resource()->createHandler();
     }
 
     public function fetchEntity(): EntityInterface

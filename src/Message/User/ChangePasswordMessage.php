@@ -13,7 +13,7 @@ use KiwiSuite\Entity\Type\Type;
 
 final class ChangePasswordMessage implements MessageInterface, CrudMessageInterface
 {
-    use MessageTrait;
+    use CrudMessageTrait;
 
     /**
      * @var UserRepository
@@ -32,11 +32,13 @@ final class ChangePasswordMessage implements MessageInterface, CrudMessageInterf
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public static function getHandler(): string
+    public function handlers(): array
     {
-        return UpdateHandler::class;
+        return [
+            UpdateHandler::class
+        ];
     }
 
     /**

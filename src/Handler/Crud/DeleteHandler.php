@@ -33,16 +33,17 @@ final class DeleteHandler implements HandlerInterface
 
     /**
      * @param MessageInterface $message
+     * @return MessageInterface
      * @throws \Exception
      */
-    public function __invoke(MessageInterface $message)
+    public function __invoke(MessageInterface $message): MessageInterface
     {
         if (!($message instanceof CrudMessageInterface)) {
             throw new \Exception("invalid message");
         }
 
         /** @var EntityInterface $entity */
-        $entity = $message->fetchEntity();
+        $entity = $message->entity();
         $repositoryName = $this->entityRepositoryMapping->getRepositoryByEntity(get_class($entity));
 
         /** @var RepositoryInterface $repository */
@@ -50,5 +51,7 @@ final class DeleteHandler implements HandlerInterface
 
         $repository->remove($entity);
         $repository->flush($entity);
+
+        return $message;
     }
 }

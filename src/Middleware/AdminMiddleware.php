@@ -39,6 +39,6 @@ class AdminMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return $this->segmentMiddlewarePipe->process($request, $handler);
+        return $this->segmentMiddlewarePipe->handle($request);
     }
 }

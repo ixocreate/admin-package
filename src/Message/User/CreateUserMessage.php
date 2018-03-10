@@ -39,11 +39,13 @@ final class CreateUserMessage implements MessageInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public static function getHandler(): string
+    public function handlers(): array
     {
-        return CreateUserHandler::class;
+        return [
+            CreateUserHandler::class
+        ];
     }
 
     /**

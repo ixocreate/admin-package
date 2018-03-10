@@ -3,6 +3,7 @@ namespace KiwiSuite\Admin\Message\Crud;
 
 use Doctrine\Instantiator\Instantiator;
 use KiwiSuite\Admin\Message\CrudMessageInterface;
+use KiwiSuite\Admin\Message\CrudMessageTrait;
 use KiwiSuite\Admin\Resource\ResourceInterface;
 use KiwiSuite\Admin\Resource\ResourceSubManager;
 use KiwiSuite\CommandBus\Message\MessageInterface;
@@ -13,9 +14,9 @@ use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\DefinitionCollection;
 use KiwiSuite\Entity\Entity\EntityInterface;
 
-abstract class AbstractCrudMessage implements MessageInterface, CrudMessageInterface
+abstract class AbstractCrudMessage implements CrudMessageInterface
 {
-    use MessageTrait;
+    use CrudMessageTrait;
 
     /**
      * @var ResourceSubManager
@@ -59,24 +60,6 @@ abstract class AbstractCrudMessage implements MessageInterface, CrudMessageInter
     protected function entityDefinitions(): DefinitionCollection
     {
         return (new Instantiator())->instantiate($this->repository()->getEntityName())->getDefinitions();
-    }
-
-    /**
-     * @return EntityInterface|null
-     */
-    protected function entity(): ?EntityInterface
-    {
-        if (empty($this->metadata['id'])) {
-            return null;
-        }
-
-        $entity = $this->repository()->findOneBy(['id' => $this->metadata['id']]);
-
-        if (!($entity instanceof EntityInterface)) {
-            return null;
-        }
-
-        return $entity;
     }
 
     protected function applyData(EntityInterface $entity): EntityInterface

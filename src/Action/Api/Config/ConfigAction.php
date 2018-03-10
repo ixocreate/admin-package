@@ -14,6 +14,7 @@ namespace KiwiSuite\Admin\Action\Api\Config;
 
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Helper\ServerUrlHelper;
+use KiwiSuite\Admin\Helper\UrlHelper;
 use KiwiSuite\Admin\Pipe\PipeConfig;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -37,6 +38,10 @@ final class ConfigAction implements MiddlewareInterface
      * @var PipeConfig
      */
     private $pipeConfig;
+    /**
+     * @var UrlHelper
+     */
+    private $urlHelper;
 
     /**
      * ConfigAction constructor.
@@ -44,11 +49,12 @@ final class ConfigAction implements MiddlewareInterface
      * @param PipeConfig $pipeConfig
      * @param ServerUrlHelper $serverUrlHelper
      */
-    public function __construct(AdminConfig $adminConfig, PipeConfig $pipeConfig, ServerUrlHelper $serverUrlHelper)
+    public function __construct(AdminConfig $adminConfig, PipeConfig $pipeConfig, ServerUrlHelper $serverUrlHelper, UrlHelper $urlHelper)
     {
         $this->adminConfig = $adminConfig;
         $this->serverUrlHelper = $serverUrlHelper;
         $this->pipeConfig = $pipeConfig;
+        $this->urlHelper = $urlHelper;
     }
 
     /**
@@ -83,9 +89,10 @@ final class ConfigAction implements MiddlewareInterface
                 if (substr($route['name'],0, 10) !== 'admin.api.') {
                     continue;
                 }
+
                 $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', substr($route['name'], 10))));
                 $routeName[0] = \mb_strtolower($routeName[0]);
-                $routes[$routeName] = $this->adminConfig->getUri()->getPath() . $route['path'];
+                $routes[$routeName] = $this->adminConfig->getUri()->getPath() .  '/api' . $route['path'];
             }
         }
 

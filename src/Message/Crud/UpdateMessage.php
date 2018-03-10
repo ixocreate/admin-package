@@ -10,14 +10,17 @@ use KiwiSuite\Entity\Type\Type;
 final class UpdateMessage extends AbstractCrudMessage
 {
 
-    public static function getHandler(): string
+    /**
+     * @return array
+     */
+    public function handlers(): array
     {
-        return UpdateHandler::class;
+        return $this->resource()->updateHandler();
     }
 
     public function fetchEntity(): EntityInterface
     {
-        $entity = $this->entity();
+        $entity = $this->repository()->findOneBy(['id' => $this->metadata()['id']]);
 
         foreach ($this->data() as $key => $value) {
             $entity = $entity->with($key, $value);

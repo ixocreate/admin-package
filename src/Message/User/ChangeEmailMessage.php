@@ -4,16 +4,14 @@ namespace KiwiSuite\Admin\Message;
 use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Handler\Crud\UpdateHandler;
 use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\CommandBus\Message\MessageInterface;
-use KiwiSuite\CommandBus\Message\MessageTrait;
 use KiwiSuite\CommandBus\Message\Validation\Result;
 use KiwiSuite\CommonTypes\Entity\EmailType;
 use KiwiSuite\Entity\Entity\EntityInterface;
 use KiwiSuite\Entity\Type\Type;
 
-final class ChangeEmailMessage implements MessageInterface, CrudMessageInterface
+final class ChangeEmailMessage implements CrudMessageInterface
 {
-    use MessageTrait;
+    use CrudMessageTrait;
 
     /**
      * @var UserRepository
@@ -25,6 +23,7 @@ final class ChangeEmailMessage implements MessageInterface, CrudMessageInterface
      */
     private $email;
 
+
     public function __construct(UserRepository $userRepository)
     {
 
@@ -32,11 +31,13 @@ final class ChangeEmailMessage implements MessageInterface, CrudMessageInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public static function getHandler(): string
+    public function handlers(): array
     {
-        return UpdateHandler::class;
+        return [
+            UpdateHandler::class
+        ];
     }
 
     /**

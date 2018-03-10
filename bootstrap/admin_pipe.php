@@ -19,6 +19,8 @@ use KiwiSuite\Admin\Message\ChangePasswordMessage;
 use KiwiSuite\Admin\Middleware\Api\AuthorizationGuardMiddleware;
 use KiwiSuite\Admin\Middleware\Api\EnforceApiResponseMiddleware;
 use KiwiSuite\Admin\Middleware\Api\ErrorMiddleware;
+use KiwiSuite\Admin\Middleware\Api\MessageInjectorMiddleware;
+use KiwiSuite\Admin\Middleware\Api\ResourceInjectorMiddleware;
 use KiwiSuite\Admin\Middleware\Api\SessionDataMiddleware;
 use KiwiSuite\Admin\Middleware\Api\XsrfProtectionMiddleware;
 use KiwiSuite\Admin\Middleware\CookieInitializerMiddleware;
@@ -37,6 +39,10 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
     $pipeConfigurator->pipe(SessionDataMiddleware::class);
     $pipeConfigurator->pipe(XsrfProtectionMiddleware::class);
     $pipeConfigurator->pipe(BodyParamsMiddleware::class);
+
+    $pipeConfigurator->pipe(ResourceInjectorMiddleware::class, PipeConfigurator::PRIORITY_POST_ROUTING);
+    $pipeConfigurator->pipe(MessageInjectorMiddleware::class, PipeConfigurator::PRIORITY_POST_ROUTING);
+
 
     //Unauthorized routes
     $pipeConfigurator->group(function (GroupPipeConfigurator $groupPipeConfigurator) {
@@ -84,6 +90,9 @@ $adminPipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigura
 $adminPipeConfigurator->group(function (GroupPipeConfigurator $groupPipeConfigurator) {
     $groupPipeConfigurator->before(CookieInitializerMiddleware::class);
     $groupPipeConfigurator->get('/session', SessionAction::class, "admin.session");
-    $groupPipeConfigurator->get('[/{any:.*}]', IndexAction::class, "admin.admin");
+    /*$groupPipeConfigurator->get('[/{any:.*}]', IndexAction::class, "admin.admin", function (RouteConfigurator $routeConfigurator) {
+        $routeConfigurator->setPriority(1 );
+    });*/
 });
 
+$adminPipeConfigurator->pipe(IndexAction::class, 1);
