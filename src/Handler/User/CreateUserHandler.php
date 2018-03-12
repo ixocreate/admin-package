@@ -44,6 +44,7 @@ final class CreateUserHandler implements HandlerInterface
             'hash' => $hash,
             'role' => $message->role(),
             'avatar' => $avatar,
+            'status' => 'active',
             'createdAt' => $message->createdAt(),
         ]);
 

@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Entity;
 
 use KiwiSuite\Admin\Type\RoleType;
+use KiwiSuite\Admin\Type\StatusType;
 use KiwiSuite\CommonTypes\Entity\DateTimeType;
 use KiwiSuite\CommonTypes\Entity\EmailType;
 use KiwiSuite\CommonTypes\Entity\UuidType;
@@ -41,6 +42,8 @@ final class User implements EntityInterface
     private $createdAt;
 
     private $lastLoginAt;
+
+    private $status;
 
     public function id(): UuidType
     {
@@ -82,6 +85,11 @@ final class User implements EntityInterface
         return $this->lastLoginAt;
     }
 
+    public function status(): StatusType
+    {
+        return $this->status;
+    }
+
     private function createDefinitions() : DefinitionCollection
     {
         return new DefinitionCollection([
@@ -93,6 +101,7 @@ final class User implements EntityInterface
             new Definition("avatar", TypeInterface::TYPE_STRING, false, true),
             new Definition("createdAt", DateTimeType::class, false, true),
             new Definition("lastLoginAt", DateTimeType::class, true, true),
+            new Definition("status", StatusType::class, false, true),
         ]);
     }
 }

@@ -56,8 +56,13 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
             return $this->createNotAuthorizedResponse();
         }
 
+        /** @var User $user */
         $user = $this->userRepository->findOneBy(['id' => $sessionData->userId()]);
         if (empty($user)) {
+            return $this->createNotAuthorizedResponse();
+        }
+
+        if ($user->status()->getValue() !== "active") {
             return $this->createNotAuthorizedResponse();
         }
 
@@ -72,6 +77,7 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
         if (!$permission->can($routeResult->getMatchedRouteName())) {
             return new ApiErrorResponse('forbidden', [], 403);
         }
+
 
 
         return $handler->handle($request);

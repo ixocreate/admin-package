@@ -5,6 +5,7 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Type\RoleType;
+use KiwiSuite\Admin\Type\StatusType;
 use KiwiSuite\CommonTypes\Entity\DateTimeType;
 use KiwiSuite\CommonTypes\Entity\EmailType;
 use KiwiSuite\CommonTypes\Entity\UuidType;
@@ -36,5 +37,6 @@ final class UserRepository extends AbstractRepository
         $metadata->addField('avatar', Type::TEXT);
         $metadata->addField('createdAt', DateTimeType::class);
         $metadata->addField('lastLoginAt', DateTimeType::class);
+        $metadata->addField('status', StatusType::class);
     }
 }
