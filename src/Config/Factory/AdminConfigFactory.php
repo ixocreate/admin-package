@@ -14,9 +14,9 @@ namespace KiwiSuite\Admin\Config\Factory;
 
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Config\Config;
+use KiwiSuite\Contract\ServiceManager\FactoryInterface;
+use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
 use KiwiSuite\ProjectUri\ProjectUri;
-use KiwiSuite\ServiceManager\FactoryInterface;
-use KiwiSuite\ServiceManager\ServiceManagerInterface;
 use Zend\Diactoros\Uri;
 
 final class AdminConfigFactory implements FactoryInterface

@@ -4,9 +4,9 @@ namespace KiwiSuite\Admin\Resource\Factory;
 use KiwiSuite\Admin\Resource\ResourceInterface;
 use KiwiSuite\Admin\Resource\ResourceServiceManagerConfig;
 use KiwiSuite\Admin\Resource\ResourceSubManager;
-use KiwiSuite\ServiceManager\ServiceManagerInterface;
-use KiwiSuite\ServiceManager\SubManager\SubManagerFactoryInterface;
-use KiwiSuite\ServiceManager\SubManager\SubManagerInterface;
+use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
+use KiwiSuite\Contract\ServiceManager\SubManager\SubManagerFactoryInterface;
+use KiwiSuite\Contract\ServiceManager\SubManager\SubManagerInterface;
 
 final class ResourceSubManagerFactory implements SubManagerFactoryInterface
 {

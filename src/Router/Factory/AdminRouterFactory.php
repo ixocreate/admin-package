@@ -13,8 +13,8 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Router\Factory;
 
 use KiwiSuite\Admin\Router\AdminRouter;
-use KiwiSuite\ServiceManager\FactoryInterface;
-use KiwiSuite\ServiceManager\ServiceManagerInterface;
+use KiwiSuite\Contract\ServiceManager\FactoryInterface;
+use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
 
 final class AdminRouterFactory implements FactoryInterface
 {

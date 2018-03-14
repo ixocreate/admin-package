@@ -16,8 +16,8 @@ use KiwiSuite\Admin\Router\AdminRouter;
 use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\ApplicationHttp\Middleware\SegmentMiddlewarePipe;
 use KiwiSuite\ApplicationHttp\Pipe\PipeConfig;
-use KiwiSuite\ServiceManager\FactoryInterface;
-use KiwiSuite\ServiceManager\ServiceManagerInterface;
+use KiwiSuite\Contract\ServiceManager\FactoryInterface;
+use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
 
 final class AdminApplicationFactory implements FactoryInterface
 {

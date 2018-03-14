@@ -14,8 +14,8 @@ namespace KiwiSuite\Admin\Helper\Factory;
 
 use KiwiSuite\Admin\Helper\UrlHelper;
 use KiwiSuite\Admin\Router\AdminRouter;
-use KiwiSuite\ServiceManager\FactoryInterface;
-use KiwiSuite\ServiceManager\ServiceManagerInterface;
+use KiwiSuite\Contract\ServiceManager\FactoryInterface;
+use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
 
 final class UrlHelperFactory implements FactoryInterface
 {
