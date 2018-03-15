@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin;
 
-/** @var \KiwiSuite\ServiceManager\ServiceManagerConfigurator $messageConfigurator */
-use KiwiSuite\CommandBus\Message\MessageInterface;
+/** @var MessageConfigurator $message */
+use KiwiSuite\CommandBus\Message\MessageConfigurator;
 
-$messageConfigurator->addDirectory( __DIR__ . '/../src/Message/', true, [MessageInterface::class]);
+$message->addDirectory( __DIR__ . '/../src/Message/', true);
 

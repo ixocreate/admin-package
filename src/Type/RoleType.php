@@ -2,6 +2,7 @@
 namespace KiwiSuite\Admin\Type;
 
 use KiwiSuite\Admin\Role\RoleInterface;
+use KiwiSuite\Admin\Role\RoleMapping;
 use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\Entity\Type\Convert\Convert;
 use KiwiSuite\Entity\Type\TypeInterface;
@@ -18,15 +19,15 @@ final class RoleType implements TypeInterface
      */
     private $roleSubManager;
 
-    public function __construct(string $value, RoleSubManager $roleSubManager)
+    public function __construct(string $value, RoleSubManager $roleSubManager, RoleMapping $roleMapping)
     {
         $this->roleSubManager = $roleSubManager;
 
-        if (empty($this->roleSubManager->getServiceManagerConfig()->getRoleMapping()[$value])) {
+        if (empty($roleMapping->getMapping()[$value])) {
             throw new \Exception("invalid role");
         }
 
-        $roleClass = $this->roleSubManager->getServiceManagerConfig()->getRoleMapping()[$value];
+        $roleClass = $roleMapping->getMapping()[$value];
 
         $this->role = $this->roleSubManager->get($roleClass);
     }

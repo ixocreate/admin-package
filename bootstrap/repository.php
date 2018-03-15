@@ -3,5 +3,7 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin;
 
-/** @var \KiwiSuite\ServiceManager\ServiceManagerConfigurator $repositoryConfigurator */
-$repositoryConfigurator->addDirectory( __DIR__ . '/../src/Repository/');
+/** @var RepositoryConfigurator $repository */
+use KiwiSuite\Database\Repository\RepositoryConfigurator;
+
+$repository->addDirectory( __DIR__ . '/../src/Repository/');

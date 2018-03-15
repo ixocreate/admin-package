@@ -3,7 +3,7 @@ namespace KiwiSuite\Admin\Message;
 
 use KiwiSuite\Admin\Handler\User\CreateUserHandler;
 use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Role\RoleServiceManagerConfig;
+use KiwiSuite\Admin\Role\RoleMapping;
 use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\CommandBus\Message\MessageInterface;
 use KiwiSuite\CommandBus\Message\MessageTrait;
@@ -30,12 +30,18 @@ final class CreateUserMessage implements MessageInterface
      */
     private $roleSubManager;
 
+    /**
+     * @var RoleMapping
+     */
+    private $roleMapping;
 
-    public function __construct(UserRepository $userRepository, RoleSubManager $roleSubManager)
+
+    public function __construct(UserRepository $userRepository, RoleSubManager $roleSubManager, RoleMapping $roleMapping)
     {
 
         $this->userRepository = $userRepository;
         $this->roleSubManager = $roleSubManager;
+        $this->roleMapping = $roleMapping;
     }
 
     /**
@@ -89,10 +95,8 @@ final class CreateUserMessage implements MessageInterface
             $result->addError("email_already_in_use");
         }
 
-        /** @var RoleServiceManagerConfig $roleServiceManagerConfig */
-        $roleServiceManagerConfig = $this->roleSubManager->getServiceManagerConfig();
 
-        if (empty($roleServiceManagerConfig->getRoleMapping()[$this->data['role']])) {
+        if (empty($this->roleMapping->getMapping()[$this->data['role']])) {
             $result->addError("invalid_role");
         }
 

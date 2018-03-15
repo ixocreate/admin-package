@@ -4,27 +4,18 @@ namespace KiwiSuite\Admin\Resource;
 use KiwiSuite\Admin\Action\Api\Crud\DetailAction;
 use KiwiSuite\Admin\Action\Api\Crud\IndexAction;
 use KiwiSuite\Admin\Action\Handler\HandlerAction;
-use KiwiSuite\Admin\Message\Crud\CreateMessage;
-use KiwiSuite\Admin\Message\Crud\DeleteMessage;
-use KiwiSuite\Admin\Message\Crud\UpdateMessage;
 use KiwiSuite\Admin\Middleware\Api\AuthorizationGuardMiddleware;
-use KiwiSuite\Admin\Middleware\Api\EnforceApiResponseMiddleware;
-use KiwiSuite\Admin\Middleware\Api\ErrorMiddleware;
-use KiwiSuite\Admin\Middleware\Api\SessionDataMiddleware;
-use KiwiSuite\Admin\Middleware\Api\XsrfProtectionMiddleware;
+use KiwiSuite\Admin\Pipe\PipeConfigurator;
 use KiwiSuite\ApplicationHttp\Pipe\GroupPipeConfigurator;
-use KiwiSuite\ApplicationHttp\Pipe\PipeConfigurator;
 use KiwiSuite\ApplicationHttp\Pipe\RouteConfigurator;
-use KiwiSuite\CommandBus\Message\MessageInterface;
-use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 final class RoutingSetup
 {
-    public function setup(PipeConfigurator $pipeConfigurator, ResourceServiceManagerConfig $resourceServiceManagerConfig): void
+    public function setup(PipeConfigurator $pipeConfigurator, ResourceMapping $resourceMapping): void
     {
-        $resourceMapping = $resourceServiceManagerConfig->getResourceMapping();
+        $resourceMapping = $resourceMapping->getMapping();
 
-        $pipeConfigurator->segment('/api', function(PipeConfigurator $pipeConfigurator) use ($resourceMapping){
+        $pipeConfigurator->segment('/api', function(\KiwiSuite\ApplicationHttp\Pipe\PipeConfigurator $pipeConfigurator) use ($resourceMapping){
 
             //Authorized routes
             $pipeConfigurator->group(function (GroupPipeConfigurator $groupPipeConfigurator) use ($resourceMapping){

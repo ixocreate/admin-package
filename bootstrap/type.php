@@ -3,8 +3,8 @@ namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\Type\RoleType;
 use KiwiSuite\Admin\Type\StatusType;
-use KiwiSuite\ServiceManager\ServiceManagerConfigurator;
+use KiwiSuite\Entity\Type\TypeConfigurator;
 
-/** @var ServiceManagerConfigurator $typeConfigurator */
-$typeConfigurator->addFactory(RoleType::class);
-$typeConfigurator->addFactory(StatusType::class);
+/** @var TypeConfigurator $type */
+$type->addType(RoleType::class);
+$type->addType(StatusType::class);

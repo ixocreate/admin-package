@@ -2,7 +2,7 @@
 namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\Role\AdministratorRole;
-use KiwiSuite\ServiceManager\ServiceManagerConfigurator;
-/** @var ServiceManagerConfigurator $adminRoleConfigurator */
+use KiwiSuite\Admin\Role\RoleConfigurator;
+/** @var RoleConfigurator $role */
 
-$adminRoleConfigurator->addFactory(AdministratorRole::class);
+$role->addRole(AdministratorRole::class);

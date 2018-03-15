@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin;
 
-/** @var \KiwiSuite\ServiceManager\ServiceManagerConfigurator $handlerConfigurator */
-use KiwiSuite\CommandBus\Handler\HandlerInterface;
+/** @var HandlerConfigurator $handler */
+use KiwiSuite\CommandBus\Handler\HandlerConfigurator;
 
-$handlerConfigurator->addDirectory( __DIR__ . '/../src/Handler/', true, [HandlerInterface::class]);
+$handler->addDirectory( __DIR__ . '/../src/Handler/', true);
 
