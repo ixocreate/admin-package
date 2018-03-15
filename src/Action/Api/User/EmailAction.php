@@ -1,18 +1,23 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Action\Api\User;
 
-use App\Admin\Entity\Tag;
 use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Resource\ResourceInterface;
-use KiwiSuite\Admin\Resource\ResourceSubManager;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
-use KiwiSuite\Database\Repository\RepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Router\RouteResult;
 
 final class EmailAction implements MiddlewareInterface
 {
@@ -37,13 +42,13 @@ final class EmailAction implements MiddlewareInterface
         //?sortColumn1=ASC&sortColumn2=DESC&filterColumn1=test&filterColumn2=foobar
         $queryParams = $request->getQueryParams();
         foreach ($queryParams as $key => $value) {
-            if (substr($key, 0, 4) === "sort") {
+            if (\mb_substr($key, 0, 4) === "sort") {
                 //filter
 
                 continue;
             }
 
-            if (substr($key, 0, 6) === "filter") {
+            if (\mb_substr($key, 0, 6) === "filter") {
                 //filter
 
                 continue;

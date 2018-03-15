@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Type;
 
 use KiwiSuite\Entity\Type\Convert\Convert;
@@ -17,9 +28,9 @@ final class StatusType implements TypeInterface
      */
     public function __construct(string $value)
     {
-        if (!in_array($value, ['active', 'inactive'])) {
+        if (!\in_array($value, ['active', 'inactive'])) {
             //TODO Exception
-           throw new \Exception("invalid type");
+            throw new \Exception("invalid type");
         }
         $this->value = $value;
     }

@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Permission;
 
 use KiwiSuite\Admin\Entity\User;
@@ -24,11 +35,11 @@ final class Permission
     {
         $role = $this->user->role()->getRole();
 
-        if (in_array($permission, $role->getPermissions())) {
+        if (\in_array($permission, $role->getPermissions())) {
             return true;
         }
 
-        if (in_array("*", $role->getPermissions())) {
+        if (\in_array("*", $role->getPermissions())) {
             return true;
         }
 
@@ -38,10 +49,10 @@ final class Permission
             $checkPermission = [];
             for ($j = 0; $j <= $i; $j++) {
                 $checkPermission[] = $permissionParts[$j];
-                if (in_array(\implode('.', $checkPermission), $role->getPermissions())) {
+                if (\in_array(\implode('.', $checkPermission), $role->getPermissions())) {
                     return true;
                 }
-                if (in_array(\implode('.', $checkPermission) . '.*', $role->getPermissions())) {
+                if (\in_array(\implode('.', $checkPermission) . '.*', $role->getPermissions())) {
                     return true;
                 }
             }

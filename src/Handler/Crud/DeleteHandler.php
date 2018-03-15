@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Handler\Crud;
 
 use KiwiSuite\Admin\Message\CrudMessageInterface;
@@ -33,8 +44,8 @@ final class DeleteHandler implements HandlerInterface
 
     /**
      * @param MessageInterface $message
-     * @return MessageInterface
      * @throws \Exception
+     * @return MessageInterface
      */
     public function __invoke(MessageInterface $message): MessageInterface
     {
@@ -44,7 +55,7 @@ final class DeleteHandler implements HandlerInterface
 
         /** @var EntityInterface $entity */
         $entity = $message->entity();
-        $repositoryName = $this->entityRepositoryMapping->getRepositoryByEntity(get_class($entity));
+        $repositoryName = $this->entityRepositoryMapping->getRepositoryByEntity(\get_class($entity));
 
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($repositoryName);

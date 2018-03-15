@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Message;
 
 use KiwiSuite\Admin\Handler\User\CreateUserHandler;
@@ -38,7 +49,6 @@ final class CreateUserMessage implements MessageInterface
 
     public function __construct(UserRepository $userRepository, RoleSubManager $roleSubManager, RoleMapping $roleMapping)
     {
-
         $this->userRepository = $userRepository;
         $this->roleSubManager = $roleSubManager;
         $this->roleMapping = $roleMapping;
@@ -50,7 +60,7 @@ final class CreateUserMessage implements MessageInterface
     public function handlers(): array
     {
         return [
-            CreateUserHandler::class
+            CreateUserHandler::class,
         ];
     }
 
@@ -88,7 +98,7 @@ final class CreateUserMessage implements MessageInterface
         }
 
         $count = $this->userRepository->count([
-            'email' => $this->email
+            'email' => $this->email,
         ]);
 
         if ($count > 0) {

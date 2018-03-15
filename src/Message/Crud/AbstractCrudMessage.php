@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Message\Crud;
 
 use Doctrine\Instantiator\Instantiator;
@@ -6,8 +17,6 @@ use KiwiSuite\Admin\Message\CrudMessageInterface;
 use KiwiSuite\Admin\Message\CrudMessageTrait;
 use KiwiSuite\Admin\Resource\ResourceInterface;
 use KiwiSuite\Admin\Resource\ResourceSubManager;
-use KiwiSuite\CommandBus\Message\MessageInterface;
-use KiwiSuite\CommandBus\Message\MessageTrait;
 use KiwiSuite\CommandBus\Message\Validation\Result;
 use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;

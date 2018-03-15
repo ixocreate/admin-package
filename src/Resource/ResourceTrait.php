@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Resource;
 
 use KiwiSuite\Admin\Handler\Crud\CreateHandler;
@@ -33,21 +44,21 @@ trait ResourceTrait
     public function createHandler(): array
     {
         return [
-            CreateHandler::class
+            CreateHandler::class,
         ];
     }
 
     public function updateHandler(): array
     {
         return [
-            UpdateHandler::class
+            UpdateHandler::class,
         ];
     }
 
     public function deleteHandler(): array
     {
         return [
-            DeleteHandler::class
+            DeleteHandler::class,
         ];
     }
 }

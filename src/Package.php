@@ -22,7 +22,6 @@ use KiwiSuite\Contract\Application\PackageInterface;
 use KiwiSuite\Contract\Application\ServiceRegistryInterface;
 use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
 
-
 class Package implements PackageInterface
 {
     /**

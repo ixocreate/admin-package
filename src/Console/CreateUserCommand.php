@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Console;
 
 use KiwiSuite\Admin\Message\CreateUserMessage;
@@ -44,7 +55,7 @@ final class CreateUserCommand extends Command implements CommandInterface
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $password = substr(base64_encode(sha1(uniqid())), 0, 8);
+        $password = \mb_substr(\base64_encode(\sha1(\uniqid())), 0, 8);
 
         /** @var CreateUserMessage $message */
         $message = $this->messageSubManager->build(CreateUserMessage::class);
@@ -56,12 +67,11 @@ final class CreateUserCommand extends Command implements CommandInterface
         ]);
         $result = $message->validate();
         if (!$result->isSuccessful()) {
-
         }
 
         $this->commandBus->handle($message);
 
-        $output->writeln("Password: ". $password);
+        $output->writeln("Password: " . $password);
     }
 
     public static function getCommandName()

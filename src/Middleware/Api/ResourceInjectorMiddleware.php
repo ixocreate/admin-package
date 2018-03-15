@@ -65,4 +65,4 @@ final class ResourceInjectorMiddleware implements MiddlewareInterface
         return $handler->handle($request);
     }
 }
-#
+//

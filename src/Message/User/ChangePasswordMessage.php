@@ -1,15 +1,23 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Message;
 
 use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Handler\Crud\UpdateHandler;
 use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\CommandBus\Message\MessageInterface;
-use KiwiSuite\CommandBus\Message\MessageTrait;
 use KiwiSuite\CommandBus\Message\Validation\Result;
-use KiwiSuite\CommonTypes\Entity\EmailType;
 use KiwiSuite\Entity\Entity\EntityInterface;
-use KiwiSuite\Entity\Type\Type;
 
 final class ChangePasswordMessage implements MessageInterface, CrudMessageInterface
 {
@@ -27,7 +35,6 @@ final class ChangePasswordMessage implements MessageInterface, CrudMessageInterf
 
     public function __construct(UserRepository $userRepository)
     {
-
         $this->userRepository = $userRepository;
     }
 
@@ -37,7 +44,7 @@ final class ChangePasswordMessage implements MessageInterface, CrudMessageInterf
     public function handlers(): array
     {
         return [
-            UpdateHandler::class
+            UpdateHandler::class,
         ];
     }
 
@@ -53,7 +60,7 @@ final class ChangePasswordMessage implements MessageInterface, CrudMessageInterf
     {
         /** @var User $user */
         $user = $this->userRepository->findOneBy(['id' => $this->metadata[User::class]]);
-        return $user->with('password', password_hash($this->password(), PASSWORD_DEFAULT));
+        return $user->with('password', \password_hash($this->password(), PASSWORD_DEFAULT));
     }
 
     /**
@@ -83,7 +90,7 @@ final class ChangePasswordMessage implements MessageInterface, CrudMessageInterf
         }
 
         $user = $this->userRepository->findOneBy(['id' => $this->metadata[User::class]]);
-        if (!password_verify($this->data['passwordOld'], $user->password())){
+        if (!\password_verify($this->data['passwordOld'], $user->password())) {
             $result->addError("invalid_old_password");
         }
     }

@@ -86,13 +86,13 @@ final class ConfigAction implements MiddlewareInterface
             }
 
             foreach ($middlewarePipe['value']['pipeConfig']->getRoutes() as $route) {
-                if (substr($route['name'],0, 10) !== 'admin.api.') {
+                if (\mb_substr($route['name'], 0, 10) !== 'admin.api.') {
                     continue;
                 }
 
-                $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', substr($route['name'], 10))));
+                $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', \mb_substr($route['name'], 10))));
                 $routeName[0] = \mb_strtolower($routeName[0]);
-                $routes[$routeName] = $this->adminConfig->getUri()->getPath() .  '/api' . $route['path'];
+                $routes[$routeName] = $this->adminConfig->getUri()->getPath() . '/api' . $route['path'];
             }
         }
 

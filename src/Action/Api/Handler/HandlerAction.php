@@ -1,10 +1,18 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Action\Handler;
 
 use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Message\Crud\CreateMessage;
-use KiwiSuite\Admin\Message\Crud\DeleteMessage;
-use KiwiSuite\Admin\Message\Crud\UpdateMessage;
 use KiwiSuite\Admin\Resource\ResourceInterface;
 use KiwiSuite\Admin\Resource\ResourceSubManager;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
@@ -74,7 +82,7 @@ final class HandlerAction implements MiddlewareInterface
         }
 
         if ($request->getAttribute(ResourceInterface::class)) {
-            $metadata[ResourceInterface::class] = get_class($request->getAttribute(ResourceInterface::class));
+            $metadata[ResourceInterface::class] = \get_class($request->getAttribute(ResourceInterface::class));
             $metadata['id'] = $request->getAttribute('id', null);
         }
 

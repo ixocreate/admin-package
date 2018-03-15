@@ -39,8 +39,8 @@ final class MessageInjectorMiddleware implements MiddlewareInterface
     /**
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
-     * @return ResponseInterface
      * @throws \Exception
+     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -49,7 +49,7 @@ final class MessageInjectorMiddleware implements MiddlewareInterface
 
         $messageName = $request->getAttribute(MessageInterface::class);
         if (!empty($messageName)) {
-            if (is_string($messageName)) {
+            if (\is_string($messageName)) {
                 /** @var MessageInterface $message */
                 $message = $this->messageSubManager->build($messageName);
             } else {

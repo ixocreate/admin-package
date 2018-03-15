@@ -89,11 +89,11 @@ class IndexAction implements MiddlewareInterface
         $styles = [
             'styles' => null,
         ];
-        
+
         /**
          * prefer embedded path
          */
-        $path = getcwd() . '/templates/admin';
+        $path = \getcwd() . '/templates/admin';
 
         /**
          * look up assets by name

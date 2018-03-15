@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Action\Api\Crud;
 
 use App\Admin\Entity\Tag;
@@ -66,13 +77,13 @@ final class IndexAction implements MiddlewareInterface
         //?sortColumn1=ASC&sortColumn2=DESC&filterColumn1=test&filterColumn2=foobar
         $queryParams = $request->getQueryParams();
         foreach ($queryParams as $key => $value) {
-            if (substr($key, 0, 4) === "sort") {
+            if (\mb_substr($key, 0, 4) === "sort") {
                 //filter
 
                 continue;
             }
 
-            if (substr($key, 0, 6) === "filter") {
+            if (\mb_substr($key, 0, 6) === "filter") {
                 //filter
 
                 continue;

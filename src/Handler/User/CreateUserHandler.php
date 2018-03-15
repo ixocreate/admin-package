@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Handler\User;
 
 use Identicon\Generator\SvgGenerator;
@@ -29,8 +40,7 @@ final class CreateUserHandler implements HandlerInterface
     public function __invoke(MessageInterface $message): MessageInterface
     {
         /** @var CreateUserMessage $message */
-
-        $password = password_hash($message->password(), PASSWORD_DEFAULT);
+        $password = \password_hash($message->password(), PASSWORD_DEFAULT);
 
         $identicion = new Identicon(new SvgGenerator());
         $avatar = $identicion->getImageData((string) $message->email()->getValue());

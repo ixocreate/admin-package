@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Pipe;
 
 use KiwiSuite\Contract\Application\ConfiguratorInterface;
@@ -40,7 +51,7 @@ final class PipeConfigurator implements ConfiguratorInterface
      */
     public function __call($name, $arguments)
     {
-        return call_user_func_array(array($this->internalPipeConfigurator, $name), $arguments);
+        return \call_user_func_array(array($this->internalPipeConfigurator, $name), $arguments);
     }
 
     /**

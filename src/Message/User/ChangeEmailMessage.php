@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @see https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Message;
 
 use KiwiSuite\Admin\Entity\User;
@@ -26,7 +37,6 @@ final class ChangeEmailMessage implements CrudMessageInterface
 
     public function __construct(UserRepository $userRepository)
     {
-
         $this->userRepository = $userRepository;
     }
 
@@ -36,7 +46,7 @@ final class ChangeEmailMessage implements CrudMessageInterface
     public function handlers(): array
     {
         return [
-            UpdateHandler::class
+            UpdateHandler::class,
         ];
     }
 
@@ -82,7 +92,7 @@ final class ChangeEmailMessage implements CrudMessageInterface
         }
 
         $count = $this->userRepository->count([
-            'email' => $this->email
+            'email' => $this->email,
         ]);
 
         if ($count > 0) {
