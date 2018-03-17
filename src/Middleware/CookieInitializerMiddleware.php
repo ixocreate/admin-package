@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Middleware;
 
+use Firebase\JWT\JWT;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Entity\SessionData;
 use KiwiSuite\Admin\Session\SessionCookie;
@@ -52,10 +53,23 @@ final class CookieInitializerMiddleware implements MiddlewareInterface
             return $response;
         }
 
-        if (!empty($request->getCookieParams()['kiwiSid']) && !empty($request->getCookieParams()['XSRF-TOKEN'])) {
+        if (!empty($request->getCookieParams()['kiwiSid'])) {
+            try {
+                $jwt = JWT::decode($request->getCookieParams()['kiwiSid'], 'secret_key', ['HS512']);
+
+                new SessionData((array)$jwt->data);
+            } catch (\Throwable $e) {
+                return $this->setSessionData($request, $response);
+            }
+
             return $response;
         }
 
+        return $this->setSessionData($request, $response);
+    }
+
+    private function setSessionData(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
         $sessionData = new SessionData([
             'xsrfToken' => Uuid::uuid4()->toString(),
         ]);

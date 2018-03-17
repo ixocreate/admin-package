@@ -85,9 +85,7 @@ $pipe->segment('/api', function(PipeConfigurator $pipe) {
 $pipe->group(function (GroupPipeConfigurator $group) {
     $group->before(CookieInitializerMiddleware::class);
     $group->get('/session', SessionAction::class, "admin.session");
-    /*$groupPipeConfigurator->get('[/{any:.*}]', IndexAction::class, "admin.admin", function (RouteConfigurator $routeConfigurator) {
-        $routeConfigurator->setPriority(1 );
-    });*/
+    $group->get('[/{any:.*}]', IndexAction::class, "admin.index", function (RouteConfigurator $route) {
+        $route->setPriority(-1 * PHP_INT_MAX );
+    });
 });
-
-$pipe->pipe(IndexAction::class, 1);
