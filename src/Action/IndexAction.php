@@ -52,7 +52,7 @@ class IndexAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return new TemplateResponse( 'admin::index', [
+        return new TemplateResponse('admin::index', [
             'assets' => $this->assetsPaths(),
             'assetsUrl' => $this->projectUri->getMainUrl() . '/assets/admin/',
             'adminConfig' => $this->adminConfig,
