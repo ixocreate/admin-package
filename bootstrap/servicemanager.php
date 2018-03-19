@@ -14,14 +14,11 @@ use KiwiSuite\Admin\Resource\ResourceSubManager;
 use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\Admin\Router\AdminRouter;
 use KiwiSuite\Admin\Router\Factory\AdminRouterFactory;
-use KiwiSuite\Template\Plates\PlatesRendererFactory;
-use Zend\Expressive\Plates\PlatesRenderer;
 
 $serviceManager->addFactory(AdminConfig::class, AdminConfigFactory::class);
 $serviceManager->addFactory(AdminRouter::class, AdminRouterFactory::class);
 $serviceManager->addFactory(ServerUrlHelper::class, ServerUrlHelperFactory::class);
 $serviceManager->addFactory(UrlHelper::class, UrlHelperFactory::class);
-$serviceManager->addFactory(PlatesRenderer::class, PlatesRendererFactory::class);
 
 $serviceManager->addSubManager(RoleSubManager::class);
 $serviceManager->addSubManager(ResourceSubManager::class);

@@ -15,21 +15,15 @@ namespace KiwiSuite\Admin\Action;
 use FilesystemIterator;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\ProjectUri\ProjectUri;
+use KiwiSuite\Template\TemplateResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use SplFileInfo;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Expressive\Plates\PlatesRenderer;
 
 class IndexAction implements MiddlewareInterface
 {
-    /**
-     * @var PlatesRenderer
-     */
-    protected $renderer;
-
     /**
      * @var AdminConfig
      */
@@ -44,16 +38,11 @@ class IndexAction implements MiddlewareInterface
      * IndexAction constructor.
      * @param AdminConfig $adminConfig
      * @param ProjectUri $projectUri
-     * @param PlatesRenderer $renderer
      */
-    public function __construct(AdminConfig $adminConfig, ProjectUri $projectUri, PlatesRenderer $renderer)
+    public function __construct(AdminConfig $adminConfig, ProjectUri $projectUri)
     {
         $this->adminConfig = $adminConfig;
         $this->projectUri = $projectUri;
-        $this->renderer = $renderer;
-
-        // TODO: inject a TemplateRendererInterface
-        $this->renderer->addPath(__DIR__ . '/../../templates/admin', 'admin');
     }
 
     /**
@@ -63,11 +52,11 @@ class IndexAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return new HtmlResponse($this->renderer->render('admin::index', [
+        return new TemplateResponse( 'admin::index', [
             'assets' => $this->assetsPaths(),
             'assetsUrl' => $this->projectUri->getMainUrl() . '/assets/admin/',
             'adminConfig' => $this->adminConfig,
-        ]));
+        ]);
     }
 
     /**
