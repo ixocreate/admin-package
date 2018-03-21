@@ -54,7 +54,6 @@ class IndexAction implements MiddlewareInterface
     {
         return new TemplateResponse('admin::index', [
             'assets' => $this->assetsPaths(),
-            'assetsUrl' => $this->projectUri->getMainUrl() . '/assets/admin/',
             'adminConfig' => $this->adminConfig,
         ]);
     }
@@ -93,12 +92,12 @@ class IndexAction implements MiddlewareInterface
             if ($fileInfo->getExtension() === 'js') {
                 $assetName = \explode('.', $fileInfo->getFilename())[0] ?? null;
                 if (\in_array($assetName, \array_keys($scripts))) {
-                    $scripts[$assetName] = $fileInfo->getFilename();
+                    $scripts[$assetName] = '/admin/' .$fileInfo->getFilename();
                 }
             } elseif ($fileInfo->getExtension() === 'css') {
                 $assetName = \explode('.', $fileInfo->getFilename())[0] ?? null;
                 if (\in_array($assetName, \array_keys($styles))) {
-                    $styles[$assetName] = $fileInfo->getFilename();
+                    $styles[$assetName] = '/admin/' . $fileInfo->getFilename();
                 }
             }
         }

@@ -11,16 +11,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta name="description" content="<?= $adminConfig->getProject()['description'] ?>">
     <meta name="author" content="<?= $adminConfig->getProject()['author'] ?>">
-    <link rel="shortcut icon" href="<?= $assetsUrl ?>assets/img/favicon.png">
+    <link rel="shortcut icon" href="<?= $this->asset('/admin/assets/img/favicon.png') ?>">
     <?php foreach ($assets['styles'] as $style): ?>
-        <link href="<?= $assetsUrl . $style ?>" rel="stylesheet"/>
+        <link href="<?= $this->asset($style) ?>" rel="stylesheet"/>
     <?php endforeach ?>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<p></p>
 <script>
     window.__theme = 'bs4';
     window.__kiwi = <?= json_encode([
-        'assetsUrl' => $assetsUrl,
+        'assetsUrl' => $this->asset('/admin'),
         'project' => $adminConfig->getProject(),
         'routes' => [
             'session' => $adminConfig->getUri() . '/session',
@@ -29,7 +30,7 @@
     ]) ?>;
 </script>
 <?php foreach ($assets['scripts'] as $script): ?>
-    <script type="text/javascript" src="<?= $assetsUrl . $script ?>"></script>
+    <script type="text/javascript" src="<?= $this->asset($script) ?>"></script>
 <?php endforeach ?>
 </body>
 </html>
