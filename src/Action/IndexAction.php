@@ -81,7 +81,7 @@ class IndexAction implements MiddlewareInterface
         /**
          * prefer embedded path
          */
-        $path = \getcwd() . '/templates/admin';
+        $path = \getcwd() . '/resources/admin/build';
 
         /**
          * look up assets by name
