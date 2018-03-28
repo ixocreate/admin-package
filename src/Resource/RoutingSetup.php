@@ -12,8 +12,9 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Resource;
 
-use KiwiSuite\Admin\Action\Api\Crud\DetailAction;
-use KiwiSuite\Admin\Action\Api\Crud\IndexAction;
+use KiwiSuite\Admin\Action\Api\Resource\DetailAction;
+use KiwiSuite\Admin\Action\Api\Resource\IndexAction;
+use KiwiSuite\Admin\Action\Api\Resource\SchemaAction;
 use KiwiSuite\Admin\Action\Handler\HandlerAction;
 use KiwiSuite\Admin\Middleware\Api\AuthorizationGuardMiddleware;
 use KiwiSuite\Admin\Pipe\PipeConfigurator;
@@ -37,6 +38,15 @@ final class RoutingSetup
                         '/resource/' . $resourceName,
                         IndexAction::class,
                         'admin.api.' . $resourceName . '.index',
+                        function (RouteConfigurator $routeConfigurator) use ($resource) {
+                            $routeConfigurator->addOption(ResourceInterface::class, $resource);
+                        }
+                    );
+
+                    $groupPipeConfigurator->get(
+                        '/resource/' . $resourceName . '/schema',
+                        SchemaAction::class,
+                        'admin.api.' . $resourceName . '.schema',
                         function (RouteConfigurator $routeConfigurator) use ($resource) {
                             $routeConfigurator->addOption(ResourceInterface::class, $resource);
                         }

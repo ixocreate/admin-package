@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\Crud;
+namespace KiwiSuite\Admin\Action\Api\Resource;
 
 use App\Admin\Entity\Tag;
 use Doctrine\Common\Collections\Criteria;

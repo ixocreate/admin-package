@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\Crud;
+namespace KiwiSuite\Admin\Action\Api\Resource;
 
 use KiwiSuite\Admin\Resource\ResourceInterface;
 use KiwiSuite\Admin\Resource\ResourceSubManager;
@@ -24,21 +24,16 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Router\RouteResult;
 
-final class DetailAction implements MiddlewareInterface
+final class SchemaAction implements MiddlewareInterface
 {
     /**
      * @var ResourceSubManager
      */
     private $resourceSubManager;
-    /**
-     * @var RepositorySubManager
-     */
-    private $repositorySubManager;
 
-    public function __construct(ResourceSubManager $resourceSubManager, RepositorySubManager $repositorySubManager)
+    public function __construct(ResourceSubManager $resourceSubManager)
     {
         $this->resourceSubManager = $resourceSubManager;
-        $this->repositorySubManager = $repositorySubManager;
     }
 
 
@@ -55,15 +50,6 @@ final class DetailAction implements MiddlewareInterface
         /** @var ResourceInterface $resource */
         $resource = $this->resourceSubManager->get($resourceKey);
 
-        /** @var RepositoryInterface $repository */
-        $repository = $this->repositorySubManager->get($resource->repository());
-
-        $result = $repository->findOneBy(['id' => $routeResult->getMatchedParams()['id']]);
-
-        if (empty($result)) {
-            return new ApiErrorResponse("invalid_id", [], 404);
-        }
-
-        return new ApiSuccessResponse($result->toPublicArray());
+        return new ApiSuccessResponse($resource->schema());
     }
 }

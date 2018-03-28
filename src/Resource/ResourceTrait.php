@@ -61,4 +61,9 @@ trait ResourceTrait
             DeleteHandler::class,
         ];
     }
+
+    public function schema(): array
+    {
+        return [];
+    }
 }

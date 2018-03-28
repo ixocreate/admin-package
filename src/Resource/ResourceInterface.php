@@ -33,4 +33,6 @@ interface ResourceInterface
     public function deleteHandler(): array;
 
     public function indexAction(): ?string;
+
+    public function schema(): array;
 }
