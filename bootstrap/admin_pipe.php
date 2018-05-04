@@ -52,6 +52,7 @@ $pipe->segment('/api', function(PipeConfigurator $pipe) {
         $group->get('/auth/user', UserAction::class, "admin.api.auth.user");
         $group->post('/auth/logout', LogoutAction::class, "admin.api.auth.logout");
 
+
         $group->patch(
             '/account/email',
             HandlerAction::class,

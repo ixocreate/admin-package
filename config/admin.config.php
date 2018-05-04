@@ -1,6 +1,6 @@
 <?php
 return [
-    'uri' => 'admin',
+    'uri' => '/admin',
     /**
      * project specific settings (white label)
      */
