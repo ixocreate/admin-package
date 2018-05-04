@@ -39,6 +39,7 @@ final class AdminConfigFactory implements FactoryInterface
             /** @var ProjectUri $projectUri */
             $projectUri = $container->get(ProjectUri::class);
 
+            $uri = $uri->withPath($projectUri->getMainUrl()->getPath() . '/' . $uri->getPath());
             $uri = $uri->withHost($projectUri->getMainUrl()->getHost());
             $uri = $uri->withScheme($projectUri->getMainUrl()->getScheme());
             $uri = $uri->withPort($projectUri->getMainUrl()->getPort());

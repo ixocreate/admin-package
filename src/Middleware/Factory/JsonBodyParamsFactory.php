@@ -28,8 +28,8 @@ final class JsonBodyParamsFactory implements FactoryInterface
     public function __invoke(ServiceManagerInterface $container, $requestedName, array $options = null)
     {
         $bodyParamsFactory = new BodyParamsMiddleware();
-        $bodyParamsFactory->clearStrategies();
-        $bodyParamsFactory->addStrategy(new JsonStrategy());
+        //$bodyParamsFactory->clearStrategies();
+        //$bodyParamsFactory->addStrategy(new JsonStrategy());
 
         return $bodyParamsFactory;
     }

@@ -23,8 +23,8 @@
     window.__kiwi = <?= json_encode([
         'project' => $adminConfig->getProject(),
         'routes' => [
-            'session' => $adminConfig->getUri() . '/session',
-            'config' => $adminConfig->getUri() . '/api/config', //TODO use url helper
+            'session' => $adminConfig->getUri()->getPath() . '/session',
+            'config' => $adminConfig->getUri()->getPath() . '/api/config', //TODO use url helper
         ]
     ]) ?>;
 </script>
