@@ -13,9 +13,9 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Console;
 
 use KiwiSuite\Admin\Message\CreateUserMessage;
-use KiwiSuite\ApplicationConsole\Command\CommandInterface;
 use KiwiSuite\CommandBus\CommandBus;
 use KiwiSuite\CommandBus\Message\MessageSubManager;
+use KiwiSuite\Contract\Command\CommandInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
