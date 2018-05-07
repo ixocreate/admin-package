@@ -14,10 +14,7 @@ namespace KiwiSuite\Admin\Action\Api\Resource;
 
 use KiwiSuite\Admin\Resource\ResourceInterface;
 use KiwiSuite\Admin\Resource\ResourceSubManager;
-use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
-use KiwiSuite\Database\Repository\RepositoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

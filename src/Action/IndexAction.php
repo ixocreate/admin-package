@@ -92,7 +92,7 @@ class IndexAction implements MiddlewareInterface
             if ($fileInfo->getExtension() === 'js') {
                 $assetName = \explode('.', $fileInfo->getFilename())[0] ?? null;
                 if (\in_array($assetName, \array_keys($scripts))) {
-                    $scripts[$assetName] = '/admin/' .$fileInfo->getFilename();
+                    $scripts[$assetName] = '/admin/' . $fileInfo->getFilename();
                 }
             } elseif ($fileInfo->getExtension() === 'css') {
                 $assetName = \explode('.', $fileInfo->getFilename())[0] ?? null;
