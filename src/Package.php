@@ -88,4 +88,12 @@ class Package implements PackageInterface
     {
         return __DIR__ . '/../config/';
     }
+
+    /**
+     * @return array|null
+     */
+    public function getDependencies(): ?array
+    {
+        return null;
+    }
 }

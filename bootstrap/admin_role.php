@@ -6,3 +6,4 @@ use KiwiSuite\Admin\Role\RoleConfigurator;
 /** @var RoleConfigurator $role */
 
 $role->addRole(AdministratorRole::class);
+$role->addDirectory(getcwd() . '/src/Admin/Role', true);
