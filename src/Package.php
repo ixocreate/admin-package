@@ -94,6 +94,8 @@ class Package implements PackageInterface
      */
     public function getDependencies(): ?array
     {
-        return null;
+        return [
+            \KiwiSuite\Media\Package::class,
+        ];
     }
 }
