@@ -68,7 +68,7 @@ class IndexAction implements MiddlewareInterface
     private function assetsPaths()
     {
         $scripts = [
-            'inline' => null,
+            'runtime' => null,
             'polyfills' => null,
             'scripts' => null,
             'main' => null,
