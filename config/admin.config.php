@@ -11,12 +11,12 @@ return [
         'name' => 'Kiwi',
         'poweredBy' => true,
         'mediaUrl' => '',
-        'logo' => '',
-        'icon' => '',
-        'background' => '',
+        'logo' => '/assets/admin/assets/img/kiwi-logo.svg',
+        'icon' => '/assets/admin/assets/img/kiwi-icon.svg',
+        'background' => '/assets/admin/assets/img/kiwi-icon.svg',
     ],
     /**
-     *
+     * navigation
      */
     'navigation' => [
         [
