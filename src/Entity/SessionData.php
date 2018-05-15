@@ -48,7 +48,7 @@ final class SessionData implements EntityInterface
         return $this->xsrfToken;
     }
 
-    private function createDefinitions() : DefinitionCollection
+    protected function createDefinitions() : DefinitionCollection
     {
         return new DefinitionCollection([
             new Definition("userId", UuidType::class, true, true),
