@@ -19,6 +19,7 @@
         "kiwi-suite/contract": "dev-develop",
         "kiwi-suite/framework": "dev-develop",
         "kiwi-suite/media": "dev-develop",
+        "kiwi-suite/cms": "dev-develop",
         "dflydev/fig-cookies": "^1.0",
         "firebase/php-jwt": "^5.0",
         "ramsey/uuid": "^3.7",

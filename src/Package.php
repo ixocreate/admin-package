@@ -96,6 +96,7 @@ class Package implements PackageInterface
     {
         return [
             \KiwiSuite\Media\Package::class,
+            \KiwiSuite\Cms\Package::class,
         ];
     }
 }
