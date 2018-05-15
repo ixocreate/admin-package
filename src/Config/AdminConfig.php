@@ -52,4 +52,12 @@ final class AdminConfig
     {
         return $this->config['project'];
     }
+
+    /**
+     * @return array
+     */
+    public function getNavigation(): array
+    {
+        return $this->config['navigation'];
+    }
 }

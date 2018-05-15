@@ -66,7 +66,28 @@ final class ConfigAction implements MiddlewareInterface
     {
         return new ApiSuccessResponse([
             'routes' => $this->getRoutes(),
+            'project' => $this->adminConfig->getProject(),
+            'navigation' => $this->getNavigation(),
         ]);
+    }
+
+    /**
+     * @return array
+     */
+    private function getNavigation(): array
+    {
+        $navigationConfig = $this->adminConfig->getNavigation();
+
+        $navigation = [];
+
+        foreach ($navigationConfig as $navigationEntry) {
+            /**
+             * TODO: manipulate/filter by user role/permissions
+             */
+            $navigation[] = $navigationEntry;
+        }
+
+        return $navigation;
     }
 
     /**
@@ -92,7 +113,7 @@ final class ConfigAction implements MiddlewareInterface
 
                 $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', \mb_substr($route['name'], 10))));
                 $routeName[0] = \mb_strtolower($routeName[0]);
-                $routes[$routeName] = (string) $this->adminConfig->getUri()->getPath() . '/api' . $route['path'];
+                $routes[$routeName] = (string)$this->adminConfig->getUri()->getPath() . '/api' . $route['path'];
             }
         }
 
