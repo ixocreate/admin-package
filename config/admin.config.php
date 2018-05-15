@@ -5,15 +5,15 @@ return [
      * project specific settings (white label)
      */
     'project' => [
-        'author' => 'kiwi suite GmbH',
-        'copyright' => '2018',
+        'author'      => 'kiwi suite GmbH',
+        'copyright'   => '2018',
         'description' => 'Kiwi Admin',
-        'name' => 'Kiwi',
-        'poweredBy' => true,
-        'mediaUrl' => '',
-        'logo' => '/assets/admin/assets/img/kiwi-logo.svg',
-        'icon' => '/assets/admin/assets/img/kiwi-icon.svg',
-        'background' => '/assets/admin/assets/img/kiwi-icon.svg',
+        'name'        => 'Kiwi',
+        'poweredBy'   => true,
+        'mediaUrl'    => '',
+        'logo'        => '/assets/admin/assets/img/kiwi-logo.svg',
+        'icon'        => '/assets/admin/assets/img/kiwi-icon.svg',
+        'background'  => '/assets/admin/assets/img/kiwi-icon.svg',
     ],
     /**
      * navigation
@@ -46,5 +46,5 @@ return [
         //         'admin'
         //     ]
         // ],
-    ]
+    ],
 ];
