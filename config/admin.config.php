@@ -19,23 +19,32 @@ return [
      * navigation
      */
     'navigation' => [
-        [
-            'name' => 'Media',
-            'url' => '/media',
-            'icon' => 'fa fa-image',
-            'permissions' => [
-                'admin.api.media.index'
-            ],
-            'roles' => []
-        ],
-        [
-            'name' => 'Users',
-            'url' => '/user',
-            'icon' => 'fa fa-users',
-            'permissions' => [],
-            'roles' => [
-                'admin'
-            ]
-        ],
+        // [
+        //     'name' => 'Pages',
+        //     'url' => '/page',
+        //     'icon' => 'fa fa-file',
+        //     'permissions' => [
+        //         'admin.api.page.index'
+        //     ],
+        //     'roles' => []
+        // ],
+        // [
+        //     'name' => 'Media',
+        //     'url' => '/media',
+        //     'icon' => 'fa fa-image',
+        //     'permissions' => [
+        //         'admin.api.media.index'
+        //     ],
+        //     'roles' => []
+        // ],
+        // [
+        //     'name' => 'Users',
+        //     'url' => '/user',
+        //     'icon' => 'fa fa-users',
+        //     'permissions' => [],
+        //     'roles' => [
+        //         'admin'
+        //     ]
+        // ],
     ]
 ];
