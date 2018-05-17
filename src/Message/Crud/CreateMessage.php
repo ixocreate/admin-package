@@ -34,6 +34,9 @@ final class CreateMessage extends AbstractCrudMessage
         if ($this->entityDefinitions()->has("createdAt")) {
             $data['createdAt'] = $this->createdAt();
         }
+        if ($this->entityDefinitions()->has("updatedAt")) {
+            $data['updatedAt'] = $this->createdAt();
+        }
 
         $entityClass = $this->repository()->getEntityName();
         return new $entityClass($data);
@@ -45,7 +48,7 @@ final class CreateMessage extends AbstractCrudMessage
 
         /** @var Definition $definition */
         foreach ($this->entityDefinitions() as $definition) {
-            if ($definition->getName() === "id") {
+            if (\in_array($definition->getName(), ['id', 'createdAt', 'updatedAt'])) {
                 continue;
             }
             if (empty($this->data()[$definition->getName()])) {

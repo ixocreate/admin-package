@@ -36,6 +36,10 @@ final class UpdateMessage extends AbstractCrudMessage
             $entity = $entity->with($key, $value);
         }
 
+        if ($this->entityDefinitions()->has("updatedAt")) {
+            $entity = $entity->with('updatedAt', $this->createdAt());
+        }
+
         return $entity;
     }
 
