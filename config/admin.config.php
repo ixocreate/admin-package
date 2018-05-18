@@ -26,7 +26,6 @@ return [
         //     'permissions' => [
         //         'admin.api.page.index'
         //     ],
-        //     'roles' => []
         // ],
         // [
         //     'name' => 'Media',
@@ -35,16 +34,14 @@ return [
         //     'permissions' => [
         //         'admin.api.media.index'
         //     ],
-        //     'roles' => []
         // ],
         // [
         //     'name' => 'Users',
         //     'url' => '/user',
         //     'icon' => 'fa fa-users',
-        //     'permissions' => [],
-        //     'roles' => [
-        //         'admin'
-        //     ]
+        //     'permissions' => [
+        //         'admin.api.user.index'
+        //     ],
         // ],
     ],
 ];
