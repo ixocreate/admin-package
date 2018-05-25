@@ -20,6 +20,7 @@ use KiwiSuite\Admin\Middleware\Api\ErrorMiddleware;
 use KiwiSuite\Admin\Middleware\Api\MessageInjectorMiddleware;
 use KiwiSuite\Admin\Middleware\Api\ResourceInjectorMiddleware;
 use KiwiSuite\Admin\Middleware\Api\SessionDataMiddleware;
+use KiwiSuite\Admin\Middleware\Api\UserMiddleware;
 use KiwiSuite\Admin\Middleware\Api\XsrfProtectionMiddleware;
 use KiwiSuite\Admin\Middleware\CookieInitializerMiddleware;
 use KiwiSuite\ApplicationHttp\Pipe\GroupPipeConfigurator;
@@ -32,6 +33,7 @@ $pipe->segment('/api', function(PipeConfigurator $pipe) {
     $pipe->pipe(EnforceApiResponseMiddleware::class);
     $pipe->pipe(ErrorMiddleware::class);
     $pipe->pipe(SessionDataMiddleware::class);
+    $pipe->pipe(UserMiddleware::class);
     $pipe->pipe(XsrfProtectionMiddleware::class);
     $pipe->pipe(BodyParamsMiddleware::class);
 

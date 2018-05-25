@@ -12,12 +12,9 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Middleware\Api;
 
-use KiwiSuite\Admin\Entity\SessionData;
 use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Permission\Permission;
-use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
-use KiwiSuite\CommonTypes\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -26,19 +23,6 @@ use Zend\Expressive\Router\RouteResult;
 
 final class AuthorizationGuardMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
-
-    /**
-     * AuthorizationGuardMiddleware constructor.
-     * @param UserRepository $userRepository
-     */
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
 
     /**
      * @param ServerRequestInterface $request
@@ -47,18 +31,8 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $sessionData = $request->getAttribute(SessionData::class);
-        if (!($sessionData instanceof SessionData)) {
-            return $this->createNotAuthorizedResponse();
-        }
-
-        if (!($sessionData->userId() instanceof UuidType)) {
-            return $this->createNotAuthorizedResponse();
-        }
-
-        /** @var User $user */
-        $user = $this->userRepository->findOneBy(['id' => $sessionData->userId()]);
-        if (empty($user)) {
+        $user = $request->getAttribute(User::class);
+        if (!($user instanceof User)) {
             return $this->createNotAuthorizedResponse();
         }
 
@@ -66,19 +40,14 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
             return $this->createNotAuthorizedResponse();
         }
 
-        $request = $request->withAttribute(User::class, $user);
-
-        $permission = new Permission($user);
-
-        $request = $request->withAttribute(Permission::class, $permission);
+        /** @var Permission $permission */
+        $permission = $request->getAttribute(Permission::class);
 
         /** @var RouteResult $routeResult */
         $routeResult = $request->getAttribute(RouteResult::class);
         if (!$permission->can($routeResult->getMatchedRouteName())) {
             return new ApiErrorResponse('forbidden', [], 403);
         }
-
-
 
         return $handler->handle($request);
     }
