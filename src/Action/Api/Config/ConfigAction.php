@@ -17,6 +17,7 @@ use KiwiSuite\Admin\Helper\ServerUrlHelper;
 use KiwiSuite\Admin\Helper\UrlHelper;
 use KiwiSuite\Admin\Pipe\PipeConfig;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
+use KiwiSuite\Intl\LocaleManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -42,19 +43,31 @@ final class ConfigAction implements MiddlewareInterface
      * @var UrlHelper
      */
     private $urlHelper;
+    /**
+     * @var LocaleManager
+     */
+    private $localeManager;
 
     /**
      * ConfigAction constructor.
      * @param AdminConfig $adminConfig
      * @param PipeConfig $pipeConfig
      * @param ServerUrlHelper $serverUrlHelper
+     * @param UrlHelper $urlHelper
+     * @param LocaleManager $localeManager
      */
-    public function __construct(AdminConfig $adminConfig, PipeConfig $pipeConfig, ServerUrlHelper $serverUrlHelper, UrlHelper $urlHelper)
-    {
+    public function __construct(
+        AdminConfig $adminConfig,
+        PipeConfig $pipeConfig,
+        ServerUrlHelper $serverUrlHelper,
+        UrlHelper $urlHelper,
+        LocaleManager $localeManager
+    ) {
         $this->adminConfig = $adminConfig;
         $this->serverUrlHelper = $serverUrlHelper;
         $this->pipeConfig = $pipeConfig;
         $this->urlHelper = $urlHelper;
+        $this->localeManager = $localeManager;
     }
 
     /**
@@ -68,6 +81,10 @@ final class ConfigAction implements MiddlewareInterface
             'routes' => $this->getRoutes(),
             'project' => $this->adminConfig->getProject(),
             'navigation' => $this->getNavigation(),
+            'intl' => [
+                'default' => $this->localeManager->defaultLocale(),
+                'locales' => $this->localeManager->all(),
+            ],
         ]);
     }
 
