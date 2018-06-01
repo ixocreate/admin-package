@@ -2,8 +2,8 @@
 
 namespace KiwiSuite\Admin\Schema;
 
-use KiwiSuite\Admin\Form\Element;
-use KiwiSuite\Admin\Form\ElementGroup;
+use KiwiSuite\Admin\Schema\Form\ElementInterface;
+use KiwiSuite\Admin\Schema\Form\FormBuilder;
 
 class Builder
 {
@@ -28,7 +28,7 @@ class Builder
     protected $filter = [];
 
     /**
-     * @var ElementGroup
+     * @var FormBuilder
      */
     protected $elements;
 
@@ -53,13 +53,7 @@ class Builder
         return $this;
     }
 
-    public function setElements(array $elements)
-    {
-        $this->elements = $elements;
-        return $this;
-    }
-
-    public function addElement(Element $element)
+    public function addElement(ElementInterface $element)
     {
         $this->elements[] = $element;
         return $this;
@@ -67,18 +61,12 @@ class Builder
 
     public function toArray()
     {
-        $elements = [];
-        foreach ($this->elements as $element) {
-            /** @var Element $element */
-            $elements[] = $element->toArray();
-        }
-
         return [
             'name'       => $this->name,
             'namePlural' => $this->namePlural,
             'list'       => $this->list,
             'filter'     => $this->filter,
-            'form'       => $elements,
+            'form'       => $this->elements->toArray(),
         ];
     }
 }
