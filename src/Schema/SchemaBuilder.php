@@ -2,35 +2,40 @@
 
 namespace KiwiSuite\Admin\Schema;
 
-use KiwiSuite\Admin\Schema\Form\ElementInterface;
-use KiwiSuite\Admin\Schema\Form\FormBuilder;
+use KiwiSuite\Admin\Schema\Form\Elements\Form;
 
-class Builder
+final class SchemaBuilder
 {
     /**
      * @var string
      */
-    protected $name;
+    private $name;
 
     /**
      * @var string
      */
-    protected $namePlural;
+    private $namePlural;
 
     /**
      * @var array
      */
-    protected $list = [];
+    private $list = [];
 
     /**
      * @var array
      */
-    protected $filter = [];
+    private $filter = [];
 
     /**
-     * @var FormBuilder
+     * @var Form
      */
-    protected $elements;
+    private $form;
+
+    public function __construct(Form $form)
+    {
+        $this->form = $form;
+    }
+
 
     public function setName(string $name)
     {
@@ -53,10 +58,9 @@ class Builder
         return $this;
     }
 
-    public function addElement(ElementInterface $element)
+    public function getForm(): Form
     {
-        $this->elements[] = $element;
-        return $this;
+        return $this->form;
     }
 
     public function toArray()
@@ -66,7 +70,7 @@ class Builder
             'namePlural' => $this->namePlural,
             'list'       => $this->list,
             'filter'     => $this->filter,
-            'form'       => $this->elements->toArray(),
+            'form'       => $this->form->toArray(),
         ];
     }
 }

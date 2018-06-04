@@ -18,6 +18,7 @@ use KiwiSuite\Admin\Handler\Crud\UpdateHandler;
 use KiwiSuite\Admin\Message\Crud\CreateMessage;
 use KiwiSuite\Admin\Message\Crud\DeleteMessage;
 use KiwiSuite\Admin\Message\Crud\UpdateMessage;
+use KiwiSuite\Admin\Schema\SchemaBuilder;
 
 trait ResourceTrait
 {
@@ -62,8 +63,8 @@ trait ResourceTrait
         ];
     }
 
-    public function schema(): array
+    public function schema(SchemaBuilder $schemaBuilder): void
     {
-        return [];
+
     }
 }

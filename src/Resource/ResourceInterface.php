@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Resource;
 
+use KiwiSuite\Admin\Schema\SchemaBuilder;
+
 interface ResourceInterface
 {
     public static function name(): string;
@@ -34,5 +36,5 @@ interface ResourceInterface
 
     public function indexAction(): ?string;
 
-    public function schema(): array;
+    public function schema(SchemaBuilder $schemaBuilder): void;
 }

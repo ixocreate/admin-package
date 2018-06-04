@@ -68,7 +68,8 @@ abstract class AbstractCrudMessage implements CrudMessageInterface
      */
     protected function entityDefinitions(): DefinitionCollection
     {
-        return (new Instantiator())->instantiate($this->repository()->getEntityName())->getDefinitions();
+        $entity = $this->repository()->getEntityName();
+        return $entity::getDefinitions();
     }
 
     protected function applyData(EntityInterface $entity): EntityInterface

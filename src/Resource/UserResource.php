@@ -14,6 +14,7 @@ namespace KiwiSuite\Admin\Resource;
 
 use KiwiSuite\Admin\Message\CreateUserMessage;
 use KiwiSuite\Admin\Repository\UserRepository;
+use KiwiSuite\Admin\Schema\SchemaBuilder;
 
 final class UserResource implements ResourceInterface
 {
@@ -39,11 +40,9 @@ final class UserResource implements ResourceInterface
         return CreateUserMessage::class;
     }
 
-    public function schema(): array
+    public function schema(SchemaBuilder $schemaBuilder): void
     {
-        return [
-            'name'       => 'User',
-            'namePlural' => 'Users',
-        ];
+        $schemaBuilder->setName("User");
+        $schemaBuilder->setNamePlural("Users");
     }
 }

@@ -1,6 +1,8 @@
 <?php
 
-namespace KiwiSuite\Admin\Schema\Form;
+namespace KiwiSuite\Admin\Schema\Form\Elements;
+
+use KiwiSuite\Admin\Schema\Form\ElementInterface;
 
 final class Element implements ElementInterface
 {
@@ -34,18 +36,25 @@ final class Element implements ElementInterface
      */
     private $options = [];
 
-    /**
-     * Element constructor.
-     * @param string $name
-     * @param string $label
-     * @param string $type
-     * @param array $options
-     */
-    public function __construct(string $name, string $label, string $type)
+    public function setName(string $name): ElementInterface
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function setLabel(string $label): ElementInterface
+    {
         $this->label = $label;
+
+        return $this;
+    }
+
+    public function setType(string $type): ElementInterface
+    {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
@@ -97,5 +106,35 @@ final class Element implements ElementInterface
         $this->readonly = $readonly;
 
         return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function getOptions(): array
+    {
+        return $this->options;
+    }
+
+    public function isRequired(): bool
+    {
+        return $this->required;
+    }
+
+    public function isReadonly(): bool
+    {
+        return $this->readonly;
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
     }
 }
