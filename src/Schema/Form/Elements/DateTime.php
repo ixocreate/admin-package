@@ -2,7 +2,10 @@
 
 namespace KiwiSuite\Admin\Schema\Form\Elements;
 
-final class DateTime extends AbstractProxyElement
+use KiwiSuite\Admin\Schema\Form\TypeMappingInterface;
+use KiwiSuite\CommonTypes\Entity\DateTimeType;
+
+final class DateTime extends AbstractProxyElement implements TypeMappingInterface
 {
     /**
      * Wysiwyg constructor.
@@ -12,5 +15,10 @@ final class DateTime extends AbstractProxyElement
         parent::__construct();
         $this->element->setType("datetime");
         $this->element->addOption("config", ['dateInputFormat' => 'YYYY-MM-DD HH:mm:ss']);
+    }
+
+    public static function getTypeMapping(): string
+    {
+        return DateTimeType::class;
     }
 }

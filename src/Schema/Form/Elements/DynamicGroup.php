@@ -2,8 +2,8 @@
 declare(strict_types=1);
 namespace KiwiSuite\Admin\Schema\Form\Elements;
 
-use KiwiSuite\Admin\Schema\Form\ElementInterface;
 use KiwiSuite\Admin\Schema\Form\ElementSubManager;
+use KiwiSuite\Admin\Schema\Form\TypeMapping;
 
 final class DynamicGroup extends Container
 {
@@ -11,10 +11,11 @@ final class DynamicGroup extends Container
     /**
      * DynamicGroup constructor.
      * @param ElementSubManager $elementSubManager
+     * @param TypeMapping $typeMapping
      */
-    public function __construct(ElementSubManager $elementSubManager)
+    public function __construct(ElementSubManager $elementSubManager, TypeMapping $typeMapping)
     {
-        parent::__construct($elementSubManager);
+        parent::__construct($elementSubManager, $typeMapping);
         $this->element->setType("dynamic");
         $this->element->addOption("btnText", "");
     }

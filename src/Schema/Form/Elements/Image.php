@@ -3,9 +3,9 @@
 namespace KiwiSuite\Admin\Schema\Form\Elements;
 
 use KiwiSuite\Admin\Schema\Form\TypeMappingInterface;
-use KiwiSuite\CommonTypes\Entity\DateType;
+use KiwiSuite\Media\Type\ImageType;
 
-final class Date extends AbstractProxyElement implements TypeMappingInterface
+final class Image extends AbstractProxyElement implements TypeMappingInterface
 {
     /**
      * Wysiwyg constructor.
@@ -13,12 +13,11 @@ final class Date extends AbstractProxyElement implements TypeMappingInterface
     public function __construct()
     {
         parent::__construct();
-        $this->element->setType("datetime");
-        $this->element->addOption("config", ['dateInputFormat' => 'YYYY-MM-DD']);
+        $this->element->setType("media");
     }
 
     public static function getTypeMapping(): string
     {
-        return DateType::class;
+        return ImageType::class;
     }
 }

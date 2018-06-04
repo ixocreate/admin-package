@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin;
 
+use KiwiSuite\Admin\BootstrapItem\FormElementBootstrapItem;
 use KiwiSuite\Admin\BootstrapItem\PipeBootstrapItem;
 use KiwiSuite\Admin\BootstrapItem\ResourceBootstrapItem;
 use KiwiSuite\Admin\BootstrapItem\RoleBootstrapItem;
@@ -54,6 +55,7 @@ class Package implements PackageInterface
             PipeBootstrapItem::class,
             RoleBootstrapItem::class,
             ResourceBootstrapItem::class,
+            FormElementBootstrapItem::class,
         ];
     }
 

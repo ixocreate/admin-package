@@ -4,6 +4,7 @@ namespace KiwiSuite\Admin\Schema\Form\Elements;
 use KiwiSuite\Admin\Schema\Form\ContainerInterface;
 use KiwiSuite\Admin\Schema\Form\ElementInterface;
 use KiwiSuite\Admin\Schema\Form\ElementSubManager;
+use KiwiSuite\Admin\Schema\Form\TypeMapping;
 use KiwiSuite\Entity\Entity\Definition;
 
 class Container extends AbstractProxyElement implements ContainerInterface
@@ -16,11 +17,21 @@ class Container extends AbstractProxyElement implements ContainerInterface
      * @var ElementSubManager
      */
     private $elementSubManager;
+    /**
+     * @var TypeMapping
+     */
+    private $typeMapping;
 
-    public function __construct(ElementSubManager $elementSubManager)
+    /**
+     * Container constructor.
+     * @param ElementSubManager $elementSubManager
+     * @param TypeMapping $typeMapping
+     */
+    public function __construct(ElementSubManager $elementSubManager, TypeMapping $typeMapping)
     {
         parent::__construct();
         $this->elementSubManager = $elementSubManager;
+        $this->typeMapping = $typeMapping;
     }
 
     public function addElement(ElementInterface $element): ContainerInterface
@@ -36,7 +47,12 @@ class Container extends AbstractProxyElement implements ContainerInterface
 
     public function createElementForType(string $type): ElementInterface
     {
-        return $this->elementSubManager->build($this->elementSubManager->typeMappingFor($type));
+        $element = $this->typeMapping->getElementByType($type);
+        if (empty($element)) {
+            $element = Text::class;
+        }
+
+        return $this->elementSubManager->build($element);
     }
     
     public function isAvailable(string $name): bool

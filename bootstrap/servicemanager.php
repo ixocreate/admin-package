@@ -15,7 +15,6 @@ use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\Admin\Router\AdminRouter;
 use KiwiSuite\Admin\Router\Factory\AdminRouterFactory;
 use KiwiSuite\Admin\Schema\Form\ElementSubManager;
-use KiwiSuite\Admin\Schema\Form\ElementSubManagerFactory;
 use KiwiSuite\Admin\Schema\SchemaInstantiator;
 use KiwiSuite\Admin\Schema\SchemaInstantiatorFactory;
 
@@ -27,4 +26,4 @@ $serviceManager->addFactory(SchemaInstantiator::class, SchemaInstantiatorFactory
 
 $serviceManager->addSubManager(RoleSubManager::class);
 $serviceManager->addSubManager(ResourceSubManager::class);
-$serviceManager->addSubManager(ElementSubManager::class, ElementSubManagerFactory::class);
+$serviceManager->addSubManager(ElementSubManager::class);
