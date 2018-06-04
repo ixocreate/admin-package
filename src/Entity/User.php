@@ -90,7 +90,7 @@ final class User implements EntityInterface
         return $this->status;
     }
 
-    protected function createDefinitions() : DefinitionCollection
+    protected static function createDefinitions() : DefinitionCollection
     {
         return new DefinitionCollection([
             new Definition("id", UuidType::class, false, true),
