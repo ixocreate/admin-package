@@ -95,6 +95,8 @@ final class HandlerAction implements MiddlewareInterface
 
         $this->commandBus->handle($message);
 
-        return new ApiSuccessResponse();
+        return new ApiSuccessResponse([
+            'id' => (string) $message->uuid()
+        ]);
     }
 }
