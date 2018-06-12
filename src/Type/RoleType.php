@@ -12,69 +12,57 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Type;
 
+use Doctrine\DBAL\Types\StringType;
 use KiwiSuite\Admin\Role\RoleInterface;
 use KiwiSuite\Admin\Role\RoleMapping;
 use KiwiSuite\Admin\Role\RoleSubManager;
-use KiwiSuite\Entity\Type\Convert\Convert;
-use KiwiSuite\Entity\Type\TypeInterface;
+use KiwiSuite\Contract\Type\DatabaseTypeInterface;
+use KiwiSuite\Entity\Type\AbstractType;
 
-final class RoleType implements TypeInterface
+final class RoleType extends AbstractType implements DatabaseTypeInterface
 {
-    /**
-     * @var RoleInterface
-     */
-    private $role;
-
     /**
      * @var RoleSubManager
      */
     private $roleSubManager;
+    /**
+     * @var RoleMapping
+     */
+    private $roleMapping;
 
-    public function __construct(string $value, RoleSubManager $roleSubManager, RoleMapping $roleMapping)
+    public function __construct(RoleSubManager $roleSubManager, RoleMapping $roleMapping)
     {
         $this->roleSubManager = $roleSubManager;
+        $this->roleMapping = $roleMapping;
+    }
 
-        if (empty($roleMapping->getMapping()[$value])) {
+    public function transform($value)
+    {
+        if (empty($this->roleMapping->getMapping()[$value])) {
             throw new \Exception("invalid role");
         }
+        $roleClass = $this->roleMapping->getMapping()[$value];
 
-        $roleClass = $roleMapping->getMapping()[$value];
-
-        $this->role = $this->roleSubManager->get($roleClass);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValue()
-    {
-        return $this->role::getName();
-    }
-
-    /**
-     * @param $value
-     * @return mixed
-     */
-    public static function convertToInternalType($value)
-    {
-        return Convert::convertString($value);
-    }
-
-    public function __toString()
-    {
-        return (string) $this->getValue();
-    }
-
-    /**
-     * @return string
-     */
-    public function jsonSerialize()
-    {
-        return (string)$this;
+        return $this->roleSubManager->get($roleClass);
     }
 
     public function getRole(): RoleInterface
     {
-        return $this->role;
+        return $this->value();
+    }
+
+    public function __toString()
+    {
+        return $this->value()::getName();
+    }
+
+    public function convertToDatabaseValue()
+    {
+        return (string) $this;
+    }
+
+    public static function baseDatabaseType(): string
+    {
+        return StringType::class;
     }
 }

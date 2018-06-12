@@ -12,51 +12,35 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Type;
 
-use KiwiSuite\Entity\Type\Convert\Convert;
-use KiwiSuite\Entity\Type\TypeInterface;
+use Doctrine\DBAL\Types\StringType;
+use KiwiSuite\Contract\Type\DatabaseTypeInterface;
+use KiwiSuite\Entity\Type\AbstractType;
 
-final class StatusType implements TypeInterface
+final class StatusType extends AbstractType implements DatabaseTypeInterface
 {
     /**
-     * @var string
+     * @param $value
+     * @return mixed
+     * @throws \Exception
      */
-    private $value;
-
-    /**
-     * StatusType constructor.
-     * @param string $value
-     */
-    public function __construct(string $value)
+    public function transform($value)
     {
         if (!\in_array($value, ['active', 'inactive'])) {
             //TODO Exception
             throw new \Exception("invalid type");
         }
-        $this->value = $value;
+
+        return $value;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValue()
+
+    public function convertToDatabaseValue()
     {
-        return $this->value;
+        return (string) $this;
     }
 
-    /**
-     * @param $value
-     * @return mixed
-     */
-    public static function convertToInternalType($value)
+    public static function baseDatabaseType(): string
     {
-        return Convert::convertString($value);
-    }
-
-    /**
-     * @return mixed|string
-     */
-    public function jsonSerialize()
-    {
-        return $this->value;
+        return StringType::class;
     }
 }
