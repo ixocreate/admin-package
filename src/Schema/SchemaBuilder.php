@@ -2,9 +2,10 @@
 
 namespace KiwiSuite\Admin\Schema;
 
-use KiwiSuite\Admin\Schema\Form\Elements\Form;
+use KiwiSuite\Schema\Builder;
+use KiwiSuite\Schema\Schema;
 
-final class SchemaBuilder
+final class SchemaBuilder implements \JsonSerializable
 {
     /**
      * @var string
@@ -22,55 +23,95 @@ final class SchemaBuilder
     private $list = [];
 
     /**
-     * @var array
+     * @var Schema
      */
-    private $filter = [];
+    private $schema;
 
     /**
-     * @var Form
+     * @var Builder
      */
-    private $form;
+    private $builder;
 
-    public function __construct(Form $form)
+    /**
+     * SchemaBuilder constructor.
+     * @param Builder $builder
+     */
+    public function __construct(Builder $builder)
     {
-        $this->form = $form;
+        $this->builder = $builder;
     }
 
-
-    public function setName(string $name)
+    /**
+     * @param string $name
+     * @return SchemaBuilder
+     */
+    public function withName(string $name): SchemaBuilder
     {
-        $this->name = $name;
-        return $this;
+        $schemaBuilder = clone $this;
+        $schemaBuilder->name = $name;
+
+        return $schemaBuilder;
     }
 
-    public function setNamePlural(string $namePlural)
+    /**
+     * @param string $namePlural
+     * @return SchemaBuilder
+     */
+    public function withNamePlural(string $namePlural): SchemaBuilder
     {
-        $this->namePlural = $namePlural;
-        return $this;
+        $schemaBuilder = clone $this;
+        $schemaBuilder->namePlural = $namePlural;
+
+        return $schemaBuilder;
     }
 
-    public function addListField(string $key, string $label)
+    /**
+     * @param string $key
+     * @param string $label
+     * @return SchemaBuilder
+     */
+    public function withAddListField(string $key, string $label): SchemaBuilder
     {
-        $this->list[] = [
+        $schemaBuilder = clone $this;
+
+        $schemaBuilder->list[$key] = [
             'key' => $key,
             'name' => $label,
         ];
-        return $this;
+        return $schemaBuilder;
     }
 
-    public function getForm(): Form
+    /**
+     * @param Schema $schema
+     * @return SchemaBuilder
+     */
+    public function withSchema(Schema $schema): SchemaBuilder
     {
-        return $this->form;
+        $schemaBuilder = clone $this;
+        $schemaBuilder->schema = $schema;
+
+        return $schemaBuilder;
     }
 
-    public function toArray()
+    /**
+     * @return Builder
+     */
+    public function builder(): Builder
+    {
+        return $this->builder;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
     {
         return [
             'name'       => $this->name,
             'namePlural' => $this->namePlural,
-            'list'       => $this->list,
-            'filter'     => $this->filter,
-            'form'       => $this->form->toArray(),
+            'list'       => \array_values($this->list),
+            'filter'     => [],
+            'form'       => $this->schema
         ];
     }
 }

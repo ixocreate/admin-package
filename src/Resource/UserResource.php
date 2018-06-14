@@ -40,9 +40,11 @@ final class UserResource implements ResourceInterface
         return CreateUserMessage::class;
     }
 
-    public function schema(SchemaBuilder $schemaBuilder): void
+    public function schema(SchemaBuilder $schemaBuilder): SchemaBuilder
     {
-        $schemaBuilder->setName("User");
-        $schemaBuilder->setNamePlural("Users");
+        $schemaBuilder = $schemaBuilder->withName("User");
+        $schemaBuilder = $schemaBuilder->withNamePlural("Users");
+
+        return $schemaBuilder;
     }
 }

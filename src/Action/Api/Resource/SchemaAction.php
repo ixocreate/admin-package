@@ -15,7 +15,10 @@ namespace KiwiSuite\Admin\Action\Api\Resource;
 use KiwiSuite\Admin\Resource\ResourceInterface;
 use KiwiSuite\Admin\Resource\ResourceSubManager;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
+use KiwiSuite\Admin\Schema\SchemaBuilder;
 use KiwiSuite\Admin\Schema\SchemaInstantiator;
+use KiwiSuite\Schema\Builder;
+use KiwiSuite\Schema\Schema;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -28,15 +31,16 @@ final class SchemaAction implements MiddlewareInterface
      * @var ResourceSubManager
      */
     private $resourceSubManager;
-    /**
-     * @var SchemaInstantiator
-     */
-    private $schemaInstantiator;
 
-    public function __construct(ResourceSubManager $resourceSubManager, SchemaInstantiator $schemaInstantiator)
+    /**
+     * @var Builder
+     */
+    private $builder;
+
+    public function __construct(ResourceSubManager $resourceSubManager, Builder $builder)
     {
         $this->resourceSubManager = $resourceSubManager;
-        $this->schemaInstantiator = $schemaInstantiator;
+        $this->builder = $builder;
     }
 
 
@@ -53,9 +57,9 @@ final class SchemaAction implements MiddlewareInterface
         /** @var ResourceInterface $resource */
         $resource = $this->resourceSubManager->get($resourceKey);
 
-        $schemaBuilder = $this->schemaInstantiator->createSchemaBuilder();
-        $resource->schema($schemaBuilder);
+        $schemaBuilder = (new SchemaBuilder($this->builder))->withSchema(new Schema());
+        $schemaBuilder = $resource->schema($schemaBuilder);
 
-        return new ApiSuccessResponse($schemaBuilder->toArray());
+        return new ApiSuccessResponse($schemaBuilder);
     }
 }

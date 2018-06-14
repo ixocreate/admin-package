@@ -55,7 +55,6 @@ class Package implements PackageInterface
             PipeBootstrapItem::class,
             RoleBootstrapItem::class,
             ResourceBootstrapItem::class,
-            FormElementBootstrapItem::class,
         ];
     }
 

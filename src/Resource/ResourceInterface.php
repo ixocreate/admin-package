@@ -20,8 +20,6 @@ interface ResourceInterface
 
     public function repository(): string;
 
-    public function icon(): string;
-
     public function createMessage(): string;
 
     public function updateMessage(): string;
@@ -36,5 +34,5 @@ interface ResourceInterface
 
     public function indexAction(): ?string;
 
-    public function schema(SchemaBuilder $schemaBuilder): void;
+    public function schema(SchemaBuilder $schemaBuilder): SchemaBuilder;
 }

@@ -63,8 +63,8 @@ trait ResourceTrait
         ];
     }
 
-    public function schema(SchemaBuilder $schemaBuilder): void
+    public function schema(SchemaBuilder $schemaBuilder): SchemaBuilder
     {
-
+        return $schemaBuilder;
     }
 }
