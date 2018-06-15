@@ -38,9 +38,9 @@ final class AdminThumb implements ImageDefinitionInterface
     /**
      * @return string
      */
-    public static function getName(): string
+    public static function serviceName(): string
     {
-        return "AdminThumb";
+        return 'AdminTumb';
     }
 
     /**
