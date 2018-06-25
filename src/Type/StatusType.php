@@ -43,4 +43,9 @@ final class StatusType extends AbstractType implements DatabaseTypeInterface
     {
         return StringType::class;
     }
+
+    public static function serviceName(): string
+    {
+        return 'status';
+    }
 }

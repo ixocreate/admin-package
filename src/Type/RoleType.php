@@ -65,4 +65,9 @@ final class RoleType extends AbstractType implements DatabaseTypeInterface
     {
         return StringType::class;
     }
+
+    public static function serviceName(): string
+    {
+        return 'role';
+    }
 }
