@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin;
 
 /** @var PipeConfigurator $pipe */
+use KiwiSuite\Admin\Action\Account\ChangeEmailAction;
+use KiwiSuite\Admin\Action\Account\ChangePasswordAction;
 use KiwiSuite\Admin\Action\Api\Auth\LoginAction;
 use KiwiSuite\Admin\Action\Api\Auth\LogoutAction;
 use KiwiSuite\Admin\Action\Api\Auth\UserAction;
@@ -60,17 +62,9 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function(PipeConfigurator $pipe)
             $group->post('/auth/logout', LogoutAction::class, "admin.api.auth.logout");
 
 
-            $group->patch('/account/email', HandlerAction::class, 'admin.api.account.email')(function (RouteConfigurator $route) {
-                $route->addOption(MessageInterface::class, ChangeEmailMessage::class);
-            });
+            $group->patch('/account/email', ChangeEmailAction::class, 'admin.api.account.email');
 
-            $group->patch('/user/email/{id}', HandlerAction::class, 'admin.api.user.email')(function (RouteConfigurator $route) {
-                $route->addOption(MessageInterface::class, ChangeEmailMessage::class);
-            });
-
-            $group->patch('/account/password', HandlerAction::class, 'admin.api.account.password')(function (RouteConfigurator $route) {
-                $route->addOption(MessageInterface::class, ChangePasswordMessage::class);
-            });
+            $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
 
             $group->group('resource')(function(GroupPipeConfigurator $group) {
                 $group->before(ResourceInjectionMiddleware::class);

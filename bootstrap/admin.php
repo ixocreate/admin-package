@@ -12,7 +12,7 @@ $admin->setLogo("/admin/assets/img/kiwi-logo.svg");
 $admin->setIcon("/admin/assets/img/kiwi-icon.svg");
 
 $contentGroup = $admin->addNavigationGroup("Content", 5000);
-$contentGroup->add("Sitemap", ['admin.api.media.index'], 'fa fa-image', '/page', 2000);
+$contentGroup->add("Sitemap", ['admin.api.media.index'], 'fa fa-sitemap', '/page', 2000);
 $contentGroup->add("Media", ['admin.api.media.index'], 'fa fa-image', '/media', 1000);
 
 $admin->addNavigationGroup("Settings", 1000)
