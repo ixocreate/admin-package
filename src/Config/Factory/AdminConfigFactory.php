@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Config\Factory;
 
 use KiwiSuite\Admin\Config\AdminConfig;
+use KiwiSuite\Admin\Config\AdminProjectConfig;
+use KiwiSuite\Asset\Asset;
 use KiwiSuite\Config\Config;
 use KiwiSuite\Contract\ServiceManager\FactoryInterface;
 use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
@@ -45,6 +47,6 @@ final class AdminConfigFactory implements FactoryInterface
             $uri = $uri->withPort($projectUri->getMainUrl()->getPort());
         }
 
-        return new AdminConfig($config->get("admin"), $uri);
+        return new AdminConfig($container->get(AdminProjectConfig::class), $uri, $container->get(Asset::class));
     }
 }

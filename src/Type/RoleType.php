@@ -16,10 +16,14 @@ use Doctrine\DBAL\Types\StringType;
 use KiwiSuite\Admin\Role\RoleInterface;
 use KiwiSuite\Admin\Role\RoleMapping;
 use KiwiSuite\Admin\Role\RoleSubManager;
+use KiwiSuite\Contract\Schema\ElementInterface;
 use KiwiSuite\Contract\Type\DatabaseTypeInterface;
+use KiwiSuite\Contract\Type\SchemaElementInterface;
 use KiwiSuite\Entity\Type\AbstractType;
+use KiwiSuite\Schema\Elements\SelectElement;
+use KiwiSuite\Schema\ElementSubManager;
 
-final class RoleType extends AbstractType implements DatabaseTypeInterface
+final class RoleType extends AbstractType implements DatabaseTypeInterface, SchemaElementInterface
 {
     /**
      * @var RoleSubManager
@@ -69,5 +73,14 @@ final class RoleType extends AbstractType implements DatabaseTypeInterface
     public static function serviceName(): string
     {
         return 'role';
+    }
+
+    public function schemaElement(ElementSubManager $elementSubManager): ElementInterface
+    {
+        /** @var SelectElement $element */
+        $element = $elementSubManager->get(SelectElement::class);
+
+        $options = array_combine(array_keys($this->roleMapping->getMapping()), array_keys($this->roleMapping->getMapping()));
+        return $element->withOptions($options);
     }
 }

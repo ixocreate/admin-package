@@ -11,7 +11,6 @@ use KiwiSuite\ApplicationHttp\Middleware\MiddlewareConfigurator;
 use Psr\Http\Server\MiddlewareInterface;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
-$middleware->addMiddleware(AdminMiddleware::class, AdminApplicationFactory::class);
 $middleware->addMiddleware(BodyParamsMiddleware::class, JsonBodyParamsFactory::class);
 $middleware->addDirectory(__DIR__ . '/../src/Action', true);
 $middleware->addDirectory(__DIR__ . '/../src/Middleware', true);

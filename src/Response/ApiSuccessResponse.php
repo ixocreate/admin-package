@@ -14,7 +14,7 @@ namespace KiwiSuite\Admin\Response;
 
 use Zend\Diactoros\Response\JsonResponse;
 
-final class ApiSuccessResponse extends JsonResponse
+class ApiSuccessResponse extends JsonResponse
 {
     public function __construct($data = null)
     {

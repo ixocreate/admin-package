@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Middleware;
 
 use Firebase\JWT\JWT;
-use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Entity\SessionData;
 use KiwiSuite\Admin\Session\SessionCookie;
 use Psr\Http\Message\ResponseInterface;
@@ -24,20 +23,6 @@ use Ramsey\Uuid\Uuid;
 
 final class CookieInitializerMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var AdminConfig
-     */
-    protected $adminConfig;
-
-    /**
-     * CookieInitializerMiddleware constructor.
-     * @param AdminConfig $adminConfig
-     */
-    public function __construct(AdminConfig $adminConfig)
-    {
-        $this->adminConfig = $adminConfig;
-    }
-
     /**
      * Process an incoming server request and return a response, optionally delegating
      * response creation to a handler.

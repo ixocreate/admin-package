@@ -2,6 +2,7 @@
 namespace KiwiSuite\Admin\Action\Api\Resource;
 
 use Doctrine\Common\Collections\Criteria;
+use KiwiSuite\Admin\Response\ApiDetailResponse;
 use KiwiSuite\Admin\Response\ApiListResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
@@ -14,8 +15,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Ramsey\Uuid\Uuid;
 
-final class IndexAction implements MiddlewareInterface
+final class CreateAction implements MiddlewareInterface
 {
     /**
      * @var RepositorySubManager
@@ -38,51 +40,29 @@ final class IndexAction implements MiddlewareInterface
         /** @var AdminAwareInterface $resource */
         $resource = $request->getAttribute(ResourceInterface::class);
 
-        if (!empty($resource->indexAction())) {
+        if (!empty($resource->createAction())) {
             /** @var MiddlewareInterface $action */
-            $action = $this->middlewareSubManager->get($resource->indexAction());
+            $action = $this->middlewareSubManager->get($resource->createAction());
             return $action->process($request, $handler);
         }
 
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
-        $criteria = new Criteria();
-        //?sortColumn1=ASC&sortColumn2=DESC&filterColumn1=test&filterColumn2=foobar
-        $queryParams = $request->getQueryParams();
-        foreach ($queryParams as $key => $value) {
-            if (\mb_substr($key, 0, 4) === "sort") {
-                //filter
-                continue;
-            }
-            if (\mb_substr($key, 0, 6) === "filter") {
-                //filter
-                continue;
-            }
-            if ($key === "offset") {
-                $value = (int) $value;
-                if (!empty($value)) {
-                    $criteria->setFirstResult($value);
-                }
-                continue;
-            }
-            if ($key === "limit") {
-                $value = (int) $value;
-                if (!empty($value)) {
-                    $criteria->setMaxResults(min($value, 500));
-                }
-                continue;
-            }
+
+        $data = $request->getParsedBody();
+        $data['id'] = Uuid::uuid4();
+
+        $entity = $repository->getEntityName();
+        if ($entity::getDefinitions()->has('createdAt')) {
+            $data['createdAt'] = new \DateTime();
         }
-        $result = $repository->matching($criteria);
-        $items = [];
-        //TODO Collection
+        if ($entity::getDefinitions()->has('updatedAt')) {
+            $data['updatedAt'] = new \DateTime();
+        }
         /** @var EntityInterface $entity */
-        foreach ($result as $entity) {
-            $items[] = $entity->toPublicArray();
-        }
+        $entity = new $entity($data);
+        $repository->save($entity);
 
-        $count = $repository->count([]);
-
-        return new ApiListResponse($resource, $items, $resource->listSchema(), ['count' => $count]);
+        return new ApiSuccessResponse(['id' => $data['id']]);
     }
 }

@@ -12,12 +12,8 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin;
 
-use KiwiSuite\Admin\BootstrapItem\FormElementBootstrapItem;
-use KiwiSuite\Admin\BootstrapItem\PipeBootstrapItem;
-use KiwiSuite\Admin\BootstrapItem\ResourceBootstrapItem;
+use KiwiSuite\Admin\BootstrapItem\AdminBootstrapItem;
 use KiwiSuite\Admin\BootstrapItem\RoleBootstrapItem;
-use KiwiSuite\Admin\Resource\RoutingSetup;
-use KiwiSuite\Admin\Resource\UserResource;
 use KiwiSuite\Contract\Application\ConfiguratorRegistryInterface;
 use KiwiSuite\Contract\Application\PackageInterface;
 use KiwiSuite\Contract\Application\ServiceRegistryInterface;
@@ -30,12 +26,7 @@ class Package implements PackageInterface
      */
     public function configure(ConfiguratorRegistryInterface $configuratorRegistry): void
     {
-        $configuratorRegistry->get(ResourceBootstrapItem::class)->addResource(UserResource::class);
-        $routingSetup = new RoutingSetup();
-        $routingSetup->setup(
-            $configuratorRegistry->get(PipeBootstrapItem::class),
-            $configuratorRegistry->get(ResourceBootstrapItem::class)->getResourceMapping()
-        );
+
     }
 
     /**
@@ -52,9 +43,8 @@ class Package implements PackageInterface
     public function getBootstrapItems(): ?array
     {
         return [
-            PipeBootstrapItem::class,
             RoleBootstrapItem::class,
-            ResourceBootstrapItem::class,
+            AdminBootstrapItem::class,
         ];
     }
 

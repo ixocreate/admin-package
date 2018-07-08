@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Handler\User;
 
-use Identicon\Generator\SvgGenerator;
+use Identicon\Generator\ImageMagickGenerator;
 use Identicon\Identicon;
 use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Message\CreateUserMessage;
@@ -42,8 +42,8 @@ final class CreateUserHandler implements HandlerInterface
         /** @var CreateUserMessage $message */
         $password = \password_hash($message->password(), PASSWORD_DEFAULT);
 
-        $identicion = new Identicon(new SvgGenerator());
-        $avatar = $identicion->getImageData((string) $message->email()->getValue());
+        $identicion = new Identicon(new ImageMagickGenerator());
+        $avatar = $identicion->getImageDataUri((string) $message->email()->value());
 
         $hash = Uuid::uuid4()->toString();
 

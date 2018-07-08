@@ -27,10 +27,6 @@ use Ramsey\Uuid\Uuid;
 
 final class LoginAction implements MiddlewareInterface
 {
-    /**
-     * @var AdminConfig
-     */
-    private $adminConfig;
 
     /**
      * @var UserRepository
@@ -39,11 +35,10 @@ final class LoginAction implements MiddlewareInterface
 
     /**
      * LoginAction constructor.
-     * @param AdminConfig $adminConfig
+     * @param UserRepository $userRepository
      */
-    public function __construct(AdminConfig $adminConfig, UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->adminConfig = $adminConfig;
         $this->userRepository = $userRepository;
     }
 
@@ -51,6 +46,7 @@ final class LoginAction implements MiddlewareInterface
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
      * @return ResponseInterface
+     * @throws \Exception
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {

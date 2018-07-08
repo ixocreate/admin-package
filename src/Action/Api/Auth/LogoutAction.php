@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Action\Api\Auth;
 
-use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Entity\SessionData;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\Admin\Session\SessionCookie;
@@ -24,20 +23,6 @@ use Ramsey\Uuid\Uuid;
 
 final class LogoutAction implements MiddlewareInterface
 {
-    /**
-     * @var AdminConfig
-     */
-    protected $adminConfig;
-
-    /**
-     * LogoutAction constructor.
-     * @param AdminConfig $adminConfig
-     */
-    public function __construct(AdminConfig $adminConfig)
-    {
-        $this->adminConfig = $adminConfig;
-    }
-
     /**
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler

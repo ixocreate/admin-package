@@ -48,7 +48,7 @@ final class ErrorMiddleware implements MiddlewareInterface
     private function handleThrowable(\Throwable $e, ServerRequestInterface $request): ResponseInterface
     {
         // TODO: only expose error message in local env
-        return new ApiErrorResponse("server-error", [$e->getMessage()], 500);
+        return new ApiErrorResponse("server-error", [$e->getMessage() . " :: " . $e->getFile(). ':' . $e->getLine() . '---' . $e->getTraceAsString()], 500);
     }
 
     private function createErrorHandler(): callable

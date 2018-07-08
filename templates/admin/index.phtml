@@ -5,12 +5,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title><?= $adminConfig->getProject()['name'] ?></title>
-    <base href="/<?= ltrim($adminConfig->getUri()->getPath(), '/')?>">
+    <title><?= $adminConfig->name() ?></title>
+    <base href="/<?= ltrim($adminConfig->uri()->getPath(), '/')?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-    <meta name="description" content="<?= $adminConfig->getProject()['description'] ?>">
-    <meta name="author" content="<?= $adminConfig->getProject()['author'] ?>">
+    <meta name="description" content="<?= $adminConfig->description() ?>">
+    <meta name="author" content="<?= $adminConfig->author() ?>">
     <link rel="shortcut icon" href="<?= $this->asset('/admin/assets/img/favicon.png') ?>">
     <?php foreach ($assets['styles'] as $style): ?>
         <link href="<?= $this->asset($style) ?>" rel="stylesheet"/>
@@ -21,7 +21,16 @@
 <script>
     window.__theme = 'bs4';
     window.__kiwi = <?= json_encode([
-        'project' => $adminConfig->getProject(),
+        'project' => [
+                'author' => $adminConfig->author(),
+                'name' => $adminConfig->name(),
+                'poweredBy' => $adminConfig->poweredBy(),
+                'copyright' => $adminConfig->copyright(),
+                'description' => $adminConfig->description(),
+                'background' => $adminConfig->background(),
+                'icon' => $adminConfig->icon(),
+                'logo' => $adminConfig->logo(),
+        ],
         'routes' => [
             'session' => $adminConfig->getUri()->getPath() . '/session',
             'config' => $adminConfig->getUri()->getPath() . '/api/config', //TODO use url helper

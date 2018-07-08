@@ -12,17 +12,25 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Resource;
 
-use KiwiSuite\Admin\Message\CreateUserMessage;
+use KiwiSuite\Admin\Action\Api\User\CreateAction;
+use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Schema\SchemaBuilder;
+use KiwiSuite\Contract\Resource\AdminAwareInterface;
+use KiwiSuite\Contract\Schema\BuilderInterface;
+use KiwiSuite\Contract\Schema\SchemaInterface;
 
-final class UserResource implements ResourceInterface
+final class UserResource implements AdminAwareInterface
 {
-    use ResourceTrait;
+    use DefaultAdminTrait;
 
-    public static function name(): string
+    public function label(): string
     {
-        return "user";
+        return "User";
+    }
+
+    public static function serviceName(): string
+    {
+        return 'admin-user';
     }
 
     public function repository(): string
@@ -30,21 +38,51 @@ final class UserResource implements ResourceInterface
         return UserRepository::class;
     }
 
-    public function icon(): string
+    public function createAction(): ?string
     {
-        return "fa";
+        return CreateAction::class;
     }
 
-    public function createMessage(): string
+    /**
+     * @param BuilderInterface $builder
+     * @return SchemaInterface
+     */
+    public function createSchema(BuilderInterface $builder): SchemaInterface
     {
-        return CreateUserMessage::class;
+        /** @var SchemaInterface $schema */
+        $schema = $builder->fromEntity(User::class);
+
+        $schema = $schema->remove('hash');
+        $schema = $schema->remove('avatar');
+        $schema = $schema->remove('lastLoginAt');
+
+
+        return $schema;
     }
 
-    public function schema(SchemaBuilder $schemaBuilder): SchemaBuilder
+    /**
+     * @param BuilderInterface $builder
+     * @return SchemaInterface
+     */
+    public function updateSchema(BuilderInterface $builder): SchemaInterface
     {
-        $schemaBuilder = $schemaBuilder->withName("User");
-        $schemaBuilder = $schemaBuilder->withNamePlural("Users");
+        /** @var SchemaInterface $schema */
+        $schema = $builder->fromEntity(User::class);
 
-        return $schemaBuilder;
+        $schema = $schema->remove('password');
+        $schema = $schema->remove('hash');
+        $schema = $schema->remove('avatar');
+        $schema = $schema->remove('lastLoginAt');
+
+
+        return $schema;
+    }
+
+    /**
+     * @return array
+     */
+    public function listSchema(): array
+    {
+        return [];
     }
 }

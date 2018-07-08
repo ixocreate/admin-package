@@ -12,18 +12,18 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\BootstrapItem;
 
-use KiwiSuite\Admin\Resource\ResourceConfigurator;
+use KiwiSuite\Admin\Config\AdminConfigurator;
 use KiwiSuite\Contract\Application\BootstrapItemInterface;
 use KiwiSuite\Contract\Application\ConfiguratorInterface;
 
-final class ResourceBootstrapItem implements BootstrapItemInterface
+final class AdminBootstrapItem implements BootstrapItemInterface
 {
     /**
      * @return mixed
      */
     public function getConfigurator(): ConfiguratorInterface
     {
-        return new ResourceConfigurator();
+        return new AdminConfigurator();
     }
 
     /**
@@ -31,7 +31,7 @@ final class ResourceBootstrapItem implements BootstrapItemInterface
      */
     public function getVariableName(): string
     {
-        return 'resource';
+        return 'admin';
     }
 
     /**
@@ -39,6 +39,6 @@ final class ResourceBootstrapItem implements BootstrapItemInterface
      */
     public function getFileName(): string
     {
-        return 'resource.php';
+        return 'admin.php';
     }
 }

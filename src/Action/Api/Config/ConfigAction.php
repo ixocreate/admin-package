@@ -15,8 +15,10 @@ namespace KiwiSuite\Admin\Action\Api\Config;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Helper\ServerUrlHelper;
 use KiwiSuite\Admin\Helper\UrlHelper;
-use KiwiSuite\Admin\Pipe\PipeConfig;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
+use KiwiSuite\ApplicationHttp\Pipe\Config\SegmentConfig;
+use KiwiSuite\ApplicationHttp\Pipe\Config\SegmentPipeConfig;
+use KiwiSuite\ApplicationHttp\Pipe\PipeConfig;
 use KiwiSuite\Intl\LocaleManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -79,7 +81,16 @@ final class ConfigAction implements MiddlewareInterface
     {
         return new ApiSuccessResponse([
             'routes' => $this->getRoutes(),
-            'project' => $this->adminConfig->getProject(),
+            'project' => [
+                'author' => $this->adminConfig->author(),
+                'name' => $this->adminConfig->name(),
+                'poweredBy' => $this->adminConfig->poweredBy(),
+                'copyright' => $this->adminConfig->copyright(),
+                'description' => $this->adminConfig->description(),
+                'background' => $this->adminConfig->background(),
+                'icon' => $this->adminConfig->icon(),
+                'logo' => $this->adminConfig->logo(),
+            ],
             'navigation' => $this->getNavigation(),
             'intl' => [
                 'default' => $this->localeManager->defaultLocale(),
@@ -93,7 +104,7 @@ final class ConfigAction implements MiddlewareInterface
      */
     private function getNavigation(): array
     {
-        $navigationConfig = $this->adminConfig->getNavigation();
+        $navigationConfig = $this->adminConfig->navigation();
 
         $navigation = [];
 
@@ -113,28 +124,45 @@ final class ConfigAction implements MiddlewareInterface
     private function getRoutes(): array
     {
         $routes = [];
+        $pipeConfig = null;
 
-        foreach ($this->pipeConfig->getMiddlewarePipe() as $middlewarePipe) {
-            if ($middlewarePipe['type'] !== PipeConfig::TYPE_SEGMENT) {
+        foreach ($this->pipeConfig->getMiddlewarePipe() as $pipe) {
+            if (!($pipe instanceof SegmentPipeConfig)) {
                 continue;
             }
 
-            if ($middlewarePipe['value']['segment'] !== '/api') {
+            if ($pipe->provider() !== AdminConfig::class) {
                 continue;
             }
 
-            foreach ($middlewarePipe['value']['pipeConfig']->getRoutes() as $route) {
-                if (\mb_substr($route['name'], 0, 10) !== 'admin.api.') {
+            foreach ($pipe->pipeConfig()->getMiddlewarePipe() as $innerPipe) {
+                if (!($innerPipe instanceof SegmentConfig)) {
                     continue;
                 }
 
-                $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', \mb_substr($route['name'], 10))));
-                $routeName[0] = \mb_strtolower($routeName[0]);
-                $routes[$routeName] = (string)$this->adminConfig->getUri()->getPath() . '/api' . $route['path'];
+                if ($innerPipe->segment() !== '/api') {
+                    continue;
+                }
+
+                $pipeConfig = $innerPipe->pipeConfig();
+                break;
             }
+            break;
         }
 
+        if (empty($pipeConfig)) {
+            return $routes;
+        }
 
+        foreach ($pipeConfig->getRoutes() as $route) {
+            if (\mb_substr($route['name'], 0, 10) !== 'admin.api.') {
+                continue;
+            }
+
+            $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', \mb_substr($route['name'], 10))));
+            $routeName[0] = \mb_strtolower($routeName[0]);
+            $routes[$routeName] = (string)$this->adminConfig->uri()->getPath() . '/api' . $route['path'];
+        }
         return $routes;
     }
 }

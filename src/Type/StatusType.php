@@ -13,10 +13,14 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Type;
 
 use Doctrine\DBAL\Types\StringType;
+use KiwiSuite\Contract\Schema\ElementInterface;
 use KiwiSuite\Contract\Type\DatabaseTypeInterface;
+use KiwiSuite\Contract\Type\SchemaElementInterface;
 use KiwiSuite\Entity\Type\AbstractType;
+use KiwiSuite\Schema\Elements\SelectElement;
+use KiwiSuite\Schema\ElementSubManager;
 
-final class StatusType extends AbstractType implements DatabaseTypeInterface
+final class StatusType extends AbstractType implements DatabaseTypeInterface, SchemaElementInterface
 {
     /**
      * @param $value
@@ -47,5 +51,15 @@ final class StatusType extends AbstractType implements DatabaseTypeInterface
     public static function serviceName(): string
     {
         return 'status';
+    }
+
+    public function schemaElement(ElementSubManager $elementSubManager): ElementInterface
+    {
+        /** @var SelectElement $element */
+        $element = $elementSubManager->get(SelectElement::class);
+        return $element->withOptions([
+            'active' => 'Active',
+            'inactive' => 'Inactive',
+        ]);
     }
 }
