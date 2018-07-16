@@ -1,9 +1,6 @@
 <?php
 namespace KiwiSuite\Admin\Action\Api\Resource;
 
-use Doctrine\Common\Collections\Criteria;
-use KiwiSuite\Admin\Response\ApiDetailResponse;
-use KiwiSuite\Admin\Response\ApiListResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
@@ -15,7 +12,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Ramsey\Uuid\Uuid;
 
 final class DeleteAction implements MiddlewareInterface
 {
