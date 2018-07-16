@@ -26,11 +26,6 @@ final class AdminThumb implements ImageDefinitionInterface
     private $height = 500;
 
     /**
-     * @var bool
-     */
-    private $fit = true;
-
-    /**
      * @var string
      */
     private $directory = 'admin-thumb';
@@ -40,7 +35,7 @@ final class AdminThumb implements ImageDefinitionInterface
      */
     public static function serviceName(): string
     {
-        return 'AdminTumb';
+        return 'AdminThumb';
     }
 
     /**
@@ -59,12 +54,19 @@ final class AdminThumb implements ImageDefinitionInterface
         return $this->height;
     }
 
-    /**
-     * @return bool
-     */
-    public function getFit(): bool
+    public function getCrop(): bool
     {
-        return $this->fit;
+        return true;
+    }
+
+    public function getUpscale(): bool
+    {
+        return false;
+    }
+
+    public function getCanvas(): bool
+    {
+        return true;
     }
 
     /**
