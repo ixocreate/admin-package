@@ -17,7 +17,9 @@ use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
 use KiwiSuite\Contract\Schema\BuilderInterface;
+use KiwiSuite\Contract\Schema\Listing\ListSchemaInterface;
 use KiwiSuite\Contract\Schema\SchemaInterface;
+use KiwiSuite\Schema\Listing\ListSchema;
 
 final class UserResource implements AdminAwareInterface
 {
@@ -79,10 +81,10 @@ final class UserResource implements AdminAwareInterface
     }
 
     /**
-     * @return array
+     * @return ListSchemaInterface
      */
-    public function listSchema(): array
+    public function listSchema(): ListSchemaInterface
     {
-        return [];
+        return new ListSchema();
     }
 }

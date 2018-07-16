@@ -16,12 +16,12 @@ use KiwiSuite\Contract\Resource\AdminAwareInterface;
 
 class ApiListResponse extends ApiSuccessResponse
 {
-    public function __construct(AdminAwareInterface $resource, array $items, array $schema, array $meta)
+    public function __construct(AdminAwareInterface $resource, array $items, array $meta)
     {
         $data = [
             'label' => $resource->label(),
             'items' => $items,
-            'schema' => $schema,
+            'schema' => $resource->listSchema(),
             'meta' => $meta,
         ];
         parent::__construct($data);
