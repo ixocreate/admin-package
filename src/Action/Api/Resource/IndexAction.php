@@ -3,7 +3,6 @@ namespace KiwiSuite\Admin\Action\Api\Resource;
 
 use Doctrine\Common\Collections\Criteria;
 use KiwiSuite\Admin\Response\ApiListResponse;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
 use KiwiSuite\Contract\Resource\ResourceInterface;
@@ -47,6 +46,8 @@ final class IndexAction implements MiddlewareInterface
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
         $criteria = new Criteria();
+        $sorting = null;
+
         //?sortColumn1=ASC&sortColumn2=DESC&filterColumn1=test&filterColumn2=foobar
         $queryParams = $request->getQueryParams();
         foreach ($queryParams as $key => $value) {
@@ -73,6 +74,11 @@ final class IndexAction implements MiddlewareInterface
                 continue;
             }
         }
+
+        if ($sorting === null && !empty($resource->listSchema()->defaultSorting())) {
+            $criteria->orderBy([$resource->listSchema()->defaultSorting()['sorting'] => $resource->listSchema()->defaultSorting()['direction']]);
+        }
+
         $result = $repository->matching($criteria);
         $items = [];
         //TODO Collection
@@ -83,6 +89,6 @@ final class IndexAction implements MiddlewareInterface
 
         $count = $repository->count([]);
 
-        return new ApiListResponse($resource, $items, $resource->listSchema(), ['count' => $count]);
+        return new ApiListResponse($resource, $items, ['count' => $count]);
     }
 }

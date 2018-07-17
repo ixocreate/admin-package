@@ -1,20 +1,13 @@
 <?php
 namespace KiwiSuite\Admin\Action\Api\User;
 
-use Doctrine\Common\Collections\Criteria;
 use Identicon\Generator\ImageMagickGenerator;
 use Identicon\Identicon;
 use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Response\ApiDetailResponse;
-use KiwiSuite\Admin\Response\ApiListResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
 use KiwiSuite\Contract\Resource\ResourceInterface;
-use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
-use KiwiSuite\Database\Repository\RepositoryInterface;
-use KiwiSuite\Entity\Entity\EntityInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
