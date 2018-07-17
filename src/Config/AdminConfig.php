@@ -105,6 +105,22 @@ final class AdminConfig implements SegmentProviderInterface
     }
 
     /**
+     * @return string
+     */
+    public function adminBuildPath(): string
+    {
+        return $this->adminProjectConfig->adminBuildPath();
+    }
+
+    /**
+     * @return array
+     */
+    public function adminBuildFiles(): array
+    {
+        return $this->adminProjectConfig->adminBuildFiles();
+    }
+
+    /**
      * @return UriInterface
      * @deprecated
      */

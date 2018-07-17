@@ -13,7 +13,7 @@
     <meta name="author" content="<?= $adminConfig->author() ?>">
     <link rel="shortcut icon" href="<?= $this->asset('/admin/assets/img/favicon.png') ?>">
     <?php foreach ($assets['styles'] as $style): ?>
-        <link href="<?= $this->asset($style) ?>" rel="stylesheet"/>
+        <link href="<?= $style ?>" rel="stylesheet"/>
     <?php endforeach ?>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed">
@@ -32,13 +32,13 @@
                 'logo' => $adminConfig->logo(),
         ],
         'routes' => [
-            'session' => $adminConfig->getUri()->getPath() . '/session',
-            'config' => $adminConfig->getUri()->getPath() . '/api/config', //TODO use url helper
+            'session' => $adminConfig->uri()->getPath() . '/session',
+            'config' => $adminConfig->uri()->getPath() . '/api/config', //TODO use url helper
         ]
     ]) ?>;
 </script>
 <?php foreach ($assets['scripts'] as $script): ?>
-    <script type="text/javascript" src="<?= $this->asset($script) ?>"></script>
+    <script type="text/javascript" src="<?= $script ?>"></script>
 <?php endforeach ?>
 </body>
 </html>

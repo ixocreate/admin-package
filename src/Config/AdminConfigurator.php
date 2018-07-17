@@ -17,6 +17,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'logo'          => '',
         'icon'          => '',
         'background'    => '',
+        'adminBuildPath'=> __DIR__ . '/../../../admin-frontend/build/'
     ];
 
     /**
@@ -87,6 +88,11 @@ final class AdminConfigurator implements ConfiguratorInterface
     public function setBackground(string $background): void
     {
         $this->config['background'] = $background;
+    }
+
+    public function setAdminBuildPath(string $buildPath): void
+    {
+        $this->config['adminBuildPath'] = $buildPath;
     }
 
     /**

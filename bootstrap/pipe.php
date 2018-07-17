@@ -16,17 +16,14 @@ use KiwiSuite\Admin\Action\Api\Resource\DeleteAction;
 use KiwiSuite\Admin\Action\Api\Resource\DetailAction;
 use KiwiSuite\Admin\Action\Api\Resource\UpdateAction;
 use KiwiSuite\Admin\Action\Api\Session\SessionAction;
-use KiwiSuite\Admin\Action\Handler\HandlerAction;
 use KiwiSuite\Admin\Action\IndexAction;
+use KiwiSuite\Admin\Action\StaticAction;
 use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Message\ChangeEmailMessage;
-use KiwiSuite\Admin\Message\ChangePasswordMessage;
 use KiwiSuite\Admin\Middleware\Api\AuthorizationGuardMiddleware;
 use KiwiSuite\Admin\Middleware\Api\EnforceApiResponseMiddleware;
 use KiwiSuite\Admin\Middleware\Api\ErrorMiddleware;
 use KiwiSuite\Admin\Middleware\Api\MessageInjectorMiddleware;
 use KiwiSuite\Admin\Middleware\Api\ResourceInjectionMiddleware;
-use KiwiSuite\Admin\Middleware\Api\ResourceInjectorMiddleware;
 use KiwiSuite\Admin\Middleware\Api\SessionDataMiddleware;
 use KiwiSuite\Admin\Middleware\Api\UserMiddleware;
 use KiwiSuite\Admin\Middleware\Api\XsrfProtectionMiddleware;
@@ -34,8 +31,6 @@ use KiwiSuite\Admin\Middleware\CookieInitializerMiddleware;
 use KiwiSuite\Admin\Router\AdminRouter;
 use KiwiSuite\ApplicationHttp\Pipe\GroupPipeConfigurator;
 use KiwiSuite\ApplicationHttp\Pipe\PipeConfigurator;
-use KiwiSuite\ApplicationHttp\Pipe\RouteConfigurator;
-use KiwiSuite\CommandBus\Message\MessageInterface;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 $pipe->segmentPipe(AdminConfig::class, 2000000)(function(PipeConfigurator $pipe) {
@@ -84,6 +79,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function(PipeConfigurator $pipe)
     $pipe->group('admin.root')(function(GroupPipeConfigurator $group) {
         $group->before(CookieInitializerMiddleware::class);
         $group->get('/session', SessionAction::class, "admin.session");
+        $group->get('/static/{file:.*}', StaticAction::class, "admin.static");
         $group->get('[/{any:.*}]', IndexAction::class, "admin.index", -1 * PHP_INT_MAX);
     });
 });

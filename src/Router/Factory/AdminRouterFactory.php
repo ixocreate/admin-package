@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Router\Factory;
 
+use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Router\AdminRouter;
 use KiwiSuite\Contract\ServiceManager\FactoryInterface;
 use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
@@ -27,6 +28,6 @@ final class AdminRouterFactory implements FactoryInterface
      */
     public function __invoke(ServiceManagerInterface $container, $requestedName, array $options = null)
     {
-        return new AdminRouter();
+        return new AdminRouter($container->get(AdminConfig::class));
     }
 }

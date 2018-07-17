@@ -13,9 +13,31 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Config;
 
 use KiwiSuite\Contract\Application\SerializableServiceInterface;
+use Symfony\Component\Finder\SplFileInfo;
 
 final class AdminProjectConfig implements SerializableServiceInterface
 {
+    private $contentTypeDefinition = [
+        'css' => 'text/css',
+        'eot' => 'application/vnd.ms-fontobject',
+        'gif' => 'image/gif',
+        'htm' => 'text/html',
+        'html' => 'text/html',
+        'ico' => 'image/x-icon',
+        'jpe' => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'jpg' => 'image/jpeg',
+        'js' => 'text/javascript',
+        'json' => 'application/json',
+        'png' => 'image/png',
+        'ppt' => 'application/vnd.ms-powerpoint',
+        'svg' => 'image/svg+xml',
+        'ttf' => 'application/x-font-ttf',
+        'txt' => 'text/plain',
+        'woff' => 'application/x-font-woff',
+        'woff2' => 'font/woff2',
+    ];
+
     private $config = [
         'author'        => '',
         'copyright'     => '',
@@ -25,6 +47,8 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'logo'          => '',
         'icon'          => '',
         'background'    => '',
+        'adminBuildPath'=> __DIR__ . '/../../../admin-frontend/build/',
+        'adminBuildFiles' => [],
         'navigation'    => [],
     ];
 
@@ -35,6 +59,26 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function __construct(AdminConfigurator $adminConfigurator)
     {
         $this->config = $adminConfigurator->toArray();
+        $this->config['adminBuildPath'] = rtrim($this->config['adminBuildPath'], '/') . '/';
+
+        $items = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->adminBuildPath()), \RecursiveIteratorIterator::LEAVES_ONLY);
+        /** @var SplFileInfo $file */
+        foreach($items as $name => $file){
+            if ($file->isDir()) {
+                continue;
+            }
+
+            if (!$this->isValidAdminFile($file->getExtension())) {
+                continue;
+            }
+
+            $name = str_replace($this->adminBuildPath(), "", $name);
+
+            $this->config['adminBuildFiles'][$name] = [
+                'contentType' => $this->getContentType($file->getExtension()),
+                'filesize' => $file->getSize(),
+            ];
+        }
     }
 
     /**
@@ -112,6 +156,22 @@ final class AdminProjectConfig implements SerializableServiceInterface
     /**
      * @return string
      */
+    public function adminBuildPath(): string
+    {
+        return $this->config['adminBuildPath'];
+    }
+
+    /**
+     * @return array
+     */
+    public function adminBuildFiles(): array
+    {
+        return $this->config['adminBuildFiles'];
+    }
+
+    /**
+     * @return string
+     */
     public function serialize()
     {
         return serialize($this->config);
@@ -123,5 +183,15 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function unserialize($serialized)
     {
         $this->config = unserialize($serialized);
+    }
+
+    private function isValidAdminFile($extension): bool
+    {
+        return !empty($this->contentTypeDefinition[$extension]);
+    }
+
+    private function getContentType($extension): string
+    {
+        return $this->contentTypeDefinition[$extension];
     }
 }

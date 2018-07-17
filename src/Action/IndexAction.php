@@ -14,6 +14,7 @@ namespace KiwiSuite\Admin\Action;
 
 use FilesystemIterator;
 use KiwiSuite\Admin\Config\AdminConfig;
+use KiwiSuite\Admin\Router\AdminRouter;
 use KiwiSuite\ProjectUri\ProjectUri;
 use KiwiSuite\Template\TemplateResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -33,16 +34,20 @@ class IndexAction implements MiddlewareInterface
      * @var ProjectUri
      */
     protected $projectUri;
+    /**
+     * @var AdminRouter
+     */
+    private $adminRouter;
 
     /**
      * IndexAction constructor.
      * @param AdminConfig $adminConfig
-     * @param ProjectUri $projectUri
+     * @param AdminRouter $adminRouter
      */
-    public function __construct(AdminConfig $adminConfig, ProjectUri $projectUri)
+    public function __construct(AdminConfig $adminConfig, AdminRouter $adminRouter)
     {
         $this->adminConfig = $adminConfig;
-        $this->projectUri = $projectUri;
+        $this->adminRouter = $adminRouter;
     }
 
     /**
@@ -59,10 +64,6 @@ class IndexAction implements MiddlewareInterface
     }
 
     /**
-     * automatically read contents of admin-frontend assets folder (scripts & css file names)
-     *
-     * TODO: cache
-     *
      * @return array
      */
     private function assetsPaths()
@@ -78,26 +79,27 @@ class IndexAction implements MiddlewareInterface
             'styles' => null,
         ];
 
-        /**
-         * prefer embedded path
-         */
-        $path = \getcwd() . '/resources/admin/build';
 
-        /**
-         * look up assets by name
-         */
-        $fileSystemIterator = new FilesystemIterator($path);
-        /** @var SplFileInfo $fileInfo */
-        foreach ($fileSystemIterator as $fileInfo) {
-            if ($fileInfo->getExtension() === 'js') {
-                $assetName = \explode('.', $fileInfo->getFilename())[0] ?? null;
-                if (\in_array($assetName, \array_keys($scripts))) {
-                    $scripts[$assetName] = '/admin/' . $fileInfo->getFilename();
+        foreach (array_keys($this->adminConfig->adminBuildFiles()) as $name) {
+            foreach ($scripts as $scriptName => $value) {
+                if ($value !== null) {
+                    continue;
                 }
-            } elseif ($fileInfo->getExtension() === 'css') {
-                $assetName = \explode('.', $fileInfo->getFilename())[0] ?? null;
-                if (\in_array($assetName, \array_keys($styles))) {
-                    $styles[$assetName] = '/admin/' . $fileInfo->getFilename();
+                if (substr($name, 0, strlen($scriptName)) === $scriptName) {
+                    $scripts[$scriptName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]);
+
+                    continue 2;
+                }
+            }
+
+            foreach ($styles as $stylesName => $value) {
+                if ($value !== null) {
+                    continue;
+                }
+
+                if (substr($name, 0, strlen($stylesName)) === $stylesName) {
+                    $styles[$stylesName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]);
+                    continue 2;
                 }
             }
         }
