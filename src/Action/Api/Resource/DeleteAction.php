@@ -36,9 +36,9 @@ final class DeleteAction implements MiddlewareInterface
         /** @var AdminAwareInterface $resource */
         $resource = $request->getAttribute(ResourceInterface::class);
 
-        if (!empty($resource->updateAction())) {
+        if (!empty($resource->deleteAction())) {
             /** @var MiddlewareInterface $action */
-            $action = $this->middlewareSubManager->get($resource->updateAction());
+            $action = $this->middlewareSubManager->get($resource->deleteAction());
             return $action->process($request, $handler);
         }
 

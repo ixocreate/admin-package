@@ -34,6 +34,12 @@ final class CreateSchemaAction implements MiddlewareInterface
         /** @var AdminAwareInterface $resource */
         $resource = $request->getAttribute(ResourceInterface::class);
 
+        if (!empty($resource->createSchemaAction())) {
+            /** @var MiddlewareInterface $action */
+            $action = $this->middlewareSubManager->get($resource->createSchemaAction());
+            return $action->process($request, $handler);
+        }
+
         return new ApiDetailResponse(
             $resource,
             [],

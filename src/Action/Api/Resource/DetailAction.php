@@ -45,9 +45,9 @@ final class DetailAction implements MiddlewareInterface
         /** @var AdminAwareInterface $resource */
         $resource = $request->getAttribute(ResourceInterface::class);
 
-        if (!empty($resource->updateAction())) {
+        if (!empty($resource->detailAction())) {
             /** @var MiddlewareInterface $action */
-            $action = $this->middlewareSubManager->get($resource->updateAction());
+            $action = $this->middlewareSubManager->get($resource->detailAction());
             return $action->process($request, $handler);
         }
 
