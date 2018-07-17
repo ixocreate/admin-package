@@ -16,21 +16,6 @@ use KiwiSuite\Media\ImageDefinition\ImageDefinitionInterface;
 final class AdminThumb implements ImageDefinitionInterface
 {
     /**
-     * @var int
-     */
-    private $width = 500;
-
-    /**
-     * @var int
-     */
-    private $height = 500;
-
-    /**
-     * @var string
-     */
-    private $directory = 'admin-thumb';
-
-    /**
      * @return string
      */
     public static function serviceName(): string
@@ -41,40 +26,36 @@ final class AdminThumb implements ImageDefinitionInterface
     /**
      * @return int|null
      */
-    public function getWidth(): ?int
+    public function width(): ?int
     {
-        return $this->width;
+        return 500;
     }
 
     /**
      * @return int|null
      */
-    public function getHeight(): ?int
+    public function height(): ?int
     {
-        return $this->height;
+        return 500;
     }
 
-    public function getCrop(): bool
-    {
-        return true;
-    }
 
-    public function getUpscale(): bool
+    public function upscale(): bool
     {
         return false;
     }
 
-    public function getCanvas(): bool
+    public function mode(): string
     {
-        return true;
+        return ImageDefinitionInterface::MODE_CANVAS;
     }
 
     /**
      * @return string
      */
-    public function getDirectory(): string
+    public function directory(): string
     {
-        return $this->directory;
+        return 'admin-thumb';
     }
 
 }
