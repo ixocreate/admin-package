@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <meta name="description" content="<?= $adminConfig->description() ?>">
     <meta name="author" content="<?= $adminConfig->author() ?>">
-    <link rel="shortcut icon" href="<?= $this->asset('/admin/assets/img/favicon.png') ?>">
+    <link rel="shortcut icon" href="<?= $adminConfig->icon() ?>">
     <?php foreach ($assets['styles'] as $style): ?>
         <link href="<?= $style ?>" rel="stylesheet"/>
     <?php endforeach ?>
