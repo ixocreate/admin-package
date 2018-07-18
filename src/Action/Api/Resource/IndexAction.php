@@ -13,6 +13,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Stratigility\Middleware\CallableMiddlewareDecorator;
+use Zend\Stratigility\MiddlewarePipe;
 
 final class IndexAction implements MiddlewareInterface
 {
@@ -37,12 +39,24 @@ final class IndexAction implements MiddlewareInterface
         /** @var AdminAwareInterface $resource */
         $resource = $request->getAttribute(ResourceInterface::class);
 
+        $middlewarePipe = new MiddlewarePipe();
+
         if (!empty($resource->indexAction())) {
             /** @var MiddlewareInterface $action */
             $action = $this->middlewareSubManager->get($resource->indexAction());
-            return $action->process($request, $handler);
+            $middlewarePipe->pipe($action);
         }
 
+        $middlewarePipe->pipe(new CallableMiddlewareDecorator(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($resource){
+            return $this->handleRequest($resource, $request, $handler);
+        }));
+
+        return $middlewarePipe->process($request, $handler);
+
+    }
+
+    private function handleRequest(AdminAwareInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
+    {
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
         $criteria = new Criteria();
