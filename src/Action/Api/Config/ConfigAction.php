@@ -161,7 +161,7 @@ final class ConfigAction implements MiddlewareInterface
 
             $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', \mb_substr($route['name'], 10))));
             $routeName[0] = \mb_strtolower($routeName[0]);
-            $routes[$routeName] = (string)$this->adminConfig->uri()->getPath() . '/api' . $route['path'];
+            $routes[$routeName] = rtrim((string)$this->adminConfig->uri()->getPath(), '/') . '/api' . $route['path'];
         }
         return $routes;
     }
