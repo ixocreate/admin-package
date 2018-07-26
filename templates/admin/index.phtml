@@ -32,8 +32,8 @@
                 'logo' => $adminConfig->logo(),
         ],
         'routes' => [
-            'session' => $adminConfig->uri()->getPath() . '/session',
-            'config' => $adminConfig->uri()->getPath() . '/api/config', //TODO use url helper
+            'session' => rtrim($adminConfig->uri()->getPath(), '/') . '/session',
+            'config' => trim($adminConfig->uri()->getPath(), '/') . '/api/config', //TODO use url helper
         ]
     ]) ?>;
 </script>
