@@ -33,7 +33,7 @@
         ],
         'routes' => [
             'session' => rtrim($adminConfig->uri()->getPath(), '/') . '/session',
-            'config' => trim($adminConfig->uri()->getPath(), '/') . '/api/config', //TODO use url helper
+            'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config', //TODO use url helper
         ]
     ]) ?>;
 </script>
