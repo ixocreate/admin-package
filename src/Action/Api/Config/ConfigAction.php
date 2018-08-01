@@ -15,6 +15,7 @@ namespace KiwiSuite\Admin\Action\Api\Config;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Helper\ServerUrlHelper;
 use KiwiSuite\Admin\Helper\UrlHelper;
+use KiwiSuite\Admin\Permission\Permission;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\ApplicationHttp\Pipe\Config\SegmentConfig;
 use KiwiSuite\ApplicationHttp\Pipe\Config\SegmentPipeConfig;
@@ -91,7 +92,7 @@ final class ConfigAction implements MiddlewareInterface
                 'icon' => $this->adminConfig->icon(),
                 'logo' => $this->adminConfig->logo(),
             ],
-            'navigation' => $this->getNavigation(),
+            'navigation' => $this->getNavigation($request->getAttribute(Permission::class, null)),
             'intl' => [
                 'default' => $this->localeManager->defaultLocale(),
                 'locales' => $this->localeManager->all(),
@@ -102,16 +103,33 @@ final class ConfigAction implements MiddlewareInterface
     /**
      * @return array
      */
-    private function getNavigation(): array
+    private function getNavigation(Permission $permission = null): array
     {
         $navigationConfig = $this->adminConfig->navigation();
 
         $navigation = [];
 
+        if ($permission === null) {
+            return $navigation;
+        }
+
         foreach ($navigationConfig as $navigationEntry) {
-            /**
-             * TODO: manipulate/filter by user role/permissions
-             */
+
+            $children = [];
+            foreach ($navigationEntry['children'] as $child) {
+                foreach ($child['permissions'] as $permissionItem) {
+                    if (!$permission->can($permissionItem)) {
+                        continue 2;
+                    }
+                }
+                $children[] = $child;
+            }
+
+            if (count($children) === 0) {
+                continue;
+            }
+
+            $navigationEntry['children'] = $children;
             $navigation[] = $navigationEntry;
         }
 
