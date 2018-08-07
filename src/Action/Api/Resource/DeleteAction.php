@@ -62,7 +62,6 @@ final class DeleteAction implements MiddlewareInterface
         $entity = $repository->find($request->getAttribute("id"));
 
         $repository->remove($entity);
-        $repository->flush($entity);
 
         return new ApiSuccessResponse();
     }

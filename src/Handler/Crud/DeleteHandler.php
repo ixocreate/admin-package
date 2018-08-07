@@ -61,7 +61,6 @@ final class DeleteHandler implements HandlerInterface
         $repository = $this->repositorySubManager->get($repositoryName);
 
         $repository->remove($entity);
-        $repository->flush($entity);
 
         return $message;
     }
