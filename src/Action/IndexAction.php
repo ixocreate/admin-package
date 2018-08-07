@@ -17,6 +17,7 @@ use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Router\AdminRouter;
 use KiwiSuite\ProjectUri\ProjectUri;
 use KiwiSuite\Template\TemplateResponse;
+use PackageVersions\Versions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -86,7 +87,7 @@ class IndexAction implements MiddlewareInterface
                     continue;
                 }
                 if (substr($name, 0, strlen($scriptName)) === $scriptName) {
-                    $scripts[$scriptName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]);
+                    $scripts[$scriptName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]). '?v=' .  Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
 
                     continue 2;
                 }
@@ -98,7 +99,7 @@ class IndexAction implements MiddlewareInterface
                 }
 
                 if (substr($name, 0, strlen($stylesName)) === $stylesName) {
-                    $styles[$stylesName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]);
+                    $styles[$stylesName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' .  Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
                     continue 2;
                 }
             }
