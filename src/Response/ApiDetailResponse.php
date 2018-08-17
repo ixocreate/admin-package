@@ -38,7 +38,7 @@ class ApiDetailResponse extends ApiSuccessResponse
     {
         $data = [
             'label' => $resource->label(),
-            'item' => $item,
+            'item' => (object)$item, // make sure an empty array here is an empty object in json
             'schema' => $schema,
             'meta' => $meta,
         ];
