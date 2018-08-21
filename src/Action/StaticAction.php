@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Action;
 
 use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Response\ApiErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

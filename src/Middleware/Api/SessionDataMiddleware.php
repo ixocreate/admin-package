@@ -50,6 +50,6 @@ final class SessionDataMiddleware implements MiddlewareInterface
 
     private function createInvalidSidResponse(): ApiErrorResponse
     {
-        return new ApiErrorResponse('session_invalid', [], 401);
+        return new ApiErrorResponse('session_invalid', [], 400);
     }
 }

@@ -52,17 +52,17 @@ final class LoginAction implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
         if (empty($data['email']) || empty($data['password'])) {
-            return new ApiErrorResponse("invalid_credentials", [], 401);
+            return new ApiErrorResponse("invalid_credentials", []);
         }
 
         /** @var User $user */
         $user = $this->userRepository->findOneBy(['email' => $data['email']]);
         if (empty($user)) {
-            return new ApiErrorResponse("invalid_credentials", [], 401);
+            return new ApiErrorResponse("invalid_credentials", []);
         }
 
         if (!\password_verify($data['password'], $user->password())) {
-            return new ApiErrorResponse("invalid_credentials", [], 401);
+            return new ApiErrorResponse("invalid_credentials", []);
         }
 
         $response = new ApiSuccessResponse();
