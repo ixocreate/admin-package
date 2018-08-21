@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Action\Api\Resource;
 
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
@@ -28,7 +39,6 @@ final class DeleteAction implements MiddlewareInterface
 
     public function __construct(RepositorySubManager $repositorySubManager, MiddlewareSubManager $middlewareSubManager)
     {
-
         $this->repositorySubManager = $repositorySubManager;
         $this->middlewareSubManager = $middlewareSubManager;
     }
@@ -46,7 +56,7 @@ final class DeleteAction implements MiddlewareInterface
             $middlewarePipe->pipe($action);
         }
 
-        $middlewarePipe->pipe(new CallableMiddlewareDecorator(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($resource){
+        $middlewarePipe->pipe(new CallableMiddlewareDecorator(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($resource) {
             return $this->handleRequest($resource, $request, $handler);
         }));
 

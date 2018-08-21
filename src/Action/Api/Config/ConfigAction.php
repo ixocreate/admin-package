@@ -3,7 +3,7 @@
  * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
  *
  * @package kiwi-suite/admin
- * @see https://github.com/kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
  * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
  * @license MIT License
  */
@@ -114,7 +114,6 @@ final class ConfigAction implements MiddlewareInterface
         }
 
         foreach ($navigationConfig as $navigationEntry) {
-
             $children = [];
             foreach ($navigationEntry['children'] as $child) {
                 foreach ($child['permissions'] as $permissionItem) {
@@ -125,7 +124,7 @@ final class ConfigAction implements MiddlewareInterface
                 $children[] = $child;
             }
 
-            if (count($children) === 0) {
+            if (\count($children) === 0) {
                 continue;
             }
 
@@ -179,7 +178,7 @@ final class ConfigAction implements MiddlewareInterface
 
             $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', \mb_substr($route['name'], 10))));
             $routeName[0] = \mb_strtolower($routeName[0]);
-            $routes[$routeName] = rtrim((string)$this->adminConfig->uri()->getPath(), '/') . '/api' . $route['path'];
+            $routes[$routeName] = \rtrim((string)$this->adminConfig->uri()->getPath(), '/') . '/api' . $route['path'];
         }
         return $routes;
     }

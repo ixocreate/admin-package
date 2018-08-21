@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Config\Navigation;
 
 use Zend\Stdlib\SplPriorityQueue;
@@ -28,7 +39,7 @@ final class Item extends SubItem
      */
     public function remove(SubItem $item): void
     {
-        if (!array_key_exists($item->getName(), $this->items)) {
+        if (!\array_key_exists($item->getName(), $this->items)) {
             return;
         }
 
@@ -65,5 +76,4 @@ final class Item extends SubItem
 
         return $array;
     }
-
 }

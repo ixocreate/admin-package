@@ -3,7 +3,7 @@
  * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
  *
  * @package kiwi-suite/admin
- * @see https://github.com/kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
  * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
  * @license MIT License
  */
@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Action;
 
-use FilesystemIterator;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Router\AdminRouter;
 use KiwiSuite\ProjectUri\ProjectUri;
@@ -22,7 +21,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use SplFileInfo;
 
 class IndexAction implements MiddlewareInterface
 {
@@ -81,13 +79,13 @@ class IndexAction implements MiddlewareInterface
         ];
 
 
-        foreach (array_keys($this->adminConfig->adminBuildFiles()) as $name) {
+        foreach (\array_keys($this->adminConfig->adminBuildFiles()) as $name) {
             foreach ($scripts as $scriptName => $value) {
                 if ($value !== null) {
                     continue;
                 }
-                if (substr($name, 0, strlen($scriptName)) === $scriptName) {
-                    $scripts[$scriptName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]). '?v=' .  Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
+                if (\mb_substr($name, 0, \mb_strlen($scriptName)) === $scriptName) {
+                    $scripts[$scriptName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' . Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
 
                     continue 2;
                 }
@@ -98,8 +96,8 @@ class IndexAction implements MiddlewareInterface
                     continue;
                 }
 
-                if (substr($name, 0, strlen($stylesName)) === $stylesName) {
-                    $styles[$stylesName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' .  Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
+                if (\mb_substr($name, 0, \mb_strlen($stylesName)) === $stylesName) {
+                    $styles[$stylesName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' . Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
                     continue 2;
                 }
             }

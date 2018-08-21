@@ -3,7 +3,7 @@
  * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
  *
  * @package kiwi-suite/admin
- * @see https://github.com/kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
  * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
  * @license MIT License
  */
@@ -33,7 +33,6 @@ class StaticAction implements MiddlewareInterface
      */
     public function __construct(AdminConfig $adminConfig)
     {
-
         $this->adminConfig = $adminConfig;
     }
 
@@ -46,7 +45,7 @@ class StaticAction implements MiddlewareInterface
     {
         $file = $this->adminConfig->adminBuildPath() . $request->getAttribute("file", "");
 
-        if (!(file_exists($file) && !is_dir($file))) {
+        if (!(\file_exists($file) && !\is_dir($file))) {
             return new Response\EmptyResponse(404);
         }
 

@@ -1,4 +1,15 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Config;
 
 use KiwiSuite\Admin\Config\Navigation\Group;
@@ -17,7 +28,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'logo'          => '',
         'icon'          => '',
         'background'    => '',
-        'adminBuildPath'=> __DIR__ . '/../../../admin-frontend/build/'
+        'adminBuildPath'=> __DIR__ . '/../../../admin-frontend/build/',
     ];
 
     /**
@@ -113,7 +124,7 @@ final class AdminConfigurator implements ConfiguratorInterface
      */
     public function remove(Group $item): void
     {
-        if (!array_key_exists($item->getName(), $this->navigation)) {
+        if (!\array_key_exists($item->getName(), $this->navigation)) {
             return;
         }
 

@@ -1,4 +1,14 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Schema;
 
@@ -111,7 +121,7 @@ final class SchemaBuilder implements \JsonSerializable
             'namePlural' => $this->namePlural,
             'list'       => \array_values($this->list),
             'filter'     => [],
-            'form'       => $this->schema
+            'form'       => $this->schema,
         ];
     }
 }

@@ -3,10 +3,11 @@
  * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
  *
  * @package kiwi-suite/admin
- * @see https://github.com/kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
  * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
  * @license MIT License
  */
+
 declare(strict_types=1);
 
 namespace KiwiSuite\Admin\ImageDefinition;
@@ -57,5 +58,4 @@ final class AdminThumb implements ImageDefinitionInterface
     {
         return 'admin-thumb';
     }
-
 }

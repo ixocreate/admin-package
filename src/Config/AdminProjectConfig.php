@@ -3,7 +3,7 @@
  * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
  *
  * @package kiwi-suite/admin
- * @see https://github.com/kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
  * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
  * @license MIT License
  */
@@ -59,11 +59,11 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function __construct(AdminConfigurator $adminConfigurator)
     {
         $this->config = $adminConfigurator->toArray();
-        $this->config['adminBuildPath'] = rtrim($this->config['adminBuildPath'], '/') . '/';
+        $this->config['adminBuildPath'] = \rtrim($this->config['adminBuildPath'], '/') . '/';
 
         $items = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->adminBuildPath()), \RecursiveIteratorIterator::LEAVES_ONLY);
         /** @var SplFileInfo $file */
-        foreach($items as $name => $file){
+        foreach ($items as $name => $file) {
             if ($file->isDir()) {
                 continue;
             }
@@ -72,7 +72,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
                 continue;
             }
 
-            $name = str_replace($this->adminBuildPath(), "", $name);
+            $name = \str_replace($this->adminBuildPath(), "", $name);
 
             $this->config['adminBuildFiles'][$name] = [
                 'contentType' => $this->getContentType($file->getExtension()),
@@ -174,7 +174,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
      */
     public function serialize()
     {
-        return serialize($this->config);
+        return \serialize($this->config);
     }
 
     /**
@@ -182,7 +182,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
      */
     public function unserialize($serialized)
     {
-        $this->config = unserialize($serialized);
+        $this->config = \unserialize($serialized);
     }
 
     private function isValidAdminFile($extension): bool

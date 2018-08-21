@@ -1,9 +1,17 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Action\Api\Resource;
 
-use Doctrine\Common\Collections\Criteria;
-use KiwiSuite\Admin\Response\ApiDetailResponse;
-use KiwiSuite\Admin\Response\ApiListResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
@@ -15,7 +23,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Ramsey\Uuid\Uuid;
 use Zend\Stratigility\Middleware\CallableMiddlewareDecorator;
 use Zend\Stratigility\MiddlewarePipe;
 
@@ -32,7 +39,6 @@ final class UpdateAction implements MiddlewareInterface
 
     public function __construct(RepositorySubManager $repositorySubManager, MiddlewareSubManager $middlewareSubManager)
     {
-
         $this->repositorySubManager = $repositorySubManager;
         $this->middlewareSubManager = $middlewareSubManager;
     }
@@ -50,7 +56,7 @@ final class UpdateAction implements MiddlewareInterface
             $middlewarePipe->pipe($action);
         }
 
-        $middlewarePipe->pipe(new CallableMiddlewareDecorator(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($resource){
+        $middlewarePipe->pipe(new CallableMiddlewareDecorator(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($resource) {
             return $this->handleRequest($resource, $request, $handler);
         }));
 

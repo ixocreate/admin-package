@@ -1,8 +1,18 @@
 <?php
+/**
+ * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
+ *
+ * @package kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
+ * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Action\Api\Resource;
 
 use KiwiSuite\Admin\Response\ApiDetailResponse;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
 use KiwiSuite\Contract\Resource\ResourceInterface;
@@ -36,7 +46,6 @@ final class DetailAction implements MiddlewareInterface
 
     public function __construct(RepositorySubManager $repositorySubManager, MiddlewareSubManager $middlewareSubManager, Builder $builder)
     {
-
         $this->repositorySubManager = $repositorySubManager;
         $this->middlewareSubManager = $middlewareSubManager;
         $this->builder = $builder;
@@ -55,7 +64,7 @@ final class DetailAction implements MiddlewareInterface
             $middlewarePipe->pipe($action);
         }
 
-        $middlewarePipe->pipe(new CallableMiddlewareDecorator(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($resource){
+        $middlewarePipe->pipe(new CallableMiddlewareDecorator(function (ServerRequestInterface $request, RequestHandlerInterface $handler) use ($resource) {
             return $this->handleRequest($resource, $request, $handler);
         }));
 

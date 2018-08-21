@@ -3,7 +3,7 @@
  * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
  *
  * @package kiwi-suite/admin
- * @see https://github.com/kiwi-suite/admin
+ * @link https://github.com/kiwi-suite/admin
  * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
  * @license MIT License
  */
@@ -37,7 +37,7 @@ final class UserMiddleware implements MiddlewareInterface
     {
         $this->userRepository = $userRepository;
     }
-    
+
     /**
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
@@ -62,7 +62,8 @@ final class UserMiddleware implements MiddlewareInterface
 
         $permission = new Permission($user);
 
-        return $handler->handle($request
+        return $handler->handle(
+            $request
             ->withAttribute(User::class, $user)
             ->withAttribute(Permission::class, $permission)
         );
