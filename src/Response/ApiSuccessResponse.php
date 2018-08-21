@@ -16,10 +16,11 @@ use Zend\Diactoros\Response\JsonResponse;
 
 class ApiSuccessResponse extends JsonResponse
 {
-    public function __construct($data = null)
+    public function __construct($data = null, array $notifications = [])
     {
         $payload = [
             'success' => true,
+            'notifications' => $notifications
         ];
         if ($data !== null) {
             $payload['result'] = $data;
