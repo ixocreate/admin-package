@@ -3,6 +3,7 @@ namespace App;
 use KiwiSuite\Admin\Config\Client\Provider\IntlProvider;
 use KiwiSuite\Admin\Config\Client\Provider\NavigationProvider;
 use KiwiSuite\Admin\Config\Client\Provider\ProjectProvider;
+use KiwiSuite\Admin\Config\Client\Provider\ResourceProvider;
 use KiwiSuite\Admin\Config\Client\Provider\RoutesProvider;
 
 /** @var \KiwiSuite\Admin\Config\AdminConfigurator $admin */
@@ -11,6 +12,7 @@ $admin->addClientProvider(ProjectProvider::class);
 $admin->addClientProvider(NavigationProvider::class);
 $admin->addClientProvider(RoutesProvider::class);
 $admin->addClientProvider(IntlProvider::class);
+$admin->addClientProvider(ResourceProvider::class);
 
 $admin->setName("kiwi");
 $admin->setAuthor("kiwi suite GmbH");
