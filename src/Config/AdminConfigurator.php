@@ -12,9 +12,13 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Config;
 
+use KiwiSuite\Admin\Config\Client\ClientConfigProviderSubManager;
 use KiwiSuite\Admin\Config\Navigation\Group;
+use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
 use KiwiSuite\Contract\Application\ConfiguratorInterface;
 use KiwiSuite\Contract\Application\ServiceRegistryInterface;
+use KiwiSuite\ServiceManager\Factory\AutowireFactory;
+use KiwiSuite\ServiceManager\SubManager\SubManagerConfigurator;
 use Zend\Stdlib\SplPriorityQueue;
 
 final class AdminConfigurator implements ConfiguratorInterface
@@ -28,6 +32,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'logo'          => '',
         'icon'          => '',
         'background'    => '',
+        'clientConfigProvider'    => [],
         'adminBuildPath'=> __DIR__ . '/../../../admin-frontend/build/',
     ];
 
@@ -35,6 +40,16 @@ final class AdminConfigurator implements ConfiguratorInterface
      * @var Group[]
      */
     private $navigation = [];
+
+    /**
+     * @var SubManagerConfigurator
+     */
+    private $subManagerConfigurator;
+
+    public function __construct()
+    {
+        $this->subManagerConfigurator = new SubManagerConfigurator(ClientConfigProviderSubManager::class, ClientConfigProviderInterface::class);
+    }
 
 
     /**
@@ -107,6 +122,16 @@ final class AdminConfigurator implements ConfiguratorInterface
     }
 
     /**
+     * @param string $clientProvider
+     * @param string $factory
+     */
+    public function addClientProvider(string $clientProvider, string $factory = AutowireFactory::class): void
+    {
+        $this->config['clientConfigProvider'][] = $clientProvider;
+        $this->subManagerConfigurator->addFactory($clientProvider, $factory);
+    }
+
+    /**
      * @param string $name
      * @param int $priority
      * @return Group
@@ -169,5 +194,6 @@ final class AdminConfigurator implements ConfiguratorInterface
     public function registerService(ServiceRegistryInterface $serviceRegistry): void
     {
         $serviceRegistry->add(AdminProjectConfig::class, new AdminProjectConfig($this));
+        $this->subManagerConfigurator->registerService($serviceRegistry);
     }
 }

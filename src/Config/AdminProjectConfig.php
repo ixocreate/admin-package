@@ -50,6 +50,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'adminBuildPath'=> __DIR__ . '/../../../admin-frontend/build/',
         'adminBuildFiles' => [],
         'navigation'    => [],
+        'clientConfigProvider' => [],
     ];
 
     /**
@@ -167,6 +168,14 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function adminBuildFiles(): array
     {
         return $this->config['adminBuildFiles'];
+    }
+
+    /**
+     * @return array
+     */
+    public function clientConfigProvider(): array
+    {
+        return $this->config['clientConfigProvider'];
     }
 
     /**

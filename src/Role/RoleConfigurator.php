@@ -29,7 +29,7 @@ final class RoleConfigurator implements ConfiguratorInterface
      */
     public function __construct()
     {
-        $this->subManagerConfigurator = new SubManagerConfigurator(RoleSubManager::class, RoleInterface::class);
+        $this->subManagerConfigurator = new SubManagerConfigurator(RoleSubManager::class, \KiwiSuite\Contract\Admin\RoleInterface::class);
     }
 
     /**
@@ -70,8 +70,8 @@ final class RoleConfigurator implements ConfiguratorInterface
 
         $roleMapping = [];
         foreach ($factories as $id => $factory) {
-            if (!\is_subclass_of($id, RoleInterface::class, true)) {
-                throw new \InvalidArgumentException(\sprintf("'%s' doesn't implement '%s'", $id, RoleInterface::class));
+            if (!\is_subclass_of($id, \KiwiSuite\Contract\Admin\RoleInterface::class, true)) {
+                throw new \InvalidArgumentException(\sprintf("'%s' doesn't implement '%s'", $id, \KiwiSuite\Contract\Admin\RoleInterface::class));
             }
             $roleName = \forward_static_call([$id, 'getName']);
             $roleMapping[$roleName] = $id;

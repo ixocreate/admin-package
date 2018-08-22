@@ -5,6 +5,7 @@ namespace KiwiSuite\Admin;
 
 /** @var \KiwiSuite\ServiceManager\ServiceManagerConfigurator $serviceManager */
 use KiwiSuite\Admin\Config\AdminConfig;
+use KiwiSuite\Admin\Config\Client\ClientConfigGenerator;
 use KiwiSuite\Admin\Config\Factory\AdminConfigFactory;
 use KiwiSuite\Admin\Helper\Factory\ServerUrlHelperFactory;
 use KiwiSuite\Admin\Helper\Factory\UrlHelperFactory;
@@ -18,5 +19,6 @@ $serviceManager->addFactory(AdminConfig::class, AdminConfigFactory::class);
 $serviceManager->addFactory(AdminRouter::class, AdminRouterFactory::class);
 $serviceManager->addFactory(ServerUrlHelper::class, ServerUrlHelperFactory::class);
 $serviceManager->addFactory(UrlHelper::class, UrlHelperFactory::class);
+$serviceManager->addFactory(ClientConfigGenerator::class);
 
 $serviceManager->addSubManager(RoleSubManager::class);

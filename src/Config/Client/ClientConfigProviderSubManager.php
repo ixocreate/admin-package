@@ -10,11 +10,10 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Role;
+namespace KiwiSuite\Admin\Config\Client;
 
-/**
- * @deprecated
- */
-interface RoleInterface extends \KiwiSuite\Contract\Admin\RoleInterface
+use KiwiSuite\ServiceManager\SubManager\SubManager;
+
+final class ClientConfigProviderSubManager extends SubManager
 {
 }
