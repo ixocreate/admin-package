@@ -5,8 +5,11 @@ use KiwiSuite\Admin\Config\Client\Provider\NavigationProvider;
 use KiwiSuite\Admin\Config\Client\Provider\ProjectProvider;
 use KiwiSuite\Admin\Config\Client\Provider\ResourceProvider;
 use KiwiSuite\Admin\Config\Client\Provider\RoutesProvider;
+use KiwiSuite\Admin\Role\AdministratorRole;
 
 /** @var \KiwiSuite\Admin\Config\AdminConfigurator $admin */
+
+$admin->addRole(AdministratorRole::class);
 
 $admin->addClientProvider(ProjectProvider::class);
 $admin->addClientProvider(NavigationProvider::class);

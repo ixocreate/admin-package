@@ -42,7 +42,6 @@ class Package implements PackageInterface
     public function getBootstrapItems(): ?array
     {
         return [
-            RoleBootstrapItem::class,
             AdminBootstrapItem::class,
         ];
     }

@@ -13,9 +13,8 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Type;
 
 use Doctrine\DBAL\Types\StringType;
-use KiwiSuite\Admin\Role\RoleInterface;
-use KiwiSuite\Admin\Role\RoleMapping;
 use KiwiSuite\Admin\Role\RoleSubManager;
+use KiwiSuite\Contract\Admin\RoleInterface;
 use KiwiSuite\Contract\Schema\ElementInterface;
 use KiwiSuite\Contract\Type\DatabaseTypeInterface;
 use KiwiSuite\Contract\Type\SchemaElementInterface;
@@ -29,25 +28,15 @@ final class RoleType extends AbstractType implements DatabaseTypeInterface, Sche
      * @var RoleSubManager
      */
     private $roleSubManager;
-    /**
-     * @var RoleMapping
-     */
-    private $roleMapping;
 
-    public function __construct(RoleSubManager $roleSubManager, RoleMapping $roleMapping)
+    public function __construct(RoleSubManager $roleSubManager)
     {
         $this->roleSubManager = $roleSubManager;
-        $this->roleMapping = $roleMapping;
     }
 
     public function transform($value)
     {
-        if (empty($this->roleMapping->getMapping()[$value])) {
-            throw new \Exception("invalid role");
-        }
-        $roleClass = $this->roleMapping->getMapping()[$value];
-
-        return $this->roleSubManager->get($roleClass);
+        return $this->roleSubManager->get($value);
     }
 
     public function getRole(): RoleInterface
@@ -57,7 +46,7 @@ final class RoleType extends AbstractType implements DatabaseTypeInterface, Sche
 
     public function __toString()
     {
-        return $this->value()::getName();
+        return $this->value()::serviceName();
     }
 
     public function convertToDatabaseValue()
@@ -80,7 +69,13 @@ final class RoleType extends AbstractType implements DatabaseTypeInterface, Sche
         /** @var SelectElement $element */
         $element = $elementSubManager->get(SelectElement::class);
 
-        $options = \array_combine(\array_keys($this->roleMapping->getMapping()), \array_keys($this->roleMapping->getMapping()));
+        $options = [];
+        foreach ($this->roleSubManager->getServices() as $service) {
+            /** @var RoleInterface $role */
+            $role = $this->roleSubManager->get($service);
+            $options[$role::serviceName()] = $role->getLabel();
+        }
+
         return $element->withOptions($options);
     }
 }

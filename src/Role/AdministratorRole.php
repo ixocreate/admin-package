@@ -12,13 +12,15 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Role;
 
+use KiwiSuite\Contract\Admin\RoleInterface;
+
 final class AdministratorRole implements RoleInterface
 {
 
     /**
      * @return string
      */
-    public static function getName(): string
+    public static function serviceName(): string
     {
         return 'admin';
     }

@@ -42,9 +42,6 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function(PipeConfigurator $pipe)
         $pipe->pipe(XsrfProtectionMiddleware::class);
         $pipe->pipe(BodyParamsMiddleware::class);
 
-        //$pipe->pipe(ResourceInjectorMiddleware::class, PipeConfigurator::PRIORITY_POST_ROUTING);
-        $pipe->pipe(MessageInjectorMiddleware::class, PipeConfigurator::PRIORITY_POST_ROUTING);
-
         $pipe->group("admin.unauthorized")(function (GroupPipeConfigurator $group) {
             $group->get('/config', ConfigAction::class, "admin.api.config");
             $group->post('/auth/login', LoginAction::class, "admin.api.auth.login");
@@ -62,7 +59,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function(PipeConfigurator $pipe)
             $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
 
             $group->group('resource')(function(GroupPipeConfigurator $group) {
-                $group->before(ResourceInjectionMiddleware::class);
+                //$group->before(ResourceInjectionMiddleware::class);
 
                 $group->get('/resource/{resource}', \KiwiSuite\Admin\Action\Api\Resource\IndexAction::class, 'admin.api.resource.index', PHP_INT_MAX * -1);
                 $group->get('/resource/{resource}/detail/{id}', DetailAction::class, 'admin.api.resource.detail', PHP_INT_MAX * -1);

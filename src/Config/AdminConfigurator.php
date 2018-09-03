@@ -14,6 +14,7 @@ namespace KiwiSuite\Admin\Config;
 
 use KiwiSuite\Admin\Config\Client\ClientConfigProviderSubManager;
 use KiwiSuite\Admin\Config\Navigation\Group;
+use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
 use KiwiSuite\Contract\Application\ConfiguratorInterface;
 use KiwiSuite\Contract\Application\ServiceRegistryInterface;
@@ -44,11 +45,17 @@ final class AdminConfigurator implements ConfiguratorInterface
     /**
      * @var SubManagerConfigurator
      */
-    private $subManagerConfigurator;
+    private $clientSubManagerConfigurator;
+
+    /**
+     * @var SubManagerConfigurator
+     */
+    private $roleSubManagerConfigurator;
 
     public function __construct()
     {
-        $this->subManagerConfigurator = new SubManagerConfigurator(ClientConfigProviderSubManager::class, ClientConfigProviderInterface::class);
+        $this->clientSubManagerConfigurator = new SubManagerConfigurator(ClientConfigProviderSubManager::class, ClientConfigProviderInterface::class);
+        $this->roleSubManagerConfigurator = new SubManagerConfigurator(RoleSubManager::class, \KiwiSuite\Contract\Admin\RoleInterface::class);
     }
 
 
@@ -128,7 +135,25 @@ final class AdminConfigurator implements ConfiguratorInterface
     public function addClientProvider(string $clientProvider, string $factory = AutowireFactory::class): void
     {
         $this->config['clientConfigProvider'][] = $clientProvider;
-        $this->subManagerConfigurator->addFactory($clientProvider, $factory);
+        $this->clientSubManagerConfigurator->addFactory($clientProvider, $factory);
+    }
+
+    /**
+     * @param string $directory
+     * @param bool $recursive
+     */
+    public function addRoleDirectory(string $directory, bool $recursive = true): void
+    {
+        $this->roleSubManagerConfigurator->addDirectory($directory, $recursive);
+    }
+
+    /**
+     * @param string $action
+     * @param string $factory
+     */
+    public function addRole(string $action, string $factory = AutowireFactory::class): void
+    {
+        $this->roleSubManagerConfigurator->addFactory($action, $factory);
     }
 
     /**
@@ -194,6 +219,7 @@ final class AdminConfigurator implements ConfiguratorInterface
     public function registerService(ServiceRegistryInterface $serviceRegistry): void
     {
         $serviceRegistry->add(AdminProjectConfig::class, new AdminProjectConfig($this));
-        $this->subManagerConfigurator->registerService($serviceRegistry);
+        $this->clientSubManagerConfigurator->registerService($serviceRegistry);
+        $this->roleSubManagerConfigurator->registerService($serviceRegistry);
     }
 }
