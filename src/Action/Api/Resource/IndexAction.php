@@ -20,6 +20,7 @@ use KiwiSuite\Contract\Resource\ResourceInterface;
 use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;
+use KiwiSuite\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -37,17 +38,25 @@ final class IndexAction implements MiddlewareInterface
      * @var MiddlewareSubManager
      */
     private $middlewareSubManager;
+    /**
+     * @var ResourceSubManager
+     */
+    private $resourceSubManager;
 
-    public function __construct(RepositorySubManager $repositorySubManager, MiddlewareSubManager $middlewareSubManager)
-    {
+    public function __construct(
+        RepositorySubManager $repositorySubManager,
+        MiddlewareSubManager $middlewareSubManager,
+        ResourceSubManager $resourceSubManager
+    ) {
         $this->repositorySubManager = $repositorySubManager;
         $this->middlewareSubManager = $middlewareSubManager;
+        $this->resourceSubManager = $resourceSubManager;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var AdminAwareInterface $resource */
-        $resource = $request->getAttribute(ResourceInterface::class);
+        $resource = $this->resourceSubManager->get($request->getAttribute("resource"));
 
         $middlewarePipe = new MiddlewarePipe();
 
@@ -66,30 +75,39 @@ final class IndexAction implements MiddlewareInterface
 
     private function handleRequest(AdminAwareInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
+        $listSchema = $resource->listSchema();
+
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
         $criteria = new Criteria();
         $sorting = null;
 
-        //?sortColumn1=ASC&sortColumn2=DESC&filterColumn1=test&filterColumn2=foobar
+        //?sort[column1]=ASC&sort[column2]=DESC&filter[column1]=test&filter[column2]=foobar
         $queryParams = $request->getQueryParams();
         foreach ($queryParams as $key => $value) {
             if (\mb_substr($key, 0, 4) === "sort") {
-                //filter
+                $sorting = [];
+                foreach ($value as $sortName => $sortValue) {
+                    if (!$listSchema->has($sortName)) {
+                        continue;
+                    }
+                    $sorting[$sortName] = $sortValue;
+                }
+            } elseif (\mb_substr($key, 0, 6) === "filter") {
+                foreach ($value as $filterName => $filterValue) {
+                    if (!$listSchema->has($filterName)) {
+                        continue;
+                    }
+                    $criteria->andWhere(Criteria::expr()->contains($filterName, $filterValue));
+                }
                 continue;
-            }
-            if (\mb_substr($key, 0, 6) === "filter") {
-                //filter
-                continue;
-            }
-            if ($key === "offset") {
+            } elseif ($key === "offset") {
                 $value = (int) $value;
                 if (!empty($value)) {
                     $criteria->setFirstResult($value);
                 }
                 continue;
-            }
-            if ($key === "limit") {
+            } elseif ($key === "limit") {
                 $value = (int) $value;
                 if (!empty($value)) {
                     $criteria->setMaxResults(\min($value, 500));
@@ -98,8 +116,10 @@ final class IndexAction implements MiddlewareInterface
             }
         }
 
-        if ($sorting === null && !empty($resource->listSchema()->defaultSorting())) {
+        if (empty($sorting) && !empty($resource->listSchema()->defaultSorting())) {
             $criteria->orderBy([$resource->listSchema()->defaultSorting()['sorting'] => $resource->listSchema()->defaultSorting()['direction']]);
+        } elseif (!empty($sorting)) {
+            $criteria->orderBy($sorting);
         }
 
         $result = $repository->matching($criteria);

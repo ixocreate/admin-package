@@ -26,26 +26,20 @@ class ApiDetailResponse extends ApiSuccessResponse
      */
     private $item;
     /**
-     * @var SchemaInterface
-     */
-    private $schema;
-    /**
      * @var array
      */
     private $meta;
 
-    public function __construct(AdminAwareInterface $resource, array $item, SchemaInterface $schema, array $meta)
+    public function __construct(AdminAwareInterface $resource, array $item, array $meta)
     {
         $data = [
             'label' => $resource->label(),
             'item' => (object)$item, // make sure an empty array here is an empty object in json
-            'schema' => $schema,
             'meta' => $meta,
         ];
         parent::__construct($data);
         $this->resource = $resource;
         $this->item = $item;
-        $this->schema = $schema;
         $this->meta = $meta;
     }
 
@@ -57,11 +51,6 @@ class ApiDetailResponse extends ApiSuccessResponse
     public function item(): array
     {
         return $this->item;
-    }
-
-    public function schema(): SchemaInterface
-    {
-        return $this->schema;
     }
 
     public function meta(): array

@@ -59,11 +59,8 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function(PipeConfigurator $pipe)
             $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
 
             $group->group('resource')(function(GroupPipeConfigurator $group) {
-                //$group->before(ResourceInjectionMiddleware::class);
-
                 $group->get('/resource/{resource}', \KiwiSuite\Admin\Action\Api\Resource\IndexAction::class, 'admin.api.resource.index', PHP_INT_MAX * -1);
                 $group->get('/resource/{resource}/detail/{id}', DetailAction::class, 'admin.api.resource.detail', PHP_INT_MAX * -1);
-                $group->get('/resource/{resource}/create', CreateSchemaAction::class, 'admin.api.resource.createDetail', PHP_INT_MAX * -1);
                 $group->patch('/resource/{resource}/{id}', UpdateAction::class, 'admin.api.resource.update', PHP_INT_MAX * -1);
                 $group->post('/resource/{resource}', CreateAction::class, 'admin.api.resource.create', PHP_INT_MAX * -1);
                 $group->delete('/resource/{resource}/{id}', DeleteAction::class, 'admin.api.resource.delete', PHP_INT_MAX * -1);

@@ -34,9 +34,7 @@ class ApiListResponse extends ApiSuccessResponse
     public function __construct(AdminAwareInterface $resource, array $items, array $meta)
     {
         $data = [
-            'label' => $resource->label(),
             'items' => $items,
-            'schema' => $resource->listSchema(),
             'meta' => $meta,
         ];
         parent::__construct($data);
