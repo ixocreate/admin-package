@@ -19,6 +19,7 @@ use KiwiSuite\Contract\Resource\ResourceInterface;
 use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;
+use KiwiSuite\Resource\SubManager\ResourceSubManager;
 use KiwiSuite\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -43,18 +44,27 @@ final class DetailAction implements MiddlewareInterface
      * @var Builder
      */
     private $builder;
+    /**
+     * @var ResourceSubManager
+     */
+    private $resourceSubManager;
 
-    public function __construct(RepositorySubManager $repositorySubManager, MiddlewareSubManager $middlewareSubManager, Builder $builder)
-    {
+    public function __construct(
+        RepositorySubManager $repositorySubManager,
+        MiddlewareSubManager $middlewareSubManager,
+        Builder $builder,
+        ResourceSubManager $resourceSubManager
+    ) {
         $this->repositorySubManager = $repositorySubManager;
         $this->middlewareSubManager = $middlewareSubManager;
         $this->builder = $builder;
+        $this->resourceSubManager = $resourceSubManager;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var AdminAwareInterface $resource */
-        $resource = $request->getAttribute(ResourceInterface::class);
+        $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
         $middlewarePipe = new MiddlewarePipe();
 
@@ -82,7 +92,6 @@ final class DetailAction implements MiddlewareInterface
         return new ApiDetailResponse(
             $resource,
             $entity->toPublicArray(),
-            $resource->updateSchema($this->builder),
             []
         );
     }

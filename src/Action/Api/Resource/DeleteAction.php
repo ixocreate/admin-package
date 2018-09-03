@@ -19,6 +19,7 @@ use KiwiSuite\Contract\Resource\ResourceInterface;
 use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;
+use KiwiSuite\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -36,17 +37,25 @@ final class DeleteAction implements MiddlewareInterface
      * @var MiddlewareSubManager
      */
     private $middlewareSubManager;
+    /**
+     * @var ResourceSubManager
+     */
+    private $resourceSubManager;
 
-    public function __construct(RepositorySubManager $repositorySubManager, MiddlewareSubManager $middlewareSubManager)
-    {
+    public function __construct(
+        RepositorySubManager $repositorySubManager,
+        MiddlewareSubManager $middlewareSubManager,
+        ResourceSubManager $resourceSubManager
+    ) {
         $this->repositorySubManager = $repositorySubManager;
         $this->middlewareSubManager = $middlewareSubManager;
+        $this->resourceSubManager = $resourceSubManager;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var AdminAwareInterface $resource */
-        $resource = $request->getAttribute(ResourceInterface::class);
+        $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
         $middlewarePipe = new MiddlewarePipe();
 
