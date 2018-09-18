@@ -12,38 +12,40 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Action\Api\User;
 
-use KiwiSuite\Admin\Command\User\CreateUserCommand;
+use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\CommandBus\CommandBus;
+use KiwiSuite\Entity\Entity\EntityInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-final class CreateAction implements MiddlewareInterface
+final class DeleteAction implements MiddlewareInterface
 {
     /**
-     * @var CommandBus
+     * @var UserRepository
      */
-    private $commandBus;
+    private $userRepository;
 
-    public function __construct(CommandBus $commandBus)
-    {
-        $this->commandBus = $commandBus;
+    public function __construct(
+        UserRepository $userRepository
+    ) {
+        $this->userRepository = $userRepository;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $data = $request->getParsedBody();
+        /** @var EntityInterface $entity */
+        $entity = $this->userRepository->find($request->getAttribute("id"));
 
-        $createCommand = $this->commandBus->create(CreateUserCommand::class, $data);
-        $commandResult = $this->commandBus->dispatch($createCommand);
-
-        if (!$commandResult->isSuccessful()) {
-            return new ApiErrorResponse('admin_create_user', $commandResult->messages());
+        if ($entity === null) {
+            return new ApiErrorResponse('admin_user_notfound', 'User not found');
         }
 
-        return new ApiSuccessResponse(['id' => $createCommand->uuid()]);
+        $entity->with('delete', new \DateTimeImmutable());
+        $this->userRepository->save($entity);
+
+        return new ApiSuccessResponse();
     }
 }

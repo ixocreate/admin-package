@@ -48,6 +48,8 @@ final class UserRepository extends AbstractRepository
         $metadata->addField('avatar', Type::TEXT);
         $metadata->addField('createdAt', DateTimeType::class);
         $metadata->addField('lastLoginAt', DateTimeType::class);
+        $metadata->addField('updatedAt', DateTimeType::class);
+        $metadata->addField('deletedAt', DateTimeType::class);
         $metadata->addField('status', StatusType::class);
     }
 }

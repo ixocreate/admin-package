@@ -53,9 +53,14 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function(PipeConfigurator $pipe)
             $group->get('/auth/user', UserAction::class, "admin.api.auth.user");
             $group->post('/auth/logout', LogoutAction::class, "admin.api.auth.logout");
 
+            $group->get('/user', \KiwiSuite\Admin\Action\Api\User\IndexAction::class, 'admin.api.user.index');
+            $group->post('/user', \KiwiSuite\Admin\Action\Api\User\CreateAction::class, 'admin.api.user.create');
+            $group->get('/user/{id}', \KiwiSuite\Admin\Action\Api\User\DetailAction::class, 'admin.api.user.detail');
+            $group->patch('/user/{id}', \KiwiSuite\Admin\Action\Api\User\UpdateAction::class, 'admin.api.user.update');
+            $group->delete('/user/{id}', \KiwiSuite\Admin\Action\Api\User\DeleteAction::class, 'admin.api.user.delete');
+            $group->post('/user/resetPassword', ChangeEmailAction::class, 'admin.api.user.resetPassword');
 
             $group->patch('/account/email', ChangeEmailAction::class, 'admin.api.account.email');
-
             $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
 
             $group->group('resource')(function(GroupPipeConfigurator $group) {

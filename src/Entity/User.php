@@ -89,7 +89,7 @@ final class User implements EntityInterface
         return $this->updatedAt;
     }
 
-    public function deletedAt(): DateTimeType
+    public function deletedAt(): ?DateTimeType
     {
         return $this->deletedAt;
     }
@@ -115,7 +115,7 @@ final class User implements EntityInterface
             new Definition("avatar", TypeInterface::TYPE_STRING, false, true),
             new Definition("createdAt", DateTimeType::class, false, true),
             new Definition("updatedAt", DateTimeType::class, false, true),
-            new Definition("deletedAt", DateTimeType::class, true, true),
+            new Definition("deletedAt", DateTimeType::class, true, false),
             new Definition("lastLoginAt", DateTimeType::class, true, true),
             new Definition("status", StatusType::class, false, true),
         ]);
