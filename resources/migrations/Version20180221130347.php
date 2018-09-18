@@ -2,18 +2,16 @@
 
 namespace KiwiMigration;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Type;
+use Doctrine\Migrations\AbstractMigration;
 use KiwiSuite\Admin\Type\RoleType;
 use KiwiSuite\Admin\Type\StatusType;
 use KiwiSuite\CommonTypes\Entity\DateTimeType;
 use KiwiSuite\CommonTypes\Entity\EmailType;
 use KiwiSuite\CommonTypes\Entity\UuidType;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 class Version20180221130347 extends AbstractMigration
 {
     public function up(Schema $schema)

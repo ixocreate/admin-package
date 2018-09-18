@@ -17,11 +17,11 @@ use KiwiSuite\Admin\Type\StatusType;
 use KiwiSuite\CommonTypes\Entity\DateTimeType;
 use KiwiSuite\CommonTypes\Entity\EmailType;
 use KiwiSuite\CommonTypes\Entity\UuidType;
+use KiwiSuite\Contract\Type\TypeInterface;
 use KiwiSuite\Entity\Entity\Definition;
 use KiwiSuite\Entity\Entity\DefinitionCollection;
 use KiwiSuite\Entity\Entity\EntityInterface;
 use KiwiSuite\Entity\Entity\EntityTrait;
-use KiwiSuite\Entity\Type\TypeInterface;
 
 final class User implements EntityInterface
 {
@@ -40,6 +40,10 @@ final class User implements EntityInterface
     private $avatar;
 
     private $createdAt;
+
+    private $updatedAt;
+
+    private $deletedAt;
 
     private $lastLoginAt;
 
@@ -80,6 +84,16 @@ final class User implements EntityInterface
         return $this->createdAt;
     }
 
+    public function updatedAt(): DateTimeType
+    {
+        return $this->updatedAt;
+    }
+
+    public function deletedAt(): DateTimeType
+    {
+        return $this->deletedAt;
+    }
+
     public function lastLoginAt():? DateTimeType
     {
         return $this->lastLoginAt;
@@ -100,6 +114,8 @@ final class User implements EntityInterface
             new Definition("role", RoleType::class, false, true),
             new Definition("avatar", TypeInterface::TYPE_STRING, false, true),
             new Definition("createdAt", DateTimeType::class, false, true),
+            new Definition("updatedAt", DateTimeType::class, false, true),
+            new Definition("deletedAt", DateTimeType::class, true, true),
             new Definition("lastLoginAt", DateTimeType::class, true, true),
             new Definition("status", StatusType::class, false, true),
         ]);

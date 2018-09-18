@@ -53,10 +53,13 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
             'role' => $this->data()['role'],
             'avatar' => $avatar,
             'createdAt' => $this->createdAt(),
+            'updatedAt' => $this->createdAt(),
             'status' => $this->data()['status'],
         ]);
 
         $this->userRepository->save($user);
+
+        return true;
     }
 
     public static function serviceName(): string
