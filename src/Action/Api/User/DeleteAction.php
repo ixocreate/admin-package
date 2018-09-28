@@ -43,7 +43,7 @@ final class DeleteAction implements MiddlewareInterface
             return new ApiErrorResponse('admin_user_notfound', 'User not found');
         }
 
-        $entity->with('delete', new \DateTimeImmutable());
+        $entity = $entity->with('deletedAt', new \DateTimeImmutable());
         $this->userRepository->save($entity);
 
         return new ApiSuccessResponse();

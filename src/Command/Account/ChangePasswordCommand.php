@@ -79,7 +79,7 @@ final class ChangePasswordCommand extends AbstractCommand implements FilterableI
         if ($this->dataValue("password") !== $this->dataValue("passwordRepeat")) {
             $violationCollector->add("password", "invalid_password");
         }
-        
+
         if (!\password_verify($this->dataValue("passwordOld"), $user->password())) {
             $violationCollector->add("passwordOld", "invalid_password_old");
         }

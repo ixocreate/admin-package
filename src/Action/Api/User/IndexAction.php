@@ -18,6 +18,8 @@ use KiwiSuite\Admin\Response\ApiListResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;
+use KiwiSuite\Schema\Listing\ListElement;
+use KiwiSuite\Schema\Listing\ListSchema;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -40,7 +42,6 @@ final class IndexAction implements MiddlewareInterface
         $sorting = null;
 
         $criteria->andWhere(Criteria::expr()->isNull('deletedAt'));
-        $criteria->setMaxResults(20);
 
         //?sort[column1]=ASC&sort[column2]=DESC&filter[column1]=test&filter[column2]=foobar
         $queryParams = $request->getQueryParams();
@@ -92,6 +93,10 @@ final class IndexAction implements MiddlewareInterface
 
         $count = $this->userRepository->count([]);
 
-        return new ApiSuccessResponse(['items' => $items, 'meta' => ['count' => $count]]);
+        $schema = (new ListSchema())
+            ->withAddedElement(new ListElement('email', 'Email'))
+            ->withAddedElement(new ListElement('role', 'Role'));
+
+        return new ApiSuccessResponse(['schema' => $schema,'items' => $items, 'meta' => ['count' => $count]]);
     }
 }
