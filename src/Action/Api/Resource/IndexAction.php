@@ -93,12 +93,9 @@ final class IndexAction implements MiddlewareInterface
                     }
                     $sorting[$sortName] = $sortValue;
                 }
-            } elseif (\mb_substr($key, 0, 6) === "filter") {
-                foreach ($value as $filterName => $filterValue) {
-                    if (!$listSchema->has($filterName)) {
-                        continue;
-                    }
-                    $criteria->andWhere(Criteria::expr()->contains($filterName, $filterValue));
+            } elseif ($key === "search" && is_string($value)) {
+                foreach ($listSchema->elements() as $element) {
+                    $criteria->orWhere(Criteria::expr()->contains($element->name(), $value));
                 }
                 continue;
             } elseif ($key === "offset") {
