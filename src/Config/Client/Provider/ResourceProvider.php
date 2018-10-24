@@ -62,7 +62,7 @@ final class ResourceProvider implements ClientConfigProviderInterface
                 'label' => $resource->label(),
                 'listSchema' => $resource->listSchema(),
                 'createSchema' => $resource->createSchema($this->builder),
-                'updateSchema' => $resource->updateSchema($this->builder)
+                'updateSchema' => $resource->updateSchema($this->builder),
             ];
         }
 

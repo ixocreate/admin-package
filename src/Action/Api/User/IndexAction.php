@@ -14,9 +14,7 @@ namespace KiwiSuite\Admin\Action\Api\User;
 
 use Doctrine\Common\Collections\Criteria;
 use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Response\ApiListResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;
 use KiwiSuite\Schema\Listing\ListElement;
 use KiwiSuite\Schema\Listing\ListSchema;
@@ -32,7 +30,8 @@ final class IndexAction implements MiddlewareInterface
      */
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository) {
+    public function __construct(UserRepository $userRepository)
+    {
         $this->userRepository = $userRepository;
     }
 

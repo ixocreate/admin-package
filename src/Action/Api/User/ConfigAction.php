@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Action\Api\User;
 
-use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\Admin\Type\RoleType;
 use KiwiSuite\Admin\Type\StatusType;

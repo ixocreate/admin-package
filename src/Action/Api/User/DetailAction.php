@@ -16,8 +16,6 @@ use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
-use KiwiSuite\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

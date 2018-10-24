@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Response;
 
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
-use KiwiSuite\Contract\Schema\SchemaInterface;
 
 class ApiDetailResponse extends ApiSuccessResponse
 {

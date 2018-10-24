@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin;
 
 use KiwiSuite\Admin\BootstrapItem\AdminBootstrapItem;
-use KiwiSuite\Admin\BootstrapItem\RoleBootstrapItem;
 use KiwiSuite\Contract\Application\ConfiguratorRegistryInterface;
 use KiwiSuite\Contract\Application\PackageInterface;
 use KiwiSuite\Contract\Application\ServiceRegistryInterface;

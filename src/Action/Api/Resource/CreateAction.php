@@ -15,7 +15,6 @@ namespace KiwiSuite\Admin\Action\Api\Resource;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
-use KiwiSuite\Contract\Resource\ResourceInterface;
 use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;

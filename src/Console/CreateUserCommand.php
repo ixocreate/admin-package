@@ -61,7 +61,6 @@ final class CreateUserCommand extends Command implements CommandInterface
         $result = $this->commandBus->command(\KiwiSuite\Admin\Command\User\CreateUserCommand::class, $data);
 
         if (!$result->isSuccessful()) {
-
         }
 
         $output->writeln("Password: " . $password);

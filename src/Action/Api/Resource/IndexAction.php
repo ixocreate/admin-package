@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Criteria;
 use KiwiSuite\Admin\Response\ApiListResponse;
 use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
-use KiwiSuite\Contract\Resource\ResourceInterface;
 use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;
@@ -93,7 +92,7 @@ final class IndexAction implements MiddlewareInterface
                     }
                     $sorting[$sortName] = $sortValue;
                 }
-            } elseif ($key === "search" && is_string($value)) {
+            } elseif ($key === "search" && \is_string($value)) {
                 foreach ($listSchema->elements() as $element) {
                     $criteria->orWhere(Criteria::expr()->contains($element->name(), $value));
                 }
