@@ -62,6 +62,8 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->patch('/account/email', ChangeEmailAction::class, 'admin.api.account.email');
             $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
 
+            $group->get('/dashboard', \KiwiSuite\Admin\Action\Api\Dashboard\IndexAction::class, 'admin.api.dashboard.index');
+
             $group->group('resource')(function(GroupPipeConfigurator $group) {
                 $group->get('/resource/{resource}', \KiwiSuite\Admin\Action\Api\Resource\IndexAction::class, 'admin.api.resource.index', PHP_INT_MAX * -1);
                 $group->get('/resource/{resource}/detail/{id}', DetailAction::class, 'admin.api.resource.detail', PHP_INT_MAX * -1);

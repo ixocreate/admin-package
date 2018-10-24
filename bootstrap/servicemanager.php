@@ -8,6 +8,7 @@ use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Config\Client\ClientConfigGenerator;
 use KiwiSuite\Admin\Config\Client\ClientConfigProviderSubManager;
 use KiwiSuite\Admin\Config\Factory\AdminConfigFactory;
+use KiwiSuite\Admin\Dashboard\DashboardWidgetSubManager;
 use KiwiSuite\Admin\Helper\Factory\ServerUrlHelperFactory;
 use KiwiSuite\Admin\Helper\Factory\UrlHelperFactory;
 use KiwiSuite\Admin\Helper\ServerUrlHelper;
@@ -24,3 +25,4 @@ $serviceManager->addFactory(ClientConfigGenerator::class);
 
 $serviceManager->addSubManager(RoleSubManager::class);
 $serviceManager->addSubManager(ClientConfigProviderSubManager::class);
+$serviceManager->addSubManager(DashboardWidgetSubManager::class);

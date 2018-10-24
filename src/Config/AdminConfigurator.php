@@ -14,8 +14,10 @@ namespace KiwiSuite\Admin\Config;
 
 use KiwiSuite\Admin\Config\Client\ClientConfigProviderSubManager;
 use KiwiSuite\Admin\Config\Navigation\Group;
+use KiwiSuite\Admin\Dashboard\DashboardWidgetSubManager;
 use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
+use KiwiSuite\Contract\Admin\DashboardWidgetInterface;
 use KiwiSuite\Contract\Application\ConfiguratorInterface;
 use KiwiSuite\Contract\Application\ServiceRegistryInterface;
 use KiwiSuite\ServiceManager\Factory\AutowireFactory;
@@ -25,16 +27,16 @@ use Zend\Stdlib\SplPriorityQueue;
 final class AdminConfigurator implements ConfiguratorInterface
 {
     private $config = [
-        'author'        => '',
-        'copyright'     => '',
-        'description'   => '',
-        'name'          => '',
-        'poweredBy'     => true,
-        'logo'          => '',
-        'icon'          => '',
-        'background'    => '',
-        'clientConfigProvider'    => [],
-        'adminBuildPath'=> __DIR__ . '/../../../admin-frontend/build/',
+        'author' => '',
+        'copyright' => '',
+        'description' => '',
+        'name' => '',
+        'poweredBy' => true,
+        'logo' => '',
+        'icon' => '',
+        'background' => '',
+        'clientConfigProvider' => [],
+        'adminBuildPath' => __DIR__ . '/../../../admin-frontend/build/',
     ];
 
     /**
@@ -53,6 +55,11 @@ final class AdminConfigurator implements ConfiguratorInterface
     private $roleSubManagerConfigurator;
 
     /**
+     * @var SubManagerConfigurator
+     */
+    private $dashboardWidgetSubManagerConfigurator;
+
+    /**
      * AdminConfigurator constructor.
      */
     public function __construct()
@@ -64,6 +71,10 @@ final class AdminConfigurator implements ConfiguratorInterface
         $this->roleSubManagerConfigurator = new SubManagerConfigurator(
             RoleSubManager::class,
             \KiwiSuite\Contract\Admin\RoleInterface::class
+        );
+        $this->dashboardWidgetSubManagerConfigurator = new SubManagerConfigurator(
+            DashboardWidgetSubManager::class,
+            DashboardWidgetInterface::class
         );
     }
 
@@ -166,6 +177,15 @@ final class AdminConfigurator implements ConfiguratorInterface
     }
 
     /**
+     * @param string $directory
+     * @param bool $recursive
+     */
+    public function addDashboardWidgetDirectory(string $directory, bool $recursive = true): void
+    {
+        $this->dashboardWidgetSubManagerConfigurator->addDirectory($directory, $recursive);
+    }
+
+    /**
      * @param string $name
      * @param int $priority
      * @return Group
@@ -230,5 +250,6 @@ final class AdminConfigurator implements ConfiguratorInterface
         $serviceRegistry->add(AdminProjectConfig::class, new AdminProjectConfig($this));
         $this->clientSubManagerConfigurator->registerService($serviceRegistry);
         $this->roleSubManagerConfigurator->registerService($serviceRegistry);
+        $this->dashboardWidgetSubManagerConfigurator->registerService($serviceRegistry);
     }
 }
