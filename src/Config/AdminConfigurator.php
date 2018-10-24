@@ -52,10 +52,19 @@ final class AdminConfigurator implements ConfiguratorInterface
      */
     private $roleSubManagerConfigurator;
 
+    /**
+     * AdminConfigurator constructor.
+     */
     public function __construct()
     {
-        $this->clientSubManagerConfigurator = new SubManagerConfigurator(ClientConfigProviderSubManager::class, ClientConfigProviderInterface::class);
-        $this->roleSubManagerConfigurator = new SubManagerConfigurator(RoleSubManager::class, \KiwiSuite\Contract\Admin\RoleInterface::class);
+        $this->clientSubManagerConfigurator = new SubManagerConfigurator(
+            ClientConfigProviderSubManager::class,
+            ClientConfigProviderInterface::class
+        );
+        $this->roleSubManagerConfigurator = new SubManagerConfigurator(
+            RoleSubManager::class,
+            \KiwiSuite\Contract\Admin\RoleInterface::class
+        );
     }
 
 
