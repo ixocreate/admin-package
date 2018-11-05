@@ -13,9 +13,11 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Action\Api\User;
 
 use KiwiSuite\Admin\Entity\User;
+use KiwiSuite\Admin\Event\UserEvent;
 use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
+use KiwiSuite\Event\EventDispatcher;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -29,9 +31,15 @@ final class UpdateAction implements MiddlewareInterface
      */
     private $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    /**
+     * @var EventDispatcher
+     */
+    private $eventDispatcher;
+
+    public function __construct(UserRepository $userRepository, EventDispatcher $eventDispatcher)
     {
         $this->userRepository = $userRepository;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -49,6 +57,8 @@ final class UpdateAction implements MiddlewareInterface
         }
         $entity = $entity->with('updatedAt', new \DateTime());
         $this->userRepository->save($entity);
+
+        $this->eventDispatcher->dispatch(UserEvent::EVENT_UPDATE, new UserEvent($entity));
 
         return new ApiSuccessResponse();
     }

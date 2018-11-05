@@ -15,6 +15,7 @@ namespace KiwiSuite\Admin\Command\User;
 use Identicon\Generator\ImageMagickGenerator;
 use Identicon\Identicon;
 use KiwiSuite\Admin\Entity\User;
+use KiwiSuite\Admin\Event\UserEvent;
 use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\CommandBus\Command\AbstractCommand;
@@ -23,6 +24,7 @@ use KiwiSuite\Contract\CommandBus\CommandInterface;
 use KiwiSuite\Contract\Validation\ValidatableInterface;
 use KiwiSuite\Contract\Validation\ViolationCollectorInterface;
 use KiwiSuite\Entity\Type\Type;
+use KiwiSuite\Event\EventDispatcher;
 use Ramsey\Uuid\Uuid;
 
 final class CreateUserCommand extends AbstractCommand implements CommandInterface, ValidatableInterface
@@ -31,20 +33,28 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
      * @var UserRepository
      */
     private $userRepository;
+
     /**
      * @var RoleSubManager
      */
     private $roleSubManager;
 
     /**
+     * @var EventDispatcher
+     */
+    private $eventDispatcher;
+
+    /**
      * CreateUserCommand constructor.
      * @param UserRepository $userRepository
      * @param RoleSubManager $roleSubManager
+     * @param EventDispatcher $eventDispatcher
      */
-    public function __construct(UserRepository $userRepository, RoleSubManager $roleSubManager)
+    public function __construct(UserRepository $userRepository, RoleSubManager $roleSubManager, EventDispatcher $eventDispatcher)
     {
         $this->userRepository = $userRepository;
         $this->roleSubManager = $roleSubManager;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -69,6 +79,8 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
         ]);
 
         $this->userRepository->save($user);
+
+        $this->eventDispatcher->dispatch(UserEvent::EVENT_CREATE, new UserEvent($user));
 
         return true;
     }

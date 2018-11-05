@@ -27,7 +27,7 @@ $admin->setLogo("/admin//kiwi-logo.svg");
 $admin->setIcon("/admin/kiwi-icon.svg");
 
 $contentGroup = $admin->addNavigationGroup("Content", 5000);
-$contentGroup->add("Sitemap", ['admin.api.media.index'], 'fa fa-sitemap', '/page', 2000);
+$contentGroup->add("Sitemap", ['admin.api.sitemap.index'], 'fa fa-sitemap', '/page', 2000);
 $contentGroup->add("Media", ['admin.api.media.index'], 'fa fa-image', '/media', 1000);
 $contentGroup->add("Translation", ['admin.api.translation.index'], 'fa fa-globe', '/translation', 500);
 
