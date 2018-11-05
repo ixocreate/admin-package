@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Resource;
 
+use KiwiSuite\Contract\Admin\RoleInterface;
+
 trait DefaultAdminTrait
 {
     /**
@@ -60,5 +62,32 @@ trait DefaultAdminTrait
     public function deleteAction(): ?string
     {
         return null;
+    }
+
+    /**
+     * @param RoleInterface $role
+     * @return bool
+     */
+    public function canCreate(RoleInterface $role): bool
+    {
+        return true;
+    }
+
+    /**
+     * @param RoleInterface $role
+     * @return bool
+     */
+    public function canEdit(RoleInterface $role): bool
+    {
+        return true;
+    }
+
+    /**
+     * @param RoleInterface $role
+     * @return bool
+     */
+    public function canDelete(RoleInterface $role): bool
+    {
+        return true;
     }
 }

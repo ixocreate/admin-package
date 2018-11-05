@@ -63,6 +63,9 @@ final class ResourceProvider implements ClientConfigProviderInterface
                 'listSchema' => $resource->listSchema(),
                 'createSchema' => $resource->createSchema($this->builder),
                 'updateSchema' => $resource->updateSchema($this->builder),
+                'canCreate' => $resource->canCreate($role),
+                'canEdit' => $resource->canEdit($role),
+                'canDelete' => $resource->canDelete($role),
             ];
         }
 
