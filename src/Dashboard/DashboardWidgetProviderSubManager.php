@@ -14,6 +14,6 @@ namespace KiwiSuite\Admin\Dashboard;
 
 use KiwiSuite\ServiceManager\SubManager\SubManager;
 
-final class DashboardWidgetSubManager extends SubManager
+final class DashboardWidgetProviderSubManager extends SubManager
 {
 }

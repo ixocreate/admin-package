@@ -12,28 +12,29 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Action\Api\Dashboard;
 
-use KiwiSuite\Admin\Dashboard\DashboardWidgetSubManager;
+use KiwiSuite\Admin\Dashboard\DashboardWidgetCollector;
+use KiwiSuite\Admin\Dashboard\DashboardWidgetProviderSubManager;
+use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Contract\Admin\DashboardWidgetInterface;
+use KiwiSuite\Contract\Admin\DashboardWidgetProviderInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Stdlib\SplPriorityQueue;
 
 final class IndexAction implements MiddlewareInterface
 {
     /**
-     * @var DashboardWidgetSubManager
+     * @var DashboardWidgetProviderSubManager
      */
     private $dashboardWidgetSubManager;
 
     /**
      * IndexAction constructor.
      *
-     * @param DashboardWidgetSubManager $dashboardWidgetSubManager
+     * @param DashboardWidgetProviderSubManager $dashboardWidgetSubManager
      */
-    public function __construct(DashboardWidgetSubManager $dashboardWidgetSubManager)
+    public function __construct(DashboardWidgetProviderSubManager $dashboardWidgetSubManager)
     {
         $this->dashboardWidgetSubManager = $dashboardWidgetSubManager;
     }
@@ -45,16 +46,16 @@ final class IndexAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        $collector = new DashboardWidgetCollector();
+
         $services = $this->dashboardWidgetSubManager->getServices();
-        $queue = new SplPriorityQueue();
         if (!empty($services)) {
             foreach ($services as $serviceName) {
-                /** @var DashboardWidgetInterface $widget */
-                $widget = $this->dashboardWidgetSubManager->get($serviceName);
-                $queue->insert($widget, $widget->priority());
+                /** @var DashboardWidgetProviderInterface $provider */
+                $provider = $this->dashboardWidgetSubManager->get($serviceName);
+                $provider->provide($collector, $request->getAttribute(User::class));
             }
-            $queue->top();
         }
-        return new ApiSuccessResponse(['items' => $queue->toArray(), 'meta' => ['count' => $queue->count()]]);
+        return new ApiSuccessResponse(['items' => $collector->widgets()]);
     }
 }

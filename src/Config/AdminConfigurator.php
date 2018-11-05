@@ -14,10 +14,10 @@ namespace KiwiSuite\Admin\Config;
 
 use KiwiSuite\Admin\Config\Client\ClientConfigProviderSubManager;
 use KiwiSuite\Admin\Config\Navigation\Group;
-use KiwiSuite\Admin\Dashboard\DashboardWidgetSubManager;
+use KiwiSuite\Admin\Dashboard\DashboardWidgetProviderSubManager;
 use KiwiSuite\Admin\Role\RoleSubManager;
 use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
-use KiwiSuite\Contract\Admin\DashboardWidgetInterface;
+use KiwiSuite\Contract\Admin\DashboardWidgetProviderInterface;
 use KiwiSuite\Contract\Application\ConfiguratorInterface;
 use KiwiSuite\Contract\Application\ServiceRegistryInterface;
 use KiwiSuite\ServiceManager\Factory\AutowireFactory;
@@ -73,8 +73,8 @@ final class AdminConfigurator implements ConfiguratorInterface
             \KiwiSuite\Contract\Admin\RoleInterface::class
         );
         $this->dashboardWidgetSubManagerConfigurator = new SubManagerConfigurator(
-            DashboardWidgetSubManager::class,
-            DashboardWidgetInterface::class
+            DashboardWidgetProviderSubManager::class,
+            DashboardWidgetProviderInterface::class
         );
     }
 
@@ -168,19 +168,28 @@ final class AdminConfigurator implements ConfiguratorInterface
     }
 
     /**
-     * @param string $action
+     * @param string $role
      * @param string $factory
      */
-    public function addRole(string $action, string $factory = AutowireFactory::class): void
+    public function addRole(string $role, string $factory = AutowireFactory::class): void
     {
-        $this->roleSubManagerConfigurator->addFactory($action, $factory);
+        $this->roleSubManagerConfigurator->addFactory($role, $factory);
+    }
+
+    /**
+     * @param string $provider
+     * @param string $factory
+     */
+    public function addDashboardProvider(string $provider, string $factory = AutowireFactory::class): void
+    {
+        $this->dashboardWidgetSubManagerConfigurator->addFactory($provider, $factory);
     }
 
     /**
      * @param string $directory
      * @param bool $recursive
      */
-    public function addDashboardWidgetDirectory(string $directory, bool $recursive = true): void
+    public function addDashboardProviderDirectory(string $directory, bool $recursive = true): void
     {
         $this->dashboardWidgetSubManagerConfigurator->addDirectory($directory, $recursive);
     }
