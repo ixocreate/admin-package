@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace KiwiSuite\Admin\Dashboard\Widget;
 
 use KiwiSuite\Contract\Admin\DashboardWidgetInterface;
@@ -18,10 +21,7 @@ final class StatisticOverviewWidget implements DashboardWidgetInterface
     /**
      * @var array
      */
-    private $data = [
-        'progress' => [],
-        'counter' => [],
-    ];
+    private $data = [];
 
 
     /**
@@ -81,21 +81,35 @@ final class StatisticOverviewWidget implements DashboardWidgetInterface
     }
 
     /**
-     * @param int $current
-     * @param int $max
-     * @param string $title
+     * @param array $progress
+     * @param array $counter
      * @return StatisticOverviewWidget
      */
-    public function withAddedProgress(int $current, int $max, string $title): StatisticOverviewWidget
+    public function withAddedSection(array $progress, array $counter): StatisticOverviewWidget
     {
         $widget = clone $this;
-        $widget->data['progress'][] = [
-            'current' => $current,
-            'max' => $max,
-            'title' => $title,
+        $widget->data[] = [
+            'progress' => $progress,
+            'counter' => $counter,
         ];
 
         return $widget;
+    }
+
+    /**
+     * @param int $current
+     * @param int $max
+     * @param string $title
+     * @return array
+     */
+    public function createProgress(int $current, int $max, string $title, string $color): array
+    {
+        return [
+            'current' => $current,
+            'max' => $max,
+            'title' => $title,
+            'color' => $color,
+        ];
     }
 
     /**
@@ -103,18 +117,15 @@ final class StatisticOverviewWidget implements DashboardWidgetInterface
      * @param string $title
      * @param string $counter
      * @param string $color
-     * @return StatisticOverviewWidget
+     * @return array
      */
-    public function withAddedCounter(string $title, string $counter, string $color): StatisticOverviewWidget
+    public function createCounter(string $title, string $counter, string $color): array
     {
-        $widget = clone $this;
-        $widget->data['counter'][] = [
+        return [
             'title' => $title,
             'counter' => $counter,
             'color' => $color,
         ];
-
-        return $widget;
     }
 
     /**
