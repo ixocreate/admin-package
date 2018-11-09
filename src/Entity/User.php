@@ -12,18 +12,21 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Entity;
 
+use Doctrine\DBAL\Types\Type;
+use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use KiwiSuite\Admin\Type\RoleType;
 use KiwiSuite\Admin\Type\StatusType;
 use KiwiSuite\CommonTypes\Entity\DateTimeType;
 use KiwiSuite\CommonTypes\Entity\EmailType;
 use KiwiSuite\CommonTypes\Entity\UuidType;
+use KiwiSuite\Contract\Entity\DatabaseEntityInterface;
 use KiwiSuite\Contract\Type\TypeInterface;
 use KiwiSuite\Entity\Entity\Definition;
 use KiwiSuite\Entity\Entity\DefinitionCollection;
 use KiwiSuite\Entity\Entity\EntityInterface;
 use KiwiSuite\Entity\Entity\EntityTrait;
 
-final class User implements EntityInterface
+final class User implements EntityInterface, DatabaseEntityInterface
 {
     use EntityTrait;
 
@@ -119,5 +122,25 @@ final class User implements EntityInterface
             new Definition("lastLoginAt", DateTimeType::class, true, true),
             new Definition("status", StatusType::class, false, true),
         ]);
+    }
+
+    public static function loadMetadata(ClassMetadataBuilder $builder)
+    {
+        $builder->setTable('admin_user');
+
+        $builder->createField('id', UuidType::class)
+            ->makePrimaryKey()
+            ->build();
+
+        $builder->addField('email', EmailType::serviceName());
+        $builder->addField('password', Type::STRING);
+        $builder->addField('hash', UuidType::serviceName());
+        $builder->addField('role', RoleType::serviceName());
+        $builder->addField('avatar', Type::TEXT);
+        $builder->addField('createdAt', DateTimeType::serviceName());
+        $builder->addField('lastLoginAt', DateTimeType::serviceName());
+        $builder->addField('updatedAt', DateTimeType::serviceName());
+        $builder->addField('deletedAt', DateTimeType::serviceName());
+        $builder->addField('status', StatusType::serviceName());
     }
 }

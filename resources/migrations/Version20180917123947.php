@@ -11,8 +11,8 @@ final class Version20180917123947 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         $table = $schema->getTable('admin_user');
-        $table->addColumn('updatedAt', DateTimeType::class);
-        $table->addColumn('deletedAt', DateTimeType::class)->setNotnull(false);
+        $table->addColumn('updatedAt', DateTimeType::serviceName());
+        $table->addColumn('deletedAt', DateTimeType::serviceName())->setNotnull(false);
     }
 
     public function down(Schema $schema) : void
