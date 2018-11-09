@@ -81,14 +81,16 @@ final class StatisticOverviewWidget implements DashboardWidgetInterface
     }
 
     /**
+     * @param string $name
      * @param array $progress
      * @param array $counter
      * @return StatisticOverviewWidget
      */
-    public function withAddedSection(array $progress, array $counter): StatisticOverviewWidget
+    public function withAddedSection(string $name, array $progress, array $counter): StatisticOverviewWidget
     {
         $widget = clone $this;
         $widget->data[] = [
+            'name' => $name,
             'progress' => $progress,
             'counter' => $counter,
         ];
