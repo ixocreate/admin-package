@@ -100,15 +100,18 @@ final class StatisticOverviewWidget implements DashboardWidgetInterface
      * @param int $current
      * @param int $max
      * @param string $title
+     * @param string $color
+     * @param string $textColor
      * @return array
      */
-    public function createProgress(int $current, int $max, string $title, string $color): array
+    public function createProgress(int $current, int $max, string $title, string $color, string $textColor): array
     {
         return [
             'current' => $current,
             'max' => $max,
             'title' => $title,
             'color' => $color,
+            'textColor' => $textColor,
         ];
     }
 
