@@ -26,11 +26,6 @@ final class PermissionTemp
         $this->role = $role;
     }
 
-    public function withUser(RoleInterface $role): Permission
-    {
-        return new Permission($role);
-    }
-
     public function can(string $permission): bool
     {
         if (\in_array($permission, $this->role->getPermissions())) {
@@ -47,10 +42,10 @@ final class PermissionTemp
             $checkPermission = [];
             for ($j = 0; $j <= $i; $j++) {
                 $checkPermission[] = $permissionParts[$j];
-                if (\in_array(\implode('.', $checkPermission), $role->getPermissions())) {
+                if (\in_array(\implode('.', $checkPermission), $this->role->getPermissions())) {
                     return true;
                 }
-                if (\in_array(\implode('.', $checkPermission) . '.*', $role->getPermissions())) {
+                if (\in_array(\implode('.', $checkPermission) . '.*', $this->role->getPermissions())) {
                     return true;
                 }
             }
