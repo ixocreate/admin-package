@@ -35,7 +35,7 @@ final class NavigationProvider implements ClientConfigProviderInterface
      */
     public function clientConfig(?RoleInterface $role = null): array
     {
-        if ($role === null) {
+        if (empty($role)) {
             return [];
         }
 
