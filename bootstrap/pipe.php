@@ -17,6 +17,7 @@ use KiwiSuite\Admin\Action\Api\Resource\DetailAction;
 use KiwiSuite\Admin\Action\Api\Resource\UpdateAction;
 use KiwiSuite\Admin\Action\Api\Session\SessionAction;
 use KiwiSuite\Admin\Action\IndexAction;
+use KiwiSuite\Admin\Action\Resource\Widgets\WidgetsAction;
 use KiwiSuite\Admin\Action\StaticAction;
 use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Middleware\Api\AuthorizationGuardMiddleware;
@@ -44,7 +45,6 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->get('/config', ConfigAction::class, "admin.api.config");
             $group->post('/auth/login', LoginAction::class, "admin.api.auth.login");
         });
-
         $pipe->group("admin.authorized")(function (GroupPipeConfigurator $group) {
             $group->before(AuthorizationGuardMiddleware::class);
 
@@ -70,8 +70,13 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
                 $group->patch('/resource/{resource}/{id}', UpdateAction::class, 'admin.api.resource.update', PHP_INT_MAX * -1);
                 $group->post('/resource/{resource}', CreateAction::class, 'admin.api.resource.create', PHP_INT_MAX * -1);
                 $group->delete('/resource/{resource}/{id}', DeleteAction::class, 'admin.api.resource.delete', PHP_INT_MAX * -1);
+                $group->post('/resource/{resource}/above/list', WidgetsAction::class, 'admin.api.resource.widgets.above.list', PHP_INT_MAX * -1);
+                $group->post('/resource/{resource}/above/create', WidgetsAction::class, 'admin.api.resource.widgets.above.create', PHP_INT_MAX * -1);
+                $group->post('/resource/{resource}/above/edit', WidgetsAction::class, 'admin.api.resource.widgets.above.edit', PHP_INT_MAX * -1);
+                $group->post('/resource/{resource}/below/list', WidgetsAction::class, 'admin.api.resource.widgets.below.list', PHP_INT_MAX * -1);
+                $group->post('/resource/{resource}/below/create', WidgetsAction::class, 'admin.api.resource.widgets.below.create', PHP_INT_MAX * -1);
+                $group->post('/resource/{resource}/below/edit', WidgetsAction::class, 'admin.api.resource.widgets.below.edit', PHP_INT_MAX * -1);
             });
-
         });
     });
 
