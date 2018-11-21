@@ -38,7 +38,7 @@ class WidgetsAction implements MiddlewareInterface
      * @param ResourceSubManager $resourceSubManager
      * @param DashboardWidgetProviderSubManager $dashboardWidgetSubManager
      */
-    public function __construct(ResourceSubManager $resourceSubManager,DashboardWidgetProviderSubManager $dashboardWidgetSubManager, UserRepository $userRepository)
+    public function __construct(ResourceSubManager $resourceSubManager, DashboardWidgetProviderSubManager $dashboardWidgetSubManager, UserRepository $userRepository)
     {
         $this->resourceSubManager = $resourceSubManager;
         $this->dashboardWidgetSubManager = $dashboardWidgetSubManager;
@@ -55,7 +55,7 @@ class WidgetsAction implements MiddlewareInterface
         $collector = new DashboardWidgetCollector();
 
         $user = $request->getAttribute(User::class);
-        
+
         /** @var WidgetsInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
@@ -76,6 +76,7 @@ class WidgetsAction implements MiddlewareInterface
                 if ($position === 'below') {
                     $resource->receiveBelowListWidgets($user, $collector);
                 }
+                break;
             case 'create':
                 if ($position === 'above') {
                     $resource->receiveAboveCreateWidgets($user, $collector);
@@ -83,6 +84,7 @@ class WidgetsAction implements MiddlewareInterface
                 if ($position === 'below') {
                     $resource->receiveBelowCreateWidgets($user, $collector);
                 }
+                break;
             case 'edit':
                 if ($position === 'above') {
                     $resource->receiveAboveEditWidgets($user, $collector);
@@ -90,6 +92,7 @@ class WidgetsAction implements MiddlewareInterface
                 if ($position === 'below') {
                     $resource->receiveBelowEditWidgets($user, $collector);
                 }
+                break;
         }
 
         return new ApiSuccessResponse(['items' => $collector->widgets()]);
