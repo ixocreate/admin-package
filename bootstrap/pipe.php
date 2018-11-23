@@ -70,12 +70,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
                 $group->patch('/resource/{resource}/{id}', UpdateAction::class, 'admin.api.resource.update', PHP_INT_MAX * -1);
                 $group->post('/resource/{resource}', CreateAction::class, 'admin.api.resource.create', PHP_INT_MAX * -1);
                 $group->delete('/resource/{resource}/{id}', DeleteAction::class, 'admin.api.resource.delete', PHP_INT_MAX * -1);
-                $group->post('/resource/{resource}/above/list', WidgetsAction::class, 'admin.api.resource.widgets.above.list', PHP_INT_MAX * -1);
-                $group->post('/resource/{resource}/above/create', WidgetsAction::class, 'admin.api.resource.widgets.above.create', PHP_INT_MAX * -1);
-                $group->post('/resource/{resource}/above/edit', WidgetsAction::class, 'admin.api.resource.widgets.above.edit', PHP_INT_MAX * -1);
-                $group->post('/resource/{resource}/below/list', WidgetsAction::class, 'admin.api.resource.widgets.below.list', PHP_INT_MAX * -1);
-                $group->post('/resource/{resource}/below/create', WidgetsAction::class, 'admin.api.resource.widgets.below.create', PHP_INT_MAX * -1);
-                $group->post('/resource/{resource}/below/edit', WidgetsAction::class, 'admin.api.resource.widgets.below.edit', PHP_INT_MAX * -1);
+                $group->get('/resource/{resource}/widget/{position}/{type}[/{id}]', WidgetsAction::class, 'admin.api.resource.widgets', PHP_INT_MAX * -1);
             });
         });
     });

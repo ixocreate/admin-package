@@ -41,6 +41,10 @@ final class DashboardWidgetCollector implements DashboardWidgetCollectorInterfac
      */
     public function widgets(): array
     {
+        if ($this->queue->isEmpty()) {
+            return [];
+        }
+
         $this->queue->top();
         return $this->queue->toArray();
     }

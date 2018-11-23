@@ -10,6 +10,12 @@ use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
 use KiwiSuite\Contract\Resource\ResourceInterface;
+use KiwiSuite\Contract\Resource\Widgets\Positions\AboveCreateWidgetsInterface;
+use KiwiSuite\Contract\Resource\Widgets\Positions\AboveEditWidgetsInterface;
+use KiwiSuite\Contract\Resource\Widgets\Positions\AboveListWidgetsInterface;
+use KiwiSuite\Contract\Resource\Widgets\Positions\BelowCreateWidgetsInterface;
+use KiwiSuite\Contract\Resource\Widgets\Positions\BelowEditWidgetsInterface;
+use KiwiSuite\Contract\Resource\Widgets\Positions\BelowListWidgetsInterface;
 use KiwiSuite\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -59,39 +65,36 @@ class WidgetsAction implements MiddlewareInterface
         /** @var WidgetsInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
-        /** @var RouteResult $route */
-        $route = $request->getAttribute(RouteResult::class);
-        $path = ($route->getMatchedRoute())->getPath();
-
-        $explode = explode('/', $path);
-
-        $position = $explode[3];
-        $type = $explode[4];
+        $position = $request->getAttribute("position");
+        $type = $request->getAttribute("type");
 
         switch ($type) {
             case 'list':
-                if ($position === 'above') {
+                if ($position === 'above' && $resource instanceof  AboveListWidgetsInterface) {
                     $resource->receiveAboveListWidgets($user, $collector);
                 }
-                if ($position === 'below') {
-                    $resource->receiveBelowListWidgets($user, $collector);
+                if ($position === 'below' && $resource instanceof BelowListWidgetsInterface) {
+                    $resource->receiveAboveListWidgets($user, $collector);
                 }
                 break;
             case 'create':
-                if ($position === 'above') {
+                if ($position === 'above' && $resource instanceof AboveCreateWidgetsInterface) {
                     $resource->receiveAboveCreateWidgets($user, $collector);
                 }
-                if ($position === 'below') {
+                if ($position === 'below' && $resource instanceof BelowCreateWidgetsInterface) {
                     $resource->receiveBelowCreateWidgets($user, $collector);
                 }
                 break;
             case 'edit':
-                if ($position === 'above') {
-                    $resource->receiveAboveEditWidgets($user, $collector);
+                if ($position === 'above' && $resource instanceof AboveEditWidgetsInterface) {
+                    $resource->receiveAboveEditWidgets($user, $collector, $request->getAttribute('id'));
                 }
-                if ($position === 'below') {
-                    $resource->receiveBelowEditWidgets($user, $collector);
+                if ($position === 'below' && $resource instanceof BelowEditWidgetsInterface) {
+                    $resource->receiveBelowEditWidgets($user, $collector, $request->getAttribute('id'));
                 }
+                break;
+
+            default:
                 break;
         }
 
