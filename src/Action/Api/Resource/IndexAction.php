@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Criteria;
 use KiwiSuite\Admin\Response\ApiListResponse;
 use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
 use KiwiSuite\Contract\Resource\AdminAwareInterface;
+use KiwiSuite\Database\EntityManager\Factory\EntityManagerSubManager;
 use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
 use KiwiSuite\Database\Repository\RepositoryInterface;
 use KiwiSuite\Entity\Entity\EntityInterface;
@@ -41,15 +42,21 @@ final class IndexAction implements MiddlewareInterface
      * @var ResourceSubManager
      */
     private $resourceSubManager;
+    /**
+     * @var EntityManagerSubManager
+     */
+    private $entitySubManager;
 
     public function __construct(
         RepositorySubManager $repositorySubManager,
         MiddlewareSubManager $middlewareSubManager,
-        ResourceSubManager $resourceSubManager
+        ResourceSubManager $resourceSubManager,
+        EntityManagerSubManager $entitySubManager
     ) {
         $this->repositorySubManager = $repositorySubManager;
         $this->middlewareSubManager = $middlewareSubManager;
         $this->resourceSubManager = $resourceSubManager;
+        $this->entitySubManager = $entitySubManager;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -123,10 +130,18 @@ final class IndexAction implements MiddlewareInterface
         //TODO Collection
         /** @var EntityInterface $entity */
         foreach ($result as $entity) {
+            if (\method_exists($entity,'deletedAt') && $entity->deletedAt() !== null) {
+                continue;
+            }
+
             $items[] = $entity->toPublicArray();
         }
 
         $count = $repository->count([]);
+
+        if (\method_exists($repository->getEntityName(), 'deletedAt')) {
+            $count = $repository->count(['deletedAt' => null]);
+        }
 
         return new ApiListResponse($resource, $items, ['count' => $count]);
     }
