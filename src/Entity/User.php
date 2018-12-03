@@ -18,6 +18,7 @@ use KiwiSuite\Admin\Type\RoleType;
 use KiwiSuite\Admin\Type\StatusType;
 use KiwiSuite\CommonTypes\Entity\DateTimeType;
 use KiwiSuite\CommonTypes\Entity\EmailType;
+use KiwiSuite\CommonTypes\Entity\SchemaType;
 use KiwiSuite\CommonTypes\Entity\UuidType;
 use KiwiSuite\Contract\Entity\DatabaseEntityInterface;
 use KiwiSuite\Contract\Type\TypeInterface;
@@ -51,6 +52,8 @@ final class User implements EntityInterface, DatabaseEntityInterface
     private $lastLoginAt;
 
     private $status;
+
+    private $additionalFields;
 
     public function id(): UuidType
     {
@@ -107,6 +110,11 @@ final class User implements EntityInterface, DatabaseEntityInterface
         return $this->status;
     }
 
+    public function additionalFields():? SchemaType
+    {
+        return $this->additionalFields;
+    }
+
     protected static function createDefinitions() : DefinitionCollection
     {
         return new DefinitionCollection([
@@ -121,6 +129,7 @@ final class User implements EntityInterface, DatabaseEntityInterface
             new Definition("deletedAt", DateTimeType::class, true, false),
             new Definition("lastLoginAt", DateTimeType::class, true, true),
             new Definition("status", StatusType::class, false, true),
+            new Definition('additionalFields', SchemaType::class, true, true)
         ]);
     }
 
@@ -142,5 +151,6 @@ final class User implements EntityInterface, DatabaseEntityInterface
         $builder->addField('updatedAt', DateTimeType::serviceName());
         $builder->addField('deletedAt', DateTimeType::serviceName());
         $builder->addField('status', StatusType::serviceName());
+        $builder->addField('additionalFields', SchemaType::serviceName());
     }
 }
