@@ -90,7 +90,7 @@ final class IndexAction implements MiddlewareInterface
             $items[] = $entity->toPublicArray();
         }
 
-        $count = $this->userRepository->count(['deletedAt' => null]);
+        $count = $this->userRepository->count($criteria);
 
         $schema = (new ListSchema())
             ->withAddedElement(new ListElement('email', 'Email'))

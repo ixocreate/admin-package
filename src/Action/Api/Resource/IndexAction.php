@@ -137,7 +137,7 @@ final class IndexAction implements MiddlewareInterface
             $items[] = $entity->toPublicArray();
         }
 
-        $count = $repository->count([]);
+        $count = $repository->count($criteria);
 
         if (\method_exists($repository->getEntityName(), 'deletedAt')) {
             $count = $repository->count(['deletedAt' => null]);
