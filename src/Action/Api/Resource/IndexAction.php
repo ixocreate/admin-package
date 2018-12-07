@@ -101,6 +101,9 @@ final class IndexAction implements MiddlewareInterface
                 }
             } elseif ($key === "search" && \is_string($value)) {
                 foreach ($listSchema->elements() as $element) {
+                    if (!$element->searchable()) {
+                        continue;
+                    }
                     $criteria->orWhere(Criteria::expr()->contains($element->name(), $value));
                 }
                 continue;
