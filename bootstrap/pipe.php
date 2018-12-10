@@ -59,6 +59,8 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->delete('/user/{id}', \KiwiSuite\Admin\Action\Api\User\DeleteAction::class, 'admin.api.user.delete');
             $group->post('/user/resetPassword', ChangeEmailAction::class, 'admin.api.user.resetPassword');
 
+            $group->patch('/account/{id}', \KiwiSuite\Admin\Action\Account\UpdateAction::class, 'admin.api.account.update');
+            $group->get('/account/config', \KiwiSuite\Admin\Action\Account\ConfigAction::class, 'admin.api.account.config');
             $group->patch('/account/email', ChangeEmailAction::class, 'admin.api.account.email');
             $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
 
