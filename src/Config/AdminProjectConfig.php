@@ -51,6 +51,8 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'adminBuildFiles' => [],
         'navigation'    => [],
         'clientConfigProvider' => [],
+        'additionalUserSchema' => '',
+        'additionalAccountSchema' => ''
     ];
 
     /**
@@ -176,6 +178,22 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function clientConfigProvider(): array
     {
         return $this->config['clientConfigProvider'];
+    }
+
+    /**
+     * @return string
+     */
+    public function additionalUserSchema(): string
+    {
+        return $this->config['additionalUserSchema'];
+    }
+
+    /**
+     * @return string
+     */
+    public function additionalAccountSchema(): string
+    {
+        return $this->config['additionalAccountSchema'];
     }
 
     /**

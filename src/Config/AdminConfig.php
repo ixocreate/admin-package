@@ -121,6 +121,22 @@ final class AdminConfig implements SegmentProviderInterface
     }
 
     /**
+     * @return string
+     */
+    public function additionalUserSchema(): string
+    {
+        return $this->adminProjectConfig->additionalUserSchema();
+    }
+
+    /**
+     * @return string
+     */
+    public function additionalAccountSchema(): string
+    {
+        return $this->adminProjectConfig->additionalAccountSchema();
+    }
+
+    /**
      * @return UriInterface
      * @deprecated
      */

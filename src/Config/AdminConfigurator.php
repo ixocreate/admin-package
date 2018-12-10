@@ -20,6 +20,8 @@ use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
 use KiwiSuite\Contract\Admin\DashboardWidgetProviderInterface;
 use KiwiSuite\Contract\Application\ConfiguratorInterface;
 use KiwiSuite\Contract\Application\ServiceRegistryInterface;
+use KiwiSuite\Contract\Schema\AdditionalSchemaInterface;
+use KiwiSuite\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use KiwiSuite\ServiceManager\Factory\AutowireFactory;
 use KiwiSuite\ServiceManager\SubManager\SubManagerConfigurator;
 use Zend\Stdlib\SplPriorityQueue;
@@ -37,6 +39,8 @@ final class AdminConfigurator implements ConfiguratorInterface
         'background' => '',
         'clientConfigProvider' => [],
         'adminBuildPath' => __DIR__ . '/../../../admin-frontend/build/',
+        'additionalUserSchema' => '',
+        'additionalAccountSchema' => ''
     ];
 
     /**
@@ -60,6 +64,11 @@ final class AdminConfigurator implements ConfiguratorInterface
     private $dashboardWidgetSubManagerConfigurator;
 
     /**
+     * @var SubManagerConfigurator
+     */
+    private $additionalSchemaSubManagerConfigurator;
+
+    /**
      * AdminConfigurator constructor.
      */
     public function __construct()
@@ -75,6 +84,10 @@ final class AdminConfigurator implements ConfiguratorInterface
         $this->dashboardWidgetSubManagerConfigurator = new SubManagerConfigurator(
             DashboardWidgetProviderSubManager::class,
             DashboardWidgetProviderInterface::class
+        );
+        $this->additionalSchemaSubManagerConfigurator = new SubManagerConfigurator(
+            AdditionalSchemaSubManager::class,
+            AdditionalSchemaInterface::class
         );
     }
 
@@ -143,9 +156,32 @@ final class AdminConfigurator implements ConfiguratorInterface
         $this->config['background'] = $background;
     }
 
+    /**
+     * @param string $buildPath
+     */
     public function setAdminBuildPath(string $buildPath): void
     {
         $this->config['adminBuildPath'] = $buildPath;
+    }
+
+    /**
+     * @param string $additionalUserSchema
+     * @param string $factory
+     */
+    public function addUserSchema(string $additionalUserSchema, string $factory = AutowireFactory::class): void
+    {
+        $this->config['additionalUserSchema'] = $additionalUserSchema;
+        $this->additionalSchemaSubManagerConfigurator->addFactory($additionalUserSchema, $factory);
+    }
+
+    /**
+     * @param string $additionalAccountSchema
+     * @param string $factory
+     */
+    public function addAccountSchema(string $additionalAccountSchema, string $factory = AutowireFactory::class): void
+    {
+        $this->config['additionalAccountSchema'] = $additionalAccountSchema;
+        $this->additionalSchemaSubManagerConfigurator->addFactory($additionalAccountSchema, $factory);
     }
 
     /**
@@ -260,5 +296,6 @@ final class AdminConfigurator implements ConfiguratorInterface
         $this->clientSubManagerConfigurator->registerService($serviceRegistry);
         $this->roleSubManagerConfigurator->registerService($serviceRegistry);
         $this->dashboardWidgetSubManagerConfigurator->registerService($serviceRegistry);
+        $this->additionalSchemaSubManagerConfigurator->registerService($serviceRegistry);
     }
 }
