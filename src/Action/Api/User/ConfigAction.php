@@ -12,12 +12,15 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Action\Api\User;
 
+use KiwiSuite\Admin\Config\AdminConfig;
 use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\Admin\Type\RoleType;
 use KiwiSuite\Admin\Type\StatusType;
+use KiwiSuite\Contract\Schema\AdditionalSchemaInterface;
 use KiwiSuite\Contract\Schema\SchemaInterface;
 use KiwiSuite\Entity\Type\TypeSubManager;
+use KiwiSuite\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use KiwiSuite\Schema\Builder;
 use KiwiSuite\Schema\Elements\GroupElement;
 use KiwiSuite\Schema\Elements\TabbedGroupElement;
@@ -47,6 +50,14 @@ final class ConfigAction implements MiddlewareInterface
      * @var UserRepository
      */
     private $userRepository;
+    /**
+     * @var AdditionalSchemaSubManager
+     */
+    private $additionalSchemaSubManager;
+    /**
+     * @var AdminConfig
+     */
+    private $adminConfig;
 
     /**
      * ConfigAction constructor.
@@ -54,17 +65,23 @@ final class ConfigAction implements MiddlewareInterface
      * @param TypeSubManager $typeSubManager
      * @param ElementSubManager $elementSubManager
      * @param UserRepository $userRepository
+     * @param AdditionalSchemaSubManager $additionalSchemaSubManager
+     * @param AdminConfig $adminConfig
      */
     public function __construct(
         Builder $builder,
         TypeSubManager $typeSubManager,
         ElementSubManager $elementSubManager,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        AdditionalSchemaSubManager $additionalSchemaSubManager,
+        AdminConfig $adminConfig
     ) {
         $this->builder = $builder;
         $this->typeSubManager = $typeSubManager;
         $this->elementSubManager = $elementSubManager;
         $this->userRepository = $userRepository;
+        $this->additionalSchemaSubManager = $additionalSchemaSubManager;
+        $this->adminConfig = $adminConfig;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -72,6 +89,7 @@ final class ConfigAction implements MiddlewareInterface
         return new ApiSuccessResponse([
             'create' => $this->createSchema(),
             'update' => $this->updateSchema(),
+            'additionalSchema' => $this->receiveAdditionalSchema()
         ]);
     }
 
@@ -123,5 +141,19 @@ final class ConfigAction implements MiddlewareInterface
             ->withAddedElement($this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status'));
 
         return $updateSchema;
+    }
+
+    /**
+     * @return AdditionalSchemaInterface|null
+     */
+    private function receiveAdditionalSchema(): ?AdditionalSchemaInterface
+    {
+        $schema = null;
+
+        if (!empty($this->adminConfig->additionalUserSchema())) {
+            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->additionalUserSchema());
+        }
+
+        return $schema;
     }
 }

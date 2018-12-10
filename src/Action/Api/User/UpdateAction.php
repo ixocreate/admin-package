@@ -12,12 +12,12 @@ declare(strict_types=1);
 
 namespace KiwiSuite\Admin\Action\Api\User;
 
+use KiwiSuite\Admin\Command\User\UpdateUserCommand;
 use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Event\UserEvent;
 use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiErrorResponse;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Event\EventDispatcher;
+use KiwiSuite\CommandBus\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -32,34 +32,42 @@ final class UpdateAction implements MiddlewareInterface
     private $userRepository;
 
     /**
-     * @var EventDispatcher
+     * @var CommandBus
      */
-    private $eventDispatcher;
+    private $commandBus;
 
-    public function __construct(UserRepository $userRepository, EventDispatcher $eventDispatcher)
+    /**
+     * UpdateAction constructor.
+     * @param UserRepository $userRepository
+     * @param CommandBus $commandBus
+     */
+    public function __construct(
+        UserRepository $userRepository,
+        CommandBus $commandBus
+    )
     {
         $this->userRepository = $userRepository;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->commandBus = $commandBus;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        $data = $request->getParsedBody();
+
+        $data['userId'] = $request->getAttribute('id');
+
         /** @var User $entity */
-        $entity = $this->userRepository->find($request->getAttribute("id"));
+        $entity = $this->userRepository->find($data['userId']);
 
         if ($entity === null || $entity->deletedAt() !== null) {
             return new ApiErrorResponse('admin_user_notfound', 'User not found');
         }
 
-        $data = $request->getParsedBody();
-        foreach ($data as $name => $value) {
-            $entity = $entity->with($name, $value);
+        $result = $this->commandBus->command(UpdateUserCommand::class, $data);
+        if ($result->isSuccessful()) {
+            return new ApiSuccessResponse();
         }
-        $entity = $entity->with('updatedAt', new \DateTime());
-        $this->userRepository->save($entity);
 
-        $this->eventDispatcher->dispatch(UserEvent::EVENT_UPDATE, new UserEvent($entity));
-
-        return new ApiSuccessResponse();
+        return new ApiErrorResponse('execution_error', $result->messages());
     }
 }
