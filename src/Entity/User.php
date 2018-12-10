@@ -53,7 +53,9 @@ final class User implements EntityInterface, DatabaseEntityInterface
 
     private $status;
 
-    private $additionalFields;
+    private $additionalUserSchema;
+
+    private $additionalAccountSchema;
 
     public function id(): UuidType
     {
@@ -110,9 +112,14 @@ final class User implements EntityInterface, DatabaseEntityInterface
         return $this->status;
     }
 
-    public function additionalFields():? SchemaType
+    public function additionalUserSchema():? SchemaType
     {
-        return $this->additionalFields;
+        return $this->additionalUserSchema;
+    }
+
+    public function additionalAccountSchema(): ?SchemaType
+    {
+        return $this->additionalAccountSchema;
     }
 
     protected static function createDefinitions() : DefinitionCollection
@@ -129,7 +136,8 @@ final class User implements EntityInterface, DatabaseEntityInterface
             new Definition("deletedAt", DateTimeType::class, true, false),
             new Definition("lastLoginAt", DateTimeType::class, true, true),
             new Definition("status", StatusType::class, false, true),
-            new Definition('additionalFields', SchemaType::class, true, true)
+            new Definition("additionalUserSchema", SchemaType::class, true, true),
+            new Definition("additionalAccountSchema", SchemaType::class, true, true)
         ]);
     }
 
@@ -151,6 +159,7 @@ final class User implements EntityInterface, DatabaseEntityInterface
         $builder->addField('updatedAt', DateTimeType::serviceName());
         $builder->addField('deletedAt', DateTimeType::serviceName());
         $builder->addField('status', StatusType::serviceName());
-        $builder->addField('additionalFields', SchemaType::serviceName());
+        $builder->addField('additionalUserSchema', SchemaType::serviceName());
+        $builder->addField('additionalAccountSchema', SchemaType::serviceName());
     }
 }
