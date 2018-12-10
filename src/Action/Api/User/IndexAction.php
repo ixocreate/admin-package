@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace KiwiSuite\Admin\Action\Api\User;
 
 use Doctrine\Common\Collections\Criteria;
+use KiwiSuite\Admin\Entity\User;
 use KiwiSuite\Admin\Repository\UserRepository;
 use KiwiSuite\Admin\Response\ApiSuccessResponse;
 use KiwiSuite\Entity\Entity\EntityInterface;
@@ -42,25 +43,36 @@ final class IndexAction implements MiddlewareInterface
 
         $criteria->andWhere(Criteria::expr()->isNull('deletedAt'));
 
+        $schema = (new ListSchema())
+            ->withAddedElement(new ListElement('email', 'Email'))
+            ->withAddedElement(new ListElement('role', 'Role'));
+
         //?sort[column1]=ASC&sort[column2]=DESC&filter[column1]=test&filter[column2]=foobar
         $queryParams = $request->getQueryParams();
         foreach ($queryParams as $key => $value) {
             if (\mb_substr($key, 0, 4) === "sort") {
-//                $sorting = [];
-//                foreach ($value as $sortName => $sortValue) {
-//                    if (!$listSchema->has($sortName)) {
-//                        continue;
-//                    }
-//                    $sorting[$sortName] = $sortValue;
-//                }
-//            } elseif (\mb_substr($key, 0, 6) === "filter") {
-//                foreach ($value as $filterName => $filterValue) {
-//                    if (!$listSchema->has($filterName)) {
-//                        continue;
-//                    }
-//                    $criteria->andWhere(Criteria::expr()->contains($filterName, $filterValue));
-//                }
-//                continue;
+                $sorting = [];
+                foreach ($value as $sortName => $sortValue) {
+                    if (!$schema->has($sortName)) {
+                        continue;
+                    }
+                    $sorting[$sortName] = $sortValue;
+                }
+            } elseif ($key === "search" && \is_string($value)) {
+                $expr = Criteria::expr();
+                $search = [];
+                foreach ($schema->elements() as $element) {
+                    if (!$element->searchable()) {
+                        continue;
+                    }
+                    $search[] = $expr->contains($element->name(), $value);
+                }
+                if (!empty($search)) {
+                    $or = call_user_func_array([$expr, 'orX'], $search);
+                    $criteria->andWhere($or);
+                }
+
+                continue;
             } elseif ($key === "offset") {
                 $value = (int) $value;
                 if (!empty($value)) {
@@ -91,10 +103,6 @@ final class IndexAction implements MiddlewareInterface
         }
 
         $count = $this->userRepository->count($criteria);
-
-        $schema = (new ListSchema())
-            ->withAddedElement(new ListElement('email', 'Email'))
-            ->withAddedElement(new ListElement('role', 'Role'));
 
         return new ApiSuccessResponse(['schema' => $schema,'items' => $items, 'meta' => ['count' => $count]]);
     }
