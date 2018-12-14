@@ -12,18 +12,19 @@ final class Version20181206162414 extends AbstractMigration
      * @param Schema $schema
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $table = $schema->getTable('admin_user');
         $table->dropColumn('additionalFields');
-        $table->addColumn('additionalUserSchema',SchemaType::serviceName())->setNotnull(false);
-        $table->addColumn('additionalAccountSchema',SchemaType::serviceName())->setNotnull(false);
+        $table->addColumn('additionalUserSchema', SchemaType::serviceName())->setNotnull(false);
+        $table->addColumn('additionalAccountSchema', SchemaType::serviceName())->setNotnull(false);
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $table = $schema->getTable('admin_user');
         $table->dropColumn('additionalUserSchema');
         $table->dropColumn('additionalAccountSchema');
+        $table->addColumn('additionalFields', SchemaType::serviceName())->setNotnull(false);
     }
 }

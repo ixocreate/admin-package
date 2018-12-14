@@ -53,9 +53,9 @@ final class User implements EntityInterface, DatabaseEntityInterface
 
     private $status;
 
-    private $additionalUserSchema;
+    private $userAttributes;
 
-    private $additionalAccountSchema;
+    private $accountAttributes;
 
     public function id(): UuidType
     {
@@ -112,14 +112,14 @@ final class User implements EntityInterface, DatabaseEntityInterface
         return $this->status;
     }
 
-    public function additionalUserSchema():? SchemaType
+    public function userAttributes():? SchemaType
     {
-        return $this->additionalUserSchema;
+        return $this->userAttributes;
     }
 
-    public function additionalAccountSchema(): ?SchemaType
+    public function accountAttributes(): ?SchemaType
     {
-        return $this->additionalAccountSchema;
+        return $this->accountAttributes;
     }
 
     protected static function createDefinitions() : DefinitionCollection
@@ -136,8 +136,8 @@ final class User implements EntityInterface, DatabaseEntityInterface
             new Definition("deletedAt", DateTimeType::class, true, false),
             new Definition("lastLoginAt", DateTimeType::class, true, true),
             new Definition("status", StatusType::class, false, true),
-            new Definition("additionalUserSchema", SchemaType::class, true, true),
-            new Definition("additionalAccountSchema", SchemaType::class, true, true)
+            new Definition("userAttributes", SchemaType::class, true, true),
+            new Definition("accountAttributes", SchemaType::class, true, true)
         ]);
     }
 
@@ -159,7 +159,7 @@ final class User implements EntityInterface, DatabaseEntityInterface
         $builder->addField('updatedAt', DateTimeType::serviceName());
         $builder->addField('deletedAt', DateTimeType::serviceName());
         $builder->addField('status', StatusType::serviceName());
-        $builder->addField('additionalUserSchema', SchemaType::serviceName());
-        $builder->addField('additionalAccountSchema', SchemaType::serviceName());
+        $builder->addField('userAttributes', SchemaType::serviceName());
+        $builder->addField('accountAttributes', SchemaType::serviceName());
     }
 }

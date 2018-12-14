@@ -150,8 +150,8 @@ final class ConfigAction implements MiddlewareInterface
     {
         $schema = null;
 
-        if (!empty($this->adminConfig->additionalUserSchema())) {
-            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->additionalUserSchema());
+        if (!empty($this->adminConfig->userAttributesSchema())) {
+            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->userAttributesSchema());
         }
 
         return $schema;

@@ -123,17 +123,17 @@ final class AdminConfig implements SegmentProviderInterface
     /**
      * @return string
      */
-    public function additionalUserSchema(): string
+    public function userAttributesSchema(): ?string
     {
-        return $this->adminProjectConfig->additionalUserSchema();
+        return $this->adminProjectConfig->userAttributesSchema();
     }
 
     /**
      * @return string
      */
-    public function additionalAccountSchema(): string
+    public function accountAttributesSchema(): ?string
     {
-        return $this->adminProjectConfig->additionalAccountSchema();
+        return $this->adminProjectConfig->accountAttributesSchema();
     }
 
     /**

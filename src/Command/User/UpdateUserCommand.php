@@ -86,7 +86,7 @@ class UpdateUserCommand extends AbstractCommand
 
             $type = (Type::create($content, SchemaType::class))->convertToDatabaseValue();
 
-            $entity = $entity->with('additionalUserSchema', $type);
+            $entity = $entity->with('userAttributes', $type);
         }
 
         $entity = $entity->with('updatedAt', new \DateTimeImmutable());
@@ -111,8 +111,8 @@ class UpdateUserCommand extends AbstractCommand
     {
         $schema = null;
 
-        if (!empty($this->adminConfig->additionalUserSchema())) {
-            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->additionalUserSchema());
+        if (!empty($this->adminConfig->userAttributesSchema())) {
+            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->userAttributesSchema());
         }
 
         return $schema;

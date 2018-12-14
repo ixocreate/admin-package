@@ -75,8 +75,8 @@ class ConfigAction implements MiddlewareInterface
     {
         $schema = null;
 
-        if (!empty($this->adminConfig->additionalAccountSchema())) {
-            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->additionalAccountSchema());
+        if (!empty($this->adminConfig->accountAttributesSchema())) {
+            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->accountAttributesSchema());
         }
 
         return $schema;

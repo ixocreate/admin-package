@@ -68,7 +68,7 @@ class UpdateCommand extends AbstractCommand
 
             $type = (Type::create($content, SchemaType::class))->convertToDatabaseValue();
 
-            $entity = $entity->with('additionalAccountSchema', $type);
+            $entity = $entity->with('accountAttributes', $type);
         }
 
         $entity = $entity->with('updatedAt', new \DateTimeImmutable());
@@ -90,8 +90,8 @@ class UpdateCommand extends AbstractCommand
     {
         $schema = null;
 
-        if (!empty($this->adminConfig->additionalAccountSchema())) {
-            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->additionalAccountSchema());
+        if (!empty($this->adminConfig->accountAttributesSchema())) {
+            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->accountAttributesSchema());
         }
 
         return $schema;

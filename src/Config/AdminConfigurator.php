@@ -39,8 +39,8 @@ final class AdminConfigurator implements ConfiguratorInterface
         'background' => '',
         'clientConfigProvider' => [],
         'adminBuildPath' => __DIR__ . '/../../../admin-frontend/build/',
-        'additionalUserSchema' => '',
-        'additionalAccountSchema' => ''
+        'userAttributesSchema' => null,
+        'accountAttributesSchema' => null
     ];
 
     /**
@@ -165,23 +165,23 @@ final class AdminConfigurator implements ConfiguratorInterface
     }
 
     /**
-     * @param string $additionalUserSchema
+     * @param string $userAttributesSchema
      * @param string $factory
      */
-    public function addUserSchema(string $additionalUserSchema, string $factory = AutowireFactory::class): void
+    public function addUserAttributesSchema(string $userAttributesSchema, string $factory = AutowireFactory::class): void
     {
-        $this->config['additionalUserSchema'] = $additionalUserSchema;
-        $this->additionalSchemaSubManagerConfigurator->addFactory($additionalUserSchema, $factory);
+        $this->config['userAttributesSchema'] = $userAttributesSchema;
+        $this->additionalSchemaSubManagerConfigurator->addFactory($userAttributesSchema, $factory);
     }
 
     /**
-     * @param string $additionalAccountSchema
+     * @param string $accountAttributesSchema
      * @param string $factory
      */
-    public function addAccountSchema(string $additionalAccountSchema, string $factory = AutowireFactory::class): void
+    public function addAccountAttributesSchema(string $accountAttributesSchema, string $factory = AutowireFactory::class): void
     {
-        $this->config['additionalAccountSchema'] = $additionalAccountSchema;
-        $this->additionalSchemaSubManagerConfigurator->addFactory($additionalAccountSchema, $factory);
+        $this->config['accountAttributesSchema'] = $accountAttributesSchema;
+        $this->additionalSchemaSubManagerConfigurator->addFactory($accountAttributesSchema, $factory);
     }
 
     /**
