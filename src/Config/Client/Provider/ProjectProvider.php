@@ -42,6 +42,7 @@ final class ProjectProvider implements ClientConfigProviderInterface
             'copyright' => $this->adminConfig->copyright(),
             'description' => $this->adminConfig->description(),
             'background' => $this->adminConfig->background(),
+            'loginMessage' => $this->adminConfig->loginMessage(),
             'icon' => $this->adminConfig->icon(),
             'logo' => $this->adminConfig->logo(),
         ];

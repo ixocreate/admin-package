@@ -47,6 +47,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'logo'          => '',
         'icon'          => '',
         'background'    => '',
+        'loginMessage' => '',
         'adminBuildPath'=> __DIR__ . '/../../../admin-frontend/build/',
         'adminBuildFiles' => [],
         'navigation'    => [],
@@ -194,6 +195,14 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function accountAttributesSchema(): ?string
     {
         return $this->config['accountAttributesSchema'];
+    }
+
+    /**
+     * @return string
+     */
+    public function loginMessage(): string
+    {
+        return $this->config['loginMessage'];
     }
 
     /**

@@ -37,6 +37,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'logo' => '',
         'icon' => '',
         'background' => '',
+        'loginMessage' => '',
         'clientConfigProvider' => [],
         'adminBuildPath' => __DIR__ . '/../../../admin-frontend/build/',
         'userAttributesSchema' => null,
@@ -262,6 +263,14 @@ final class AdminConfigurator implements ConfiguratorInterface
     public function getNavigationGroup(string $name): Group
     {
         return $this->navigation[$name];
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setLoginMessage(string $message): void
+    {
+        $this->config['loginMessage'] = $message;
     }
 
     /**

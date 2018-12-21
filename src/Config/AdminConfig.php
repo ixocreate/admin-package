@@ -107,6 +107,14 @@ final class AdminConfig implements SegmentProviderInterface
     /**
      * @return string
      */
+    public function loginMessage(): string
+    {
+        return $this->adminProjectConfig->loginMessage();
+    }
+
+    /**
+     * @return string
+     */
     public function adminBuildPath(): string
     {
         return $this->adminProjectConfig->adminBuildPath();
