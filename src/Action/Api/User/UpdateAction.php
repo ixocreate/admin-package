@@ -1,10 +1,7 @@
 <?php
 /**
- * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
- *
- * @package kiwi-suite/admin
- * @link https://github.com/kiwi-suite/admin
- * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
  * @license MIT License
  */
 
@@ -25,7 +22,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class UpdateAction implements MiddlewareInterface
 {
-
     /**
      * @var UserRepository
      */
@@ -44,8 +40,7 @@ final class UpdateAction implements MiddlewareInterface
     public function __construct(
         UserRepository $userRepository,
         CommandBus $commandBus
-    )
-    {
+    ) {
         $this->userRepository = $userRepository;
         $this->commandBus = $commandBus;
     }

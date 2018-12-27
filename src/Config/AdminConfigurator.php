@@ -1,10 +1,7 @@
 <?php
 /**
- * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
- *
- * @package kiwi-suite/admin
- * @link https://github.com/kiwi-suite/admin
- * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
  * @license MIT License
  */
 
@@ -41,7 +38,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'clientConfigProvider' => [],
         'adminBuildPath' => __DIR__ . '/../../../admin-frontend/build/',
         'userAttributesSchema' => null,
-        'accountAttributesSchema' => null
+        'accountAttributesSchema' => null,
     ];
 
     /**
@@ -91,7 +88,6 @@ final class AdminConfigurator implements ConfiguratorInterface
             AdditionalSchemaInterface::class
         );
     }
-
 
     /**
      * @param string $author

@@ -1,10 +1,7 @@
 <?php
 /**
- * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
- *
- * @package kiwi-suite/admin
- * @link https://github.com/kiwi-suite/admin
- * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
  * @license MIT License
  */
 
@@ -34,14 +31,17 @@ final class IndexAction implements MiddlewareInterface
      * @var RepositorySubManager
      */
     private $repositorySubManager;
+
     /**
      * @var MiddlewareSubManager
      */
     private $middlewareSubManager;
+
     /**
      * @var ResourceSubManager
      */
     private $resourceSubManager;
+
     /**
      * @var EntityManagerSubManager
      */
@@ -133,7 +133,7 @@ final class IndexAction implements MiddlewareInterface
         //TODO Collection
         /** @var EntityInterface $entity */
         foreach ($result as $entity) {
-            if (\method_exists($entity,'deletedAt') && $entity->deletedAt() !== null) {
+            if (\method_exists($entity, 'deletedAt') && $entity->deletedAt() !== null) {
                 continue;
             }
 

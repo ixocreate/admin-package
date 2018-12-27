@@ -1,8 +1,13 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
+
 declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Account;
-
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
@@ -16,20 +21,20 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class ConfigAction implements MiddlewareInterface
 {
-
     /**
      * @var AdminConfig
      */
     private $adminConfig;
+
     /**
      * @var Builder
      */
     private $builder;
+
     /**
      * @var AdditionalSchemaSubManager
      */
     private $additionalSchemaSubManager;
-
 
     /**
      * ConfigAction constructor.
@@ -61,7 +66,7 @@ class ConfigAction implements MiddlewareInterface
 
         if ($schema !== null) {
             return new ApiSuccessResponse([
-                'additionalSchema' => $schema->receiveSchema($this->builder)
+                'additionalSchema' => $schema->receiveSchema($this->builder),
             ]);
         }
 

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
 
 declare(strict_types=1);
 
@@ -9,8 +14,9 @@ use Ixocreate\Event\Event;
 
 class UserEvent extends Event
 {
-    public CONST EVENT_CREATE = 'admin-user.create';
-    public CONST EVENT_UPDATE = 'admin-user.update';
+    public const EVENT_CREATE = 'admin-user.create';
+
+    public const EVENT_UPDATE = 'admin-user.update';
 
     /**
      * @var User

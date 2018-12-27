@@ -1,8 +1,13 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
+
 declare(strict_types=1);
 
 namespace Ixocreate\Admin\Command\User;
-
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Event\UserEvent;
@@ -16,19 +21,21 @@ use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 
 class UpdateUserCommand extends AbstractCommand
 {
-
     /**
      * @var AdminConfig
      */
     private $adminConfig;
+
     /**
      * @var AdditionalSchemaSubManager
      */
     private $additionalSchemaSubManager;
+
     /**
      * @var UserRepository
      */
     private $userRepository;
+
     /**
      * @var EventDispatcher
      */
@@ -46,8 +53,7 @@ class UpdateUserCommand extends AbstractCommand
         AdditionalSchemaSubManager $additionalSchemaSubManager,
         UserRepository $userRepository,
         EventDispatcher $eventDispatcher
-    )
-    {
+    ) {
         $this->adminConfig = $adminConfig;
         $this->additionalSchemaSubManager = $additionalSchemaSubManager;
         $this->userRepository = $userRepository;
@@ -55,8 +61,8 @@ class UpdateUserCommand extends AbstractCommand
     }
 
     /**
-     * @return bool
      * @throws \Exception
+     * @return bool
      */
     public function execute(): bool
     {
@@ -73,13 +79,12 @@ class UpdateUserCommand extends AbstractCommand
         $additionalSchema = $this->receiveAdditionalSchema();
 
         if ($additionalSchema !== null) {
-
             $content = [
                 '__receiver__' => [
                     'receiver' => AdditionalSchemaSubManager::class,
                     'options' => [
-                        'additionalSchema' => $additionalSchema::serviceName()
-                    ]
+                        'additionalSchema' => $additionalSchema::serviceName(),
+                    ],
                 ],
                 '__value__' => $data,
             ];
@@ -95,14 +100,12 @@ class UpdateUserCommand extends AbstractCommand
         $this->eventDispatcher->dispatch(UserEvent::EVENT_UPDATE, new UserEvent($entity));
 
         return true;
-
     }
 
     public static function serviceName(): string
     {
         return 'admin.user-update';
     }
-
 
     /**
      * @return AdditionalSchemaInterface|null
@@ -117,6 +120,4 @@ class UpdateUserCommand extends AbstractCommand
 
         return $schema;
     }
-
-
 }

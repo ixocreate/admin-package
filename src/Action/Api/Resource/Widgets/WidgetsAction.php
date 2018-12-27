@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
+
 declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Resource\Widgets;
@@ -8,8 +14,6 @@ use Ixocreate\Admin\Dashboard\DashboardWidgetProviderSubManager;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Contract\Resource\AdminAwareInterface;
-use Ixocreate\Contract\Resource\ResourceInterface;
 use Ixocreate\Contract\Resource\Widgets\Positions\AboveCreateWidgetsInterface;
 use Ixocreate\Contract\Resource\Widgets\Positions\AboveEditWidgetsInterface;
 use Ixocreate\Contract\Resource\Widgets\Positions\AboveListWidgetsInterface;
@@ -21,8 +25,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Router\RouteResult;
-use Zend\Stratigility\MiddlewarePipe;
 use Ixocreate\Contract\Resource\Widgets\WidgetsInterface;
 
 class WidgetsAction implements MiddlewareInterface

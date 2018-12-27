@@ -1,10 +1,7 @@
 <?php
 /**
- * kiwi-suite/admin (https://github.com/kiwi-suite/admin)
- *
- * @package kiwi-suite/admin
- * @link https://github.com/kiwi-suite/admin
- * @copyright Copyright (c) 2010 - 2018 kiwi suite GmbH
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
  * @license MIT License
  */
 
@@ -13,7 +10,6 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Api\User;
 
 use Doctrine\Common\Collections\Criteria;
-use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Entity\Entity\EntityInterface;
@@ -68,7 +64,7 @@ final class IndexAction implements MiddlewareInterface
                     $search[] = $expr->contains($element->name(), $value);
                 }
                 if (!empty($search)) {
-                    $or = call_user_func_array([$expr, 'orX'], $search);
+                    $or = \call_user_func_array([$expr, 'orX'], $search);
                     $criteria->andWhere($or);
                 }
 

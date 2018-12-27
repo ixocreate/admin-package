@@ -1,4 +1,12 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
+
+declare(strict_types=1);
+
 namespace Ixocreate\Admin\Dashboard\Widget;
 
 use Ixocreate\Contract\Admin\DashboardWidgetInterface;
@@ -20,7 +28,6 @@ final class GalleryWidget implements DashboardWidgetInterface
      * @var array
      */
     private $data = [];
-
 
     /**
      * @return int
@@ -76,7 +83,7 @@ final class GalleryWidget implements DashboardWidgetInterface
         $widget->data[] = [
             'image' => $image,
             'title' => $title,
-            'icon' => $icon
+            'icon' => $icon,
         ];
 
         return $widget;
@@ -92,9 +99,9 @@ final class GalleryWidget implements DashboardWidgetInterface
 
     /**
      * Specify data which should be serialized to JSON
-     * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
+     * @see https://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
+     * which is a value of any type other than a resource
      * @since 5.4.0
      */
     public function jsonSerialize()

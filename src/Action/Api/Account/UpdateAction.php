@@ -1,8 +1,13 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
+
 declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Account;
-
 
 use Ixocreate\Admin\Command\Account\UpdateCommand;
 use Ixocreate\Admin\Entity\User;
@@ -17,7 +22,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class UpdateAction implements MiddlewareInterface
 {
-
     /**
      * @var UserRepository
      */
@@ -47,8 +51,8 @@ class UpdateAction implements MiddlewareInterface
      * request handler to do so.
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
-     * @return ResponseInterface
      * @throws \Exception
+     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -69,6 +73,5 @@ class UpdateAction implements MiddlewareInterface
             return new ApiSuccessResponse();
         }
         return new ApiErrorResponse('execution_error', $result->messages());
-
     }
 }

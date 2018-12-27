@@ -1,8 +1,13 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
+
 declare(strict_types=1);
 
 namespace Ixocreate\Admin\Command\Account;
-
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Repository\UserRepository;
@@ -14,15 +19,16 @@ use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 
 class UpdateCommand extends AbstractCommand
 {
-
     /**
      * @var AdminConfig
      */
     private $adminConfig;
+
     /**
      * @var AdditionalSchemaSubManager
      */
     private $additionalSchemaSubManager;
+
     /**
      * @var UserRepository
      */
@@ -36,15 +42,14 @@ class UpdateCommand extends AbstractCommand
      */
     public function __construct(AdminConfig $adminConfig, AdditionalSchemaSubManager $additionalSchemaSubManager, UserRepository $userRepository)
     {
-
         $this->adminConfig = $adminConfig;
         $this->additionalSchemaSubManager = $additionalSchemaSubManager;
         $this->userRepository = $userRepository;
     }
 
     /**
-     * @return bool
      * @throws \Exception
+     * @return bool
      */
     public function execute(): bool
     {
@@ -55,13 +60,12 @@ class UpdateCommand extends AbstractCommand
         $additionalSchema = $this->receiveAdditionalSchema();
 
         if ($additionalSchema !== null) {
-
             $content = [
                 '__receiver__' => [
                     'receiver' => AdditionalSchemaSubManager::class,
                     'options' => [
-                        'additionalSchema' => $additionalSchema::serviceName()
-                    ]
+                        'additionalSchema' => $additionalSchema::serviceName(),
+                    ],
                 ],
                 '__value__' => $data,
             ];
