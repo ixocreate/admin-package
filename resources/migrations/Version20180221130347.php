@@ -5,11 +5,11 @@ namespace KiwiMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\Migrations\AbstractMigration;
-use KiwiSuite\Admin\Type\RoleType;
-use KiwiSuite\Admin\Type\StatusType;
-use KiwiSuite\CommonTypes\Entity\DateTimeType;
-use KiwiSuite\CommonTypes\Entity\EmailType;
-use KiwiSuite\CommonTypes\Entity\UuidType;
+use Ixocreate\Admin\Type\RoleType;
+use Ixocreate\Admin\Type\StatusType;
+use Ixocreate\CommonTypes\Entity\DateTimeType;
+use Ixocreate\CommonTypes\Entity\EmailType;
+use Ixocreate\CommonTypes\Entity\UuidType;
 
 class Version20180221130347 extends AbstractMigration
 {

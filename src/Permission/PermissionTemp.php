@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Permission;
+namespace Ixocreate\Admin\Permission;
 
-use KiwiSuite\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Admin\RoleInterface;
 
 final class PermissionTemp
 {

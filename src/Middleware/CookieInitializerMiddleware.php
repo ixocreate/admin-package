@@ -10,11 +10,11 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Middleware;
+namespace Ixocreate\Admin\Middleware;
 
 use Firebase\JWT\JWT;
-use KiwiSuite\Admin\Entity\SessionData;
-use KiwiSuite\Admin\Session\SessionCookie;
+use Ixocreate\Admin\Entity\SessionData;
+use Ixocreate\Admin\Session\SessionCookie;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

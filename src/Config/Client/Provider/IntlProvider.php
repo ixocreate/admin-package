@@ -10,11 +10,11 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config\Client\Provider;
+namespace Ixocreate\Admin\Config\Client\Provider;
 
-use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
-use KiwiSuite\Contract\Admin\RoleInterface;
-use KiwiSuite\Intl\LocaleManager;
+use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
+use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Intl\LocaleManager;
 
 final class IntlProvider implements ClientConfigProviderInterface
 {

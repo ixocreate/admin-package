@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Response;
+namespace Ixocreate\Admin\Response;
 
-use KiwiSuite\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Contract\Resource\AdminAwareInterface;
 
 class ApiListResponse extends ApiSuccessResponse
 {

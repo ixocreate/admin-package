@@ -10,12 +10,12 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\User;
+namespace Ixocreate\Admin\Action\Api\User;
 
-use KiwiSuite\Admin\Command\User\CreateUserCommand;
-use KiwiSuite\Admin\Response\ApiErrorResponse;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\CommandBus\CommandBus;
+use Ixocreate\Admin\Command\User\CreateUserCommand;
+use Ixocreate\Admin\Response\ApiErrorResponse;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\CommandBus\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -10,16 +10,16 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Command\Account;
+namespace Ixocreate\Admin\Command\Account;
 
 use Doctrine\Common\Collections\Criteria;
-use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\CommandBus\Command\AbstractCommand;
-use KiwiSuite\CommonTypes\Entity\EmailType;
-use KiwiSuite\Contract\Filter\FilterableInterface;
-use KiwiSuite\Contract\Validation\ValidatableInterface;
-use KiwiSuite\Contract\Validation\ViolationCollectorInterface;
-use KiwiSuite\Entity\Type\Type;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\CommandBus\Command\AbstractCommand;
+use Ixocreate\CommonTypes\Entity\EmailType;
+use Ixocreate\Contract\Filter\FilterableInterface;
+use Ixocreate\Contract\Validation\ValidatableInterface;
+use Ixocreate\Contract\Validation\ViolationCollectorInterface;
+use Ixocreate\Entity\Type\Type;
 
 final class ChangeEmailCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {

@@ -10,21 +10,21 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Command\User;
+namespace Ixocreate\Admin\Command\User;
 
 use Identicon\Generator\ImageMagickGenerator;
 use Identicon\Identicon;
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Event\UserEvent;
-use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Role\RoleSubManager;
-use KiwiSuite\CommandBus\Command\AbstractCommand;
-use KiwiSuite\CommonTypes\Entity\EmailType;
-use KiwiSuite\Contract\CommandBus\CommandInterface;
-use KiwiSuite\Contract\Validation\ValidatableInterface;
-use KiwiSuite\Contract\Validation\ViolationCollectorInterface;
-use KiwiSuite\Entity\Type\Type;
-use KiwiSuite\Event\EventDispatcher;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Event\UserEvent;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Role\RoleSubManager;
+use Ixocreate\CommandBus\Command\AbstractCommand;
+use Ixocreate\CommonTypes\Entity\EmailType;
+use Ixocreate\Contract\CommandBus\CommandInterface;
+use Ixocreate\Contract\Validation\ValidatableInterface;
+use Ixocreate\Contract\Validation\ViolationCollectorInterface;
+use Ixocreate\Entity\Type\Type;
+use Ixocreate\Event\EventDispatcher;
 use Ramsey\Uuid\Uuid;
 
 final class CreateUserCommand extends AbstractCommand implements CommandInterface, ValidatableInterface

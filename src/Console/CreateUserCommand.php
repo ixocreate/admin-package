@@ -10,10 +10,10 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Console;
+namespace Ixocreate\Admin\Console;
 
-use KiwiSuite\CommandBus\CommandBus;
-use KiwiSuite\Contract\Command\CommandInterface;
+use Ixocreate\CommandBus\CommandBus;
+use Ixocreate\Contract\Command\CommandInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -58,7 +58,7 @@ final class CreateUserCommand extends Command implements CommandInterface
             'status' => 'active',
         ];
 
-        $result = $this->commandBus->command(\KiwiSuite\Admin\Command\User\CreateUserCommand::class, $data);
+        $result = $this->commandBus->command(\Ixocreate\Admin\Command\User\CreateUserCommand::class, $data);
 
         if (!$result->isSuccessful()) {
         }

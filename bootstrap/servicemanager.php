@@ -1,21 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin;
+namespace Ixocreate\Admin;
 
-/** @var \KiwiSuite\ServiceManager\ServiceManagerConfigurator $serviceManager */
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Config\Client\ClientConfigGenerator;
-use KiwiSuite\Admin\Config\Client\ClientConfigProviderSubManager;
-use KiwiSuite\Admin\Config\Factory\AdminConfigFactory;
-use KiwiSuite\Admin\Dashboard\DashboardWidgetProviderSubManager;
-use KiwiSuite\Admin\Helper\Factory\ServerUrlHelperFactory;
-use KiwiSuite\Admin\Helper\Factory\UrlHelperFactory;
-use KiwiSuite\Admin\Helper\ServerUrlHelper;
-use KiwiSuite\Admin\Helper\UrlHelper;
-use KiwiSuite\Admin\Role\RoleSubManager;
-use KiwiSuite\Admin\Router\AdminRouter;
-use KiwiSuite\Admin\Router\Factory\AdminRouterFactory;
+/** @var \Ixocreate\ServiceManager\ServiceManagerConfigurator $serviceManager */
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Config\Client\ClientConfigGenerator;
+use Ixocreate\Admin\Config\Client\ClientConfigProviderSubManager;
+use Ixocreate\Admin\Config\Factory\AdminConfigFactory;
+use Ixocreate\Admin\Dashboard\DashboardWidgetProviderSubManager;
+use Ixocreate\Admin\Helper\Factory\ServerUrlHelperFactory;
+use Ixocreate\Admin\Helper\Factory\UrlHelperFactory;
+use Ixocreate\Admin\Helper\ServerUrlHelper;
+use Ixocreate\Admin\Helper\UrlHelper;
+use Ixocreate\Admin\Role\RoleSubManager;
+use Ixocreate\Admin\Router\AdminRouter;
+use Ixocreate\Admin\Router\Factory\AdminRouterFactory;
 
 $serviceManager->addFactory(AdminConfig::class, AdminConfigFactory::class);
 $serviceManager->addFactory(AdminRouter::class, AdminRouterFactory::class);

@@ -10,20 +10,20 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config;
+namespace Ixocreate\Admin\Config;
 
-use KiwiSuite\Admin\Config\Client\ClientConfigProviderSubManager;
-use KiwiSuite\Admin\Config\Navigation\Group;
-use KiwiSuite\Admin\Dashboard\DashboardWidgetProviderSubManager;
-use KiwiSuite\Admin\Role\RoleSubManager;
-use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
-use KiwiSuite\Contract\Admin\DashboardWidgetProviderInterface;
-use KiwiSuite\Contract\Application\ConfiguratorInterface;
-use KiwiSuite\Contract\Application\ServiceRegistryInterface;
-use KiwiSuite\Contract\Schema\AdditionalSchemaInterface;
-use KiwiSuite\Schema\AdditionalSchema\AdditionalSchemaSubManager;
-use KiwiSuite\ServiceManager\Factory\AutowireFactory;
-use KiwiSuite\ServiceManager\SubManager\SubManagerConfigurator;
+use Ixocreate\Admin\Config\Client\ClientConfigProviderSubManager;
+use Ixocreate\Admin\Config\Navigation\Group;
+use Ixocreate\Admin\Dashboard\DashboardWidgetProviderSubManager;
+use Ixocreate\Admin\Role\RoleSubManager;
+use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
+use Ixocreate\Contract\Admin\DashboardWidgetProviderInterface;
+use Ixocreate\Contract\Application\ConfiguratorInterface;
+use Ixocreate\Contract\Application\ServiceRegistryInterface;
+use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
+use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\ServiceManager\Factory\AutowireFactory;
+use Ixocreate\ServiceManager\SubManager\SubManagerConfigurator;
 use Zend\Stdlib\SplPriorityQueue;
 
 final class AdminConfigurator implements ConfiguratorInterface
@@ -80,7 +80,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         );
         $this->roleSubManagerConfigurator = new SubManagerConfigurator(
             RoleSubManager::class,
-            \KiwiSuite\Contract\Admin\RoleInterface::class
+            \Ixocreate\Contract\Admin\RoleInterface::class
         );
         $this->dashboardWidgetSubManagerConfigurator = new SubManagerConfigurator(
             DashboardWidgetProviderSubManager::class,

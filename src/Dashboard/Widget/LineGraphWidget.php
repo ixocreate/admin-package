@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Dashboard\Widget;
+namespace Ixocreate\Admin\Dashboard\Widget;
 
-use KiwiSuite\Contract\Admin\DashboardWidgetInterface;
+use Ixocreate\Contract\Admin\DashboardWidgetInterface;
 
 final class LineGraphWidget implements DashboardWidgetInterface
 {

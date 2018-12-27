@@ -10,11 +10,11 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config\Client;
+namespace Ixocreate\Admin\Config\Client;
 
-use KiwiSuite\Admin\Config\AdminProjectConfig;
-use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
-use KiwiSuite\Contract\Admin\RoleInterface;
+use Ixocreate\Admin\Config\AdminProjectConfig;
+use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
+use Ixocreate\Contract\Admin\RoleInterface;
 
 final class ClientConfigGenerator
 {

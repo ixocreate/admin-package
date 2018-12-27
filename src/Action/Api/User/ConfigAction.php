@@ -10,23 +10,23 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\User;
+namespace Ixocreate\Admin\Action\Api\User;
 
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Admin\Type\RoleType;
-use KiwiSuite\Admin\Type\StatusType;
-use KiwiSuite\Contract\Schema\AdditionalSchemaInterface;
-use KiwiSuite\Contract\Schema\SchemaInterface;
-use KiwiSuite\Entity\Type\TypeSubManager;
-use KiwiSuite\Schema\AdditionalSchema\AdditionalSchemaSubManager;
-use KiwiSuite\Schema\Builder;
-use KiwiSuite\Schema\Elements\GroupElement;
-use KiwiSuite\Schema\Elements\TabbedGroupElement;
-use KiwiSuite\Schema\Elements\TextElement;
-use KiwiSuite\Schema\ElementSubManager;
-use KiwiSuite\Schema\Schema;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Type\RoleType;
+use Ixocreate\Admin\Type\StatusType;
+use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
+use Ixocreate\Contract\Schema\SchemaInterface;
+use Ixocreate\Entity\Type\TypeSubManager;
+use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\Builder;
+use Ixocreate\Schema\Elements\GroupElement;
+use Ixocreate\Schema\Elements\TabbedGroupElement;
+use Ixocreate\Schema\Elements\TextElement;
+use Ixocreate\Schema\ElementSubManager;
+use Ixocreate\Schema\Schema;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

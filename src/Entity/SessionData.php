@@ -10,13 +10,13 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Entity;
+namespace Ixocreate\Admin\Entity;
 
-use KiwiSuite\CommonTypes\Entity\UuidType;
-use KiwiSuite\Entity\Entity\Definition;
-use KiwiSuite\Entity\Entity\DefinitionCollection;
-use KiwiSuite\Entity\Entity\EntityInterface;
-use KiwiSuite\Entity\Entity\EntityTrait;
+use Ixocreate\CommonTypes\Entity\UuidType;
+use Ixocreate\Entity\Entity\Definition;
+use Ixocreate\Entity\Entity\DefinitionCollection;
+use Ixocreate\Entity\Entity\EntityInterface;
+use Ixocreate\Entity\Entity\EntityTrait;
 
 final class SessionData implements EntityInterface
 {

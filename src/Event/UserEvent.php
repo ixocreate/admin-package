@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Event;
+namespace Ixocreate\Admin\Event;
 
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Event\Event;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Event\Event;
 
 class UserEvent extends Event
 {

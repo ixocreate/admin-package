@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use KiwiSuite\Media\ImageDefinition\ImageDefinitionConfigurator;
+use Ixocreate\Media\ImageDefinition\ImageDefinitionConfigurator;
 
 /** @var ImageDefinitionConfigurator $imageDefinition */
-$imageDefinition->addImageDefinition(\KiwiSuite\Admin\ImageDefinition\AdminThumb::class);
+$imageDefinition->addImageDefinition(\Ixocreate\Admin\ImageDefinition\AdminThumb::class);

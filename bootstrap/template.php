@@ -1,8 +1,8 @@
 <?php
-namespace KiwiSuite\Admin;
+namespace Ixocreate\Admin;
 
 
-use KiwiSuite\Template\TemplateConfigurator;
+use Ixocreate\Template\TemplateConfigurator;
 
 /** @var TemplateConfigurator $template */
 

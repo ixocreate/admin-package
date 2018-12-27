@@ -10,12 +10,12 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Router\Factory;
+namespace Ixocreate\Admin\Router\Factory;
 
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Router\AdminRouter;
-use KiwiSuite\Contract\ServiceManager\FactoryInterface;
-use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Router\AdminRouter;
+use Ixocreate\Contract\ServiceManager\FactoryInterface;
+use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
 
 final class AdminRouterFactory implements FactoryInterface
 {

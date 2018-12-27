@@ -10,12 +10,12 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Helper\Factory;
+namespace Ixocreate\Admin\Helper\Factory;
 
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Helper\ServerUrlHelper;
-use KiwiSuite\Contract\ServiceManager\FactoryInterface;
-use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Helper\ServerUrlHelper;
+use Ixocreate\Contract\ServiceManager\FactoryInterface;
+use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
 
 final class ServerUrlHelperFactory implements FactoryInterface
 {

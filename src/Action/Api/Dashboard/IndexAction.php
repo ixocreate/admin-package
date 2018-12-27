@@ -10,13 +10,13 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\Dashboard;
+namespace Ixocreate\Admin\Action\Api\Dashboard;
 
-use KiwiSuite\Admin\Dashboard\DashboardWidgetCollector;
-use KiwiSuite\Admin\Dashboard\DashboardWidgetProviderSubManager;
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Contract\Admin\DashboardWidgetProviderInterface;
+use Ixocreate\Admin\Dashboard\DashboardWidgetCollector;
+use Ixocreate\Admin\Dashboard\DashboardWidgetProviderSubManager;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Contract\Admin\DashboardWidgetProviderInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

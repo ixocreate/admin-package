@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\Session;
+namespace Ixocreate\Admin\Action\Api\Session;
 
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

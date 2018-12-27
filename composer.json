@@ -29,13 +29,13 @@
     },
     "autoload": {
         "psr-4": {
-            "KiwiSuite\\Admin\\": "src/"
+            "Ixocreate\\Admin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "KiwiSuiteTest\\Admin\\": "tests/src/",
-            "KiwiSuiteMisc\\Admin\\": "tests/misc/"
+            "IxocreateTest\\Admin\\": "tests/src/",
+            "IxocreateMisc\\Admin\\": "tests/misc/"
         }
     },
     "scripts" : {

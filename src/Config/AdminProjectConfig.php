@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config;
+namespace Ixocreate\Admin\Config;
 
-use KiwiSuite\Contract\Application\SerializableServiceInterface;
+use Ixocreate\Contract\Application\SerializableServiceInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
 final class AdminProjectConfig implements SerializableServiceInterface

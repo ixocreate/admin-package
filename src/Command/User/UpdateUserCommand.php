@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Command\User;
+namespace Ixocreate\Admin\Command\User;
 
 
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Event\UserEvent;
-use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\CommandBus\Command\AbstractCommand;
-use KiwiSuite\CommonTypes\Entity\SchemaType;
-use KiwiSuite\Contract\Schema\AdditionalSchemaInterface;
-use KiwiSuite\Entity\Type\Type;
-use KiwiSuite\Event\EventDispatcher;
-use KiwiSuite\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Event\UserEvent;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\CommandBus\Command\AbstractCommand;
+use Ixocreate\CommonTypes\Entity\SchemaType;
+use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
+use Ixocreate\Entity\Type\Type;
+use Ixocreate\Event\EventDispatcher;
+use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 
 class UpdateUserCommand extends AbstractCommand
 {

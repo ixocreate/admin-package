@@ -1,9 +1,9 @@
 <?php
-namespace KiwiSuite\Admin;
+namespace Ixocreate\Admin;
 
-use KiwiSuite\Admin\Type\RoleType;
-use KiwiSuite\Admin\Type\StatusType;
-use KiwiSuite\Entity\Type\TypeConfigurator;
+use Ixocreate\Admin\Type\RoleType;
+use Ixocreate\Admin\Type\StatusType;
+use Ixocreate\Entity\Type\TypeConfigurator;
 
 /** @var TypeConfigurator $type */
 $type->addType(RoleType::class);

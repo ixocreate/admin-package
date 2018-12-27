@@ -10,22 +10,22 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Entity;
+namespace Ixocreate\Admin\Entity;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use KiwiSuite\Admin\Type\RoleType;
-use KiwiSuite\Admin\Type\StatusType;
-use KiwiSuite\CommonTypes\Entity\DateTimeType;
-use KiwiSuite\CommonTypes\Entity\EmailType;
-use KiwiSuite\CommonTypes\Entity\SchemaType;
-use KiwiSuite\CommonTypes\Entity\UuidType;
-use KiwiSuite\Contract\Entity\DatabaseEntityInterface;
-use KiwiSuite\Contract\Type\TypeInterface;
-use KiwiSuite\Entity\Entity\Definition;
-use KiwiSuite\Entity\Entity\DefinitionCollection;
-use KiwiSuite\Entity\Entity\EntityInterface;
-use KiwiSuite\Entity\Entity\EntityTrait;
+use Ixocreate\Admin\Type\RoleType;
+use Ixocreate\Admin\Type\StatusType;
+use Ixocreate\CommonTypes\Entity\DateTimeType;
+use Ixocreate\CommonTypes\Entity\EmailType;
+use Ixocreate\CommonTypes\Entity\SchemaType;
+use Ixocreate\CommonTypes\Entity\UuidType;
+use Ixocreate\Contract\Entity\DatabaseEntityInterface;
+use Ixocreate\Contract\Type\TypeInterface;
+use Ixocreate\Entity\Entity\Definition;
+use Ixocreate\Entity\Entity\DefinitionCollection;
+use Ixocreate\Entity\Entity\EntityInterface;
+use Ixocreate\Entity\Entity\EntityTrait;
 
 final class User implements EntityInterface, DatabaseEntityInterface
 {

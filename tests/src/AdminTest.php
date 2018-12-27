@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuiteTest\Admin;
+namespace IxocreateTest\Admin;
 
 use PHPUnit\Framework\TestCase;
 

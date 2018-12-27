@@ -10,17 +10,17 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Type;
+namespace Ixocreate\Admin\Type;
 
 use Doctrine\DBAL\Types\StringType;
-use KiwiSuite\Admin\Role\RoleSubManager;
-use KiwiSuite\Contract\Admin\RoleInterface;
-use KiwiSuite\Contract\Schema\ElementInterface;
-use KiwiSuite\Contract\Type\DatabaseTypeInterface;
-use KiwiSuite\Contract\Type\SchemaElementInterface;
-use KiwiSuite\Entity\Type\AbstractType;
-use KiwiSuite\Schema\Elements\SelectElement;
-use KiwiSuite\Schema\ElementSubManager;
+use Ixocreate\Admin\Role\RoleSubManager;
+use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Schema\ElementInterface;
+use Ixocreate\Contract\Type\DatabaseTypeInterface;
+use Ixocreate\Contract\Type\SchemaElementInterface;
+use Ixocreate\Entity\Type\AbstractType;
+use Ixocreate\Schema\Elements\SelectElement;
+use Ixocreate\Schema\ElementSubManager;
 
 final class RoleType extends AbstractType implements DatabaseTypeInterface, SchemaElementInterface
 {

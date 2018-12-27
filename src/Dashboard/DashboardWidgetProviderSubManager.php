@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Dashboard;
+namespace Ixocreate\Admin\Dashboard;
 
-use KiwiSuite\ServiceManager\SubManager\SubManager;
+use Ixocreate\ServiceManager\SubManager\SubManager;
 
 final class DashboardWidgetProviderSubManager extends SubManager
 {

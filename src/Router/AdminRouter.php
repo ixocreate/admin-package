@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Router;
+namespace Ixocreate\Admin\Router;
 
-use KiwiSuite\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Config\AdminConfig;
 use Zend\Expressive\Router\FastRouteRouter;
 
 final class AdminRouter extends FastRouteRouter

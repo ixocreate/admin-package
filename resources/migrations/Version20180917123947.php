@@ -4,7 +4,7 @@ namespace KiwiMigration;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use KiwiSuite\CommonTypes\Entity\DateTimeType;
+use Ixocreate\CommonTypes\Entity\DateTimeType;
 
 final class Version20180917123947 extends AbstractMigration
 {

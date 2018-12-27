@@ -1,35 +1,35 @@
 <?php
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin;
+namespace Ixocreate\Admin;
 
 /** @var PipeConfigurator $pipe */
 
-use KiwiSuite\Admin\Action\Account\ChangeEmailAction;
-use KiwiSuite\Admin\Action\Account\ChangePasswordAction;
-use KiwiSuite\Admin\Action\Api\Auth\LoginAction;
-use KiwiSuite\Admin\Action\Api\Auth\LogoutAction;
-use KiwiSuite\Admin\Action\Api\Auth\UserAction;
-use KiwiSuite\Admin\Action\Api\Config\ConfigAction;
-use KiwiSuite\Admin\Action\Api\Resource\CreateAction;
-use KiwiSuite\Admin\Action\Api\Resource\DeleteAction;
-use KiwiSuite\Admin\Action\Api\Resource\DetailAction;
-use KiwiSuite\Admin\Action\Api\Resource\UpdateAction;
-use KiwiSuite\Admin\Action\Api\Session\SessionAction;
-use KiwiSuite\Admin\Action\IndexAction;
-use KiwiSuite\Admin\Action\Resource\Widgets\WidgetsAction;
-use KiwiSuite\Admin\Action\StaticAction;
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Middleware\Api\AuthorizationGuardMiddleware;
-use KiwiSuite\Admin\Middleware\Api\EnforceApiResponseMiddleware;
-use KiwiSuite\Admin\Middleware\Api\ErrorMiddleware;
-use KiwiSuite\Admin\Middleware\Api\SessionDataMiddleware;
-use KiwiSuite\Admin\Middleware\Api\UserMiddleware;
-use KiwiSuite\Admin\Middleware\Api\XsrfProtectionMiddleware;
-use KiwiSuite\Admin\Middleware\CookieInitializerMiddleware;
-use KiwiSuite\Admin\Router\AdminRouter;
-use KiwiSuite\ApplicationHttp\Pipe\GroupPipeConfigurator;
-use KiwiSuite\ApplicationHttp\Pipe\PipeConfigurator;
+use Ixocreate\Admin\Action\Account\ChangeEmailAction;
+use Ixocreate\Admin\Action\Account\ChangePasswordAction;
+use Ixocreate\Admin\Action\Api\Auth\LoginAction;
+use Ixocreate\Admin\Action\Api\Auth\LogoutAction;
+use Ixocreate\Admin\Action\Api\Auth\UserAction;
+use Ixocreate\Admin\Action\Api\Config\ConfigAction;
+use Ixocreate\Admin\Action\Api\Resource\CreateAction;
+use Ixocreate\Admin\Action\Api\Resource\DeleteAction;
+use Ixocreate\Admin\Action\Api\Resource\DetailAction;
+use Ixocreate\Admin\Action\Api\Resource\UpdateAction;
+use Ixocreate\Admin\Action\Api\Session\SessionAction;
+use Ixocreate\Admin\Action\IndexAction;
+use Ixocreate\Admin\Action\Resource\Widgets\WidgetsAction;
+use Ixocreate\Admin\Action\StaticAction;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Middleware\Api\AuthorizationGuardMiddleware;
+use Ixocreate\Admin\Middleware\Api\EnforceApiResponseMiddleware;
+use Ixocreate\Admin\Middleware\Api\ErrorMiddleware;
+use Ixocreate\Admin\Middleware\Api\SessionDataMiddleware;
+use Ixocreate\Admin\Middleware\Api\UserMiddleware;
+use Ixocreate\Admin\Middleware\Api\XsrfProtectionMiddleware;
+use Ixocreate\Admin\Middleware\CookieInitializerMiddleware;
+use Ixocreate\Admin\Router\AdminRouter;
+use Ixocreate\ApplicationHttp\Pipe\GroupPipeConfigurator;
+use Ixocreate\ApplicationHttp\Pipe\PipeConfigurator;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe) {
@@ -51,23 +51,23 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->get('/auth/user', UserAction::class, "admin.api.auth.user");
             $group->post('/auth/logout', LogoutAction::class, "admin.api.auth.logout");
 
-            $group->get('/user', \KiwiSuite\Admin\Action\Api\User\IndexAction::class, 'admin.api.user.index');
-            $group->post('/user', \KiwiSuite\Admin\Action\Api\User\CreateAction::class, 'admin.api.user.create');
-            $group->get('/user/{id}', \KiwiSuite\Admin\Action\Api\User\DetailAction::class, 'admin.api.user.detail');
-            $group->get('/user/config', \KiwiSuite\Admin\Action\Api\User\ConfigAction::class, 'admin.api.user.config');
-            $group->patch('/user/{id}', \KiwiSuite\Admin\Action\Api\User\UpdateAction::class, 'admin.api.user.update');
-            $group->delete('/user/{id}', \KiwiSuite\Admin\Action\Api\User\DeleteAction::class, 'admin.api.user.delete');
+            $group->get('/user', \Ixocreate\Admin\Action\Api\User\IndexAction::class, 'admin.api.user.index');
+            $group->post('/user', \Ixocreate\Admin\Action\Api\User\CreateAction::class, 'admin.api.user.create');
+            $group->get('/user/{id}', \Ixocreate\Admin\Action\Api\User\DetailAction::class, 'admin.api.user.detail');
+            $group->get('/user/config', \Ixocreate\Admin\Action\Api\User\ConfigAction::class, 'admin.api.user.config');
+            $group->patch('/user/{id}', \Ixocreate\Admin\Action\Api\User\UpdateAction::class, 'admin.api.user.update');
+            $group->delete('/user/{id}', \Ixocreate\Admin\Action\Api\User\DeleteAction::class, 'admin.api.user.delete');
             $group->post('/user/resetPassword', ChangeEmailAction::class, 'admin.api.user.resetPassword');
 
-            $group->patch('/account/{id}', \KiwiSuite\Admin\Action\Account\UpdateAction::class, 'admin.api.account.update');
-            $group->get('/account/config', \KiwiSuite\Admin\Action\Account\ConfigAction::class, 'admin.api.account.config');
+            $group->patch('/account/{id}', \Ixocreate\Admin\Action\Account\UpdateAction::class, 'admin.api.account.update');
+            $group->get('/account/config', \Ixocreate\Admin\Action\Account\ConfigAction::class, 'admin.api.account.config');
             $group->patch('/account/email', ChangeEmailAction::class, 'admin.api.account.email');
             $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
 
-            $group->get('/dashboard', \KiwiSuite\Admin\Action\Api\Dashboard\IndexAction::class, 'admin.api.dashboard.index');
+            $group->get('/dashboard', \Ixocreate\Admin\Action\Api\Dashboard\IndexAction::class, 'admin.api.dashboard.index');
 
             $group->group('resource')(function(GroupPipeConfigurator $group) {
-                $group->get('/resource/{resource}', \KiwiSuite\Admin\Action\Api\Resource\IndexAction::class, 'admin.api.resource.index', PHP_INT_MAX * -1);
+                $group->get('/resource/{resource}', \Ixocreate\Admin\Action\Api\Resource\IndexAction::class, 'admin.api.resource.index', PHP_INT_MAX * -1);
                 $group->get('/resource/{resource}/detail/{id}', DetailAction::class, 'admin.api.resource.detail', PHP_INT_MAX * -1);
                 $group->patch('/resource/{resource}/{id}', UpdateAction::class, 'admin.api.resource.update', PHP_INT_MAX * -1);
                 $group->post('/resource/{resource}', CreateAction::class, 'admin.api.resource.create', PHP_INT_MAX * -1);

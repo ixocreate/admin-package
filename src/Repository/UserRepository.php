@@ -10,10 +10,10 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Repository;
+namespace Ixocreate\Admin\Repository;
 
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Database\Repository\AbstractRepository;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Database\Repository\AbstractRepository;
 
 final class UserRepository extends AbstractRepository
 {

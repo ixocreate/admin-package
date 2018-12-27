@@ -10,10 +10,10 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Middleware\Api;
+namespace Ixocreate\Admin\Middleware\Api;
 
-use KiwiSuite\Admin\Entity\SessionData;
-use KiwiSuite\Admin\Response\ApiErrorResponse;
+use Ixocreate\Admin\Entity\SessionData;
+use Ixocreate\Admin\Response\ApiErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

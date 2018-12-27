@@ -10,15 +10,15 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config\Factory;
+namespace Ixocreate\Admin\Config\Factory;
 
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Config\AdminProjectConfig;
-use KiwiSuite\Asset\Asset;
-use KiwiSuite\Config\Config;
-use KiwiSuite\Contract\ServiceManager\FactoryInterface;
-use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
-use KiwiSuite\ProjectUri\ProjectUri;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Config\AdminProjectConfig;
+use Ixocreate\Asset\Asset;
+use Ixocreate\Config\Config;
+use Ixocreate\Contract\ServiceManager\FactoryInterface;
+use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\ProjectUri\ProjectUri;
 use Zend\Diactoros\Uri;
 
 final class AdminConfigFactory implements FactoryInterface

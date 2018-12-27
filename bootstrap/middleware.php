@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin;
+namespace Ixocreate\Admin;
 
 /** @var MiddlewareConfigurator $middleware */
-use KiwiSuite\Admin\Middleware\Factory\JsonBodyParamsFactory;
-use KiwiSuite\ApplicationHttp\Middleware\MiddlewareConfigurator;
+use Ixocreate\Admin\Middleware\Factory\JsonBodyParamsFactory;
+use Ixocreate\ApplicationHttp\Middleware\MiddlewareConfigurator;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 $middleware->addMiddleware(BodyParamsMiddleware::class, JsonBodyParamsFactory::class);

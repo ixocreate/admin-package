@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Resource;
+namespace Ixocreate\Admin\Resource;
 
-use KiwiSuite\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Admin\RoleInterface;
 
 trait DefaultAdminTrait
 {

@@ -1,13 +1,13 @@
 <?php
 namespace App;
-use KiwiSuite\Admin\Config\Client\Provider\IntlProvider;
-use KiwiSuite\Admin\Config\Client\Provider\NavigationProvider;
-use KiwiSuite\Admin\Config\Client\Provider\ProjectProvider;
-use KiwiSuite\Admin\Config\Client\Provider\ResourceProvider;
-use KiwiSuite\Admin\Config\Client\Provider\RoutesProvider;
-use KiwiSuite\Admin\Role\AdministratorRole;
+use Ixocreate\Admin\Config\Client\Provider\IntlProvider;
+use Ixocreate\Admin\Config\Client\Provider\NavigationProvider;
+use Ixocreate\Admin\Config\Client\Provider\ProjectProvider;
+use Ixocreate\Admin\Config\Client\Provider\ResourceProvider;
+use Ixocreate\Admin\Config\Client\Provider\RoutesProvider;
+use Ixocreate\Admin\Role\AdministratorRole;
 
-/** @var \KiwiSuite\Admin\Config\AdminConfigurator $admin */
+/** @var \Ixocreate\Admin\Config\AdminConfigurator $admin */
 
 $admin->addRole(AdministratorRole::class);
 

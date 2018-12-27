@@ -1,29 +1,29 @@
 <?php
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Resource\Widgets;
+namespace Ixocreate\Admin\Action\Resource\Widgets;
 
-use KiwiSuite\Admin\Dashboard\DashboardWidgetCollector;
-use KiwiSuite\Admin\Dashboard\DashboardWidgetProviderSubManager;
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Contract\Resource\AdminAwareInterface;
-use KiwiSuite\Contract\Resource\ResourceInterface;
-use KiwiSuite\Contract\Resource\Widgets\Positions\AboveCreateWidgetsInterface;
-use KiwiSuite\Contract\Resource\Widgets\Positions\AboveEditWidgetsInterface;
-use KiwiSuite\Contract\Resource\Widgets\Positions\AboveListWidgetsInterface;
-use KiwiSuite\Contract\Resource\Widgets\Positions\BelowCreateWidgetsInterface;
-use KiwiSuite\Contract\Resource\Widgets\Positions\BelowEditWidgetsInterface;
-use KiwiSuite\Contract\Resource\Widgets\Positions\BelowListWidgetsInterface;
-use KiwiSuite\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Admin\Dashboard\DashboardWidgetCollector;
+use Ixocreate\Admin\Dashboard\DashboardWidgetProviderSubManager;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Contract\Resource\ResourceInterface;
+use Ixocreate\Contract\Resource\Widgets\Positions\AboveCreateWidgetsInterface;
+use Ixocreate\Contract\Resource\Widgets\Positions\AboveEditWidgetsInterface;
+use Ixocreate\Contract\Resource\Widgets\Positions\AboveListWidgetsInterface;
+use Ixocreate\Contract\Resource\Widgets\Positions\BelowCreateWidgetsInterface;
+use Ixocreate\Contract\Resource\Widgets\Positions\BelowEditWidgetsInterface;
+use Ixocreate\Contract\Resource\Widgets\Positions\BelowListWidgetsInterface;
+use Ixocreate\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Router\RouteResult;
 use Zend\Stratigility\MiddlewarePipe;
-use KiwiSuite\Contract\Resource\Widgets\WidgetsInterface;
+use Ixocreate\Contract\Resource\Widgets\WidgetsInterface;
 
 class WidgetsAction implements MiddlewareInterface
 {

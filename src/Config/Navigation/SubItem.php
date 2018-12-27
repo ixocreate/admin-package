@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config\Navigation;
+namespace Ixocreate\Admin\Config\Navigation;
 
 class SubItem
 {

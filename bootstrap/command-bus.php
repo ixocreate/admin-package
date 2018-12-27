@@ -1,5 +1,5 @@
 <?php
-namespace KiwiSuite\Admin;
+namespace Ixocreate\Admin;
 
-/** @var \KiwiSuite\CommandBus\Configurator $commandBus */
+/** @var \Ixocreate\CommandBus\Configurator $commandBus */
 $commandBus->addCommandDirectory(__DIR__ . '/../src/Command', true);

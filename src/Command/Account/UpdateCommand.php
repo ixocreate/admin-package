@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Command\Account;
+namespace Ixocreate\Admin\Command\Account;
 
 
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\CommandBus\Command\AbstractCommand;
-use KiwiSuite\CommonTypes\Entity\SchemaType;
-use KiwiSuite\Contract\Schema\AdditionalSchemaInterface;
-use KiwiSuite\Entity\Type\Type;
-use KiwiSuite\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\CommandBus\Command\AbstractCommand;
+use Ixocreate\CommonTypes\Entity\SchemaType;
+use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
+use Ixocreate\Entity\Type\Type;
+use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 
 class UpdateCommand extends AbstractCommand
 {

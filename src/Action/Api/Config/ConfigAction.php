@@ -10,11 +10,11 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\Config;
+namespace Ixocreate\Admin\Action\Api\Config;
 
-use KiwiSuite\Admin\Config\Client\ClientConfigGenerator;
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Config\Client\ClientConfigGenerator;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

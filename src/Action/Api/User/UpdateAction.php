@@ -10,14 +10,14 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\User;
+namespace Ixocreate\Admin\Action\Api\User;
 
-use KiwiSuite\Admin\Command\User\UpdateUserCommand;
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Response\ApiErrorResponse;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\CommandBus\CommandBus;
+use Ixocreate\Admin\Command\User\UpdateUserCommand;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Response\ApiErrorResponse;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\CommandBus\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

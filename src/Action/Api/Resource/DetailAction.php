@@ -10,16 +10,16 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\Resource;
+namespace Ixocreate\Admin\Action\Api\Resource;
 
-use KiwiSuite\Admin\Response\ApiDetailResponse;
-use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
-use KiwiSuite\Contract\Resource\AdminAwareInterface;
-use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
-use KiwiSuite\Database\Repository\RepositoryInterface;
-use KiwiSuite\Entity\Entity\EntityInterface;
-use KiwiSuite\Resource\SubManager\ResourceSubManager;
-use KiwiSuite\Schema\Builder;
+use Ixocreate\Admin\Response\ApiDetailResponse;
+use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
+use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Database\Repository\Factory\RepositorySubManager;
+use Ixocreate\Database\Repository\RepositoryInterface;
+use Ixocreate\Entity\Entity\EntityInterface;
+use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

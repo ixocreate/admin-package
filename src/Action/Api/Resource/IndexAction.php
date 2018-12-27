@@ -10,17 +10,17 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\Resource;
+namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Doctrine\Common\Collections\Criteria;
-use KiwiSuite\Admin\Response\ApiListResponse;
-use KiwiSuite\ApplicationHttp\Middleware\MiddlewareSubManager;
-use KiwiSuite\Contract\Resource\AdminAwareInterface;
-use KiwiSuite\Database\EntityManager\Factory\EntityManagerSubManager;
-use KiwiSuite\Database\Repository\Factory\RepositorySubManager;
-use KiwiSuite\Database\Repository\RepositoryInterface;
-use KiwiSuite\Entity\Entity\EntityInterface;
-use KiwiSuite\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Admin\Response\ApiListResponse;
+use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
+use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Database\EntityManager\Factory\EntityManagerSubManager;
+use Ixocreate\Database\Repository\Factory\RepositorySubManager;
+use Ixocreate\Database\Repository\RepositoryInterface;
+use Ixocreate\Entity\Entity\EntityInterface;
+use Ixocreate\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

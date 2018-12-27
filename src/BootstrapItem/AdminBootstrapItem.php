@@ -10,11 +10,11 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\BootstrapItem;
+namespace Ixocreate\Admin\BootstrapItem;
 
-use KiwiSuite\Admin\Config\AdminConfigurator;
-use KiwiSuite\Contract\Application\BootstrapItemInterface;
-use KiwiSuite\Contract\Application\ConfiguratorInterface;
+use Ixocreate\Admin\Config\AdminConfigurator;
+use Ixocreate\Contract\Application\BootstrapItemInterface;
+use Ixocreate\Contract\Application\ConfiguratorInterface;
 
 final class AdminBootstrapItem implements BootstrapItemInterface
 {

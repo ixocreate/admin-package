@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Helper;
+namespace Ixocreate\Admin\Helper;
 
 final class UrlHelper extends \Zend\Expressive\Helper\UrlHelper
 {

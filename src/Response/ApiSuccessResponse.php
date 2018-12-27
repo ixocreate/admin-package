@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Response;
+namespace Ixocreate\Admin\Response;
 
 use Zend\Diactoros\Response\JsonResponse;
 

@@ -10,7 +10,7 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config\Client;
+namespace Ixocreate\Admin\Config\Client;
 
 final class ClientConfig implements \JsonSerializable
 {

@@ -10,10 +10,10 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Dashboard;
+namespace Ixocreate\Admin\Dashboard;
 
-use KiwiSuite\Contract\Admin\DashboardWidgetCollectorInterface;
-use KiwiSuite\Contract\Admin\DashboardWidgetInterface;
+use Ixocreate\Contract\Admin\DashboardWidgetCollectorInterface;
+use Ixocreate\Contract\Admin\DashboardWidgetInterface;
 use Zend\Stdlib\SplPriorityQueue;
 
 final class DashboardWidgetCollector implements DashboardWidgetCollectorInterface

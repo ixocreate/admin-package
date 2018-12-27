@@ -4,7 +4,7 @@ namespace KiwiMigration;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use KiwiSuite\CommonTypes\Entity\SchemaType;
+use Ixocreate\CommonTypes\Entity\SchemaType;
 
 final class Version20181213100000 extends AbstractMigration
 {

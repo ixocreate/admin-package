@@ -10,12 +10,12 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action;
+namespace Ixocreate\Admin\Action;
 
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Router\AdminRouter;
-use KiwiSuite\ProjectUri\ProjectUri;
-use KiwiSuite\Template\TemplateResponse;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Router\AdminRouter;
+use Ixocreate\ProjectUri\ProjectUri;
+use Ixocreate\Template\TemplateResponse;
 use PackageVersions\Versions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

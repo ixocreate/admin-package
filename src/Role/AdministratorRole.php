@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Role;
+namespace Ixocreate\Admin\Role;
 
-use KiwiSuite\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Admin\RoleInterface;
 
 final class AdministratorRole implements RoleInterface
 {

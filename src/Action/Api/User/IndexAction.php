@@ -10,15 +10,15 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\User;
+namespace Ixocreate\Admin\Action\Api\User;
 
 use Doctrine\Common\Collections\Criteria;
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Entity\Entity\EntityInterface;
-use KiwiSuite\Schema\Listing\ListElement;
-use KiwiSuite\Schema\Listing\ListSchema;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Entity\Entity\EntityInterface;
+use Ixocreate\Schema\Listing\ListElement;
+use Ixocreate\Schema\Listing\ListSchema;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

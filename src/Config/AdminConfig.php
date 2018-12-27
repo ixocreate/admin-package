@@ -10,10 +10,10 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config;
+namespace Ixocreate\Admin\Config;
 
-use KiwiSuite\Asset\Asset;
-use KiwiSuite\Contract\Http\SegmentProviderInterface;
+use Ixocreate\Asset\Asset;
+use Ixocreate\Contract\Http\SegmentProviderInterface;
 use Psr\Http\Message\UriInterface;
 
 final class AdminConfig implements SegmentProviderInterface

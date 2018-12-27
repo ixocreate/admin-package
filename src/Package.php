@@ -10,13 +10,13 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin;
+namespace Ixocreate\Admin;
 
-use KiwiSuite\Admin\BootstrapItem\AdminBootstrapItem;
-use KiwiSuite\Contract\Application\ConfiguratorRegistryInterface;
-use KiwiSuite\Contract\Application\PackageInterface;
-use KiwiSuite\Contract\Application\ServiceRegistryInterface;
-use KiwiSuite\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\Admin\BootstrapItem\AdminBootstrapItem;
+use Ixocreate\Contract\Application\ConfiguratorRegistryInterface;
+use Ixocreate\Contract\Application\PackageInterface;
+use Ixocreate\Contract\Application\ServiceRegistryInterface;
+use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
 
 class Package implements PackageInterface
 {
@@ -83,9 +83,9 @@ class Package implements PackageInterface
     public function getDependencies(): ?array
     {
         return [
-            \KiwiSuite\Media\Package::class,
-            \KiwiSuite\Cms\Package::class,
-            \KiwiSuite\Intl\Package::class,
+            \Ixocreate\Media\Package::class,
+            \Ixocreate\Cms\Package::class,
+            \Ixocreate\Intl\Package::class,
         ];
     }
 }

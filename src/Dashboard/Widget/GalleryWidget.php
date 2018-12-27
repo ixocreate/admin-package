@@ -1,8 +1,8 @@
 <?php
-namespace KiwiSuite\Admin\Dashboard\Widget;
+namespace Ixocreate\Admin\Dashboard\Widget;
 
-use KiwiSuite\Contract\Admin\DashboardWidgetInterface;
-use KiwiSuite\Media\Type\ImageType;
+use Ixocreate\Contract\Admin\DashboardWidgetInterface;
+use Ixocreate\Media\Type\ImageType;
 
 final class GalleryWidget implements DashboardWidgetInterface
 {

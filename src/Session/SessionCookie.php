@@ -10,13 +10,13 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Session;
+namespace Ixocreate\Admin\Session;
 
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
-use KiwiSuite\Admin\Entity\SessionData;
-use KiwiSuite\CommonTypes\Entity\UuidType;
+use Ixocreate\Admin\Entity\SessionData;
+use Ixocreate\CommonTypes\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

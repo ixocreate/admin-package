@@ -1,7 +1,7 @@
 <?php
-namespace KiwiSuite\Admin;
+namespace Ixocreate\Admin;
 
 /** @var ConsoleConfigurator $console */
-use KiwiSuite\ApplicationConsole\ConsoleConfigurator;
+use Ixocreate\ApplicationConsole\ConsoleConfigurator;
 
 $console->addDirectory(__DIR__ . '/../src/Console', true);

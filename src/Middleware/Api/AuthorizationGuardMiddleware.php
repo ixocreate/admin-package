@@ -10,11 +10,11 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Middleware\Api;
+namespace Ixocreate\Admin\Middleware\Api;
 
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Permission\Permission;
-use KiwiSuite\Admin\Response\ApiErrorResponse;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Permission\Permission;
+use Ixocreate\Admin\Response\ApiErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

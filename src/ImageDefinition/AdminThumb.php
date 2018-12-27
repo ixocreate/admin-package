@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\ImageDefinition;
+namespace Ixocreate\Admin\ImageDefinition;
 
-use KiwiSuite\Media\ImageDefinition\ImageDefinitionInterface;
+use Ixocreate\Media\ImageDefinition\ImageDefinitionInterface;
 
 final class AdminThumb implements ImageDefinitionInterface
 {

@@ -10,10 +10,10 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\Auth;
+namespace Ixocreate\Admin\Action\Api\Auth;
 
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

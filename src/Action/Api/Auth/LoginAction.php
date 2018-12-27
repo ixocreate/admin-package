@@ -10,14 +10,14 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Api\Auth;
+namespace Ixocreate\Admin\Action\Api\Auth;
 
-use KiwiSuite\Admin\Entity\SessionData;
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Repository\UserRepository;
-use KiwiSuite\Admin\Response\ApiErrorResponse;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Admin\Session\SessionCookie;
+use Ixocreate\Admin\Entity\SessionData;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Response\ApiErrorResponse;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Session\SessionCookie;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -10,14 +10,14 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config\Client\Provider;
+namespace Ixocreate\Admin\Config\Client\Provider;
 
-use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
-use KiwiSuite\Contract\Admin\RoleInterface;
-use KiwiSuite\Contract\Resource\AdminAwareInterface;
-use KiwiSuite\Contract\Resource\ResourceInterface;
-use KiwiSuite\Resource\SubManager\ResourceSubManager;
-use KiwiSuite\Schema\Builder;
+use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
+use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Contract\Resource\ResourceInterface;
+use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Schema\Builder;
 
 final class ResourceProvider implements ClientConfigProviderInterface
 {

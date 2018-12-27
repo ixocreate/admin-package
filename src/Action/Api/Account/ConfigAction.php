@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Account;
+namespace Ixocreate\Admin\Action\Account;
 
 
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\Contract\Schema\AdditionalSchemaInterface;
-use KiwiSuite\Schema\AdditionalSchema\AdditionalSchemaSubManager;
-use KiwiSuite\Schema\Builder;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
+use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

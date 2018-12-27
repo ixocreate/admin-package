@@ -10,9 +10,9 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Permission;
+namespace Ixocreate\Admin\Permission;
 
-use KiwiSuite\Admin\Entity\User;
+use Ixocreate\Admin\Entity\User;
 
 final class Permission
 {

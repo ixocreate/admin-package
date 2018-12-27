@@ -10,12 +10,12 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Config\Client\Provider;
+namespace Ixocreate\Admin\Config\Client\Provider;
 
-use KiwiSuite\Admin\Config\AdminConfig;
-use KiwiSuite\Admin\Permission\PermissionTemp;
-use KiwiSuite\Contract\Admin\ClientConfigProviderInterface;
-use KiwiSuite\Contract\Admin\RoleInterface;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Permission\PermissionTemp;
+use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
+use Ixocreate\Contract\Admin\RoleInterface;
 
 final class NavigationProvider implements ClientConfigProviderInterface
 {

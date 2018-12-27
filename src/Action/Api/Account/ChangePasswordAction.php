@@ -10,13 +10,13 @@
 
 declare(strict_types=1);
 
-namespace KiwiSuite\Admin\Action\Account;
+namespace Ixocreate\Admin\Action\Account;
 
-use KiwiSuite\Admin\Command\Account\ChangePasswordCommand;
-use KiwiSuite\Admin\Entity\User;
-use KiwiSuite\Admin\Response\ApiErrorResponse;
-use KiwiSuite\Admin\Response\ApiSuccessResponse;
-use KiwiSuite\CommandBus\CommandBus;
+use Ixocreate\Admin\Command\Account\ChangePasswordCommand;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Response\ApiErrorResponse;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\CommandBus\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,7 +1,7 @@
 <?php
-namespace KiwiSuite\Admin;
+namespace Ixocreate\Admin;
 
 /** @var PublishConfigurator $publish */
-use KiwiSuite\Application\Publish\PublishConfigurator;
+use Ixocreate\Application\Publish\PublishConfigurator;
 
 $publish->add('migrations', __DIR__ . '/../resources/migrations');
