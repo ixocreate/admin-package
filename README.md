@@ -1,6 +1,6 @@
 # IXOCREATE admin
 
-[![Build Status](https://travis-ci.org/ixocreate/admin.svg?branch=master)](https://travis-ci.org/ixocreate/admin)
+[![Build Status](https://travis-ci.com/ixocreate/admin.svg?branch=master)](https://travis-ci.com/ixocreate/admin)
 [![Coverage Status](https://coveralls.io/repos/github/ixocreate/admin/badge.svg?branch=develop)](https://coveralls.io/github/ixocreate/admin?branch=develop)
 [![Packagist](https://img.shields.io/packagist/v/ixocreate/admin.svg)](https://packagist.org/packages/ixocreate/admin)
 [![Packagist Pre Release](https://img.shields.io/packagist/vpre/ixocreate/admin.svg)](https://packagist.org/packages/ixocreate/admin)
