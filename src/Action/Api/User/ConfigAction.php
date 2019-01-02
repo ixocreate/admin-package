@@ -88,10 +88,12 @@ final class ConfigAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        $userAttributesSchema = $this->receiveUserAttributesSchema();
+
         return new ApiSuccessResponse([
             'create' => $this->createSchema(),
             'update' => $this->updateSchema(),
-            'additionalSchema' => $this->receiveAdditionalSchema(),
+            'userAttributesSchema' => $userAttributesSchema->receiveSchema($this->builder),
         ]);
     }
 
@@ -148,7 +150,7 @@ final class ConfigAction implements MiddlewareInterface
     /**
      * @return AdditionalSchemaInterface|null
      */
-    private function receiveAdditionalSchema(): ?AdditionalSchemaInterface
+    private function receiveUserAttributesSchema(): ?AdditionalSchemaInterface
     {
         $schema = null;
 

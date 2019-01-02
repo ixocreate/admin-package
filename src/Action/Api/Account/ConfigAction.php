@@ -61,22 +61,17 @@ class ConfigAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $schema = $this->receiveAdditionalSchema();
+        $accountAttributesSchema = $this->receiveAccountAttributesSchema();
 
-
-        if ($schema !== null) {
-            return new ApiSuccessResponse([
-                'additionalSchema' => $schema->receiveSchema($this->builder),
-            ]);
-        }
-
-        return new ApiSuccessResponse();
+        return new ApiSuccessResponse([
+            'accountAttributesSchema' => $accountAttributesSchema->receiveSchema($this->builder)
+        ]);
     }
 
     /**
      * @return AdditionalSchemaInterface|null
      */
-    private function receiveAdditionalSchema(): ?AdditionalSchemaInterface
+    private function receiveAccountAttributesSchema(): ?AdditionalSchemaInterface
     {
         $schema = null;
 
