@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Command\User;
 
 use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Event\UserEvent;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\Command\AbstractCommand;
@@ -67,16 +68,17 @@ class UpdateUserCommand extends AbstractCommand
     public function execute(): bool
     {
         $data = $this->data();
+        /* @var $entity User */
         $entity = $this->userRepository->find($data['userId']);
 
         foreach ($data as $name => $value) {
-            if ($name === 'userId') {
+            if ($name === 'userId' || !in_array($name, $entity->toArray())) {
                 continue;
             }
             $entity = $entity->with($name, $value);
         }
 
-        $additionalSchema = $this->receiveAdditionalSchema();
+        $additionalSchema = $this->receiveUserAttributesSchema();
 
         if ($additionalSchema !== null) {
             $content = [
@@ -110,14 +112,12 @@ class UpdateUserCommand extends AbstractCommand
     /**
      * @return AdditionalSchemaInterface|null
      */
-    private function receiveAdditionalSchema(): ?AdditionalSchemaInterface
+    private function receiveUserAttributesSchema(): ?AdditionalSchemaInterface
     {
         $schema = null;
-
         if (!empty($this->adminConfig->userAttributesSchema())) {
             $schema = $this->additionalSchemaSubManager->get($this->adminConfig->userAttributesSchema());
         }
-
         return $schema;
     }
 }

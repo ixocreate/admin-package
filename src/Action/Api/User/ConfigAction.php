@@ -19,8 +19,6 @@ use Ixocreate\Contract\Schema\SchemaInterface;
 use Ixocreate\Entity\Type\TypeSubManager;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\Schema\Builder;
-use Ixocreate\Schema\Elements\GroupElement;
-use Ixocreate\Schema\Elements\TabbedGroupElement;
 use Ixocreate\Schema\Elements\TextElement;
 use Ixocreate\Schema\ElementSubManager;
 use Ixocreate\Schema\Schema;
@@ -86,14 +84,16 @@ final class ConfigAction implements MiddlewareInterface
         $this->adminConfig = $adminConfig;
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @param RequestHandlerInterface $handler
+     * @return ResponseInterface
+     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $userAttributesSchema = $this->receiveUserAttributesSchema();
-
         return new ApiSuccessResponse([
             'create' => $this->createSchema(),
             'update' => $this->updateSchema(),
-            'userAttributesSchema' => $userAttributesSchema->receiveSchema($this->builder),
         ]);
     }
 
@@ -104,29 +104,30 @@ final class ConfigAction implements MiddlewareInterface
     {
         $createSchema = (new Schema())
             ->withAddedElement(
-                $this->builder->create(TabbedGroupElement::class, 'tabs')
-                    ->withAddedElement(
-                        $this->builder->create(GroupElement::class, 'basicData')
-                            ->withLabel('Grunddaten')
-                            ->withAddedElement(
-                                $this->builder->create(TextElement::class, 'email')
-                                    ->withRequired(true)
-                                    ->withLabel("Email")
-                            )
-                            ->withAddedElement(
-                                $this->builder->create(TextElement::class, 'password')
-                                    ->withRequired(true)
-                                    ->withLabel("Password")
-                            )
-                            ->withAddedElement(
-                                $this->builder->create(TextElement::class, 'passwordRepeat')
-                                    ->withRequired(true)
-                                    ->withLabel("Password Repeat")
-                            )
-                            ->withAddedElement($this->typeSubManager->get(RoleType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('role')->withLabel('Role'))
-                            ->withAddedElement($this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status'))
-                    )
-    );
+                $this->builder->create(TextElement::class, 'email')
+                    ->withRequired(true)
+                    ->withLabel("Email")
+            )
+            ->withAddedElement(
+                $this->builder->create(TextElement::class, 'password')
+                    ->withRequired(true)
+                    ->withLabel("Password")
+            )
+            ->withAddedElement(
+                $this->builder->create(TextElement::class, 'passwordRepeat')
+                    ->withRequired(true)
+                    ->withLabel("Password Repeat")
+            )
+            ->withAddedElement($this->typeSubManager->get(RoleType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('role')->withLabel('Role'))
+            ->withAddedElement($this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status')
+        );
+
+        if ($this->receiveUserAttributesSchema() !== null) {
+            foreach (($this->receiveUserAttributesSchema()->additionalSchema($this->builder))->elements() as $element) {
+                $createSchema = $createSchema->withAddedElement($element);
+            }
+        }
+
         return $createSchema;
     }
 
@@ -144,6 +145,12 @@ final class ConfigAction implements MiddlewareInterface
             ->withAddedElement($this->typeSubManager->get(RoleType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('role')->withLabel('Role'))
             ->withAddedElement($this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status'));
 
+        if ($this->receiveUserAttributesSchema() !== null) {
+            foreach (($this->receiveUserAttributesSchema()->additionalSchema($this->builder))->elements() as $element) {
+                $updateSchema = $updateSchema->withAddedElement($element);
+            }
+        }
+
         return $updateSchema;
     }
 
@@ -153,11 +160,9 @@ final class ConfigAction implements MiddlewareInterface
     private function receiveUserAttributesSchema(): ?AdditionalSchemaInterface
     {
         $schema = null;
-
         if (!empty($this->adminConfig->userAttributesSchema())) {
             $schema = $this->additionalSchemaSubManager->get($this->adminConfig->userAttributesSchema());
         }
-
         return $schema;
     }
 }
