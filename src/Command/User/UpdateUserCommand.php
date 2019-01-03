@@ -72,7 +72,7 @@ class UpdateUserCommand extends AbstractCommand
         $entity = $this->userRepository->find($data['userId']);
 
         foreach ($data as $name => $value) {
-            if ($name === 'userId' || !in_array($name, $entity->toArray())) {
+            if ($name === 'userId' || !array_key_exists($name, $entity->toArray())) {
                 continue;
             }
             $entity = $entity->with($name, $value);
