@@ -24,7 +24,7 @@ $admin->setCopyright(date("Y"));
 $admin->setPoweredBy(true);
 $admin->setBackground("/admin/icon.svg");
 $admin->setLogo("/admin/logo.svg");
-$admin->setIcon("/admin/icon.svg");
+$admin->setIcon("/admin/icon.png");
 
 $contentGroup = $admin->addNavigationGroup("Content", 5000);
 $contentGroup->add("Sitemap", ['admin.api.sitemap.index'], 'fa fa-sitemap', '/page', 2000);
