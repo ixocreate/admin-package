@@ -10,7 +10,6 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Account;
 
 use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Dashboard\DashboardWidgetProviderSubManager;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
@@ -66,7 +65,7 @@ class ConfigAction implements MiddlewareInterface
 
         if ($accountAttributesSchema !== null) {
             return new ApiSuccessResponse([
-                'accountAttributesSchema' => $accountAttributesSchema->additionalSchema($this->builder)
+                'accountAttributesSchema' => $accountAttributesSchema->additionalSchema($this->builder),
             ]);
         }
 

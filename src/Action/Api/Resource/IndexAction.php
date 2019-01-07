@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\Criteria;
 use Ixocreate\Admin\Response\ApiListResponse;
 use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
 use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Contract\Schema\Listing\ElementInterface;
 use Ixocreate\Database\EntityManager\Factory\EntityManagerSubManager;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
 use Ixocreate\Database\Repository\RepositoryInterface;
@@ -98,6 +99,22 @@ final class IndexAction implements MiddlewareInterface
                         continue;
                     }
                     $sorting[$sortName] = $sortValue;
+                }
+            } elseif (\mb_substr($key, 0, 6) === "filter") {
+                foreach ($value as $filterName => $filterValue) {
+                    if (!\is_string($filterValue)) {
+                        continue;
+                    }
+                    if (!$listSchema->has($filterName)) {
+                        continue;
+                    }
+                    /** @var ElementInterface $element */
+                    $element = $listSchema->elements()[$filterName];
+                    if (!$element->searchable()) {
+                        continue;
+                    }
+
+                    $criteria->orWhere(Criteria::expr()->contains($element->name(), $filterValue));
                 }
             } elseif ($key === "search" && \is_string($value)) {
                 foreach ($listSchema->elements() as $element) {

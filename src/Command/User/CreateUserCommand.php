@@ -44,10 +44,12 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
      * @var EventDispatcher
      */
     private $eventDispatcher;
+
     /**
      * @var AdminConfig
      */
     private $adminConfig;
+
     /**
      * @var AdditionalSchemaSubManager
      */
@@ -67,8 +69,7 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
         EventDispatcher $eventDispatcher,
         AdminConfig $adminConfig,
         AdditionalSchemaSubManager $additionalSchemaSubManager
-    )
-    {
+    ) {
         $this->userRepository = $userRepository;
         $this->roleSubManager = $roleSubManager;
         $this->eventDispatcher = $eventDispatcher;

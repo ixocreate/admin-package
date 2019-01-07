@@ -119,7 +119,8 @@ final class ConfigAction implements MiddlewareInterface
                     ->withLabel("Password Repeat")
             )
             ->withAddedElement($this->typeSubManager->get(RoleType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('role')->withLabel('Role'))
-            ->withAddedElement($this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status')
+            ->withAddedElement(
+                $this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status')
         );
 
         if ($this->receiveUserAttributesSchema() !== null) {
