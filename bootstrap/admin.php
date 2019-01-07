@@ -17,14 +17,14 @@ $admin->addClientProvider(RoutesProvider::class);
 $admin->addClientProvider(IntlProvider::class);
 $admin->addClientProvider(ResourceProvider::class);
 
-$admin->setName("kiwi");
-$admin->setAuthor("kiwi suite GmbH");
-$admin->setDescription("kiwi");
+$admin->setName("IXOCREATE");
+$admin->setAuthor("IXOCREATE GmbH");
+$admin->setDescription("IXOCREATE");
 $admin->setCopyright(date("Y"));
 $admin->setPoweredBy(true);
-$admin->setBackground("/admin/kiwi-icon.svg");
-$admin->setLogo("/admin//kiwi-logo.svg");
-$admin->setIcon("/admin/kiwi-icon.svg");
+$admin->setBackground("/admin/ixocreate-icon.svg");
+$admin->setLogo("/admin//ixocreate-logo.svg");
+$admin->setIcon("/admin/ixocreate-icon.svg");
 
 $contentGroup = $admin->addNavigationGroup("Content", 5000);
 $contentGroup->add("Sitemap", ['admin.api.sitemap.index'], 'fa fa-sitemap', '/page', 2000);
