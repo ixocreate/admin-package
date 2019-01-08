@@ -63,6 +63,7 @@ final class ResourceProvider implements ClientConfigProviderInterface
                 'canCreate' => $resource->canCreate($role),
                 'canEdit' => $resource->canEdit($role),
                 'canDelete' => $resource->canDelete($role),
+                'canView' => $resource->canView($role),
             ];
         }
 

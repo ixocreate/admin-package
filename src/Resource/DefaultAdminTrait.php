@@ -87,4 +87,13 @@ trait DefaultAdminTrait
     {
         return true;
     }
+
+    /**
+     * @param RoleInterface $role
+     * @return bool
+     */
+    public function canView(RoleInterface $role): bool
+    {
+        return false;
+    }
 }
