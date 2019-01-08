@@ -12,6 +12,7 @@ use Ixocreate\Admin\Action\Api\Auth\LogoutAction;
 use Ixocreate\Admin\Action\Api\Auth\UserAction;
 use Ixocreate\Admin\Action\Api\Config\ConfigAction;
 use Ixocreate\Admin\Action\Api\Resource\CreateAction;
+use Ixocreate\Admin\Action\Api\Resource\DefaultValueAction;
 use Ixocreate\Admin\Action\Api\Resource\DeleteAction;
 use Ixocreate\Admin\Action\Api\Resource\DetailAction;
 use Ixocreate\Admin\Action\Api\Resource\UpdateAction;
@@ -69,6 +70,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->group('resource')(function(GroupPipeConfigurator $group) {
                 $group->get('/resource/{resource}', \Ixocreate\Admin\Action\Api\Resource\IndexAction::class, 'admin.api.resource.index', PHP_INT_MAX * -1);
                 $group->get('/resource/{resource}/detail/{id}', DetailAction::class, 'admin.api.resource.detail', PHP_INT_MAX * -1);
+                $group->get('/resource/{resource}/default-values', DefaultValueAction::class, 'admin.api.resource.defaultValue', PHP_INT_MAX * -1);
                 $group->patch('/resource/{resource}/{id}', UpdateAction::class, 'admin.api.resource.update', PHP_INT_MAX * -1);
                 $group->post('/resource/{resource}', CreateAction::class, 'admin.api.resource.create', PHP_INT_MAX * -1);
                 $group->delete('/resource/{resource}/{id}', DeleteAction::class, 'admin.api.resource.delete', PHP_INT_MAX * -1);
