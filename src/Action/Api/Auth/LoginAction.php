@@ -47,17 +47,19 @@ final class LoginAction implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
         if (empty($data['email']) || empty($data['password'])) {
-            return new ApiErrorResponse("invalid_credentials", []);
+            return new ApiErrorResponse("invalid_credentials", ['Empty e-mail or password!']);
         }
 
         /** @var User $user */
         $user = $this->userRepository->findOneBy(['email' => $data['email']]);
         if (empty($user)) {
-            return new ApiErrorResponse("invalid_credentials", []);
+            // dummy verify to prevent timing analysis
+            \password_verify('password', '$2y$10$Uw3MyeyL91oOwt9axt4hYeP5yyY9P487G5DEUVnVsdzMdnXCmeXYS');
+            return new ApiErrorResponse("invalid_credentials", ['Invalid e-mail or password!']);
         }
 
         if (!\password_verify($data['password'], $user->password())) {
-            return new ApiErrorResponse("invalid_credentials", []);
+            return new ApiErrorResponse("invalid_credentials", ['Invalid e-mail or password!']);
         }
 
         $response = new ApiSuccessResponse();
@@ -66,7 +68,6 @@ final class LoginAction implements MiddlewareInterface
             'xsrfToken' => Uuid::uuid4()->toString(),
             'userId' => $user->id(),
         ]);
-
 
         $sessionCookie = new SessionCookie();
         $response = $sessionCookie->createSessionCookie($request, $response, $sessionData);
