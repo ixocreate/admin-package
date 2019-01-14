@@ -17,7 +17,7 @@ use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
 use Ixocreate\Entity\Type\Type;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 
-class UpdateCommand extends AbstractCommand
+class ChangeAttributesCommand extends AbstractCommand
 {
     /**
      * @var AdminConfig
@@ -35,7 +35,7 @@ class UpdateCommand extends AbstractCommand
     private $userRepository;
 
     /**
-     * UpdateCommand constructor.
+     * ChangeAttributesCommand constructor.
      * @param AdminConfig $adminConfig
      * @param AdditionalSchemaSubManager $additionalSchemaSubManager
      * @param UserRepository $userRepository
@@ -84,7 +84,7 @@ class UpdateCommand extends AbstractCommand
 
     public static function serviceName(): string
     {
-        return "admin.account-update";
+        return "admin.account-change-attributes";
     }
 
     /**

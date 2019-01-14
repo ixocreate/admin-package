@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Account;
 
-use Ixocreate\Admin\Command\Account\UpdateCommand;
+use Ixocreate\Admin\Command\Account\ChangeAttributesCommand;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Response\ApiErrorResponse;
@@ -20,7 +20,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class UpdateAction implements MiddlewareInterface
+class ChangeAttributesAction implements MiddlewareInterface
 {
     /**
      * @var UserRepository
@@ -58,7 +58,7 @@ class UpdateAction implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
 
-        $data['userId'] = $request->getAttribute('id');
+        $data['userId'] = $request->getAttribute(User::class, null)->id();;
 
         /** @var User $entity */
         $entity = $this->userRepository->find($data['userId']);
@@ -68,7 +68,7 @@ class UpdateAction implements MiddlewareInterface
             return new ApiErrorResponse('admin_user_notfound', 'User not found');
         }
 
-        $result = $this->commandBus->command(UpdateCommand::class, $data);
+        $result = $this->commandBus->command(ChangeAttributesCommand::class, $data);
         if ($result->isSuccessful()) {
             return new ApiSuccessResponse();
         }
