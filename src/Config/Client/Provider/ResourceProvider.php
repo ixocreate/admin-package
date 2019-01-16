@@ -11,6 +11,7 @@ namespace Ixocreate\Admin\Config\Client\Provider;
 
 use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
 use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Resource\AdditionalSchemasInterface;
 use Ixocreate\Contract\Resource\AdminAwareInterface;
 use Ixocreate\Contract\Resource\ResourceInterface;
 use Ixocreate\Resource\SubManager\ResourceSubManager;
@@ -54,7 +55,7 @@ final class ResourceProvider implements ClientConfigProviderInterface
                 continue;
             }
 
-            $resources[] = [
+            $resourceConfig = [
                 'name' => $resource::serviceName(),
                 'label' => $resource->label(),
                 'listSchema' => $resource->listSchema(),
@@ -65,6 +66,12 @@ final class ResourceProvider implements ClientConfigProviderInterface
                 'canDelete' => $resource->canDelete($role),
                 'canView' => $resource->canView($role),
             ];
+
+            if ($resource instanceof AdditionalSchemasInterface && !empty($resource->additionalSchemas($this->builder))) {
+                $resourceConfig = array_merge($resourceConfig, $resource->additionalSchemas($this->builder));
+            }
+
+            $resources[] = $resourceConfig;
         }
 
         return $resources;
