@@ -68,7 +68,9 @@ final class ResourceProvider implements ClientConfigProviderInterface
             ];
 
             if ($resource instanceof AdditionalSchemasInterface && !empty($resource->additionalSchemas($this->builder))) {
-                $resourceConfig = array_merge($resourceConfig, $resource->additionalSchemas($this->builder));
+                $resourceConfig = \array_merge($resourceConfig, [
+                    'additionalSchemas' => $resource->additionalSchemas($this->builder),
+                ]);
             }
 
             $resources[] = $resourceConfig;
