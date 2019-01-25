@@ -39,6 +39,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'adminBuildPath' => __DIR__ . '/../../../admin-frontend/build/',
         'userAttributesSchema' => null,
         'accountAttributesSchema' => null,
+        'googleMapApiKey' => null,
     ];
 
     /**
@@ -159,6 +160,11 @@ final class AdminConfigurator implements ConfiguratorInterface
     public function setAdminBuildPath(string $buildPath): void
     {
         $this->config['adminBuildPath'] = $buildPath;
+    }
+
+    public function setGoogleMapApiKey(string $googleMapApiKey): void
+    {
+        $this->config['googleMapApiKey'] = $googleMapApiKey;
     }
 
     /**

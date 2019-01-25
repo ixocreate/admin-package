@@ -15,12 +15,14 @@
     <?php foreach ($assets['styles'] as $style): ?>
         <link href="<?= $style ?>" rel="stylesheet"/>
     <?php endforeach ?>
+    <?php if (!empty($adminConfig->googleMapApiKey())): ?>
+        <script src="http://maps.googleapis.com/maps/api/js?key=<?= $adminConfig->googleMapApiKey() ?>&libraries=places"></script>
+    <?php endif; ?>
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed">
-<p></p>
+<body class="app">
 <script>
-    window.__theme = 'bs4';
     window.__kiwi = <?= json_encode([
+        'googleApiKey' => $adminConfig->googleMapApiKey(),
         'project' => [
                 'author' => $adminConfig->author(),
                 'name' => $adminConfig->name(),

@@ -112,6 +112,14 @@ final class AdminConfig implements SegmentProviderInterface
     }
 
     /**
+     * @return string|null
+     */
+    public function googleMapApiKey(): ?string
+    {
+        return $this->adminProjectConfig->googleMapApiKey();
+    }
+
+    /**
      * @return string
      */
     public function adminBuildPath(): string
