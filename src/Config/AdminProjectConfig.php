@@ -51,6 +51,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'clientConfigProvider' => [],
         'userAttributesSchema' => null,
         'accountAttributesSchema' => null,
+        'googleMapApiKey' => null,
     ];
 
     /**
@@ -200,6 +201,14 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function loginMessage(): string
     {
         return $this->config['loginMessage'];
+    }
+
+    /**
+     * @return string|null
+     */
+    public function googleMapApiKey(): ?string
+    {
+        return $this->config['googleMapApiKey'];
     }
 
     /**

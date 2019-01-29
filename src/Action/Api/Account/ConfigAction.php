@@ -69,7 +69,7 @@ class ConfigAction implements MiddlewareInterface
             ]);
         }
 
-        return new ApiSuccessResponse();
+        return new ApiSuccessResponse(['accountAttributesSchema' => []]);
     }
 
     /**

@@ -12,8 +12,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.1",
+        "ext-json": "*",
         "ixocreate/admin-frontend": "dev-develop",
         "ixocreate/contract": "dev-develop",
+        "ixocreate/servicemanager": "dev-develop",
         "dflydev/fig-cookies": "^1.0",
         "firebase/php-jwt": "^5.0",
         "ramsey/uuid": "^3.7",
