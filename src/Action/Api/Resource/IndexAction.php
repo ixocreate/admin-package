@@ -53,7 +53,8 @@ final class IndexAction implements MiddlewareInterface
         MiddlewareSubManager $middlewareSubManager,
         ResourceSubManager $resourceSubManager,
         EntityManagerSubManager $entitySubManager
-    ) {
+    )
+    {
         $this->repositorySubManager = $repositorySubManager;
         $this->middlewareSubManager = $middlewareSubManager;
         $this->resourceSubManager = $resourceSubManager;
@@ -88,6 +89,10 @@ final class IndexAction implements MiddlewareInterface
         $repository = $this->repositorySubManager->get($resource->repository());
         $criteria = new Criteria();
         $sorting = null;
+
+        if (\method_exists($repository->getEntityName(), 'deletedAt')) {
+            $criteria->where(Criteria::expr()->isNull('deletedAt'));
+        }
 
         //?sort[column1]=ASC&sort[column2]=DESC&filter[column1]=test&filter[column2]=foobar
         $queryParams = $request->getQueryParams();
@@ -125,13 +130,13 @@ final class IndexAction implements MiddlewareInterface
                 }
                 continue;
             } elseif ($key === "offset") {
-                $value = (int) $value;
+                $value = (int)$value;
                 if (!empty($value)) {
                     $criteria->setFirstResult($value);
                 }
                 continue;
             } elseif ($key === "limit") {
-                $value = (int) $value;
+                $value = (int)$value;
                 if (!empty($value)) {
                     $criteria->setMaxResults(\min($value, 500));
                 }
@@ -150,19 +155,9 @@ final class IndexAction implements MiddlewareInterface
         //TODO Collection
         /** @var EntityInterface $entity */
         foreach ($result as $entity) {
-            if (\method_exists($entity, 'deletedAt') && $entity->deletedAt() !== null) {
-                continue;
-            }
-
             $items[] = $entity->toPublicArray();
         }
-
         $count = $repository->count($criteria);
-
-        if (\method_exists($repository->getEntityName(), 'deletedAt')) {
-            $count = $repository->count(['deletedAt' => null]);
-        }
-
         return new ApiListResponse($resource, $items, ['count' => $count]);
     }
 }
