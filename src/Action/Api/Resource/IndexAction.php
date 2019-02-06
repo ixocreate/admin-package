@@ -10,9 +10,11 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Doctrine\Common\Collections\Criteria;
+use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Response\ApiListResponse;
 use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
-use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Contract\Admin\Resource\IndexActionAwareInterface;
+use Ixocreate\Contract\Resource\ResourceInterface;
 use Ixocreate\Contract\Schema\Listing\ElementInterface;
 use Ixocreate\Database\EntityManager\Factory\EntityManagerSubManager;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
@@ -63,14 +65,13 @@ final class IndexAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var AdminAwareInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute("resource"));
 
         $middlewarePipe = new MiddlewarePipe();
 
-        if (!empty($resource->indexAction())) {
+        if ($resource instanceof IndexActionAwareInterface) {
             /** @var MiddlewareInterface $action */
-            $action = $this->middlewareSubManager->get($resource->indexAction());
+            $action = $this->middlewareSubManager->get($resource->indexAction($request->getAttribute(User::class)));
             $middlewarePipe->pipe($action);
         }
 
@@ -81,7 +82,7 @@ final class IndexAction implements MiddlewareInterface
         return $middlewarePipe->process($request, $handler);
     }
 
-    private function handleRequest(AdminAwareInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
+    private function handleRequest(ResourceInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
         $listSchema = $resource->listSchema();
 

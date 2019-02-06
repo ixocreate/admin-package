@@ -10,7 +10,11 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Config\Client\Provider;
 
 use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Admin\Resource\Permission\CanCreateInterface;
+use Ixocreate\Contract\Admin\Resource\Permission\CanDeleteInterface;
+use Ixocreate\Contract\Admin\Resource\Permission\CanEditInterface;
+use Ixocreate\Contract\Admin\Resource\Permission\CanViewInterface;
+use Ixocreate\Contract\Admin\UserInterface;
 use Ixocreate\Contract\Resource\AdditionalSchemasInterface;
 use Ixocreate\Contract\Resource\AdminAwareInterface;
 use Ixocreate\Contract\Resource\ResourceInterface;
@@ -35,13 +39,18 @@ final class ResourceProvider implements ClientConfigProviderInterface
         $this->builder = $builder;
     }
 
+    public static function serviceName(): string
+    {
+        return 'resources';
+    }
+
     /**
-     * @param RoleInterface|null $role
+     * @param UserInterface|null $user
      * @return array
      */
-    public function clientConfig(?RoleInterface $role = null): array
+    public function clientConfig(?UserInterface $user = null): array
     {
-        if (empty($role)) {
+        if (empty($user)) {
             return [];
         }
 
@@ -55,16 +64,33 @@ final class ResourceProvider implements ClientConfigProviderInterface
                 continue;
             }
 
+            $canCreate = true;
+            if ($resource instanceof CanCreateInterface) {
+                $canCreate = $resource->canCreate($user);
+            }
+            $canEdit = true;
+            if ($resource instanceof CanEditInterface) {
+                $canEdit = $resource->canEdit($user);
+            }
+            $canDelete = true;
+            if ($resource instanceof CanDeleteInterface) {
+                $canDelete = $resource->canDelete($user);
+            }
+            $canView = true;
+            if ($resource instanceof CanViewInterface) {
+                $canView = $resource->canView($user);
+            }
+
             $resourceConfig = [
                 'name' => $resource::serviceName(),
                 'label' => $resource->label(),
                 'listSchema' => $resource->listSchema(),
                 'createSchema' => $resource->createSchema($this->builder),
                 'updateSchema' => $resource->updateSchema($this->builder),
-                'canCreate' => $resource->canCreate($role),
-                'canEdit' => $resource->canEdit($role),
-                'canDelete' => $resource->canDelete($role),
-                'canView' => $resource->canView($role),
+                'canCreate' => $canCreate,
+                'canEdit' => $canEdit,
+                'canDelete' => $canDelete,
+                'canView' => $canView,
             ];
 
             if ($resource instanceof AdditionalSchemasInterface && !empty($resource->additionalSchemas($this->builder))) {
@@ -77,10 +103,5 @@ final class ResourceProvider implements ClientConfigProviderInterface
         }
 
         return $resources;
-    }
-
-    public static function serviceName(): string
-    {
-        return 'resources';
     }
 }

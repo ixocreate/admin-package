@@ -36,11 +36,6 @@ final class ConfigAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $role = null;
-        if ($user = $request->getAttribute(User::class)) {
-            $role = $user->role()->getRole();
-        }
-
-        return new ApiSuccessResponse($this->clientConfigGenerator->generate($role));
+        return new ApiSuccessResponse($this->clientConfigGenerator->generate($request->getAttribute(User::class, null)));
     }
 }

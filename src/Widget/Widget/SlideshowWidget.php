@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Dashboard\Widget;
+namespace Ixocreate\Admin\Widget\Widget;
 
-use Ixocreate\Contract\Admin\DashboardWidgetInterface;
+use Ixocreate\Contract\Admin\Widget\WidgetInterface;
 
-final class LineGraphWidget implements DashboardWidgetInterface
+final class SlideshowWidget implements WidgetInterface
 {
     /**
      * @var int
@@ -26,12 +26,7 @@ final class LineGraphWidget implements DashboardWidgetInterface
     /**
      * @var array
      */
-    private $data = [
-        'xAxisLabel' => null,
-        'yAxisLabel' => null,
-        'datasets' => [],
-        'customColors' => [],
-    ];
+    private $data = [];
 
     /**
      * @return int
@@ -54,14 +49,14 @@ final class LineGraphWidget implements DashboardWidgetInterface
      */
     public function type(): string
     {
-        return 'graph';
+        return 'slideshow';
     }
 
     /**
      * @param int $size
-     * @return LineGraphWidget
+     * @return SlideshowWidget
      */
-    public function withSize(int $size): LineGraphWidget
+    public function withSize(int $size): SlideshowWidget
     {
         $widget = clone $this;
         $widget->size = $size;
@@ -71,9 +66,9 @@ final class LineGraphWidget implements DashboardWidgetInterface
 
     /**
      * @param int $priority
-     * @return LineGraphWidget
+     * @return SlideshowWidget
      */
-    public function withPriority(int $priority): LineGraphWidget
+    public function withPriority(int $priority): SlideshowWidget
     {
         $widget = clone $this;
         $widget->priority = $priority;
@@ -82,21 +77,18 @@ final class LineGraphWidget implements DashboardWidgetInterface
     }
 
     /**
-     * @param array $data
-     * @param string $label
-     * @param string $color
-     * @return LineGraphWidget
+     * @param string $src
+     * @param string $title
+     * @param string $link
+     * @return SlideshowWidget
      */
-    public function withDataset(array $data, string $label, string $color): LineGraphWidget
+    public function withAddedItem(string $src, string $title, string $link): SlideshowWidget
     {
         $widget = clone $this;
-        $widget->data['datasets'][] = [
-            'name' => $label,
-            'series' => $data,
-        ];
-        $widget->data['customColors'][] = [
-            'name' => $label,
-            'value' => $color,
+        $widget->data[] = [
+            'src' => $src,
+            'title' => $title,
+            'link' => $link,
         ];
 
         return $widget;

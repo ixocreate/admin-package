@@ -32,7 +32,7 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
             return $this->createNotAuthorizedResponse();
         }
 
-        if ($user->status()->getValue() !== "active") {
+        if ($user->status()->value() !== "active") {
             return $this->createNotAuthorizedResponse();
         }
 

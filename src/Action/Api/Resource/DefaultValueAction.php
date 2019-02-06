@@ -11,8 +11,7 @@ namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Response\ApiDetailResponse;
-use Ixocreate\Contract\Resource\AdminAwareInterface;
-use Ixocreate\Contract\Resource\DefaultValueInterface;
+use Ixocreate\Contract\Admin\Resource\DefaultValueInterface;
 use Ixocreate\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -34,7 +33,6 @@ final class DefaultValueAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var AdminAwareInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
         $values = [];

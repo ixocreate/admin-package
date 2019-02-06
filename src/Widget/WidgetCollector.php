@@ -7,13 +7,15 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Dashboard;
+namespace Ixocreate\Admin\Widget;
 
 use Ixocreate\Contract\Admin\DashboardWidgetCollectorInterface;
 use Ixocreate\Contract\Admin\DashboardWidgetInterface;
+use Ixocreate\Contract\Admin\Widget\WidgetCollectorInterface;
+use Ixocreate\Contract\Admin\Widget\WidgetInterface;
 use Zend\Stdlib\SplPriorityQueue;
 
-final class DashboardWidgetCollector implements DashboardWidgetCollectorInterface
+final class WidgetCollector implements WidgetCollectorInterface
 {
     /**
      * @var SplPriorityQueue
@@ -26,11 +28,11 @@ final class DashboardWidgetCollector implements DashboardWidgetCollectorInterfac
     }
 
     /**
-     * @param DashboardWidgetInterface $dashboardWidget
+     * @param WidgetInterface $widget
      */
-    public function add(DashboardWidgetInterface $dashboardWidget): void
+    public function add(WidgetInterface $widget): void
     {
-        $this->queue->insert($dashboardWidget, $dashboardWidget->priority());
+        $this->queue->insert($widget, $widget->priority());
     }
 
     /**
