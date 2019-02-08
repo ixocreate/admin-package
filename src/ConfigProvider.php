@@ -17,7 +17,7 @@ final class ConfigProvider implements ConfigProviderInterface
     {
         return [
             'admin' => [
-                'url' => '/admin',
+                'uri' => '/admin',
             ],
         ];
     }
