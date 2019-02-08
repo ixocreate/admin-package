@@ -86,6 +86,12 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
         $identicon = new Identicon(new ImageMagickGenerator());
         $avatar = $identicon->getImageDataUri($this->data()['email']);
 
+        if (!empty($this->data()['passwordHash'])) {
+            $password = $this->data()['passwordHash'];
+        } else {
+            $password = \password_hash($this->data()['password'], PASSWORD_DEFAULT);
+        }
+
         $type = null;
 
         $additionalSchema = $this->receiveUserAttributesSchema();
@@ -107,7 +113,7 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
         $user = new User([
             'id' => $this->uuid(),
             'email' => $this->data()['email'],
-            'password' =>  \password_hash($this->data()['password'], PASSWORD_DEFAULT),
+            'password' =>  $password,
             'hash' => Uuid::uuid4()->toString(),
             'role' => $this->data()['role'],
             'avatar' => $avatar,
@@ -151,12 +157,12 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
             $violationCollector->add('email', 'email.invalid', 'Email is invalid');
         }
 
-        if (empty($this->data()['password']) || empty($this->data()['passwordRepeat'])) {
-            $violationCollector->add("password", "password.invalid", "Password is invalid");
-        }
-
-        if ($this->data()['password'] !== $this->data()['passwordRepeat']) {
-            $violationCollector->add("password", "password.doesnt-match", "Password and repeated password doesn't match");
+        if (empty($this->data()['passwordHash'])) {
+            if (empty($this->data()['password']) || empty($this->data()['passwordRepeat'])) {
+                $violationCollector->add("password", "password.invalid", "Password is invalid");
+            } else  if ($this->data()['password'] !== $this->data()['passwordRepeat']) {
+                $violationCollector->add("password", "password.doesnt-match", "Password and repeated password doesn't match");
+            }
         }
 
         if (!$this->roleSubManager->has($this->data()['role'])) {
