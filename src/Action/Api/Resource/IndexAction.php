@@ -88,15 +88,26 @@ final class IndexAction implements MiddlewareInterface
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
         $criteria = new Criteria();
-        $sorting = null;
 
+        /**
+         * apply soft deletes
+         * TODO: make this overridable so deleted items can be listed as well
+         */
         if (\method_exists($repository->getEntityName(), 'deletedAt')) {
-            $criteria->where(Criteria::expr()->isNull('deletedAt'));
+            $criteria->andWhere(Criteria::expr()->isNull('deletedAt'));
         }
 
+        /**
+         * extract limit, offset, filters and sorts from query string
+         */
         //?sort[column1]=ASC&sort[column2]=DESC&filter[column1]=test&filter[column2]=foobar
         $queryParams = $request->getQueryParams();
+        $sorting = null;
+        $filterExpressions = [];
         foreach ($queryParams as $key => $value) {
+            /**
+             * TODO: why not use $key === 'sort' and $key === 'filter'? legacy code depending on it? -> TBD
+             */
             if (\mb_substr($key, 0, 4) === "sort") {
                 $sorting = [];
                 foreach ($value as $sortName => $sortValue) {
@@ -118,15 +129,14 @@ final class IndexAction implements MiddlewareInterface
                     if (!$element->searchable()) {
                         continue;
                     }
-
-                    $criteria->orWhere(Criteria::expr()->contains($element->name(), $filterValue));
+                    $filterExpressions[] = $criteria::expr()->contains($element->name(), $filterValue);
                 }
             } elseif ($key === "search" && \is_string($value)) {
                 foreach ($listSchema->elements() as $element) {
                     if (!$element->searchable()) {
                         continue;
                     }
-                    $criteria->orWhere(Criteria::expr()->contains($element->name(), $value));
+                    $filterExpressions[] = $criteria::expr()->contains($element->name(), $value);
                 }
                 continue;
             } elseif ($key === "offset") {
@@ -144,6 +154,16 @@ final class IndexAction implements MiddlewareInterface
             }
         }
 
+        /**
+         * apply collected filters
+         */
+        if (!empty($filterExpressions)) {
+            $criteria->andWhere(Criteria::expr()->andX(...$filterExpressions));
+        }
+
+        /**
+         * apply collected sorts
+         */
         if (empty($sorting) && !empty($resource->listSchema()->defaultSorting())) {
             $criteria->orderBy([$resource->listSchema()->defaultSorting()['sorting'] => $resource->listSchema()->defaultSorting()['direction']]);
         } elseif (!empty($sorting)) {
