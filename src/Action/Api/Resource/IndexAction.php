@@ -172,12 +172,19 @@ final class IndexAction implements MiddlewareInterface
 
         $result = $repository->matching($criteria);
         $items = [];
-        //TODO Collection
+        /**
+         * TODO: Collection
+         */
         /** @var EntityInterface $entity */
         foreach ($result as $entity) {
             $items[] = $entity->toPublicArray();
         }
         $count = $repository->count($criteria);
+
+        /**
+         * TODO: add active constraints to meta
+         * this way it is clear for the consumer which constraints were actually applied
+         */
         return new ApiListResponse($resource, $items, ['count' => $count]);
     }
 }
