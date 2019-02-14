@@ -18,12 +18,12 @@ use Ixocreate\Contract\Admin\Resource\WidgetPosition\AboveListWidgetInterface;
 use Ixocreate\Contract\Admin\Resource\WidgetPosition\BelowCreateWidgetInterface;
 use Ixocreate\Contract\Admin\Resource\WidgetPosition\BelowEditWidgetInterface;
 use Ixocreate\Contract\Admin\Resource\WidgetPosition\BelowListWidgetInterface;
+use Ixocreate\Contract\Admin\Resource\Widgets\WidgetsInterface;
 use Ixocreate\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Ixocreate\Contract\Resource\Widgets\WidgetsInterface;
 
 class WidgetsAction implements MiddlewareInterface
 {

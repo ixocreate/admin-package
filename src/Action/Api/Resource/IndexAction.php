@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\Criteria;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Response\ApiListResponse;
 use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
-use Ixocreate\Contract\Admin\Resource\IndexActionAwareInterface;
+use Ixocreate\Contract\Admin\Resource\Action\IndexActionAwareInterface;
 use Ixocreate\Contract\Resource\ResourceInterface;
 use Ixocreate\Contract\Schema\Listing\ElementInterface;
 use Ixocreate\Database\EntityManager\Factory\EntityManagerSubManager;
@@ -84,7 +84,7 @@ final class IndexAction implements MiddlewareInterface
 
     private function handleRequest(ResourceInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
-        $listSchema = $resource->listSchema();
+        $listSchema = $resource->listSchema($request->getAttribute(User::class));
 
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
@@ -145,8 +145,8 @@ final class IndexAction implements MiddlewareInterface
             }
         }
 
-        if (empty($sorting) && !empty($resource->listSchema()->defaultSorting())) {
-            $criteria->orderBy([$resource->listSchema()->defaultSorting()['sorting'] => $resource->listSchema()->defaultSorting()['direction']]);
+        if (empty($sorting) && !empty($listSchema->defaultSorting())) {
+            $criteria->orderBy([$listSchema->defaultSorting()['sorting'] => $listSchema->defaultSorting()['direction']]);
         } elseif (!empty($sorting)) {
             $criteria->orderBy($sorting);
         }

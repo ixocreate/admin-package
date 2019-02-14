@@ -12,7 +12,7 @@ namespace Ixocreate\Admin\Action\Api\Resource;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
-use Ixocreate\Contract\Admin\Resource\DeleteActionAwareInterface;
+use Ixocreate\Contract\Admin\Resource\Action\DeleteActionAwareInterface;
 use Ixocreate\Contract\Resource\ResourceInterface;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
 use Ixocreate\Database\Repository\RepositoryInterface;
