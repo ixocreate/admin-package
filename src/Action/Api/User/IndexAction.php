@@ -49,7 +49,14 @@ final class IndexAction implements MiddlewareInterface
         $sorting = [];
         $filterExpressions = [];
         foreach ($queryParams as $key => $value) {
-            if (\mb_substr($key, 0, 4) === "sort") {
+            /**
+             * TODO: why not use $key === 'sort' and $key === 'filter'? legacy code depending on it? -> TBD
+             */
+            if ($key === 'orderBy') {
+                $sorting[$value] = $queryParams['orderDirection'] ?? 'asc';
+            } elseif ($key === 'orderDirection') {
+                // see orderBy
+            } elseif (\mb_substr($key, 0, 4) === "sort") {
                 foreach ($value as $sortName => $sortValue) {
                     if (!$listSchema->has($sortName)) {
                         continue;
