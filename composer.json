@@ -21,7 +21,6 @@
         "ixocreate/command-bus": "dev-develop",
         "ixocreate/common-types": "dev-develop",
         "ixocreate/config": "dev-develop",
-        "ixocreate/contract": "dev-develop",
         "ixocreate/database": "dev-develop",
         "ixocreate/entity": "dev-develop",
         "ixocreate/event": "dev-develop",
