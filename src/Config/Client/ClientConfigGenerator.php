@@ -11,7 +11,7 @@ namespace Ixocreate\Admin\Config\Client;
 
 use Ixocreate\Admin\Config\AdminProjectConfig;
 use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Admin\UserInterface;
 
 final class ClientConfigGenerator
 {
@@ -37,17 +37,17 @@ final class ClientConfigGenerator
     }
 
     /**
-     * @param RoleInterface $role
+     * @param UserInterface $user
      * @return ClientConfig
      */
-    public function generate(?RoleInterface $role = null): ClientConfig
+    public function generate(?UserInterface $user = null): ClientConfig
     {
         $config = [];
 
         foreach ($this->adminProjectConfig->clientConfigProvider() as $configProviderName) {
             /** @var ClientConfigProviderInterface $configProvider */
             $configProvider = $this->clientConfigProviderSubManager->get($configProviderName);
-            $config[$configProvider::serviceName()] = $configProvider->clientConfig($role);
+            $config[$configProvider::serviceName()] = $configProvider->clientConfig($user);
         }
 
         return new ClientConfig($config);

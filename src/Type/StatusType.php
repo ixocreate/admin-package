@@ -10,14 +10,16 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Type;
 
 use Doctrine\DBAL\Types\StringType;
+use Ixocreate\Contract\Schema\BuilderInterface;
 use Ixocreate\Contract\Schema\ElementInterface;
+use Ixocreate\Contract\Schema\ElementProviderInterface;
 use Ixocreate\Contract\Type\DatabaseTypeInterface;
 use Ixocreate\Contract\Type\SchemaElementInterface;
 use Ixocreate\Entity\Type\AbstractType;
 use Ixocreate\Schema\Elements\SelectElement;
 use Ixocreate\Schema\ElementSubManager;
 
-final class StatusType extends AbstractType implements DatabaseTypeInterface, SchemaElementInterface
+final class StatusType extends AbstractType implements DatabaseTypeInterface, ElementProviderInterface
 {
     /**
      * @param $value
@@ -49,10 +51,10 @@ final class StatusType extends AbstractType implements DatabaseTypeInterface, Sc
         return 'status';
     }
 
-    public function schemaElement(ElementSubManager $elementSubManager): ElementInterface
+    public function provideElement(BuilderInterface $builder): ElementInterface
     {
         /** @var SelectElement $element */
-        $element = $elementSubManager->get(SelectElement::class);
+        $element = $builder->get(SelectElement::class);
         return $element->withOptions([
             'active' => 'Active',
             'inactive' => 'Inactive',

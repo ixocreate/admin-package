@@ -17,6 +17,8 @@ use Ixocreate\CommonTypes\Entity\DateTimeType;
 use Ixocreate\CommonTypes\Entity\EmailType;
 use Ixocreate\CommonTypes\Entity\SchemaType;
 use Ixocreate\CommonTypes\Entity\UuidType;
+use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Admin\UserInterface;
 use Ixocreate\Contract\Entity\DatabaseEntityInterface;
 use Ixocreate\Contract\Type\TypeInterface;
 use Ixocreate\Entity\Entity\Definition;
@@ -24,7 +26,7 @@ use Ixocreate\Entity\Entity\DefinitionCollection;
 use Ixocreate\Entity\Entity\EntityInterface;
 use Ixocreate\Entity\Entity\EntityTrait;
 
-final class User implements EntityInterface, DatabaseEntityInterface
+final class User implements EntityInterface, DatabaseEntityInterface, UserInterface
 {
     use EntityTrait;
 
@@ -119,6 +121,14 @@ final class User implements EntityInterface, DatabaseEntityInterface
         return $this->accountAttributes;
     }
 
+    /**
+     * @return RoleInterface
+     */
+    public function getRole(): RoleInterface
+    {
+        return $this->role()->getRole();
+    }
+
     protected static function createDefinitions() : DefinitionCollection
     {
         return new DefinitionCollection([
@@ -159,4 +169,6 @@ final class User implements EntityInterface, DatabaseEntityInterface
         $builder->addField('userAttributes', SchemaType::serviceName());
         $builder->addField('accountAttributes', SchemaType::serviceName());
     }
+
+
 }

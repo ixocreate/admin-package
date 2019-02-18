@@ -9,11 +9,11 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Api\Dashboard;
 
-use Ixocreate\Admin\Dashboard\DashboardWidgetCollector;
-use Ixocreate\Admin\Dashboard\DashboardWidgetProviderSubManager;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Contract\Admin\DashboardWidgetProviderInterface;
+use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
+use Ixocreate\Admin\Widget\WidgetCollector;
+use Ixocreate\Contract\Admin\Widget\WidgetProviderInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -43,12 +43,12 @@ final class IndexAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $collector = new DashboardWidgetCollector();
+        $collector = new WidgetCollector();
 
         $services = $this->dashboardWidgetSubManager->getServices();
         if (!empty($services)) {
             foreach ($services as $serviceName) {
-                /** @var DashboardWidgetProviderInterface $provider */
+                /** @var WidgetProviderInterface $provider */
                 $provider = $this->dashboardWidgetSubManager->get($serviceName);
                 $provider->provide($collector, $request->getAttribute(User::class));
             }

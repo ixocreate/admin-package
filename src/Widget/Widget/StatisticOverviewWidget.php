@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Dashboard\Widget;
+namespace Ixocreate\Admin\Widget\Widget;
 
-use Ixocreate\Contract\Admin\DashboardWidgetInterface;
+use Ixocreate\Contract\Admin\Widget\WidgetInterface;
 
-final class StatisticOverviewWidget implements DashboardWidgetInterface
+final class StatisticOverviewWidget implements WidgetInterface
 {
     /**
      * @var int

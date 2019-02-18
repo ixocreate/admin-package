@@ -11,10 +11,10 @@ namespace Ixocreate\Admin\Config;
 
 use Ixocreate\Admin\Config\Client\ClientConfigProviderSubManager;
 use Ixocreate\Admin\Config\Navigation\Group;
-use Ixocreate\Admin\Dashboard\DashboardWidgetProviderSubManager;
 use Ixocreate\Admin\Role\RoleSubManager;
+use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
 use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\DashboardWidgetProviderInterface;
+use Ixocreate\Contract\Admin\Widget\DashboardWidgetProviderInterface;
 use Ixocreate\Contract\Application\ConfiguratorInterface;
 use Ixocreate\Contract\Application\ServiceRegistryInterface;
 use Ixocreate\Contract\Schema\AdditionalSchemaInterface;

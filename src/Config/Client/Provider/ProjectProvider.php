@@ -11,7 +11,7 @@ namespace Ixocreate\Admin\Config\Client\Provider;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Contract\Admin\UserInterface;
 
 final class ProjectProvider implements ClientConfigProviderInterface
 {
@@ -25,11 +25,16 @@ final class ProjectProvider implements ClientConfigProviderInterface
         $this->adminConfig = $adminConfig;
     }
 
+    public static function serviceName(): string
+    {
+        return 'project';
+    }
+
     /**
-     * @param RoleInterface|null $role
+     * @param UserInterface|null $user
      * @return array
      */
-    public function clientConfig(?RoleInterface $role = null): array
+    public function clientConfig(?UserInterface $user = null): array
     {
         return [
             'author' => $this->adminConfig->author(),
@@ -42,10 +47,5 @@ final class ProjectProvider implements ClientConfigProviderInterface
             'icon' => $this->adminConfig->icon(),
             'logo' => $this->adminConfig->logo(),
         ];
-    }
-
-    public static function serviceName(): string
-    {
-        return 'project';
     }
 }

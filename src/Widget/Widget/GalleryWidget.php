@@ -7,11 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Dashboard\Widget;
+namespace Ixocreate\Admin\Widget\Widget;
 
-use Ixocreate\Contract\Admin\DashboardWidgetInterface;
+use Ixocreate\Contract\Admin\Widget\WidgetInterface;
+use Ixocreate\Media\Type\ImageType;
 
-final class SlideshowWidget implements DashboardWidgetInterface
+final class GalleryWidget implements WidgetInterface
 {
     /**
      * @var int
@@ -49,14 +50,14 @@ final class SlideshowWidget implements DashboardWidgetInterface
      */
     public function type(): string
     {
-        return 'slideshow';
+        return 'gallery';
     }
 
     /**
      * @param int $size
-     * @return SlideshowWidget
+     * @return GalleryWidget
      */
-    public function withSize(int $size): SlideshowWidget
+    public function withSize(int $size): GalleryWidget
     {
         $widget = clone $this;
         $widget->size = $size;
@@ -66,9 +67,9 @@ final class SlideshowWidget implements DashboardWidgetInterface
 
     /**
      * @param int $priority
-     * @return SlideshowWidget
+     * @return GalleryWidget
      */
-    public function withPriority(int $priority): SlideshowWidget
+    public function withPriority(int $priority): GalleryWidget
     {
         $widget = clone $this;
         $widget->priority = $priority;
@@ -76,19 +77,13 @@ final class SlideshowWidget implements DashboardWidgetInterface
         return $widget;
     }
 
-    /**
-     * @param string $src
-     * @param string $title
-     * @param string $link
-     * @return SlideshowWidget
-     */
-    public function withAddedItem(string $src, string $title, string $link): SlideshowWidget
+    public function withAddedItem(ImageType $image, ?string $title = null, ?string $icon = null): GalleryWidget
     {
         $widget = clone $this;
         $widget->data[] = [
-            'src' => $src,
+            'image' => $image,
             'title' => $title,
-            'link' => $link,
+            'icon' => $icon,
         ];
 
         return $widget;

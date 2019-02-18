@@ -7,16 +7,16 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Dashboard\Widget;
+namespace Ixocreate\Admin\Widget\Widget;
 
-use Ixocreate\Contract\Admin\DashboardWidgetInterface;
+use Ixocreate\Contract\Admin\Widget\WidgetInterface;
 
-final class CounterWidget implements DashboardWidgetInterface
+final class LineGraphWidget implements WidgetInterface
 {
     /**
      * @var int
      */
-    private $size = self::SIZE_SMALL;
+    private $size = self::SIZE_LARGE;
 
     /**
      * @var int
@@ -26,7 +26,12 @@ final class CounterWidget implements DashboardWidgetInterface
     /**
      * @var array
      */
-    private $data = [];
+    private $data = [
+        'xAxisLabel' => null,
+        'yAxisLabel' => null,
+        'datasets' => [],
+        'customColors' => [],
+    ];
 
     /**
      * @return int
@@ -49,14 +54,14 @@ final class CounterWidget implements DashboardWidgetInterface
      */
     public function type(): string
     {
-        return 'counter';
+        return 'graph';
     }
 
     /**
      * @param int $size
-     * @return CounterWidget
+     * @return LineGraphWidget
      */
-    public function withSize(int $size): CounterWidget
+    public function withSize(int $size): LineGraphWidget
     {
         $widget = clone $this;
         $widget->size = $size;
@@ -66,9 +71,9 @@ final class CounterWidget implements DashboardWidgetInterface
 
     /**
      * @param int $priority
-     * @return CounterWidget
+     * @return LineGraphWidget
      */
-    public function withPriority(int $priority): CounterWidget
+    public function withPriority(int $priority): LineGraphWidget
     {
         $widget = clone $this;
         $widget->priority = $priority;
@@ -77,20 +82,21 @@ final class CounterWidget implements DashboardWidgetInterface
     }
 
     /**
-     * @param string $icon
-     * @param string $title
-     * @param string $counter
+     * @param array $data
+     * @param string $label
      * @param string $color
-     * @return CounterWidget
+     * @return LineGraphWidget
      */
-    public function withData(string $icon, string $title, string $counter, string $color): CounterWidget
+    public function withDataset(array $data, string $label, string $color): LineGraphWidget
     {
         $widget = clone $this;
-        $widget->data = [
-            'icon' => $icon,
-            'title' => $title,
-            'counter' => $counter,
-            'color' => $color,
+        $widget->data['datasets'][] = [
+            'name' => $label,
+            'series' => $data,
+        ];
+        $widget->data['customColors'][] = [
+            'name' => $label,
+            'value' => $color,
         ];
 
         return $widget;

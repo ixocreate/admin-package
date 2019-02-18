@@ -7,17 +7,16 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Dashboard\Widget;
+namespace Ixocreate\Admin\Widget\Widget;
 
-use Ixocreate\Contract\Admin\DashboardWidgetInterface;
-use Ixocreate\Media\Type\ImageType;
+use Ixocreate\Contract\Admin\Widget\WidgetInterface;
 
-final class GalleryWidget implements DashboardWidgetInterface
+final class CounterWidget implements WidgetInterface
 {
     /**
      * @var int
      */
-    private $size = self::SIZE_LARGE;
+    private $size = self::SIZE_SMALL;
 
     /**
      * @var int
@@ -50,14 +49,14 @@ final class GalleryWidget implements DashboardWidgetInterface
      */
     public function type(): string
     {
-        return 'gallery';
+        return 'counter';
     }
 
     /**
      * @param int $size
-     * @return GalleryWidget
+     * @return CounterWidget
      */
-    public function withSize(int $size): GalleryWidget
+    public function withSize(int $size): CounterWidget
     {
         $widget = clone $this;
         $widget->size = $size;
@@ -67,9 +66,9 @@ final class GalleryWidget implements DashboardWidgetInterface
 
     /**
      * @param int $priority
-     * @return GalleryWidget
+     * @return CounterWidget
      */
-    public function withPriority(int $priority): GalleryWidget
+    public function withPriority(int $priority): CounterWidget
     {
         $widget = clone $this;
         $widget->priority = $priority;
@@ -77,13 +76,21 @@ final class GalleryWidget implements DashboardWidgetInterface
         return $widget;
     }
 
-    public function withAddedItem(ImageType $image, ?string $title = null, ?string $icon = null): GalleryWidget
+    /**
+     * @param string $icon
+     * @param string $title
+     * @param string $counter
+     * @param string $color
+     * @return CounterWidget
+     */
+    public function withData(string $icon, string $title, string $counter, string $color): CounterWidget
     {
         $widget = clone $this;
-        $widget->data[] = [
-            'image' => $image,
-            'title' => $title,
+        $widget->data = [
             'icon' => $icon,
+            'title' => $title,
+            'counter' => $counter,
+            'color' => $color,
         ];
 
         return $widget;

@@ -10,10 +10,14 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Doctrine\Common\Collections\Criteria;
+use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Response\ApiListResponse;
 use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
-use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Contract\Admin\Resource\Action\IndexActionAwareInterface;
+use Ixocreate\Contract\Admin\Resource\Schema\ListSchemaAwareInterface;
+use Ixocreate\Contract\Resource\ResourceInterface;
 use Ixocreate\Contract\Schema\Listing\ElementInterface;
+use Ixocreate\Contract\Schema\Listing\ListSchemaInterface;
 use Ixocreate\Database\EntityManager\Factory\EntityManagerSubManager;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
 use Ixocreate\Database\Repository\RepositoryInterface;
@@ -63,14 +67,13 @@ final class IndexAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var AdminAwareInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute("resource"));
 
         $middlewarePipe = new MiddlewarePipe();
 
-        if (!empty($resource->indexAction())) {
+        if ($resource instanceof IndexActionAwareInterface) {
             /** @var MiddlewareInterface $action */
-            $action = $this->middlewareSubManager->get($resource->indexAction());
+            $action = $this->middlewareSubManager->get($resource->indexAction($request->getAttribute(User::class)));
             $middlewarePipe->pipe($action);
         }
 
@@ -81,14 +84,18 @@ final class IndexAction implements MiddlewareInterface
         return $middlewarePipe->process($request, $handler);
     }
 
-    private function handleRequest(AdminAwareInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
+    private function handleRequest(ResourceInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
-        $listSchema = $resource->listSchema();
+        if (!($resource instanceof ListSchemaAwareInterface)) {
+            return new ApiListResponse($resource, [], ['count' => 0]);
+        }
+
+        /** @var ListSchemaInterface $listSchema */
+        $listSchema = $resource->listSchema($request->getAttribute(User::class));
 
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
         $criteria = new Criteria();
-
         /**
          * apply soft deletes
          * TODO: make this overridable so deleted items can be listed as well
@@ -96,7 +103,6 @@ final class IndexAction implements MiddlewareInterface
         if (\method_exists($repository->getEntityName(), 'deletedAt')) {
             $criteria->andWhere(Criteria::expr()->isNull('deletedAt'));
         }
-
         /**
          * extract limit, offset, filters and sorts from query string
          */
@@ -156,23 +162,20 @@ final class IndexAction implements MiddlewareInterface
                 continue;
             }
         }
-
         /**
          * apply collected filters
          */
         if (!empty($filterExpressions)) {
             $criteria->andWhere(Criteria::expr()->andX(...$filterExpressions));
         }
-
         /**
          * apply collected sorts
          */
-        if (empty($sorting) && !empty($resource->listSchema()->defaultSorting())) {
-            $criteria->orderBy([$resource->listSchema()->defaultSorting()['sorting'] => $resource->listSchema()->defaultSorting()['direction']]);
+        if (empty($sorting) && !empty($listSchema->defaultSorting())) {
+            $criteria->orderBy([$listSchema->defaultSorting()['sorting'] => $listSchema->defaultSorting()['direction']]);
         } elseif (!empty($sorting)) {
             $criteria->orderBy($sorting);
         }
-
         $result = $repository->matching($criteria);
         $items = [];
         /**
@@ -183,7 +186,6 @@ final class IndexAction implements MiddlewareInterface
             $items[] = $entity->toPublicArray();
         }
         $count = $repository->count($criteria);
-
         /**
          * TODO: add active constraints to meta
          * this way it is clear for the consumer which constraints were actually applied

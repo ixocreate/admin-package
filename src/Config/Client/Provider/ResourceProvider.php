@@ -10,12 +10,20 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Config\Client\Provider;
 
 use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\RoleInterface;
-use Ixocreate\Contract\Resource\AdditionalSchemasInterface;
-use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Contract\Admin\Resource\AdditionalSchemasInterface;
+use Ixocreate\Contract\Admin\Resource\Permission\CanCreateInterface;
+use Ixocreate\Contract\Admin\Resource\Permission\CanDeleteInterface;
+use Ixocreate\Contract\Admin\Resource\Permission\CanEditInterface;
+use Ixocreate\Contract\Admin\Resource\Permission\CanViewInterface;
+use Ixocreate\Contract\Admin\Resource\Schema\CreateSchemaAwareInterface;
+use Ixocreate\Contract\Admin\Resource\Schema\ListSchemaAwareInterface;
+use Ixocreate\Contract\Admin\Resource\Schema\UpdateSchemaAwareInterface;
+use Ixocreate\Contract\Admin\UserInterface;
 use Ixocreate\Contract\Resource\ResourceInterface;
 use Ixocreate\Resource\SubManager\ResourceSubManager;
 use Ixocreate\Schema\Builder;
+use Ixocreate\Schema\Listing\ListSchema;
+use Ixocreate\Schema\Schema;
 
 final class ResourceProvider implements ClientConfigProviderInterface
 {
@@ -35,13 +43,18 @@ final class ResourceProvider implements ClientConfigProviderInterface
         $this->builder = $builder;
     }
 
+    public static function serviceName(): string
+    {
+        return 'resources';
+    }
+
     /**
-     * @param RoleInterface|null $role
+     * @param UserInterface|null $user
      * @return array
      */
-    public function clientConfig(?RoleInterface $role = null): array
+    public function clientConfig(?UserInterface $user = null): array
     {
-        if (empty($role)) {
+        if (empty($user)) {
             return [];
         }
 
@@ -51,36 +64,58 @@ final class ResourceProvider implements ClientConfigProviderInterface
             /** @var ResourceInterface $resource */
             $resource = $this->resourceSubManager->get($service);
 
-            if (!($resource instanceof AdminAwareInterface)) {
-                continue;
+            $canCreate = true;
+            if ($resource instanceof CanCreateInterface) {
+                $canCreate = $resource->canCreate($user);
+            }
+            $canEdit = true;
+            if ($resource instanceof CanEditInterface) {
+                $canEdit = $resource->canEdit($user);
+            }
+            $canDelete = true;
+            if ($resource instanceof CanDeleteInterface) {
+                $canDelete = $resource->canDelete($user);
+            }
+            $canView = false;
+            if ($resource instanceof CanViewInterface) {
+                $canView = $resource->canView($user);
+            }
+
+            $listSchema = new ListSchema();
+            if ($resource instanceof ListSchemaAwareInterface) {
+                $listSchema = $resource->listSchema($user);
+            }
+
+            $createSchema = new Schema();
+            if ($resource instanceof CreateSchemaAwareInterface) {
+                $createSchema = $resource->createSchema($this->builder, $user);
+            }
+
+            $updateSchema = new Schema();
+            if ($resource instanceof UpdateSchemaAwareInterface) {
+                $updateSchema = $resource->updateSchema($this->builder, $user);
             }
 
             $resourceConfig = [
                 'name' => $resource::serviceName(),
                 'label' => $resource->label(),
-                'listSchema' => $resource->listSchema(),
-                'createSchema' => $resource->createSchema($this->builder),
-                'updateSchema' => $resource->updateSchema($this->builder),
-                'canCreate' => $resource->canCreate($role),
-                'canEdit' => $resource->canEdit($role),
-                'canDelete' => $resource->canDelete($role),
-                'canView' => $resource->canView($role),
+                'listSchema' => $listSchema,
+                'createSchema' => $createSchema,
+                'updateSchema' => $updateSchema,
+                'canCreate' => $canCreate,
+                'canEdit' => $canEdit,
+                'canDelete' => $canDelete,
+                'canView' => $canView,
+                'additionalSchemas' => []
             ];
 
-            if ($resource instanceof AdditionalSchemasInterface && !empty($resource->additionalSchemas($this->builder))) {
-                $resourceConfig = \array_merge($resourceConfig, [
-                    'additionalSchemas' => $resource->additionalSchemas($this->builder),
-                ]);
+            if ($resource instanceof AdditionalSchemasInterface) {
+                $resourceConfig['additionalSchemas'] = $resource->additionalSchemas($this->builder, $user);
             }
 
             $resources[] = $resourceConfig;
         }
 
         return $resources;
-    }
-
-    public static function serviceName(): string
-    {
-        return 'resources';
     }
 }

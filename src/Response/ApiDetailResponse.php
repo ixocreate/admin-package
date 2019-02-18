@@ -9,12 +9,12 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Response;
 
-use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Contract\Resource\ResourceInterface;
 
 class ApiDetailResponse extends ApiSuccessResponse
 {
     /**
-     * @var AdminAwareInterface
+     * @var ResourceInterface
      */
     private $resource;
 
@@ -28,7 +28,7 @@ class ApiDetailResponse extends ApiSuccessResponse
      */
     private $meta;
 
-    public function __construct(AdminAwareInterface $resource, array $item, array $meta)
+    public function __construct(ResourceInterface $resource, array $item, array $meta)
     {
         $data = [
             'label' => $resource->label(),
@@ -41,7 +41,7 @@ class ApiDetailResponse extends ApiSuccessResponse
         $this->meta = $meta;
     }
 
-    public function resource(): AdminAwareInterface
+    public function resource(): ResourceInterface
     {
         return $this->resource;
     }

@@ -9,9 +9,11 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Api\Resource;
 
+use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
-use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Contract\Admin\Resource\Action\DeleteActionAwareInterface;
+use Ixocreate\Contract\Resource\ResourceInterface;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
 use Ixocreate\Database\Repository\RepositoryInterface;
 use Ixocreate\Entity\Entity\EntityInterface;
@@ -52,14 +54,13 @@ final class DeleteAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var AdminAwareInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
         $middlewarePipe = new MiddlewarePipe();
 
-        if (!empty($resource->deleteAction())) {
+        if ($resource instanceof DeleteActionAwareInterface) {
             /** @var MiddlewareInterface $action */
-            $action = $this->middlewareSubManager->get($resource->deleteAction());
+            $action = $this->middlewareSubManager->get($resource->deleteAction($request->getAttribute(User::class)));
             $middlewarePipe->pipe($action);
         }
 
@@ -70,7 +71,7 @@ final class DeleteAction implements MiddlewareInterface
         return $middlewarePipe->process($request, $handler);
     }
 
-    private function handleRequest(AdminAwareInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
+    private function handleRequest(ResourceInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());

@@ -60,40 +60,4 @@ trait DefaultAdminTrait
     {
         return null;
     }
-
-    /**
-     * @param RoleInterface $role
-     * @return bool
-     */
-    public function canCreate(RoleInterface $role): bool
-    {
-        return true;
-    }
-
-    /**
-     * @param RoleInterface $role
-     * @return bool
-     */
-    public function canEdit(RoleInterface $role): bool
-    {
-        return true;
-    }
-
-    /**
-     * @param RoleInterface $role
-     * @return bool
-     */
-    public function canDelete(RoleInterface $role): bool
-    {
-        return true;
-    }
-
-    /**
-     * @param RoleInterface $role
-     * @return bool
-     */
-    public function canView(RoleInterface $role): bool
-    {
-        return false;
-    }
 }
