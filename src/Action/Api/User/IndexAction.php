@@ -38,6 +38,9 @@ final class IndexAction implements MiddlewareInterface
         $listSchema = (new ListSchema())
             ->withAddedElement(new ListElement('email', 'Email'))
             ->withAddedElement(new ListElement('role', 'Role'))
+            ->withAddedElement(new ListElement('createdAt', 'Created'))
+            ->withAddedElement(new ListElement('updatedAt', 'Updated'))
+            ->withAddedElement(new ListElement('lastLoginAt', 'Last Login'))
             ->withDefaultSorting('createdAt', 'desc');
 
         $criteria = new Criteria();
