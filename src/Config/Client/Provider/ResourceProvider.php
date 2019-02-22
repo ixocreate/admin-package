@@ -20,6 +20,7 @@ use Ixocreate\Contract\Admin\Resource\Schema\ListSchemaAwareInterface;
 use Ixocreate\Contract\Admin\Resource\Schema\UpdateSchemaAwareInterface;
 use Ixocreate\Contract\Admin\UserInterface;
 use Ixocreate\Contract\Resource\ResourceInterface;
+use Ixocreate\Contract\Schema\SchemaAwareInterface;
 use Ixocreate\Resource\SubManager\ResourceSubManager;
 use Ixocreate\Schema\Builder;
 use Ixocreate\Schema\Listing\ListSchema;
@@ -89,11 +90,15 @@ final class ResourceProvider implements ClientConfigProviderInterface
             $createSchema = new Schema();
             if ($resource instanceof CreateSchemaAwareInterface) {
                 $createSchema = $resource->createSchema($this->builder, $user);
+            } elseif ($resource instanceof SchemaAwareInterface) {
+                $createSchema = $resource->schema($this->builder);
             }
 
             $updateSchema = new Schema();
             if ($resource instanceof UpdateSchemaAwareInterface) {
                 $updateSchema = $resource->updateSchema($this->builder, $user);
+            } elseif ($resource instanceof SchemaAwareInterface) {
+                $createSchema = $resource->schema($this->builder);
             }
 
             $resourceConfig = [
