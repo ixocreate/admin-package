@@ -84,7 +84,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
         $group->before(CookieInitializerMiddleware::class);
         $group->get('/session', SessionAction::class, "admin.session");
         $group->get('/static/{file:.*}', StaticAction::class, "admin.static");
-        $group->get('/', IndexAction::class, "admin.index", -1 * PHP_INT_MAX);
+        $group->get('[/{any:.*}]', IndexAction::class, "admin.index", -1 * PHP_INT_MAX);
     });
 });
 
