@@ -98,7 +98,7 @@ final class ResourceProvider implements ClientConfigProviderInterface
             if ($resource instanceof UpdateSchemaAwareInterface) {
                 $updateSchema = $resource->updateSchema($this->builder, $user);
             } elseif ($resource instanceof SchemaAwareInterface) {
-                $createSchema = $resource->schema($this->builder);
+                $updateSchema = $resource->schema($this->builder);
             }
 
             $resourceConfig = [
