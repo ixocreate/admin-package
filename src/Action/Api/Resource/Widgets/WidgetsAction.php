@@ -64,7 +64,7 @@ class WidgetsAction implements MiddlewareInterface
                     $resource->receiveAboveListWidgets($user, $collector);
                 }
                 if ($position === 'below' && $resource instanceof BelowListWidgetInterface) {
-                    $resource->receiveAboveListWidgets($user, $collector);
+                    $resource->receiveBelowListWidgets($user, $collector);
                 }
                 break;
             case 'create':
