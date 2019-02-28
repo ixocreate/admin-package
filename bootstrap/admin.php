@@ -1,5 +1,8 @@
 <?php
-namespace App;
+declare(strict_types=1);
+
+namespace Ixocreate\Admin;
+
 use Ixocreate\Admin\Config\Client\Provider\IntlProvider;
 use Ixocreate\Admin\Config\Client\Provider\NavigationProvider;
 use Ixocreate\Admin\Config\Client\Provider\ProjectProvider;

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin;
 
-/** @var \Ixocreate\ServiceManager\ServiceManagerConfigurator $serviceManager */
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Config\Client\ClientConfigGenerator;
 use Ixocreate\Admin\Config\Client\ClientConfigProviderSubManager;
@@ -16,6 +15,8 @@ use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Admin\Router\Factory\AdminRouterFactory;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
+
+/** @var \Ixocreate\ServiceManager\ServiceManagerConfigurator $serviceManager */
 
 $serviceManager->addFactory(AdminConfig::class, AdminConfigFactory::class);
 $serviceManager->addFactory(AdminRouter::class, AdminRouterFactory::class);

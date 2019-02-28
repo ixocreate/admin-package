@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
+
 namespace Ixocreate\Admin;
 
-/** @var ConsoleConfigurator $console */
 use Ixocreate\ApplicationConsole\ConsoleConfigurator;
+
+/** @var ConsoleConfigurator $console */
 
 $console->addDirectory(__DIR__ . '/../src/Console', true);
