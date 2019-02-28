@@ -36,6 +36,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
     ];
 
     private $config = [
+        'secret'        => '',
         'author'        => '',
         'copyright'     => '',
         'description'   => '',
@@ -63,6 +64,8 @@ final class AdminProjectConfig implements SerializableServiceInterface
         $this->config = $adminConfigurator->toArray();
         $this->config['adminBuildPath'] = \rtrim($this->config['adminBuildPath'], '/') . '/';
 
+        // TODO: check if secret is set
+
         $items = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->adminBuildPath()), \RecursiveIteratorIterator::LEAVES_ONLY);
         /** @var SplFileInfo $file */
         foreach ($items as $name => $file) {
@@ -81,6 +84,14 @@ final class AdminProjectConfig implements SerializableServiceInterface
                 'filesize' => $file->getSize(),
             ];
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function secret(): string
+    {
+        return $this->config['secret'];
     }
 
     /**

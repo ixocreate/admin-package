@@ -26,6 +26,7 @@ use Zend\Stdlib\SplPriorityQueue;
 final class AdminConfigurator implements ConfiguratorInterface
 {
     private $config = [
+        'secret' => '',
         'author' => '',
         'copyright' => '',
         'description' => '',
@@ -88,6 +89,14 @@ final class AdminConfigurator implements ConfiguratorInterface
             AdditionalSchemaSubManager::class,
             AdditionalSchemaInterface::class
         );
+    }
+
+    /**
+     * @param string $secret
+     */
+    public function setSecret(string $secret): void
+    {
+        $this->config['secret'] = $secret;
     }
 
     /**

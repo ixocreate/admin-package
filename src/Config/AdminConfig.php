@@ -42,6 +42,17 @@ final class AdminConfig implements SegmentProviderInterface
         $this->asset = $asset;
     }
 
+    /**
+     * @return string
+     */
+    public function secret(): string
+    {
+        return $this->adminProjectConfig->secret();
+    }
+
+    /**
+     * @return string
+     */
     public function author(): string
     {
         return $this->adminProjectConfig->author();
