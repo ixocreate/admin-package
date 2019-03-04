@@ -12,9 +12,12 @@ namespace Ixocreate\Admin\Console;
 use Ixocreate\CommandBus\CommandBus;
 use Ixocreate\Contract\Command\CommandInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 final class CreateUserCommand extends Command implements CommandInterface
 {
@@ -38,6 +41,7 @@ final class CreateUserCommand extends Command implements CommandInterface
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'Email address')
             ->addArgument('role', InputArgument::REQUIRED, 'Role')
+            ->addOption('password', 'p', InputOption::VALUE_OPTIONAL, 'set password', false)
         ;
 
         $this->setDescription('Creates a new admin user with a random generated password.');
@@ -45,7 +49,28 @@ final class CreateUserCommand extends Command implements CommandInterface
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $password = \mb_substr(\base64_encode(\sha1(\uniqid())), 0, 10);
+        if (!empty($input->getOption('password'))) {
+            $password = $input->getOption('password');
+        } else if ($input->getOption('password') === null) {
+            /** @var QuestionHelper $helper */
+            $helper = $this->getHelper('question');
+            $question = new Question('password: ');
+            $question->setHidden(true);
+
+            $password = $helper->ask($input, $output, $question);
+
+            $question = new Question('repeat password: ');
+            $question->setHidden(true);
+
+            $repeatPassword = $helper->ask($input, $output, $question);
+            if ($password !== $repeatPassword) {
+                $output->writeln('<error>passwords does not match</error>');
+                return;
+            }
+        } else {
+            $password = \mb_substr(\base64_encode(\sha1(\uniqid())), 0, 10);
+            $output->writeln("Password: " . $password);
+        }
 
         $data = [
             'email' => $input->getArgument("email"),
@@ -59,8 +84,6 @@ final class CreateUserCommand extends Command implements CommandInterface
 
         if (!$result->isSuccessful()) {
         }
-
-        $output->writeln("Password: " . $password);
     }
 
     public static function getCommandName()
