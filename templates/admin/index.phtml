@@ -1,9 +1,11 @@
 <!doctype html>
-<?php
-/** @var \Ixocreate\Admin\Config\AdminConfig $adminConfig */
-?>
 <html lang="en">
 <head>
+    <?php
+    /** @var \Ixocreate\Admin\Config\AdminConfig $adminConfig */
+    $adminConfig = $this->admin()->getAdminConfig();
+    $assets = $this->admin()->assetsPaths();
+    ?>
     <meta charset="utf-8">
     <title><?= $adminConfig->name() ?></title>
     <base href="/<?= ltrim($adminConfig->uri()->getPath(), '/')?>">
@@ -34,8 +36,27 @@
                 'logo' => $adminConfig->logo(),
         ],
         'routes' => [
+            'login' => $this->admin()->generateUri('admin.login'),
             'session' => rtrim($adminConfig->uri()->getPath(), '/') . '/session',
-            'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config', //TODO use url helper
+            //'config' => $this->admin()->generateUri('admin.api.config'),
+            'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config',
+        ]
+    ]) ?>;
+    window.__ixocreate = <?= json_encode([
+        'googleApiKey' => $adminConfig->googleMapApiKey(),
+        'project' => [
+            'author' => $adminConfig->author(),
+            'name' => $adminConfig->name(),
+            'poweredBy' => $adminConfig->poweredBy(),
+            'copyright' => $adminConfig->copyright(),
+            'description' => $adminConfig->description(),
+            'background' => $adminConfig->background(),
+            'icon' => $adminConfig->icon(),
+            'logo' => $adminConfig->logo(),
+        ],
+        'routes' => [
+            'login' => $this->admin()->generateUri('admin.login'),
+            'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config',
         ]
     ]) ?>;
 </script>

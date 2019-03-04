@@ -114,7 +114,6 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
             'id' => $this->uuid(),
             'email' => $this->data()['email'],
             'password' =>  $password,
-            'hash' => Uuid::uuid4()->toString(),
             'role' => $this->data()['role'],
             'avatar' => $avatar,
             'createdAt' => $this->createdAt(),

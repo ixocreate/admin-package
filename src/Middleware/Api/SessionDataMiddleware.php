@@ -10,8 +10,8 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Middleware\Api;
 
 use Firebase\JWT\JWT;
+use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\SessionData;
-use Ixocreate\Admin\Response\ApiErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -19,6 +19,19 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 final class SessionDataMiddleware implements MiddlewareInterface
 {
+    /**
+     * @var AdminConfig
+     */
+    private $adminConfig;
+
+    /**
+     * SessionDataMiddleware constructor.
+     */
+    public function __construct(AdminConfig $adminConfig)
+    {
+        $this->adminConfig = $adminConfig;
+    }
+
     /**
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
@@ -31,22 +44,17 @@ final class SessionDataMiddleware implements MiddlewareInterface
         }
 
         if (empty($request->getCookieParams()['kiwiSid'])) {
-            return $this->createInvalidSidResponse();
+            return $handler->handle($request);
         }
 
         try {
-            $jwt = JWT::decode($request->getCookieParams()['kiwiSid'], 'secret_key', ['HS512']);
+            $jwt = JWT::decode($request->getCookieParams()['kiwiSid'], $this->adminConfig->secret(), ['HS512']);
 
             $sessionData = new SessionData((array)$jwt->data);
         } catch (\Throwable $e) {
-            return $this->createInvalidSidResponse();
+            return $handler->handle($request);
         }
 
         return $handler->handle($request->withAttribute(SessionData::class, $sessionData));
-    }
-
-    private function createInvalidSidResponse(): ApiErrorResponse
-    {
-        return new ApiErrorResponse('session_invalid', [], 400);
     }
 }

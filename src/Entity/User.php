@@ -36,7 +36,7 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
 
     private $password;
 
-    private $hash;
+    private $status;
 
     private $role;
 
@@ -50,7 +50,9 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
 
     private $lastLoginAt;
 
-    private $status;
+    private $lastActivityAt;
+
+    private $lastPasswordChangeAt;
 
     private $userAttributes;
 
@@ -71,9 +73,9 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
         return $this->password;
     }
 
-    public function hash(): UuidType
+    public function status(): StatusType
     {
-        return $this->hash;
+        return $this->status;
     }
 
     public function role(): RoleType
@@ -106,9 +108,14 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
         return $this->lastLoginAt;
     }
 
-    public function status(): StatusType
+    public function lastActivityAt():? DateTimeType
     {
-        return $this->status;
+        return $this->lastActivityAt;
+    }
+
+    public function lastPasswordChangeAt():? DateTimeType
+    {
+        return $this->lastPasswordChangeAt;
     }
 
     public function userAttributes():? SchemaType
@@ -135,14 +142,15 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
             new Definition("id", UuidType::class, false, true),
             new Definition("email", EmailType::class, false, true),
             new Definition("password", TypeInterface::TYPE_STRING, false, false),
-            new Definition("hash", UuidType::class, false, false),
+            new Definition("status", StatusType::class, false, true),
             new Definition("role", RoleType::class, false, true),
             new Definition("avatar", TypeInterface::TYPE_STRING, false, true),
             new Definition("createdAt", DateTimeType::class, false, true),
             new Definition("updatedAt", DateTimeType::class, false, true),
             new Definition("deletedAt", DateTimeType::class, true, false),
             new Definition("lastLoginAt", DateTimeType::class, true, true),
-            new Definition("status", StatusType::class, false, true),
+            new Definition("lastActivityAt", DateTimeType::class, true, true),
+            new Definition("lastPasswordChangeAt", DateTimeType::class, true, true),
             new Definition("userAttributes", SchemaType::class, true, true),
             new Definition("accountAttributes", SchemaType::class, true, true),
         ]);
@@ -158,17 +166,16 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
 
         $builder->addField('email', EmailType::serviceName());
         $builder->addField('password', Type::STRING);
-        $builder->addField('hash', UuidType::serviceName());
+        $builder->addField('status', StatusType::serviceName());
         $builder->addField('role', RoleType::serviceName());
         $builder->addField('avatar', Type::TEXT);
         $builder->addField('createdAt', DateTimeType::serviceName());
-        $builder->addField('lastLoginAt', DateTimeType::serviceName());
         $builder->addField('updatedAt', DateTimeType::serviceName());
         $builder->addField('deletedAt', DateTimeType::serviceName());
-        $builder->addField('status', StatusType::serviceName());
+        $builder->addField('lastLoginAt', DateTimeType::serviceName());
+        $builder->addField('lastActivityAt', DateTimeType::serviceName());
+        $builder->addField('lastPasswordChangeAt', DateTimeType::serviceName());
         $builder->addField('userAttributes', SchemaType::serviceName());
         $builder->addField('accountAttributes', SchemaType::serviceName());
     }
-
-
 }

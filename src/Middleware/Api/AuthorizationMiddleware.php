@@ -21,7 +21,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Expressive\Router\RouteResult;
 
-final class AuthorizationGuardMiddleware implements MiddlewareInterface
+final class AuthorizationMiddleware implements MiddlewareInterface
 {
     /**
      * @var UserRepository
@@ -44,21 +44,27 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $user = $request->getAttribute(User::class);
-        if ($user === null) {
-            return new ApiErrorResponse('unauthorized', [], 401);
+        $sessionData = $request->getAttribute(SessionData::class);
+        if (!($sessionData instanceof SessionData)) {
+            return $handler->handle($request);
         }
 
-        $permission = new Permission($user);
+        if (!($sessionData->userId() instanceof UuidType)) {
+            return $handler->handle($request);
+        }
 
-        /** @var RouteResult $routeResult */
-        $routeResult = $request->getAttribute(RouteResult::class);
-        if (!$permission->can($routeResult->getMatchedRouteName())) {
-            return new ApiErrorResponse('forbidden', [], 403);
+        /** @var User $user */
+        $user = $this->userRepository->findOneBy(['id' => $sessionData->userId()]);
+        if (empty($user)) {
+            return $handler->handle($request);
+        }
+
+        if ($user->status()->value() !== "active") {
+            return $handler->handle($request);
         }
 
         return $handler->handle($request
-            ->withAttribute(Permission::class, $permission)
+            ->withAttribute(User::class, $user)
         );
     }
 }

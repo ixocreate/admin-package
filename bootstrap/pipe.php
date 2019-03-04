@@ -3,11 +3,9 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin;
 
-/** @var PipeConfigurator $pipe */
-
 use Ixocreate\Admin\Action\Account\ChangeEmailAction;
 use Ixocreate\Admin\Action\Account\ChangePasswordAction;
-use Ixocreate\Admin\Action\Api\Auth\LoginAction;
+use Ixocreate\Admin\Action\Api\Auth\LoginAction as LegacyLogin;
 use Ixocreate\Admin\Action\Api\Auth\LogoutAction;
 use Ixocreate\Admin\Action\Api\Auth\UserAction;
 use Ixocreate\Admin\Action\Api\Config\ConfigAction;
@@ -17,11 +15,16 @@ use Ixocreate\Admin\Action\Api\Resource\DeleteAction;
 use Ixocreate\Admin\Action\Api\Resource\DetailAction;
 use Ixocreate\Admin\Action\Api\Resource\UpdateAction;
 use Ixocreate\Admin\Action\Api\Session\SessionAction;
+use Ixocreate\Admin\Action\Auth\LoginAction;
+use Ixocreate\Admin\Action\Auth\LostPasswordAction;
+use Ixocreate\Admin\Action\Auth\RecoverPasswordAction;
 use Ixocreate\Admin\Action\IndexAction;
 use Ixocreate\Admin\Action\Resource\Widgets\WidgetsAction;
 use Ixocreate\Admin\Action\StaticAction;
 use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Middleware\Api\ActivityMiddleware;
 use Ixocreate\Admin\Middleware\Api\AuthorizationGuardMiddleware;
+use Ixocreate\Admin\Middleware\Api\AuthorizationMiddleware;
 use Ixocreate\Admin\Middleware\Api\EnforceApiResponseMiddleware;
 use Ixocreate\Admin\Middleware\Api\ErrorMiddleware;
 use Ixocreate\Admin\Middleware\Api\SessionDataMiddleware;
@@ -33,21 +36,25 @@ use Ixocreate\ApplicationHttp\Pipe\GroupPipeConfigurator;
 use Ixocreate\ApplicationHttp\Pipe\PipeConfigurator;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
+/** @var PipeConfigurator $pipe */
+
 $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe) {
+
     $pipe->segment('/api')(function (PipeConfigurator $pipe) {
+
         $pipe->pipe(EnforceApiResponseMiddleware::class);
         $pipe->pipe(ErrorMiddleware::class);
         $pipe->pipe(SessionDataMiddleware::class);
-        $pipe->pipe(UserMiddleware::class);
         $pipe->pipe(XsrfProtectionMiddleware::class);
         $pipe->pipe(BodyParamsMiddleware::class);
+        $pipe->pipe(AuthorizationMiddleware::class);
 
-        $pipe->group("admin.unauthorized")(function (GroupPipeConfigurator $group) {
-            $group->get('/config', ConfigAction::class, "admin.api.config");
-            $group->post('/auth/login', LoginAction::class, "admin.api.auth.login");
-        });
+        $pipe->setRouter(AdminRouter::class);
         $pipe->group("admin.authorized")(function (GroupPipeConfigurator $group) {
             $group->before(AuthorizationGuardMiddleware::class);
+            $group->before(ActivityMiddleware::class);
+
+            $group->get('/config', ConfigAction::class, "admin.api.config");
 
             $group->get('/auth/user', UserAction::class, "admin.api.auth.user");
             $group->post('/auth/logout', LogoutAction::class, "admin.api.auth.logout");
@@ -67,7 +74,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
 
             $group->get('/dashboard', \Ixocreate\Admin\Action\Api\Dashboard\IndexAction::class, 'admin.api.dashboard.index');
 
-            $group->group('resource')(function(GroupPipeConfigurator $group) {
+            $group->group('resource')(function (GroupPipeConfigurator $group) {
                 $group->get('/resource/{resource}', \Ixocreate\Admin\Action\Api\Resource\IndexAction::class, 'admin.api.resource.index', PHP_INT_MAX * -1);
                 $group->get('/resource/{resource}/detail/{id}', DetailAction::class, 'admin.api.resource.detail', PHP_INT_MAX * -1);
                 $group->get('/resource/{resource}/default-values', DefaultValueAction::class, 'admin.api.resource.defaultValue', PHP_INT_MAX * -1);
@@ -81,11 +88,17 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
 
     $pipe->setRouter(AdminRouter::class);
     $pipe->group('admin.root')(function (GroupPipeConfigurator $group) {
-        $group->before(CookieInitializerMiddleware::class);
+        $group->before(SessionDataMiddleware::class);
+        $group->before(AuthorizationMiddleware::class);
+
+        $group->get('[/]', IndexAction::class, "admin.index", -1 * PHP_INT_MAX);
+
         $group->get('/session', SessionAction::class, "admin.session");
+
         $group->get('/static/{file:.*}', StaticAction::class, "admin.static");
-        $group->get('[/{any:.*}]', IndexAction::class, "admin.index", -1 * PHP_INT_MAX);
+
+        $group->any('/login', LoginAction::class, "admin.login");
+        $group->any('/lost-password', LostPasswordAction::class, "admin.lost-password");
+        $group->any('/recover-password', RecoverPasswordAction::class, "admin.recover-password");
     });
 });
-
-

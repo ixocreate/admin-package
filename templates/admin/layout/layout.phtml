@@ -1,1 +1,49 @@
-<?php
+<!doctype html>
+<html lang="en">
+<head>
+    <?php
+        /** @var \Ixocreate\Admin\Config\AdminConfig $adminConfig */
+        $adminConfig = $this->admin()->getAdminConfig();
+        $assets = $this->admin()->assetsPaths();
+    ?>
+    <meta charset="utf-8">
+    <title><?= $adminConfig->name() ?></title>
+    <base href="/<?= ltrim($adminConfig->uri()->getPath(), '/') ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="description" content="<?= $adminConfig->description() ?>">
+    <meta name="author" content="<?= $adminConfig->author() ?>">
+    <link rel="shortcut icon" href="<?= $adminConfig->icon() ?>">
+
+    <?php foreach ($assets['styles'] as $style): ?>
+        <link href="<?= $style ?>" rel="stylesheet"/>
+    <?php endforeach ?>
+</head>
+<body>
+<div class="app-body"><!---->
+    <div class="app-body-background"
+         style="background-image: url(&quot;<?= $adminConfig->background() ?>&quot;);"></div>
+    <main class="main d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card-group">
+                        <div class="card p-4">
+                            <div class="card-body"><!---->
+                                <div class="text-center mb-2">
+                                    <img style="width: 100px; height: 100px;"
+                                         src="<?= $adminConfig->logo() ?>">
+                                </div>
+
+                                <?= $this->section('content') ?>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

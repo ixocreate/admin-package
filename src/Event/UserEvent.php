@@ -15,8 +15,8 @@ use Ixocreate\Event\Event;
 class UserEvent extends Event
 {
     public const EVENT_CREATE = 'admin-user.create';
-
     public const EVENT_UPDATE = 'admin-user.update';
+    public const EVENT_CHANGE_PASSWORD = 'admin-user.change-password';
 
     /**
      * @var User

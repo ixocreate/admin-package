@@ -9,19 +9,14 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Middleware\Api;
 
-use Ixocreate\Admin\Entity\SessionData;
 use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Repository\UserRepository;
-use Ixocreate\Admin\Response\ApiErrorResponse;
-use Ixocreate\CommonTypes\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Router\RouteResult;
 
-final class AuthorizationGuardMiddleware implements MiddlewareInterface
+final class ActivityMiddleware implements MiddlewareInterface
 {
     /**
      * @var UserRepository
@@ -29,7 +24,7 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
     private $userRepository;
 
     /**
-     * AuthorizationGuardMiddleware constructor.
+     * ActivityMiddleware constructor.
      * @param UserRepository $userRepository
      */
     public function __construct(UserRepository $userRepository)
@@ -44,21 +39,12 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        /** @var User $user */
         $user = $request->getAttribute(User::class);
-        if ($user === null) {
-            return new ApiErrorResponse('unauthorized', [], 401);
-        }
 
-        $permission = new Permission($user);
+        $user = $user->with('lastActivityAt', new \DateTimeImmutable());
+        $this->userRepository->save($user);
 
-        /** @var RouteResult $routeResult */
-        $routeResult = $request->getAttribute(RouteResult::class);
-        if (!$permission->can($routeResult->getMatchedRouteName())) {
-            return new ApiErrorResponse('forbidden', [], 403);
-        }
-
-        return $handler->handle($request
-            ->withAttribute(Permission::class, $permission)
-        );
+        return $handler->handle($request);
     }
 }

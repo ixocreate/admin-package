@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Account;
 
-use Ixocreate\Admin\Command\Account\ChangePasswordCommand;
+use Ixocreate\Admin\Command\User\ChangePasswordCommand;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Response\ApiErrorResponse;
 use Ixocreate\Admin\Response\ApiSuccessResponse;

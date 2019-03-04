@@ -17,7 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\Stream;
 
-class StaticAction implements MiddlewareInterface
+final class StaticAction implements MiddlewareInterface
 {
     /**
      * @var AdminConfig

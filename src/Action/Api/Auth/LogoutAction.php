@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Api\Auth;
 
+use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\SessionData;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Admin\Session\SessionCookie;
@@ -21,9 +22,24 @@ use Ramsey\Uuid\Uuid;
 final class LogoutAction implements MiddlewareInterface
 {
     /**
+     * @var AdminConfig
+     */
+    private $adminConfig;
+
+    /**
+     * IndexAction constructor.
+     * @param AdminConfig $adminConfig
+     */
+    public function __construct(AdminConfig $adminConfig)
+    {
+        $this->adminConfig = $adminConfig;
+    }
+
+    /**
      * @param ServerRequestInterface $request
      * @param RequestHandlerInterface $handler
      * @return ResponseInterface
+     * @throws \Exception
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -34,7 +50,7 @@ final class LogoutAction implements MiddlewareInterface
         ]);
 
         $sessionCookie = new SessionCookie();
-        $response = $sessionCookie->createSessionCookie($request, $response, $sessionData);
+        $response = $sessionCookie->createSessionCookie($request, $response, $this->adminConfig, $sessionData);
         $response = $sessionCookie->createXsrfCookie($request, $response, $sessionData);
 
         return $response;

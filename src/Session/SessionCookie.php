@@ -12,6 +12,7 @@ namespace Ixocreate\Admin\Session;
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
+use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\SessionData;
 use Ixocreate\CommonTypes\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
@@ -19,7 +20,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class SessionCookie
 {
-    public function createSessionCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData): ResponseInterface
+    public function createSessionCookie(ServerRequestInterface $request, ResponseInterface $response, AdminConfig $adminConfig, SessionData $sessionData): ResponseInterface
     {
         $data = [
             'xsrfToken' => (string) $sessionData->xsrfToken()->value(),
@@ -38,7 +39,7 @@ final class SessionCookie
                 'exp' => \time() + 31536000,
                 'data' => $data,
             ],
-            'secret_key',
+            $adminConfig->secret(),
             'HS512'
         );
 
