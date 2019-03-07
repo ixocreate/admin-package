@@ -16,6 +16,7 @@ use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Admin\Session\SessionCookie;
+use Ixocreate\Application\ApplicationConfig;
 use Ixocreate\Template\TemplateResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -37,6 +38,11 @@ final class LoginAction implements MiddlewareInterface
     private $adminRouter;
 
     /**
+     * @var ApplicationConfig
+     */
+    private $applicationConfig;
+
+    /**
      * @var UserRepository
      */
     private $userRepository;
@@ -45,12 +51,15 @@ final class LoginAction implements MiddlewareInterface
      * IndexAction constructor.
      * @param AdminConfig $adminConfig
      * @param AdminRouter $adminRouter
+     * @param ApplicationConfig $applicationConfig
+     * @param UserRepository $userRepository
      */
-    public function __construct(AdminConfig $adminConfig, AdminRouter $adminRouter, UserRepository $userRepository)
+    public function __construct(AdminConfig $adminConfig, AdminRouter $adminRouter, ApplicationConfig $applicationConfig, UserRepository $userRepository)
     {
         $this->adminConfig = $adminConfig;
         $this->adminRouter = $adminRouter;
         $this->userRepository = $userRepository;
+        $this->applicationConfig = $applicationConfig;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -101,6 +110,9 @@ final class LoginAction implements MiddlewareInterface
 
             } catch (\Exception $e) {
                 $errors[] = 'Session expired, please try again';
+                if($this->applicationConfig->isDevelopment()) {
+                    $errors[] = $e->getMessage();
+                }
             }
         }
 
