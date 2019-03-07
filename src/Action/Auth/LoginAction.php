@@ -110,15 +110,15 @@ final class LoginAction implements MiddlewareInterface
 
             } catch (\Exception $e) {
                 $errors[] = 'Session expired, please try again';
-                if($this->applicationConfig->isDevelopment()) {
-                    $errors[] = $e->getMessage();
+                if ($this->applicationConfig->isDevelopment()) {
+                    $errors[] = 'Error ' . $e->getCode() . ' occurred in ' . $e->getFile() . ':' . $e->getLine() . ' : ' . $e->getMessage();
                 }
             }
         }
 
         $response = new TemplateResponse('admin::auth/login', [
             'csrf' => $csrf,
-            'errors' => $errors
+            'errors' => $errors,
         ]);
 
         return $response;
