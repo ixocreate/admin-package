@@ -30,18 +30,12 @@ final class AuthorizationMiddleware implements MiddlewareInterface
     private $userRepository;
 
     /**
-     * @var AdminProjectConfig
-     */
-    private $adminProjectConfig;
-
-    /**
      * AuthorizationGuardMiddleware constructor.
      * @param UserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository, AdminProjectConfig $adminProjectConfig)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->adminProjectConfig = $adminProjectConfig;
     }
 
     /**
@@ -68,15 +62,6 @@ final class AuthorizationMiddleware implements MiddlewareInterface
 
         if ($user->status()->value() !== "active") {
             return $handler->handle($request);
-        }
-
-        if (!empty($user->lastActivityAt())) {
-            /** @var \DateTimeImmutable $dateTime */
-            $dateTime = $user->lastActivityAt()->value();
-
-            if ($dateTime->getTimestamp() < time() - $this->adminProjectConfig->sessionTimeout()) {
-                return $handler->handle($request);
-            }
         }
 
         return $handler->handle($request

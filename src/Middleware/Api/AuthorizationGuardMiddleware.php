@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Middleware\Api;
 
+use Ixocreate\Admin\Config\AdminProjectConfig;
 use Ixocreate\Admin\Entity\SessionData;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Permission\Permission;
@@ -29,12 +30,18 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
     private $userRepository;
 
     /**
+     * @var AdminProjectConfig
+     */
+    private $adminProjectConfig;
+
+    /**
      * AuthorizationGuardMiddleware constructor.
      * @param UserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository, AdminProjectConfig $adminProjectConfig)
     {
         $this->userRepository = $userRepository;
+        $this->adminProjectConfig = $adminProjectConfig;
     }
 
     /**
@@ -47,6 +54,15 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
         $user = $request->getAttribute(User::class);
         if ($user === null) {
             return new ApiErrorResponse('unauthorized', [], 401);
+        }
+
+        if (!empty($user->lastActivityAt())) {
+            /** @var \DateTimeImmutable $dateTime */
+            $dateTime = $user->lastActivityAt()->value();
+
+            if ($dateTime->getTimestamp() < time() - $this->adminProjectConfig->sessionTimeout()) {
+                return new ApiErrorResponse('unauthorized', [], 401);
+            }
         }
 
         $permission = new Permission($user);
