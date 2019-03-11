@@ -42,7 +42,7 @@
             'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config',
         ]
     ]) ?>;
-    window.__ixocreate = <?= json_encode([
+    window.__ixo = <?= json_encode([
         'googleApiKey' => $adminConfig->googleMapApiKey(),
         'project' => [
             'author' => $adminConfig->author(),
@@ -56,6 +56,7 @@
         ],
         'routes' => [
             'login' => $this->admin()->generateUri('admin.login'),
+            'session' => rtrim($adminConfig->uri()->getPath(), '/') . '/session',
             'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config',
         ]
     ]) ?>;
