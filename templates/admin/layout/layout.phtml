@@ -19,27 +19,29 @@
         <link href="<?= $style ?>" rel="stylesheet"/>
     <?php endforeach ?>
 </head>
-<body>
-<div class="app-body"><!---->
-    <div class="app-body-background"
-         style="background-image: url(&quot;<?= $adminConfig->background() ?>&quot;);"></div>
+<body class="app">
+<div class="app-body">
+    <div class="app-body-background" style="background-image: url('<?= $adminConfig->background() ?>');"></div>
     <main class="main d-flex align-items-center">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 mx-auto">
                     <div class="card-group">
                         <div class="card p-4">
-                            <div class="card-body"><!---->
+                            <div class="card-body">
                                 <div class="text-center mb-2">
-                                    <img style="width: 100px; height: 100px;"
-                                         src="<?= $adminConfig->logo() ?>">
+                                    <img class="img-fluid" src="<?= $adminConfig->loginLogo() ?>">
                                 </div>
-
                                 <?= $this->section('content') ?>
-
                             </div>
                         </div>
                     </div>
+
+                    <?php if (!empty($adminConfig->loginMessage())): ?>
+                    <div class="alert alert-info mt-3">
+                        <?= $adminConfig->loginMessage() ?>
+                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
