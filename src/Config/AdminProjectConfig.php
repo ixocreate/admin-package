@@ -58,6 +58,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'userAttributesSchema' => null,
         'accountAttributesSchema' => null,
         'googleMapApiKey' => null,
+        'sessionTimeout' => 7200,
     ];
 
     /**
@@ -233,6 +234,14 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function googleMapApiKey(): ?string
     {
         return $this->config['googleMapApiKey'];
+    }
+
+    /**
+     * @return int
+     */
+    public function sessionTimeout(): int
+    {
+        return $this->config['sessionTimeout'];
     }
 
     /**

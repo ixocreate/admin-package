@@ -43,8 +43,8 @@ final class ActivityMiddleware implements MiddlewareInterface
         $user = $request->getAttribute(User::class);
 
         $user = $user->with('lastActivityAt', new \DateTimeImmutable());
-        $this->userRepository->save($user);
+        $user = $this->userRepository->save($user);
 
-        return $handler->handle($request);
+        return $handler->handle($request->withAttribute(User::class, $user));
     }
 }

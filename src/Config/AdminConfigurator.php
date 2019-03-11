@@ -46,6 +46,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'userAttributesSchema' => null,
         'accountAttributesSchema' => null,
         'googleMapApiKey' => null,
+        'sessionTimeout' => 7200,
     ];
 
     /**
@@ -299,6 +300,14 @@ final class AdminConfigurator implements ConfiguratorInterface
     public function setLoginMessage(string $message): void
     {
         $this->config['loginMessage'] = $message;
+    }
+
+    /**
+     * @param int $sessionTimeout
+     */
+    public function setSessionTimeout(int $sessionTimeout): void
+    {
+        $this->config['sessionTimeout'] = $sessionTimeout;
     }
 
     /**

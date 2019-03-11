@@ -30,7 +30,6 @@ use Ixocreate\Admin\Middleware\Api\ErrorMiddleware;
 use Ixocreate\Admin\Middleware\Api\SessionDataMiddleware;
 use Ixocreate\Admin\Middleware\Api\UserMiddleware;
 use Ixocreate\Admin\Middleware\Api\XsrfProtectionMiddleware;
-use Ixocreate\Admin\Middleware\CookieInitializerMiddleware;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\ApplicationHttp\Pipe\GroupPipeConfigurator;
 use Ixocreate\ApplicationHttp\Pipe\PipeConfigurator;
