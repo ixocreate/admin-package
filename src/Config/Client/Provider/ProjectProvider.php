@@ -46,6 +46,8 @@ final class ProjectProvider implements ClientConfigProviderInterface
             'loginMessage' => $this->adminConfig->loginMessage(),
             'icon' => $this->adminConfig->icon(),
             'logo' => $this->adminConfig->logo(),
+            'loginUrl' => (string) $this->adminConfig->uri() . '/login',
+            'logoutUrl' => (string) $this->adminConfig->uri() . '/logout',
         ];
     }
 }

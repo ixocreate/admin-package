@@ -53,9 +53,10 @@
             'background' => $adminConfig->background(),
             'icon' => $adminConfig->icon(),
             'logo' => $adminConfig->logo(),
+            'loginUrl' => $this->admin()->generateUri('admin.login'),
+            'logoutUrl' => $this->admin()->generateUri('admin.logout'),
         ],
         'routes' => [
-            'login' => $this->admin()->generateUri('admin.login'),
             'session' => rtrim($adminConfig->uri()->getPath(), '/') . '/session',
             'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config',
         ]
