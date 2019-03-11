@@ -61,7 +61,7 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
             $dateTime = $user->lastActivityAt()->value();
 
             if ($dateTime->getTimestamp() < time() - $this->adminProjectConfig->sessionTimeout()) {
-                return new ApiErrorResponse('unauthorized', [], 401);
+                //return new ApiErrorResponse('unauthorized', [], 401);
             }
         }
 

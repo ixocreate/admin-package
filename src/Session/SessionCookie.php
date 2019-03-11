@@ -43,7 +43,7 @@ final class SessionCookie
             'HS512'
         );
 
-        $cookie = SetCookie::create("kiwiSid")
+        $cookie = SetCookie::create("ixoSid")
             ->withValue($jwt)
             ->withPath("/")
             ->withHttpOnly(true)

@@ -6,7 +6,6 @@ namespace Ixocreate\Admin;
 use Ixocreate\Admin\Action\Account\ChangeEmailAction;
 use Ixocreate\Admin\Action\Account\ChangePasswordAction;
 use Ixocreate\Admin\Action\Api\Auth\LoginAction as LegacyLogin;
-use Ixocreate\Admin\Action\Api\Auth\LogoutAction;
 use Ixocreate\Admin\Action\Api\Auth\UserAction;
 use Ixocreate\Admin\Action\Api\Config\ConfigAction;
 use Ixocreate\Admin\Action\Api\Resource\CreateAction;
@@ -16,6 +15,7 @@ use Ixocreate\Admin\Action\Api\Resource\DetailAction;
 use Ixocreate\Admin\Action\Api\Resource\UpdateAction;
 use Ixocreate\Admin\Action\Api\Session\SessionAction;
 use Ixocreate\Admin\Action\Auth\LoginAction;
+use Ixocreate\Admin\Action\Auth\LogoutAction;
 use Ixocreate\Admin\Action\Auth\LostPasswordAction;
 use Ixocreate\Admin\Action\Auth\RecoverPasswordAction;
 use Ixocreate\Admin\Action\IndexAction;
@@ -56,7 +56,6 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->get('/config', ConfigAction::class, "admin.api.config");
 
             $group->get('/auth/user', UserAction::class, "admin.api.auth.user");
-            $group->post('/auth/logout', LogoutAction::class, "admin.api.auth.logout");
 
             $group->get('/user', \Ixocreate\Admin\Action\Api\User\IndexAction::class, 'admin.api.user.index');
             $group->post('/user', \Ixocreate\Admin\Action\Api\User\CreateAction::class, 'admin.api.user.create');
@@ -97,6 +96,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
         $group->get('/static/{file:.*}', StaticAction::class, "admin.static");
 
         $group->any('/login', LoginAction::class, "admin.login");
+        $group->any('/logout', LogoutAction::class, "admin.logout");
         $group->any('/lost-password', LostPasswordAction::class, "admin.lost-password");
         $group->any('/recover-password', RecoverPasswordAction::class, "admin.recover-password");
     });

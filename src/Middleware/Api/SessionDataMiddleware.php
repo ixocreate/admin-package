@@ -43,12 +43,12 @@ final class SessionDataMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        if (empty($request->getCookieParams()['kiwiSid'])) {
+        if (empty($request->getCookieParams()['ixoSid'])) {
             return $handler->handle($request);
         }
 
         try {
-            $jwt = JWT::decode($request->getCookieParams()['kiwiSid'], $this->adminConfig->secret(), ['HS512']);
+            $jwt = JWT::decode($request->getCookieParams()['ixoSid'], $this->adminConfig->secret(), ['HS512']);
 
             $sessionData = new SessionData((array)$jwt->data);
         } catch (\Throwable $e) {
