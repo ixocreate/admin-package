@@ -21,13 +21,10 @@ $admin->addClientProvider(IntlProvider::class);
 $admin->addClientProvider(ResourceProvider::class);
 
 $admin->setName("IXOCREATE");
-$admin->setAuthor("IXOCREATE GmbH");
+$admin->setAuthor("IXOLIT GmbH");
 $admin->setDescription("IXOCREATE");
 $admin->setCopyright(date("Y"));
 $admin->setPoweredBy(true);
-$admin->setBackground("/admin/icon.svg");
-$admin->setLogo("/admin/logo.svg");
-$admin->setIcon("/admin/icon.png");
 
 $contentGroup = $admin->addNavigationGroup("Content", 5000);
 $contentGroup->add("Sitemap", ['admin.api.sitemap.index'], 'fa fa-sitemap', '/page', 2000);
