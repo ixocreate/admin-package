@@ -40,11 +40,6 @@ final class ConfigAction implements MiddlewareInterface
     private $typeSubManager;
 
     /**
-     * @var ElementSubManager
-     */
-    private $elementSubManager;
-
-    /**
      * @var UserRepository
      */
     private $userRepository;
@@ -78,7 +73,6 @@ final class ConfigAction implements MiddlewareInterface
     ) {
         $this->builder = $builder;
         $this->typeSubManager = $typeSubManager;
-        $this->elementSubManager = $elementSubManager;
         $this->userRepository = $userRepository;
         $this->additionalSchemaSubManager = $additionalSchemaSubManager;
         $this->adminConfig = $adminConfig;
@@ -118,9 +112,10 @@ final class ConfigAction implements MiddlewareInterface
                     ->withRequired(true)
                     ->withLabel("Password Repeat")
             )
-            ->withAddedElement($this->typeSubManager->get(RoleType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('role')->withLabel('Role'))
             ->withAddedElement(
-                $this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status')
+                $this->typeSubManager->get(RoleType::class)->provideElement($this->builder)->withRequired(true)->withName('role')->withLabel('Role'))
+            ->withAddedElement(
+                $this->typeSubManager->get(StatusType::class)->provideElement($this->builder)->withRequired(true)->withName('status')->withLabel('Status')
         );
 
         if ($this->receiveUserAttributesSchema() !== null) {
@@ -143,8 +138,8 @@ final class ConfigAction implements MiddlewareInterface
                     ->withRequired(true)
                     ->withLabel("Email")
             )
-            ->withAddedElement($this->typeSubManager->get(RoleType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('role')->withLabel('Role'))
-            ->withAddedElement($this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status'));
+            ->withAddedElement($this->typeSubManager->get(RoleType::class)->provideElement($this->builder)->withRequired(true)->withName('role')->withLabel('Role'))
+            ->withAddedElement($this->typeSubManager->get(StatusType::class)->provideElement($this->builder)->withRequired(true)->withName('status')->withLabel('Status'));
 
         if ($this->receiveUserAttributesSchema() !== null) {
             foreach (($this->receiveUserAttributesSchema()->additionalSchema($this->builder))->elements() as $element) {
