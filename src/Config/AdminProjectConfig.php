@@ -42,7 +42,12 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'description'   => '',
         'name'          => '',
         'poweredBy'     => true,
-        'logo'          => '',
+        'logo'          => [
+            'image' => '',
+            'width' => 0,
+            'height' => 0,
+        ],
+        'loginLogo'     => '',
         'icon'          => '',
         'background'    => '',
         'loginMessage' => '',
@@ -135,11 +140,19 @@ final class AdminProjectConfig implements SerializableServiceInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function logo(): string
+    public function logo(): array
     {
         return $this->config['logo'];
+    }
+
+    /**
+     * @return string
+     */
+    public function loginLogo(): string
+    {
+        return $this->config['loginLogo'];
     }
 
     /**

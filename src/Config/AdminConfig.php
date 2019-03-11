@@ -91,11 +91,23 @@ final class AdminConfig implements SegmentProviderInterface
     }
 
     /**
+     * @return array
+     */
+    public function logo(): array
+    {
+        return [
+            'image' =>  $this->asset->getUrl($this->adminProjectConfig->logo()['image']),
+            'width' =>  $this->adminProjectConfig->logo()['width'],
+            'height' =>  $this->adminProjectConfig->logo()['height'],
+        ];
+    }
+
+    /**
      * @return string
      */
-    public function logo(): string
+    public function loginLogo(): string
     {
-        return $this->asset->getUrl($this->adminProjectConfig->logo());
+        return $this->asset->getUrl($this->adminProjectConfig->loginLogo());
     }
 
     /**

@@ -32,7 +32,12 @@ final class AdminConfigurator implements ConfiguratorInterface
         'description' => '',
         'name' => '',
         'poweredBy' => true,
-        'logo' => '',
+        'logo' => [
+            'image' => '',
+            'width' => 0,
+            'height' => 0,
+        ],
+        'loginLogo' => '',
         'icon' => '',
         'background' => '',
         'loginMessage' => '',
@@ -142,9 +147,21 @@ final class AdminConfigurator implements ConfiguratorInterface
     /**
      * @param string $logo
      */
-    public function setLogo(string $logo): void
+    public function setLogo(string $logo, int $width, int $height): void
     {
-        $this->config['logo'] = $logo;
+        $this->config['logo'] = [
+            'image' => $logo,
+            'width' => $width,
+            'height' => $height,
+        ];
+    }
+
+    /**
+     * @param string $logo
+     */
+    public function setLoginLogo(string $logo): void
+    {
+        $this->config['loginLogo'] = $logo;
     }
 
     /**
