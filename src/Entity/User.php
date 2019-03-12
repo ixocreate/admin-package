@@ -160,7 +160,7 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
     {
         $builder->setTable('admin_user');
 
-        $builder->createField('id', UuidType::class)
+        $builder->createField('id', UuidType::serviceName())
             ->makePrimaryKey()
             ->build();
 
