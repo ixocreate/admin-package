@@ -62,25 +62,25 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
         $schema = $schema
             ->withAddedElement(
                 $builder->create(SelectElement::class, 'locale')
-                    ->withLabel('Locale / Language')
+                    ->withLabel('Language')
                     ->withDescription('Primary Language & Formats / Defaults to system locale')
                     ->withOptions($this->locales)
             )
             ->withAddedElement(
-                $builder->create(SelectElement::class, 'locale_date')
-                    ->withLabel('Date Locale')
+                $builder->create(SelectElement::class, 'dateLocale')
+                    ->withLabel('Date Format')
                     ->withDescription('Defaults to Locale / Language')
                     ->withOptions($this->locales)
             )
             ->withAddedElement(
-                $builder->create(SelectElement::class, 'locale_time')
-                    ->withLabel('Time Locale')
+                $builder->create(SelectElement::class, 'timeLocale')
+                    ->withLabel('Time Format')
                     ->withDescription('Defaults to Locale / Language')
                     ->withOptions($this->locales)
             )
             ->withAddedElement(
-                $builder->create(SelectElement::class, 'locale_number')
-                    ->withLabel('Number Format Locale')
+                $builder->create(SelectElement::class, 'numberLocale')
+                    ->withLabel('Number Format')
                     ->withDescription('Defaults to Locale / Language')
                     ->withOptions($this->locales)
             )
