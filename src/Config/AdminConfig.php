@@ -175,6 +175,22 @@ final class AdminConfig implements SegmentProviderInterface
     }
 
     /**
+     * @return string
+     */
+    public function localeAttributesSchema(): ?string
+    {
+        return $this->adminProjectConfig->localeAttributesSchema();
+    }
+
+    /**
+     * @return string
+     */
+    public function defaultLocale(): ?string
+    {
+        return $this->adminProjectConfig->defaultLocale();
+    }
+
+    /**
      * @return UriInterface
      * @deprecated
      */

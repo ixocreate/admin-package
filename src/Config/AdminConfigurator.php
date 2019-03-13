@@ -12,6 +12,7 @@ namespace Ixocreate\Admin\Config;
 use Ixocreate\Admin\Config\Client\ClientConfigProviderSubManager;
 use Ixocreate\Admin\Config\Navigation\Group;
 use Ixocreate\Admin\Role\RoleSubManager;
+use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
 use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
 use Ixocreate\Contract\Admin\Widget\DashboardWidgetProviderInterface;
@@ -45,6 +46,8 @@ final class AdminConfigurator implements ConfiguratorInterface
         'adminBuildPath' => __DIR__ . '/../../../admin-frontend/build/',
         'userAttributesSchema' => null,
         'accountAttributesSchema' => null,
+        'localeAttributesSchema' => LocaleAttributesSchema::class,
+        'defaultLocale' => 'en_US',
         'googleMapApiKey' => null,
         'sessionTimeout' => 7200,
     ];
@@ -95,6 +98,8 @@ final class AdminConfigurator implements ConfiguratorInterface
             AdditionalSchemaSubManager::class,
             AdditionalSchemaInterface::class
         );
+
+        $this->addLocaleAttributesSchema(LocaleAttributesSchema::class);
     }
 
     /**
@@ -189,6 +194,9 @@ final class AdminConfigurator implements ConfiguratorInterface
         $this->config['adminBuildPath'] = $buildPath;
     }
 
+    /**
+     * @param string $googleMapApiKey
+     */
     public function setGoogleMapApiKey(string $googleMapApiKey): void
     {
         $this->config['googleMapApiKey'] = $googleMapApiKey;
@@ -212,6 +220,24 @@ final class AdminConfigurator implements ConfiguratorInterface
     {
         $this->config['accountAttributesSchema'] = $accountAttributesSchema;
         $this->additionalSchemaSubManagerConfigurator->addFactory($accountAttributesSchema, $factory);
+    }
+
+    /**
+     * @param string $localeAttributesSchema
+     * @param string $factory
+     */
+    public function addLocaleAttributesSchema(string $localeAttributesSchema, string $factory = AutowireFactory::class): void
+    {
+        $this->config['localeAttributesSchema'] = $localeAttributesSchema;
+        $this->additionalSchemaSubManagerConfigurator->addFactory($localeAttributesSchema, $factory);
+    }
+
+    /**
+     * @param string $locale
+     */
+    public function setDefaultLocale(string $locale): void
+    {
+        $this->config['defaultLocale'] = $locale;
     }
 
     /**

@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config;
 
+use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
 use Ixocreate\Contract\Application\SerializableServiceInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -57,6 +58,8 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'clientConfigProvider' => [],
         'userAttributesSchema' => null,
         'accountAttributesSchema' => null,
+        'localeAttributesSchema' => LocaleAttributesSchema::class,
+        'defaultLocale' => 'en_US',
         'googleMapApiKey' => null,
         'sessionTimeout' => 7200,
     ];
@@ -218,6 +221,22 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function accountAttributesSchema(): ?string
     {
         return $this->config['accountAttributesSchema'];
+    }
+
+    /**
+     * @return string
+     */
+    public function localeAttributesSchema(): ?string
+    {
+        return $this->config['localeAttributesSchema'];
+    }
+
+    /**
+     * @return string
+     */
+    public function defaultLocale(): string
+    {
+        return $this->config['defaultLocale'];
     }
 
     /**

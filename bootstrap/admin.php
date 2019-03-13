@@ -26,6 +26,8 @@ $admin->setDescription("IXOCREATE");
 $admin->setCopyright(date("Y"));
 $admin->setPoweredBy(true);
 
+$admin->setDefaultLocale('en_US');
+
 $contentGroup = $admin->addNavigationGroup("Content", 5000);
 $contentGroup->add("Sitemap", ['admin.api.sitemap.index'], 'fa fa-sitemap', '/page', 2000);
 $contentGroup->add("Media", ['admin.api.media.index'], 'fa fa-image', '/media', 1000);

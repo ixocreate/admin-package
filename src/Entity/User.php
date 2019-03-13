@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Entity;
 
+use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Ixocreate\Admin\Type\RoleType;
@@ -57,6 +58,16 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
     private $userAttributes;
 
     private $accountAttributes;
+
+    private $locale;
+
+    private $numberLocale;
+
+    private $dateLocale;
+
+    private $timeLocale;
+
+    private $timezone;
 
     public function id(): UuidType
     {
@@ -128,6 +139,31 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
         return $this->accountAttributes;
     }
 
+    public function locale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function numberLocale(): ?string
+    {
+        return $this->numberLocale;
+    }
+
+    public function dateLocale(): ?string
+    {
+        return $this->dateLocale;
+    }
+
+    public function timeLocale(): ?string
+    {
+        return $this->timeLocale;
+    }
+
+    public function timezone(): ?string
+    {
+        return $this->timezone;
+    }
+
     /**
      * @return RoleInterface
      */
@@ -153,6 +189,11 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
             new Definition("lastPasswordChangeAt", DateTimeType::class, true, true),
             new Definition("userAttributes", SchemaType::class, true, true),
             new Definition("accountAttributes", SchemaType::class, true, true),
+            new Definition("locale", TypeInterface::TYPE_STRING, true, true),
+            new Definition("numberLocale", TypeInterface::TYPE_STRING, true, true),
+            new Definition("dateLocale", TypeInterface::TYPE_STRING, true, true),
+            new Definition("timeLocale", TypeInterface::TYPE_STRING, true, true),
+            new Definition("timezone", TypeInterface::TYPE_STRING, true, true),
         ]);
     }
 
@@ -177,5 +218,10 @@ final class User implements EntityInterface, DatabaseEntityInterface, UserInterf
         $builder->addField('lastPasswordChangeAt', DateTimeType::serviceName());
         $builder->addField('userAttributes', SchemaType::serviceName());
         $builder->addField('accountAttributes', SchemaType::serviceName());
+        $builder->addField('locale', Type::STRING);
+        $builder->addField('numberLocale', Type::STRING);
+        $builder->addField('dateLocale', Type::STRING);
+        $builder->addField('timeLocale', Type::STRING);
+        $builder->addField('timezone', Type::STRING);
     }
 }

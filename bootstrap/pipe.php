@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Ixocreate\Admin;
 
 use Ixocreate\Admin\Action\Account\ChangeEmailAction;
+use Ixocreate\Admin\Action\Account\ChangeLocaleAction;
 use Ixocreate\Admin\Action\Account\ChangePasswordAction;
-use Ixocreate\Admin\Action\Api\Auth\LoginAction as LegacyLogin;
 use Ixocreate\Admin\Action\Api\Auth\UserAction;
 use Ixocreate\Admin\Action\Api\Config\ConfigAction;
 use Ixocreate\Admin\Action\Api\Resource\CreateAction;
@@ -28,7 +28,6 @@ use Ixocreate\Admin\Middleware\Api\AuthorizationMiddleware;
 use Ixocreate\Admin\Middleware\Api\EnforceApiResponseMiddleware;
 use Ixocreate\Admin\Middleware\Api\ErrorMiddleware;
 use Ixocreate\Admin\Middleware\Api\SessionDataMiddleware;
-use Ixocreate\Admin\Middleware\Api\UserMiddleware;
 use Ixocreate\Admin\Middleware\Api\XsrfProtectionMiddleware;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\ApplicationHttp\Pipe\GroupPipeConfigurator;
@@ -67,6 +66,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
 
             $group->get('/account/config', \Ixocreate\Admin\Action\Account\ConfigAction::class, 'admin.api.account.config');
             $group->patch('/account/email', ChangeEmailAction::class, 'admin.api.account.email');
+            $group->patch('/account/locale', ChangeLocaleAction::class, 'admin.api.account.locale');
             $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
             $group->patch('/account/attributes', \Ixocreate\Admin\Action\Account\ChangeAttributesAction::class, 'admin.api.account.attributes');
 
