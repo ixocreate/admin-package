@@ -5,6 +5,7 @@ namespace Ixocreate\Admin\Schema\User;
 
 use DateTimeZone;
 use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Collection\Collection;
 use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
 use Ixocreate\Contract\Schema\BuilderInterface;
 use Ixocreate\Contract\Schema\SchemaInterface;
@@ -26,6 +27,11 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
     /**
      * @var array
      */
+    protected $numberLocales;
+
+    /**
+     * @var array
+     */
     protected $timezoneIdentifiers;
 
     /**
@@ -37,11 +43,20 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
         $this->adminConfig = $adminConfig;
 
         $this->locales = [
+            null => 'Default',
             'en_US' => 'English (US)',
             'de_AT' => 'German (Austria)',
         ];
 
-        $this->timezoneIdentifiers = DateTimeZone::listIdentifiers();
+        $this->numberLocales = [
+            null => 'Default',
+            'en_US' => '1,234.56',
+            'de_AT' => '1 234,56',
+        ];
+
+        $this->timezoneIdentifiers = (new Collection(DateTimeZone::listIdentifiers()))
+            ->indexBy(function($value){ return $value; })
+            ->toArray();
     }
 
     /**
@@ -68,26 +83,28 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
             )
             ->withAddedElement(
                 $builder->create(SelectElement::class, 'dateLocale')
-                    ->withLabel('Date Format')
+                    ->withLabel('Date & Time Format')
                     ->withDescription('Defaults to Locale / Language')
                     ->withOptions($this->locales)
             )
-            ->withAddedElement(
-                $builder->create(SelectElement::class, 'timeLocale')
-                    ->withLabel('Time Format')
-                    ->withDescription('Defaults to Locale / Language')
-                    ->withOptions($this->locales)
-            )
+            /**
+             * TODO: remove? not required as dateLocale includes time formatting
+             */
+            //->withAddedElement(
+            //    $builder->create(SelectElement::class, 'timeLocale')
+            //        ->withLabel('Time Format')
+            //        ->withDescription('Defaults to Locale / Language')
+            //        ->withOptions($this->locales)
+            //)
             ->withAddedElement(
                 $builder->create(SelectElement::class, 'numberLocale')
                     ->withLabel('Number Format')
                     ->withDescription('Defaults to Locale / Language')
-                    ->withOptions($this->locales)
+                    ->withOptions($this->numberLocales)
             )
             ->withAddedElement(
                 $builder->create(SelectElement::class, 'timezone')
                     ->withLabel('Timezone')
-                    ->withDescription('Defaults to UTC')
                     ->withOptions($this->timezoneIdentifiers)
             );
         return $schema;

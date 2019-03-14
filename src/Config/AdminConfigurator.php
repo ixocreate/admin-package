@@ -48,6 +48,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'accountAttributesSchema' => null,
         'localeAttributesSchema' => LocaleAttributesSchema::class,
         'defaultLocale' => 'en_US',
+        'defaultTimezone' => 'UTC',
         'googleMapApiKey' => null,
         'sessionTimeout' => 7200,
     ];
@@ -238,6 +239,14 @@ final class AdminConfigurator implements ConfiguratorInterface
     public function setDefaultLocale(string $locale): void
     {
         $this->config['defaultLocale'] = $locale;
+    }
+
+    /**
+     * @param string $timezone
+     */
+    public function setDefaultTimezone(string $timezone)
+    {
+        $this->config['defaultTimezone'] = $timezone;
     }
 
     /**

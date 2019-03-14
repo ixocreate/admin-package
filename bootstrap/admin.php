@@ -27,6 +27,7 @@ $admin->setCopyright(date("Y"));
 $admin->setPoweredBy(true);
 
 $admin->setDefaultLocale('en_US');
+$admin->setDefaultTimezone('UTC');
 
 $contentGroup = $admin->addNavigationGroup("Content", 5000);
 $contentGroup->add("Sitemap", ['admin.api.sitemap.index'], 'fa fa-sitemap', '/page', 2000);

@@ -60,6 +60,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'accountAttributesSchema' => null,
         'localeAttributesSchema' => LocaleAttributesSchema::class,
         'defaultLocale' => 'en_US',
+        'defaultTimezone' => 'UTC',
         'googleMapApiKey' => null,
         'sessionTimeout' => 7200,
     ];
@@ -237,6 +238,14 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function defaultLocale(): string
     {
         return $this->config['defaultLocale'];
+    }
+
+    /**
+     * @return string
+     */
+    public function defaultTimezone(): string
+    {
+        return $this->config['defaultTimezone'];
     }
 
     /**

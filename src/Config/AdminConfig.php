@@ -191,6 +191,14 @@ final class AdminConfig implements SegmentProviderInterface
     }
 
     /**
+     * @return string
+     */
+    public function defaultTimezone(): ?string
+    {
+        return $this->adminProjectConfig->defaultTimezone();
+    }
+
+    /**
      * @return UriInterface
      * @deprecated
      */
