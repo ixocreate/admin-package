@@ -76,13 +76,11 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
             ->withAddedElement(
                 $builder->create(SelectElement::class, 'locale')
                     ->withLabel('Language')
-                    ->withDescription('Primary Language & Formats / Defaults to system locale')
                     ->withOptions($this->locales)
             )
             ->withAddedElement(
                 $builder->create(SelectElement::class, 'dateLocale')
                     ->withLabel('Date & Time Format')
-                    ->withDescription('Defaults to Locale / Language')
                     ->withOptions($this->locales)
             )
             /**
@@ -97,7 +95,6 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
             ->withAddedElement(
                 $builder->create(SelectElement::class, 'numberLocale')
                     ->withLabel('Number Format')
-                    ->withDescription('Defaults to Locale / Language')
                     ->withOptions($this->numberLocales)
             )
             ->withAddedElement(
