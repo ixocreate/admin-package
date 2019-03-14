@@ -14,8 +14,9 @@ use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Contract\Schema\ElementInterface;
 use Ixocreate\Entity\Entity\EntityInterface;
-use Ixocreate\Schema\Listing\ListElement;
+use Ixocreate\Schema\Listing\DateTimeElement;
 use Ixocreate\Schema\Listing\ListSchema;
+use Ixocreate\Schema\Listing\TextElement;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -36,11 +37,12 @@ final class IndexAction implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $listSchema = (new ListSchema())
-            ->withAddedElement(new ListElement('email', 'Email'))
-            ->withAddedElement(new ListElement('role', 'Role'))
-            ->withAddedElement(new ListElement('createdAt', 'Created', true, false, 'date'))
-            ->withAddedElement(new ListElement('updatedAt', 'Updated', true, false, 'date'))
-            ->withAddedElement(new ListElement('lastLoginAt', 'Last Login', true, false, 'datetime'))
+            ->withAddedElement(new TextElement('email', 'Email'))
+            ->withAddedElement(new TextElement('role', 'Role'))
+            ->withAddedElement(new DateTimeElement('createdAt', 'Created', true, false))
+            ->withAddedElement(new DateTimeElement('updatedAt', 'Updated', true, false))
+            ->withAddedElement(new DateTimeElement('lastLoginAt', 'Last Login', true, false))
+            ->withAddedElement(new DateTimeElement('lastActivityAt', 'Last Activity', true, false))
             ->withDefaultSorting('createdAt', 'desc');
 
         $criteria = new Criteria();
