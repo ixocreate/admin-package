@@ -43,13 +43,11 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
         $this->adminConfig = $adminConfig;
 
         $this->locales = [
-            null => 'Default',
             'en_US' => 'English (US)',
             'de_AT' => 'German (Austria)',
         ];
 
         $this->numberLocales = [
-            null => 'Default',
             'en_US' => '1,234.56',
             'de_AT' => '1 234,56',
         ];
