@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
+
 declare(strict_types=1);
 
 namespace Ixocreate\Admin\Schema\User;
@@ -53,7 +59,9 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
         ];
 
         $this->timezoneIdentifiers = (new Collection(DateTimeZone::listIdentifiers()))
-            ->indexBy(function($value){ return $value; })
+            ->indexBy(function ($value) {
+                return $value;
+            })
             ->toArray();
     }
 

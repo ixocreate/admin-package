@@ -111,7 +111,7 @@ final class ResourceProvider implements ClientConfigProviderInterface
                 'canEdit' => $canEdit,
                 'canDelete' => $canDelete,
                 'canView' => $canView,
-                'additionalSchemas' => []
+                'additionalSchemas' => [],
             ];
 
             if ($resource instanceof AdditionalSchemasInterface) {

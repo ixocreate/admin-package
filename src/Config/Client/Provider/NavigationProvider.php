@@ -11,9 +11,7 @@ namespace Ixocreate\Admin\Config\Client\Provider;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Permission\Permission;
-use Ixocreate\Admin\Permission\PermissionTemp;
 use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\RoleInterface;
 use Ixocreate\Contract\Admin\UserInterface;
 
 final class NavigationProvider implements ClientConfigProviderInterface

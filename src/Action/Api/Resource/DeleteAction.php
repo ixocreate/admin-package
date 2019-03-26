@@ -79,12 +79,12 @@ final class DeleteAction implements MiddlewareInterface
         /** @var EntityInterface $entity */
         $entity = $repository->find($request->getAttribute("id"));
 
-        if (method_exists($entity, 'deletedAt')) {
+        if (\method_exists($entity, 'deletedAt')) {
             //if(!$entity->deletedAt()) {
             $repository->save($entity->with('deletedAt', new \DateTimeImmutable()));
-            /**
-             * TODO: implement permanent deletion
-             */
+        /**
+         * TODO: implement permanent deletion
+         */
             //} else {
             //$repository->remove($entity);
             //}

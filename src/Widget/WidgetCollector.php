@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Widget;
 
-use Ixocreate\Contract\Admin\DashboardWidgetCollectorInterface;
 use Ixocreate\Contract\Admin\DashboardWidgetInterface;
 use Ixocreate\Contract\Admin\Widget\WidgetCollectorInterface;
 use Ixocreate\Contract\Admin\Widget\WidgetInterface;

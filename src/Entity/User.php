@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Entity;
 
-use Doctrine\DBAL\Types\StringType;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Ixocreate\Admin\Type\RoleType;

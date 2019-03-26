@@ -14,10 +14,8 @@ use Ixocreate\Contract\Schema\BuilderInterface;
 use Ixocreate\Contract\Schema\ElementInterface;
 use Ixocreate\Contract\Schema\ElementProviderInterface;
 use Ixocreate\Contract\Type\DatabaseTypeInterface;
-use Ixocreate\Contract\Type\SchemaElementInterface;
 use Ixocreate\Entity\Type\AbstractType;
 use Ixocreate\Schema\Elements\SelectElement;
-use Ixocreate\Schema\ElementSubManager;
 
 final class StatusType extends AbstractType implements DatabaseTypeInterface, ElementProviderInterface
 {

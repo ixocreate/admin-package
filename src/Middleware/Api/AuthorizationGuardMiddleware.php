@@ -10,12 +10,10 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Middleware\Api;
 
 use Ixocreate\Admin\Config\AdminProjectConfig;
-use Ixocreate\Admin\Entity\SessionData;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Response\ApiErrorResponse;
-use Ixocreate\CommonTypes\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -60,7 +58,7 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
             /** @var \DateTimeImmutable $dateTime */
             $dateTime = $user->lastActivityAt()->value();
 
-            if ($dateTime->getTimestamp() < time() - $this->adminProjectConfig->sessionTimeout()) {
+            if ($dateTime->getTimestamp() < \time() - $this->adminProjectConfig->sessionTimeout()) {
                 //return new ApiErrorResponse('unauthorized', [], 401);
             }
         }
@@ -73,7 +71,8 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
             return new ApiErrorResponse('forbidden', [], 403);
         }
 
-        return $handler->handle($request
+        return $handler->handle(
+            $request
             ->withAttribute(Permission::class, $permission)
         );
     }

@@ -32,6 +32,7 @@ final class AdminConfig implements SegmentProviderInterface
 
     /**
      * AdminConfig constructor.
+     *
      * @param AdminProjectConfig $adminProjectConfig
      * @param UriInterface $uri
      */
@@ -244,6 +245,6 @@ final class AdminConfig implements SegmentProviderInterface
      */
     public function getSegment(): string
     {
-        return (string) $this->uri();
+        return (string)$this->uri();
     }
 }
