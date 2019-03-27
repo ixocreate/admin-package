@@ -88,7 +88,6 @@ final class LoginAction implements MiddlewareInterface
 
                 $user = $this->getUser($data['email'], $data['password']);
                 if ($user !== null) {
-
                     $sessionData = new SessionData([
                         'xsrfToken' => Uuid::uuid4()->toString(),
                         'userId' => $user->id(),
@@ -107,7 +106,6 @@ final class LoginAction implements MiddlewareInterface
                 }
 
                 $errors[] = 'Invalid e-mail or password!';
-
             } catch (\Exception $e) {
                 $errors[] = 'Session expired, please try again';
                 if ($this->applicationConfig->isDevelopment()) {

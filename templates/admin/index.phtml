@@ -18,30 +18,11 @@
         <link href="<?= $style ?>" rel="stylesheet"/>
     <?php endforeach ?>
     <?php if (!empty($adminConfig->googleMapApiKey())): ?>
-        <script src="http://maps.googleapis.com/maps/api/js?key=<?= $adminConfig->googleMapApiKey() ?>&libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<?= $adminConfig->googleMapApiKey() ?>&libraries=places"></script>
     <?php endif; ?>
 </head>
 <body class="app">
 <script>
-    window.__kiwi = <?= json_encode([
-        'googleApiKey' => $adminConfig->googleMapApiKey(),
-        'project' => [
-                'author' => $adminConfig->author(),
-                'name' => $adminConfig->name(),
-                'poweredBy' => $adminConfig->poweredBy(),
-                'copyright' => $adminConfig->copyright(),
-                'description' => $adminConfig->description(),
-                'background' => $adminConfig->background(),
-                'icon' => $adminConfig->icon(),
-                'logo' => $adminConfig->logo(),
-        ],
-        'routes' => [
-            'login' => $this->admin()->generateUri('admin.login'),
-            'session' => rtrim($adminConfig->uri()->getPath(), '/') . '/session',
-            //'config' => $this->admin()->generateUri('admin.api.config'),
-            'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config',
-        ]
-    ]) ?>;
     window.__ixo = <?= json_encode([
         'googleApiKey' => $adminConfig->googleMapApiKey(),
         'project' => [

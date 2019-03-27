@@ -26,7 +26,6 @@ use Ixocreate\Contract\Validation\ViolationCollectorInterface;
 use Ixocreate\Entity\Type\Type;
 use Ixocreate\Event\EventDispatcher;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
-use Ramsey\Uuid\Uuid;
 
 final class CreateUserCommand extends AbstractCommand implements CommandInterface, ValidatableInterface
 {
@@ -159,7 +158,7 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
         if (empty($this->data()['passwordHash'])) {
             if (empty($this->data()['password']) || empty($this->data()['passwordRepeat'])) {
                 $violationCollector->add("password", "password.invalid", "Password is invalid");
-            } else  if ($this->data()['password'] !== $this->data()['passwordRepeat']) {
+            } elseif ($this->data()['password'] !== $this->data()['passwordRepeat']) {
                 $violationCollector->add("password", "password.doesnt-match", "Password and repeated password doesn't match");
             }
         }

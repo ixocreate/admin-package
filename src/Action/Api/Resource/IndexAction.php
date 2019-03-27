@@ -57,8 +57,7 @@ final class IndexAction implements MiddlewareInterface
         MiddlewareSubManager $middlewareSubManager,
         ResourceSubManager $resourceSubManager,
         EntityManagerSubManager $entitySubManager
-    )
-    {
+    ) {
         $this->repositorySubManager = $repositorySubManager;
         $this->middlewareSubManager = $middlewareSubManager;
         $this->resourceSubManager = $resourceSubManager;

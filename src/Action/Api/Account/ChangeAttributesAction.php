@@ -58,7 +58,7 @@ class ChangeAttributesAction implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
 
-        $data['userId'] = $request->getAttribute(User::class, null)->id();;
+        $data['userId'] = $request->getAttribute(User::class, null)->id();
 
         /** @var User $entity */
         $entity = $this->userRepository->find($data['userId']);

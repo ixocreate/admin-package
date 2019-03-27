@@ -9,18 +9,14 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Middleware\Api;
 
-use Ixocreate\Admin\Config\AdminProjectConfig;
 use Ixocreate\Admin\Entity\SessionData;
 use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Repository\UserRepository;
-use Ixocreate\Admin\Response\ApiErrorResponse;
 use Ixocreate\CommonTypes\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Router\RouteResult;
 
 final class AuthorizationMiddleware implements MiddlewareInterface
 {
@@ -64,7 +60,8 @@ final class AuthorizationMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        return $handler->handle($request
+        return $handler->handle(
+            $request
             ->withAttribute(User::class, $user)
         );
     }

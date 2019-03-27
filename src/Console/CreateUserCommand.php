@@ -51,7 +51,7 @@ final class CreateUserCommand extends Command implements CommandInterface
     {
         if (!empty($input->getOption('password'))) {
             $password = $input->getOption('password');
-        } else if ($input->getOption('password') === null) {
+        } elseif ($input->getOption('password') === null) {
             /** @var QuestionHelper $helper */
             $helper = $this->getHelper('question');
             $question = new Question('password: ');

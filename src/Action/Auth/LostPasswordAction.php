@@ -64,7 +64,6 @@ final class LostPasswordAction implements MiddlewareInterface
             $data = $request->getParsedBody();
 
             if (empty($data['email'])) {
-
             }
 
             $lifetime = 60 * 30;
@@ -87,7 +86,7 @@ final class LostPasswordAction implements MiddlewareInterface
             if (!empty($user)) {
                 $this->sendEmail($user, $token, \round($lifetime / 60));
             } else {
-                \usleep(rand(100, 500));
+                \usleep(\mt_rand(100, 500));
             }
 
             $csrf = $token;
@@ -124,6 +123,5 @@ final class LostPasswordAction implements MiddlewareInterface
 
     private function getUser($email)
     {
-
     }
 }

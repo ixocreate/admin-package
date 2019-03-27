@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
 
 declare(strict_types=1);
 
@@ -77,7 +82,7 @@ final class RecoverPasswordAction implements MiddlewareInterface
                         'user' => $user,
                         'password' => $data['password'],
                         'passwordRepeat' => $data['passwordRepeat'],
-                        'skipPasswordOld' => true
+                        'skipPasswordOld' => true,
                     ]
                 );
 

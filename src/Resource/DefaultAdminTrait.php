@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Resource;
 
-use Ixocreate\Contract\Admin\RoleInterface;
-
 trait DefaultAdminTrait
 {
     /**

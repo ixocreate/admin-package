@@ -114,14 +114,14 @@ class ChangePasswordCommand extends AbstractCommand implements FilterableInterfa
         if ($this->dataValue("skipPasswordOld") === true) {
             if (empty($this->dataValue("passwordOld"))) {
                 $violationCollector->add("passwordOld", "invalid_password_old");
-            } else if (!\password_verify($this->dataValue("passwordOld"), $user->password())) {
+            } elseif (!\password_verify($this->dataValue("passwordOld"), $user->password())) {
                 $violationCollector->add("passwordOld", "invalid_password_old");
             }
         }
 
         if (empty($this->dataValue("password"))) {
             $violationCollector->add("password", "invalid_password");
-        } else if ($this->dataValue("password") !== $this->dataValue("passwordRepeat")) {
+        } elseif ($this->dataValue("password") !== $this->dataValue("passwordRepeat")) {
             $violationCollector->add("password", "invalid_password");
         }
     }

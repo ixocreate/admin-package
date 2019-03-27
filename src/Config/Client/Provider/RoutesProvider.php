@@ -14,7 +14,6 @@ use Ixocreate\ApplicationHttp\Pipe\Config\SegmentConfig;
 use Ixocreate\ApplicationHttp\Pipe\Config\SegmentPipeConfig;
 use Ixocreate\ApplicationHttp\Pipe\PipeConfig;
 use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\RoleInterface;
 use Ixocreate\Contract\Admin\UserInterface;
 
 final class RoutesProvider implements ClientConfigProviderInterface
