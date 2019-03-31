@@ -25,6 +25,7 @@
         "ixocreate/entity": "dev-develop",
         "ixocreate/event": "dev-develop",
         "ixocreate/intl": "dev-develop",
+        "ixocreate/media-contract": "dev-develop",
         "ixocreate/resource": "dev-develop",
         "ixocreate/schema": "dev-develop",
         "ixocreate/servicemanager": "dev-develop",
@@ -35,7 +36,6 @@
     },
     "require-dev": {
         "ixocreate/coding-standard": "^1.0.1",
-        "ixocreate/media": "dev-develop",
         "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpunit": "^7.0"
     },
