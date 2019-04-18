@@ -20,11 +20,11 @@ use Ixocreate\Admin\Resource\Schema\ListSchemaAwareInterface;
 use Ixocreate\Admin\Resource\Schema\UpdateSchemaAwareInterface;
 use Ixocreate\Admin\UserInterface;
 use Ixocreate\Resource\ResourceInterface;
-use Ixocreate\Schema\SchemaAwareInterface;
-use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Resource\ResourceSubManager;
 use Ixocreate\Schema\Builder;
 use Ixocreate\Schema\Listing\ListSchema;
 use Ixocreate\Schema\Schema;
+use Ixocreate\Schema\SchemaAwareInterface;
 
 final class ResourceProvider implements ClientConfigProviderInterface
 {

@@ -16,7 +16,7 @@ use Ixocreate\Admin\Type\RoleType;
 use Ixocreate\Admin\Type\StatusType;
 use Ixocreate\Schema\AdditionalSchemaInterface;
 use Ixocreate\Schema\SchemaInterface;
-use Ixocreate\Entity\Type\TypeSubManager;
+use Ixocreate\Type\TypeSubManager;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\Schema\Builder;
 use Ixocreate\Schema\Elements\TextElement;

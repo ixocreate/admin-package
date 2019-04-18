@@ -10,7 +10,7 @@ use Ixocreate\Admin\Config\Client\Provider\ResourceProvider;
 use Ixocreate\Admin\Config\Client\Provider\RoutesProvider;
 use Ixocreate\Admin\Role\AdministratorRole;
 
-/** @var \Ixocreate\Admin\Config\AdminConfigurator $admin */
+/** @var AdminConfigurator $admin */
 
 $admin->addRole(AdministratorRole::class);
 

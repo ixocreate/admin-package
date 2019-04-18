@@ -19,7 +19,7 @@ use Ixocreate\Type\Entity\SchemaType;
 use Ixocreate\Type\Entity\UuidType;
 use Ixocreate\Admin\RoleInterface;
 use Ixocreate\Admin\UserInterface;
-use Ixocreate\Entity\DatabaseEntityInterface;
+use Ixocreate\Database\DatabaseEntityInterface;
 use Ixocreate\Type\TypeInterface;
 use Ixocreate\Entity\Definition;
 use Ixocreate\Entity\DefinitionCollection;

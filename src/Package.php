@@ -9,10 +9,9 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin;
 
-use Ixocreate\Admin\Bootstrap\AdminBootstrapItem;
-use Ixocreate\Application\Service\Configurator\ConfiguratorRegistryInterface;
+use Ixocreate\Application\ConfiguratorRegistryInterface;
 use Ixocreate\Application\PackageInterface;
-use Ixocreate\Application\Service\Registry\ServiceRegistryInterface;
+use Ixocreate\Application\Service\ServiceRegistryInterface;
 use Ixocreate\ServiceManager\ServiceManagerInterface;
 
 class Package implements PackageInterface

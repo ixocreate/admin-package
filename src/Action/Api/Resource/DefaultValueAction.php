@@ -12,7 +12,7 @@ namespace Ixocreate\Admin\Action\Api\Resource;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Response\ApiDetailResponse;
 use Ixocreate\Admin\Resource\DefaultValueInterface;
-use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Resource\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

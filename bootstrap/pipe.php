@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin;
 
-use Ixocreate\Application\Http\Pipe\GroupPipeConfigurator;
-use Ixocreate\Application\Http\Pipe\PipeConfigurator;
 use Ixocreate\Admin\Action\Account\ChangeEmailAction;
 use Ixocreate\Admin\Action\Account\ChangeLocaleAction;
 use Ixocreate\Admin\Action\Account\ChangePasswordAction;
@@ -32,6 +30,8 @@ use Ixocreate\Admin\Middleware\Api\ErrorMiddleware;
 use Ixocreate\Admin\Middleware\Api\SessionDataMiddleware;
 use Ixocreate\Admin\Middleware\Api\XsrfProtectionMiddleware;
 use Ixocreate\Admin\Router\AdminRouter;
+use Ixocreate\Application\Http\Pipe\GroupPipeConfigurator;
+use Ixocreate\Application\Http\Pipe\PipeConfigurator;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 /** @var PipeConfigurator $pipe */

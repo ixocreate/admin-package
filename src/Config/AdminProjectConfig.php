@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config;
 
+use Ixocreate\Admin\AdminConfigurator;
 use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
 use Ixocreate\Application\Service\SerializableServiceInterface;
 use Symfony\Component\Finder\SplFileInfo;

@@ -7,21 +7,21 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Config;
+namespace Ixocreate\Admin;
 
+use Ixocreate\Admin\Config\AdminProjectConfig;
 use Ixocreate\Admin\Config\Client\ClientConfigProviderSubManager;
 use Ixocreate\Admin\Config\Navigation\Group;
 use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
-use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
-use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderInterface;
-use Ixocreate\Application\Service\Configurator\ConfiguratorInterface;
-use Ixocreate\Application\Service\Registry\ServiceRegistryInterface;
-use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
-use Ixocreate\ServiceManager\Factory\AutowireFactory;
+use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
+use Ixocreate\Application\ConfiguratorInterface;
+use Ixocreate\Application\Service\ServiceRegistryInterface;
 use Ixocreate\Application\Service\SubManagerConfigurator;
+use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\AdditionalSchemaInterface;
+use Ixocreate\ServiceManager\Factory\AutowireFactory;
 use Zend\Stdlib\SplPriorityQueue;
 
 final class AdminConfigurator implements ConfiguratorInterface
@@ -43,7 +43,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'background' => '',
         'loginMessage' => '',
         'clientConfigProvider' => [],
-        'adminBuildPath' => __DIR__ . '/../../../admin-frontend/build/',
+        'adminBuildPath' => __DIR__ . '/../../admin-frontend/build/',
         'userAttributesSchema' => null,
         'accountAttributesSchema' => null,
         'localeAttributesSchema' => LocaleAttributesSchema::class,
@@ -207,8 +207,10 @@ final class AdminConfigurator implements ConfiguratorInterface
      * @param string $userAttributesSchema
      * @param string $factory
      */
-    public function addUserAttributesSchema(string $userAttributesSchema, string $factory = AutowireFactory::class): void
-    {
+    public function addUserAttributesSchema(
+        string $userAttributesSchema,
+        string $factory = AutowireFactory::class
+    ): void {
         $this->config['userAttributesSchema'] = $userAttributesSchema;
         $this->additionalSchemaSubManagerConfigurator->addFactory($userAttributesSchema, $factory);
     }
@@ -217,8 +219,10 @@ final class AdminConfigurator implements ConfiguratorInterface
      * @param string $accountAttributesSchema
      * @param string $factory
      */
-    public function addAccountAttributesSchema(string $accountAttributesSchema, string $factory = AutowireFactory::class): void
-    {
+    public function addAccountAttributesSchema(
+        string $accountAttributesSchema,
+        string $factory = AutowireFactory::class
+    ): void {
         $this->config['accountAttributesSchema'] = $accountAttributesSchema;
         $this->additionalSchemaSubManagerConfigurator->addFactory($accountAttributesSchema, $factory);
     }
@@ -227,8 +231,10 @@ final class AdminConfigurator implements ConfiguratorInterface
      * @param string $localeAttributesSchema
      * @param string $factory
      */
-    public function addLocaleAttributesSchema(string $localeAttributesSchema, string $factory = AutowireFactory::class): void
-    {
+    public function addLocaleAttributesSchema(
+        string $localeAttributesSchema,
+        string $factory = AutowireFactory::class
+    ): void {
         $this->config['localeAttributesSchema'] = $localeAttributesSchema;
         $this->additionalSchemaSubManagerConfigurator->addFactory($localeAttributesSchema, $factory);
     }
