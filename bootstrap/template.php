@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package;
+namespace Ixocreate\Admin;
 
-use Ixocreate\Admin\Package\Template\AdminExtension;
-use Ixocreate\Template\Package\TemplateConfigurator;
+use Ixocreate\Admin\Template\AdminExtension;
+use Ixocreate\Template\TemplateConfigurator;
 
 /** @var TemplateConfigurator $template */
 

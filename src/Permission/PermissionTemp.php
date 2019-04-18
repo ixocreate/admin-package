@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Permission;
+namespace Ixocreate\Admin\Permission;
 
-use Ixocreate\Admin\Package\RoleInterface;
+use Ixocreate\Admin\RoleInterface;
 
 final class PermissionTemp
 {

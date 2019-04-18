@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Action\Api\Auth;
+namespace Ixocreate\Admin\Action\Api\Auth;
 
-use Ixocreate\Admin\Package\Config\AdminConfig;
-use Ixocreate\Admin\Package\Entity\SessionData;
-use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
-use Ixocreate\Admin\Package\Session\SessionCookie;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Entity\SessionData;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Session\SessionCookie;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

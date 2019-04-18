@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Middleware\Api;
+namespace Ixocreate\Admin\Middleware\Api;
 
-use Ixocreate\Admin\Package\Entity\SessionData;
-use Ixocreate\Admin\Package\Entity\User;
-use Ixocreate\Admin\Package\Repository\UserRepository;
-use Ixocreate\Type\Package\Entity\UuidType;
+use Ixocreate\Admin\Entity\SessionData;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Type\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

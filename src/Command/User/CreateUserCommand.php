@@ -7,25 +7,25 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Command\User;
+namespace Ixocreate\Admin\Command\User;
 
 use Identicon\Generator\ImageMagickGenerator;
 use Identicon\Identicon;
-use Ixocreate\Admin\Package\Config\AdminConfig;
-use Ixocreate\Admin\Package\Entity\User;
-use Ixocreate\Admin\Package\Event\UserEvent;
-use Ixocreate\Admin\Package\Repository\UserRepository;
-use Ixocreate\Admin\Package\Role\RoleSubManager;
-use Ixocreate\CommandBus\Package\Command\AbstractCommand;
-use Ixocreate\Type\Package\Entity\EmailType;
-use Ixocreate\Type\Package\Entity\SchemaType;
-use Ixocreate\CommandBus\Package\CommandInterface;
-use Ixocreate\Schema\Package\AdditionalSchemaInterface;
-use Ixocreate\Validation\Package\ValidatableInterface;
-use Ixocreate\Validation\Package\ViolationCollectorInterface;
-use Ixocreate\Entity\Package\Type\Type;
-use Ixocreate\Event\Package\EventDispatcher;
-use Ixocreate\Schema\Package\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Event\UserEvent;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Role\RoleSubManager;
+use Ixocreate\CommandBus\Command\AbstractCommand;
+use Ixocreate\Type\Entity\EmailType;
+use Ixocreate\Type\Entity\SchemaType;
+use Ixocreate\CommandBus\CommandInterface;
+use Ixocreate\Schema\AdditionalSchemaInterface;
+use Ixocreate\Validation\ValidatableInterface;
+use Ixocreate\Validation\ViolationCollectorInterface;
+use Ixocreate\Entity\Type\Type;
+use Ixocreate\Event\EventDispatcher;
+use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 
 final class CreateUserCommand extends AbstractCommand implements CommandInterface, ValidatableInterface
 {

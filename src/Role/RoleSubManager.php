@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Role;
+namespace Ixocreate\Admin\Role;
 
 use Ixocreate\ServiceManager\SubManager\SubManager;
 

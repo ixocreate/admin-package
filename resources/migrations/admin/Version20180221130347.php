@@ -6,11 +6,11 @@ namespace Ixocreate\Migration;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\Migrations\AbstractMigration;
-use Ixocreate\Admin\Package\Type\RoleType;
-use Ixocreate\Admin\Package\Type\StatusType;
-use Ixocreate\Type\Package\Entity\DateTimeType;
-use Ixocreate\Type\Package\Entity\EmailType;
-use Ixocreate\Type\Package\Entity\UuidType;
+use Ixocreate\Admin\Type\RoleType;
+use Ixocreate\Admin\Type\StatusType;
+use Ixocreate\Type\Entity\DateTimeType;
+use Ixocreate\Type\Entity\EmailType;
+use Ixocreate\Type\Entity\UuidType;
 
 class Version20180221130347 extends AbstractMigration
 {

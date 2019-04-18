@@ -7,22 +7,22 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Action\Api\Resource;
+namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Doctrine\Common\Collections\Criteria;
-use Ixocreate\Admin\Package\Entity\User;
-use Ixocreate\Admin\Package\Response\ApiListResponse;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Response\ApiListResponse;
 use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
 use Ixocreate\Admin\Resource\Action\IndexActionAwareInterface;
 use Ixocreate\Admin\Resource\Schema\ListSchemaAwareInterface;
-use Ixocreate\Resource\Package\ResourceInterface;
-use Ixocreate\Schema\Package\Listing\ElementInterface;
-use Ixocreate\Schema\Package\Listing\ListSchemaInterface;
-use Ixocreate\Database\Package\EntityManager\Factory\EntityManagerSubManager;
-use Ixocreate\Database\Package\Repository\Factory\RepositorySubManager;
-use Ixocreate\Database\Package\Repository\RepositoryInterface;
-use Ixocreate\Entity\Package\EntityInterface;
-use Ixocreate\Resource\Package\SubManager\ResourceSubManager;
+use Ixocreate\Resource\ResourceInterface;
+use Ixocreate\Schema\Listing\ElementInterface;
+use Ixocreate\Schema\Listing\ListSchemaInterface;
+use Ixocreate\Database\EntityManager\Factory\EntityManagerSubManager;
+use Ixocreate\Database\Repository\Factory\RepositorySubManager;
+use Ixocreate\Database\Repository\RepositoryInterface;
+use Ixocreate\Entity\EntityInterface;
+use Ixocreate\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

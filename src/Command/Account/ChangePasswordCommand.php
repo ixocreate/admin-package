@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Command\Account;
+namespace Ixocreate\Admin\Command\Account;
 
-use Ixocreate\Admin\Package\Repository\UserRepository;
-use Ixocreate\CommandBus\Package\Command\AbstractCommand;
-use Ixocreate\Filter\Package\FilterableInterface;
-use Ixocreate\Validation\Package\ValidatableInterface;
-use Ixocreate\Validation\Package\ViolationCollectorInterface;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\CommandBus\Command\AbstractCommand;
+use Ixocreate\Filter\FilterableInterface;
+use Ixocreate\Validation\ValidatableInterface;
+use Ixocreate\Validation\ViolationCollectorInterface;
 
 final class ChangePasswordCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {

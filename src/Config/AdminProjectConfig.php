@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Config;
+namespace Ixocreate\Admin\Config;
 
-use Ixocreate\Admin\Package\Schema\User\LocaleAttributesSchema;
+use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
 use Ixocreate\Application\Service\SerializableServiceInterface;
 use Symfony\Component\Finder\SplFileInfo;
 

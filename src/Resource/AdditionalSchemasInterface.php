@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Resource;
 
-use Ixocreate\Admin\Package\UserInterface;
-use Ixocreate\Schema\Package\BuilderInterface;
+use Ixocreate\Admin\UserInterface;
+use Ixocreate\Schema\BuilderInterface;
 
 interface AdditionalSchemasInterface
 {

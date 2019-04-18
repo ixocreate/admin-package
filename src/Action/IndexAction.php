@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Action;
+namespace Ixocreate\Admin\Action;
 
-use Ixocreate\Admin\Package\Config\AdminConfig;
-use Ixocreate\Admin\Package\Entity\User;
-use Ixocreate\Admin\Package\Router\AdminRouter;
-use Ixocreate\Template\Package\TemplateResponse;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Router\AdminRouter;
+use Ixocreate\Template\TemplateResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

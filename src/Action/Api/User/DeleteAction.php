@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Action\Api\User;
+namespace Ixocreate\Admin\Action\Api\User;
 
-use Ixocreate\Admin\Package\Repository\UserRepository;
-use Ixocreate\Admin\Package\Response\ApiErrorResponse;
-use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
-use Ixocreate\Entity\Package\EntityInterface;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Response\ApiErrorResponse;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Entity\EntityInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

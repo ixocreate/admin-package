@@ -7,21 +7,21 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Action\Api\User;
+namespace Ixocreate\Admin\Action\Api\User;
 
-use Ixocreate\Admin\Package\Config\AdminConfig;
-use Ixocreate\Admin\Package\Repository\UserRepository;
-use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
-use Ixocreate\Admin\Package\Type\RoleType;
-use Ixocreate\Admin\Package\Type\StatusType;
-use Ixocreate\Schema\Package\AdditionalSchemaInterface;
-use Ixocreate\Schema\Package\SchemaInterface;
-use Ixocreate\Entity\Package\Type\TypeSubManager;
-use Ixocreate\Schema\Package\AdditionalSchema\AdditionalSchemaSubManager;
-use Ixocreate\Schema\Package\Builder;
-use Ixocreate\Schema\Package\Elements\TextElement;
-use Ixocreate\Schema\Package\ElementSubManager;
-use Ixocreate\Schema\Package\Schema;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Type\RoleType;
+use Ixocreate\Admin\Type\StatusType;
+use Ixocreate\Schema\AdditionalSchemaInterface;
+use Ixocreate\Schema\SchemaInterface;
+use Ixocreate\Entity\Type\TypeSubManager;
+use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\Builder;
+use Ixocreate\Schema\Elements\TextElement;
+use Ixocreate\Schema\ElementSubManager;
+use Ixocreate\Schema\Schema;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

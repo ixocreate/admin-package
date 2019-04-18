@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Action\Account;
+namespace Ixocreate\Admin\Action\Account;
 
-use Ixocreate\Admin\Package\Command\User\ChangePasswordCommand;
-use Ixocreate\Admin\Package\Entity\User;
-use Ixocreate\Admin\Package\Response\ApiErrorResponse;
-use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Command\User\ChangePasswordCommand;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Response\ApiErrorResponse;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\CommandBus\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

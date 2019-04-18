@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Resource\Schema;
 
-use Ixocreate\Admin\Package\UserInterface;
-use Ixocreate\Schema\Package\Listing\ListSchemaInterface;
+use Ixocreate\Admin\UserInterface;
+use Ixocreate\Schema\Listing\ListSchemaInterface;
 
 interface ListSchemaAwareInterface
 {

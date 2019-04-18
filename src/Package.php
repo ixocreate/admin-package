@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package;
+namespace Ixocreate\Admin;
 
-use Ixocreate\Admin\Package\Bootstrap\AdminBootstrapItem;
+use Ixocreate\Admin\Bootstrap\AdminBootstrapItem;
 use Ixocreate\Application\Service\Configurator\ConfiguratorRegistryInterface;
 use Ixocreate\Application\PackageInterface;
 use Ixocreate\Application\Service\Registry\ServiceRegistryInterface;
@@ -82,9 +82,9 @@ class Package implements PackageInterface
     public function getDependencies(): ?array
     {
         return [
-            \Ixocreate\Media\Package\Package::class,
-            \Ixocreate\Cms\Package\Package::class,
-            \Ixocreate\Intl\Package\Package::class,
+            \Ixocreate\Media\Package::class,
+            \Ixocreate\Cms\Package::class,
+            \Ixocreate\Intl\Package::class,
         ];
     }
 }

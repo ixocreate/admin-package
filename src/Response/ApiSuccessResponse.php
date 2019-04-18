@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Response;
+namespace Ixocreate\Admin\Response;
 
 use Zend\Diactoros\Response\JsonResponse;
 

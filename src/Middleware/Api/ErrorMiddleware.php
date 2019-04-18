@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Middleware\Api;
+namespace Ixocreate\Admin\Middleware\Api;
 
-use Ixocreate\Admin\Package\Response\ApiErrorResponse;
+use Ixocreate\Admin\Response\ApiErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

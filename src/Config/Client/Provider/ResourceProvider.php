@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Config\Client\Provider;
+namespace Ixocreate\Admin\Config\Client\Provider;
 
-use Ixocreate\Admin\Package\ClientConfigProviderInterface;
+use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\Resource\AdditionalSchemasInterface;
 use Ixocreate\Admin\Resource\Permission\CanCreateInterface;
 use Ixocreate\Admin\Resource\Permission\CanDeleteInterface;
@@ -18,13 +18,13 @@ use Ixocreate\Admin\Resource\Permission\CanViewInterface;
 use Ixocreate\Admin\Resource\Schema\CreateSchemaAwareInterface;
 use Ixocreate\Admin\Resource\Schema\ListSchemaAwareInterface;
 use Ixocreate\Admin\Resource\Schema\UpdateSchemaAwareInterface;
-use Ixocreate\Admin\Package\UserInterface;
-use Ixocreate\Resource\Package\ResourceInterface;
-use Ixocreate\Schema\Package\SchemaAwareInterface;
-use Ixocreate\Resource\Package\SubManager\ResourceSubManager;
-use Ixocreate\Schema\Package\Builder;
-use Ixocreate\Schema\Package\Listing\ListSchema;
-use Ixocreate\Schema\Package\Schema;
+use Ixocreate\Admin\UserInterface;
+use Ixocreate\Resource\ResourceInterface;
+use Ixocreate\Schema\SchemaAwareInterface;
+use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Schema\Builder;
+use Ixocreate\Schema\Listing\ListSchema;
+use Ixocreate\Schema\Schema;
 
 final class ResourceProvider implements ClientConfigProviderInterface
 {

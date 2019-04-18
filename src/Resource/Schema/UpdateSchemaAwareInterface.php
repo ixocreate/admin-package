@@ -9,9 +9,9 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Resource\Schema;
 
-use Ixocreate\Admin\Package\UserInterface;
-use Ixocreate\Schema\Package\BuilderInterface;
-use Ixocreate\Schema\Package\SchemaInterface;
+use Ixocreate\Admin\UserInterface;
+use Ixocreate\Schema\BuilderInterface;
+use Ixocreate\Schema\SchemaInterface;
 
 interface UpdateSchemaAwareInterface
 {

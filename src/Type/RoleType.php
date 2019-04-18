@@ -7,17 +7,17 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Type;
+namespace Ixocreate\Admin\Type;
 
 use Doctrine\DBAL\Types\StringType;
-use Ixocreate\Admin\Package\Role\RoleSubManager;
-use Ixocreate\Admin\Package\RoleInterface;
-use Ixocreate\Schema\Package\BuilderInterface;
-use Ixocreate\Schema\Package\ElementInterface;
-use Ixocreate\Schema\Package\ElementProviderInterface;
-use Ixocreate\Type\Package\DatabaseTypeInterface;
-use Ixocreate\Entity\Package\Type\AbstractType;
-use Ixocreate\Schema\Package\Elements\SelectElement;
+use Ixocreate\Admin\Role\RoleSubManager;
+use Ixocreate\Admin\RoleInterface;
+use Ixocreate\Schema\BuilderInterface;
+use Ixocreate\Schema\ElementInterface;
+use Ixocreate\Schema\ElementProviderInterface;
+use Ixocreate\Type\DatabaseTypeInterface;
+use Ixocreate\Entity\Type\AbstractType;
+use Ixocreate\Schema\Elements\SelectElement;
 
 final class RoleType extends AbstractType implements DatabaseTypeInterface, ElementProviderInterface
 {

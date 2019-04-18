@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Resource;
+namespace Ixocreate\Admin\Resource;
 
 trait DefaultAdminTrait
 {

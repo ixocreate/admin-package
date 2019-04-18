@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Console;
+namespace Ixocreate\Admin\Console;
 
 use Ixocreate\CommandBus\CommandBus;
 use Ixocreate\Application\Console\CommandInterface;
@@ -80,7 +80,7 @@ final class CreateUserCommand extends Command implements CommandInterface
             'status' => 'active',
         ];
 
-        $result = $this->commandBus->command(\Ixocreate\Admin\Package\Command\User\CreateUserCommand::class, $data);
+        $result = $this->commandBus->command(\Ixocreate\Admin\Command\User\CreateUserCommand::class, $data);
 
         if (!$result->isSuccessful()) {
             //

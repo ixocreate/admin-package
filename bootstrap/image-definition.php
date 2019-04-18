@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package;
+namespace Ixocreate\Admin;
 
-use Ixocreate\Media\Package\ImageDefinition\ImageDefinitionConfigurator;
+use Ixocreate\Media\ImageDefinition\ImageDefinitionConfigurator;
 
 /** @var ImageDefinitionConfigurator $imageDefinition */
 
-$imageDefinition->addImageDefinition(\Ixocreate\Admin\Package\ImageDefinition\AdminThumb::class);
+$imageDefinition->addImageDefinition(\Ixocreate\Admin\ImageDefinition\AdminThumb::class);

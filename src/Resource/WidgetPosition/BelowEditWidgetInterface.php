@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Resource\WidgetPosition;
 
-use Ixocreate\Admin\Package\UserInterface;
+use Ixocreate\Admin\UserInterface;
 use Ixocreate\Admin\Widget\WidgetCollectorInterface;
 
 interface BelowEditWidgetInterface

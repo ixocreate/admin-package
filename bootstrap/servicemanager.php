@@ -1,21 +1,21 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package;
+namespace Ixocreate\Admin;
 
 use Ixocreate\Application\Service\ServiceManagerConfigurator;
-use Ixocreate\Admin\Package\Config\AdminConfig;
-use Ixocreate\Admin\Package\Config\Client\ClientConfigGenerator;
-use Ixocreate\Admin\Package\Config\Client\ClientConfigProviderSubManager;
-use Ixocreate\Admin\Package\Config\Factory\AdminConfigFactory;
-use Ixocreate\Admin\Package\Helper\Factory\ServerUrlHelperFactory;
-use Ixocreate\Admin\Package\Helper\Factory\UrlHelperFactory;
-use Ixocreate\Admin\Package\Helper\ServerUrlHelper;
-use Ixocreate\Admin\Package\Helper\UrlHelper;
-use Ixocreate\Admin\Package\Role\RoleSubManager;
-use Ixocreate\Admin\Package\Router\AdminRouter;
-use Ixocreate\Admin\Package\Router\Factory\AdminRouterFactory;
-use Ixocreate\Admin\Package\Widget\DashboardWidgetProviderSubManager;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Config\Client\ClientConfigGenerator;
+use Ixocreate\Admin\Config\Client\ClientConfigProviderSubManager;
+use Ixocreate\Admin\Config\Factory\AdminConfigFactory;
+use Ixocreate\Admin\Helper\Factory\ServerUrlHelperFactory;
+use Ixocreate\Admin\Helper\Factory\UrlHelperFactory;
+use Ixocreate\Admin\Helper\ServerUrlHelper;
+use Ixocreate\Admin\Helper\UrlHelper;
+use Ixocreate\Admin\Role\RoleSubManager;
+use Ixocreate\Admin\Router\AdminRouter;
+use Ixocreate\Admin\Router\Factory\AdminRouterFactory;
+use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
 
 /** @var ServiceManagerConfigurator $serviceManager */
 

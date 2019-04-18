@@ -5,7 +5,7 @@ namespace Ixocreate\Migration;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Ixocreate\Type\Package\Entity\DateTimeType;
+use Ixocreate\Type\Entity\DateTimeType;
 
 final class Version20180917123947 extends AbstractMigration
 {

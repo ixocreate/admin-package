@@ -7,17 +7,17 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Action\Api\Resource;
+namespace Ixocreate\Admin\Action\Api\Resource;
 
-use Ixocreate\Admin\Package\Entity\User;
-use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
 use Ixocreate\Admin\Resource\Action\CreateActionAwareInterface;
-use Ixocreate\Resource\Package\ResourceInterface;
-use Ixocreate\Database\Package\Repository\Factory\RepositorySubManager;
-use Ixocreate\Database\Package\Repository\RepositoryInterface;
-use Ixocreate\Entity\Package\EntityInterface;
-use Ixocreate\Resource\Package\SubManager\ResourceSubManager;
+use Ixocreate\Resource\ResourceInterface;
+use Ixocreate\Database\Repository\Factory\RepositorySubManager;
+use Ixocreate\Database\Repository\RepositoryInterface;
+use Ixocreate\Entity\EntityInterface;
+use Ixocreate\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

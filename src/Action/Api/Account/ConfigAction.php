@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Action\Account;
+namespace Ixocreate\Admin\Action\Account;
 
-use Ixocreate\Admin\Package\Config\AdminConfig;
-use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
-use Ixocreate\Schema\Package\AdditionalSchemaInterface;
-use Ixocreate\Schema\Package\AdditionalSchema\AdditionalSchemaSubManager;
-use Ixocreate\Schema\Package\Builder;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Schema\AdditionalSchemaInterface;
+use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

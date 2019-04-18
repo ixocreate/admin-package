@@ -7,14 +7,14 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Config\Client\Provider;
+namespace Ixocreate\Admin\Config\Client\Provider;
 
-use Ixocreate\Admin\Package\Config\AdminConfig;
+use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Application\Http\Pipe\Config\SegmentConfig;
 use Ixocreate\Application\Http\Pipe\Config\SegmentPipeConfig;
 use Ixocreate\Application\Http\Pipe\PipeConfig;
-use Ixocreate\Admin\Package\ClientConfigProviderInterface;
-use Ixocreate\Admin\Package\UserInterface;
+use Ixocreate\Admin\ClientConfigProviderInterface;
+use Ixocreate\Admin\UserInterface;
 
 final class RoutesProvider implements ClientConfigProviderInterface
 {

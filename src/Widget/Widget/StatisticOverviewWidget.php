@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Widget\Widget;
+namespace Ixocreate\Admin\Widget\Widget;
 
 use Ixocreate\Admin\Widget\WidgetInterface;
 

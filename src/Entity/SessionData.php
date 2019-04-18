@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Entity;
+namespace Ixocreate\Admin\Entity;
 
-use Ixocreate\Type\Package\Entity\UuidType;
-use Ixocreate\Entity\Package\Definition;
-use Ixocreate\Entity\Package\DefinitionCollection;
-use Ixocreate\Entity\Package\EntityInterface;
-use Ixocreate\Entity\Package\EntityTrait;
+use Ixocreate\Type\Entity\UuidType;
+use Ixocreate\Entity\Definition;
+use Ixocreate\Entity\DefinitionCollection;
+use Ixocreate\Entity\EntityInterface;
+use Ixocreate\Entity\EntityTrait;
 
 final class SessionData implements EntityInterface
 {

@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Ixocreate\\Admin\\Package\\": "src/"
+            "Ixocreate\\Admin\\": "src/"
         }
     },
     "autoload-dev": {

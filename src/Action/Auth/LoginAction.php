@@ -7,17 +7,17 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\Action\Auth;
+namespace Ixocreate\Admin\Action\Auth;
 
 use Firebase\JWT\JWT;
-use Ixocreate\Admin\Package\Config\AdminConfig;
-use Ixocreate\Admin\Package\Entity\SessionData;
-use Ixocreate\Admin\Package\Entity\User;
-use Ixocreate\Admin\Package\Repository\UserRepository;
-use Ixocreate\Admin\Package\Router\AdminRouter;
-use Ixocreate\Admin\Package\Session\SessionCookie;
+use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Entity\SessionData;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Router\AdminRouter;
+use Ixocreate\Admin\Session\SessionCookie;
 use Ixocreate\Application\ApplicationConfig;
-use Ixocreate\Template\Package\TemplateResponse;
+use Ixocreate\Template\TemplateResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
