@@ -10,7 +10,9 @@ use Ixocreate\Admin\Type\RoleType;
 use Ixocreate\Admin\Type\StatusType;
 use Ixocreate\Type\Entity\DateTimeType;
 use Ixocreate\Type\Entity\EmailType;
+use Ixocreate\Type\Entity\SchemaType;
 use Ixocreate\Type\Entity\UuidType;
+use Ixocreate\Type\TypeInterface;
 
 class Version20180221130347 extends AbstractMigration
 {
@@ -20,12 +22,22 @@ class Version20180221130347 extends AbstractMigration
         $table->addColumn('id', UuidType::serviceName());
         $table->addColumn('email', EmailType::serviceName());
         $table->addColumn('password', Type::STRING)->setLength(255);
-        $table->addColumn('hash', UuidType::serviceName());
         $table->addColumn('role', RoleType::serviceName())->setLength(255);
         $table->addColumn('avatar', Type::TEXT);
-        $table->addColumn("status", StatusType::serviceName(), ['default' => 'active']);
-        $table->addColumn('createdAt', DateTimeType::serviceName());
+        $table->addColumn('status', StatusType::serviceName(), ['default' => 'active']);
+        $table->addColumn('locale', TypeInterface::TYPE_STRING)->setNotnull(false);
+        $table->addColumn('numberLocale', TypeInterface::TYPE_STRING)->setNotnull(false);
+        $table->addColumn('dateLocale', TypeInterface::TYPE_STRING)->setNotnull(false);
+        $table->addColumn('timeLocale', TypeInterface::TYPE_STRING)->setNotnull(false);
+        $table->addColumn('timezone', TypeInterface::TYPE_STRING)->setNotnull(false);
+        $table->addColumn('userAttributes', SchemaType::serviceName())->setNotnull(false);
+        $table->addColumn('accountAttributes', SchemaType::serviceName())->setNotnull(false);
         $table->addColumn('lastLoginAt', DateTimeType::serviceName())->setNotnull(false);
+        $table->addColumn('lastActivityAt', DateTimeType::serviceName())->setNotnull(false);
+        $table->addColumn('lastPasswordChangeAt', DateTimeType::serviceName())->setNotnull(false);
+        $table->addColumn('createdAt', DateTimeType::serviceName());
+        $table->addColumn('updatedAt', DateTimeType::serviceName());
+        $table->addColumn('deletedAt', DateTimeType::serviceName())->setNotnull(false);
 
         $table->setPrimaryKey(["id"]);
         $table->addUniqueIndex(["email"]);

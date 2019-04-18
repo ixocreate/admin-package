@@ -16,7 +16,7 @@ use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderInterface;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
-use Ixocreate\Application\ConfiguratorInterface;
+use Ixocreate\Application\Configurator\ConfiguratorInterface;
 use Ixocreate\Application\Service\ServiceRegistryInterface;
 use Ixocreate\Application\Service\SubManagerConfigurator;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
