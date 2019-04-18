@@ -28,7 +28,7 @@ final class TableWidget implements WidgetInterface
      */
     private $data = [
         'schema' => null,
-        'uri' => null
+        'uri' => null,
     ];
 
     /**

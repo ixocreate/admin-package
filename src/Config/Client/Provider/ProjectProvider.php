@@ -10,8 +10,8 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Package\Config\Client\Provider;
 
 use Ixocreate\Admin\Package\Config\AdminConfig;
-use Ixocreate\Admin\ClientConfigProviderInterface;
-use Ixocreate\Admin\UserInterface;
+use Ixocreate\Admin\Package\ClientConfigProviderInterface;
+use Ixocreate\Admin\Package\UserInterface;
 
 final class ProjectProvider implements ClientConfigProviderInterface
 {

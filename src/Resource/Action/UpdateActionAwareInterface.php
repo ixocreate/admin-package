@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Resource\Action;
 
-use Ixocreate\Admin\UserInterface;
+use Ixocreate\Admin\Package\UserInterface;
 
 interface UpdateActionAwareInterface
 {

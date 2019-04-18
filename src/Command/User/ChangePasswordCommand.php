@@ -14,7 +14,7 @@ use Ixocreate\Admin\Package\Entity\User;
 use Ixocreate\Admin\Package\Event\UserEvent;
 use Ixocreate\Admin\Package\Repository\UserRepository;
 use Ixocreate\CommandBus\Package\Command\AbstractCommand;
-use Ixocreate\Admin\UserInterface;
+use Ixocreate\Admin\Package\UserInterface;
 use Ixocreate\Filter\Package\FilterableInterface;
 use Ixocreate\Validation\ValidatableInterface;
 use Ixocreate\Validation\ViolationCollectorInterface;

@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Package\Console;
 
 use Ixocreate\CommandBus\CommandBus;
-use Ixocreate\Application\Console\CommandInterface;;
+use Ixocreate\Application\Console\CommandInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;

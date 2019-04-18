@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Package\BootstrapItem;
+namespace Ixocreate\Admin\Package\Bootstrap;
 
-use Ixocreate\Application\Bootstrap\BootstrapItemInterface;
-use Ixocreate\Application\ConfiguratorInterface;
+use Ixocreate\Application\Service\Bootstrap\BootstrapItemInterface;
+use Ixocreate\Application\Service\Configurator\ConfiguratorInterface;
 use Ixocreate\Admin\Package\Config\AdminConfigurator;
 
 final class AdminBootstrapItem implements BootstrapItemInterface

@@ -12,7 +12,7 @@ namespace Ixocreate\Admin\Package\Config\Factory;
 use Ixocreate\Admin\Package\Config\AdminConfig;
 use Ixocreate\Admin\Package\Config\AdminProjectConfig;
 use Ixocreate\Asset\Package\Asset;
-use Ixocreate\Config\Config;
+use Ixocreate\Application\Config\Config;
 use Ixocreate\ServiceManager\FactoryInterface;
 use Ixocreate\ServiceManager\ServiceManagerInterface;
 use Ixocreate\Application\Uri\ApplicationUri;

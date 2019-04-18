@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Package\Config\Client\Provider;
 
-use Ixocreate\Admin\ClientConfigProviderInterface;
+use Ixocreate\Admin\Package\ClientConfigProviderInterface;
 use Ixocreate\Admin\Resource\AdditionalSchemasInterface;
 use Ixocreate\Admin\Resource\Permission\CanCreateInterface;
 use Ixocreate\Admin\Resource\Permission\CanDeleteInterface;
@@ -18,7 +18,7 @@ use Ixocreate\Admin\Resource\Permission\CanViewInterface;
 use Ixocreate\Admin\Resource\Schema\CreateSchemaAwareInterface;
 use Ixocreate\Admin\Resource\Schema\ListSchemaAwareInterface;
 use Ixocreate\Admin\Resource\Schema\UpdateSchemaAwareInterface;
-use Ixocreate\Admin\UserInterface;
+use Ixocreate\Admin\Package\UserInterface;
 use Ixocreate\Resource\Package\ResourceInterface;
 use Ixocreate\Schema\Package\SchemaAwareInterface;
 use Ixocreate\Resource\Package\SubManager\ResourceSubManager;

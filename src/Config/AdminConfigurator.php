@@ -14,14 +14,14 @@ use Ixocreate\Admin\Package\Config\Navigation\Group;
 use Ixocreate\Admin\Package\Role\RoleSubManager;
 use Ixocreate\Admin\Package\Schema\User\LocaleAttributesSchema;
 use Ixocreate\Admin\Package\Widget\DashboardWidgetProviderSubManager;
-use Ixocreate\Admin\ClientConfigProviderInterface;
+use Ixocreate\Admin\Package\ClientConfigProviderInterface;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderInterface;
-use Ixocreate\Application\ConfiguratorInterface;
-use Ixocreate\Application\ServiceRegistryInterface;
+use Ixocreate\Application\Service\Configurator\ConfiguratorInterface;
+use Ixocreate\Application\Service\Registry\ServiceRegistryInterface;
 use Ixocreate\Schema\Package\AdditionalSchemaInterface;
 use Ixocreate\Schema\Package\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\ServiceManager\Factory\AutowireFactory;
-use Ixocreate\ServiceManager\SubManager\SubManagerConfigurator;
+use Ixocreate\Application\Service\SubManagerConfigurator;
 use Zend\Stdlib\SplPriorityQueue;
 
 final class AdminConfigurator implements ConfiguratorInterface
@@ -89,7 +89,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         );
         $this->roleSubManagerConfigurator = new SubManagerConfigurator(
             RoleSubManager::class,
-            \Ixocreate\Admin\RoleInterface::class
+            \Ixocreate\Admin\Package\RoleInterface::class
         );
         $this->dashboardWidgetSubManagerConfigurator = new SubManagerConfigurator(
             DashboardWidgetProviderSubManager::class,

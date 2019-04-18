@@ -12,7 +12,7 @@ namespace Ixocreate\Admin\Package\Action\Api\User;
 use Ixocreate\Admin\Package\Repository\UserRepository;
 use Ixocreate\Admin\Package\Response\ApiErrorResponse;
 use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
-use Ixocreate\Entity\Package\Entity\EntityInterface;
+use Ixocreate\Entity\Package\EntityInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

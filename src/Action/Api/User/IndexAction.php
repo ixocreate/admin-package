@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\Criteria;
 use Ixocreate\Admin\Package\Repository\UserRepository;
 use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
 use Ixocreate\Schema\Package\ElementInterface;
-use Ixocreate\Entity\Package\Entity\EntityInterface;
+use Ixocreate\Entity\Package\EntityInterface;
 use Ixocreate\Schema\Package\Listing\DateTimeElement;
 use Ixocreate\Schema\Package\Listing\ListSchema;
 use Ixocreate\Schema\Package\Listing\TextElement;

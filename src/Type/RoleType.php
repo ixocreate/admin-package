@@ -11,7 +11,7 @@ namespace Ixocreate\Admin\Package\Type;
 
 use Doctrine\DBAL\Types\StringType;
 use Ixocreate\Admin\Package\Role\RoleSubManager;
-use Ixocreate\Admin\RoleInterface;
+use Ixocreate\Admin\Package\RoleInterface;
 use Ixocreate\Schema\Package\BuilderInterface;
 use Ixocreate\Schema\Package\ElementInterface;
 use Ixocreate\Schema\Package\ElementProviderInterface;

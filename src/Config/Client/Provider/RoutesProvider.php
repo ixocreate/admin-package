@@ -13,8 +13,8 @@ use Ixocreate\Admin\Package\Config\AdminConfig;
 use Ixocreate\Application\Http\Pipe\Config\SegmentConfig;
 use Ixocreate\Application\Http\Pipe\Config\SegmentPipeConfig;
 use Ixocreate\Application\Http\Pipe\PipeConfig;
-use Ixocreate\Admin\ClientConfigProviderInterface;
-use Ixocreate\Admin\UserInterface;
+use Ixocreate\Admin\Package\ClientConfigProviderInterface;
+use Ixocreate\Admin\Package\UserInterface;
 
 final class RoutesProvider implements ClientConfigProviderInterface
 {

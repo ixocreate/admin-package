@@ -11,7 +11,7 @@ namespace Ixocreate\Admin\Package\Template;
 
 use Ixocreate\Admin\Package\Config\AdminConfig;
 use Ixocreate\Admin\Package\Router\AdminRouter;
-use Ixocreate\Template\ExtensionInterface;
+use Ixocreate\Template\Package\ExtensionInterface;
 use PackageVersions\Versions;
 
 class AdminExtension implements ExtensionInterface
