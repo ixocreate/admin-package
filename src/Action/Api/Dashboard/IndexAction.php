@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Api\Dashboard;
+namespace Ixocreate\Package\Admin\Action\Api\Dashboard;
 
-use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
-use Ixocreate\Admin\Widget\WidgetCollector;
-use Ixocreate\Contract\Admin\Widget\WidgetProviderInterface;
+use Ixocreate\Package\Admin\Entity\User;
+use Ixocreate\Package\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Package\Admin\Widget\DashboardWidgetProviderSubManager;
+use Ixocreate\Package\Admin\Widget\WidgetCollector;
+use Ixocreate\Admin\Widget\WidgetProviderInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

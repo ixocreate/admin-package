@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Admin;
+namespace Ixocreate\Package\Admin;
 
 use Ixocreate\Application\Publish\PublishConfigurator;
 

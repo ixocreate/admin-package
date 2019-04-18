@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Api\Resource;
+namespace Ixocreate\Package\Admin\Action\Api\Resource;
 
-use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Response\ApiDetailResponse;
-use Ixocreate\Contract\Admin\Resource\DefaultValueInterface;
-use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Package\Admin\Entity\User;
+use Ixocreate\Package\Admin\Response\ApiDetailResponse;
+use Ixocreate\Admin\Resource\DefaultValueInterface;
+use Ixocreate\Package\Resource\SubManager\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

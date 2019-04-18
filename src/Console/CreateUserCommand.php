@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Console;
+namespace Ixocreate\Package\Admin\Console;
 
 use Ixocreate\CommandBus\CommandBus;
-use Ixocreate\Contract\Command\CommandInterface;
+use Ixocreate\Application\Console\CommandInterface;;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
@@ -80,9 +80,10 @@ final class CreateUserCommand extends Command implements CommandInterface
             'status' => 'active',
         ];
 
-        $result = $this->commandBus->command(\Ixocreate\Admin\Command\User\CreateUserCommand::class, $data);
+        $result = $this->commandBus->command(\Ixocreate\Package\Admin\Command\User\CreateUserCommand::class, $data);
 
         if (!$result->isSuccessful()) {
+            //
         }
     }
 

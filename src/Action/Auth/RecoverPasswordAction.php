@@ -7,16 +7,16 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Auth;
+namespace Ixocreate\Package\Admin\Action\Auth;
 
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
-use Ixocreate\Admin\Command\User\ChangePasswordCommand;
-use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Package\Admin\Command\User\ChangePasswordCommand;
+use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Package\Admin\Entity\User;
+use Ixocreate\Package\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\CommandBus;
-use Ixocreate\Template\TemplateResponse;
+use Ixocreate\Package\Template\TemplateResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

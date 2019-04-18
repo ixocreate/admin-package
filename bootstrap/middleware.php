@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Admin;
+namespace Ixocreate\Package\Admin;
 
-use Ixocreate\Admin\Middleware\Factory\JsonBodyParamsFactory;
-use Ixocreate\ApplicationHttp\Middleware\MiddlewareConfigurator;
+use Ixocreate\Package\Admin\Middleware\Factory\JsonBodyParamsFactory;
+use Ixocreate\Application\Http\Middleware\MiddlewareConfigurator;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 
 /** @var MiddlewareConfigurator $middleware */

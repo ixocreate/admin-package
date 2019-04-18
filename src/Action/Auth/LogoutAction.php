@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Auth;
+namespace Ixocreate\Package\Admin\Action\Auth;
 
-use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Entity\SessionData;
-use Ixocreate\Admin\Repository\UserRepository;
-use Ixocreate\Admin\Router\AdminRouter;
-use Ixocreate\Admin\Session\SessionCookie;
+use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Package\Admin\Entity\SessionData;
+use Ixocreate\Package\Admin\Repository\UserRepository;
+use Ixocreate\Package\Admin\Router\AdminRouter;
+use Ixocreate\Package\Admin\Session\SessionCookie;
 use Ixocreate\Application\ApplicationConfig;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

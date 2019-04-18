@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Middleware\Api;
+namespace Ixocreate\Package\Admin\Middleware\Api;
 
-use Ixocreate\Admin\Entity\SessionData;
-use Ixocreate\Admin\Response\ApiErrorResponse;
+use Ixocreate\Package\Admin\Entity\SessionData;
+use Ixocreate\Package\Admin\Response\ApiErrorResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

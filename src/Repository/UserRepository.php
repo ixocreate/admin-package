@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Repository;
+namespace Ixocreate\Package\Admin\Repository;
 
-use Ixocreate\Admin\Entity\User;
-use Ixocreate\Database\Repository\AbstractRepository;
+use Ixocreate\Package\Admin\Entity\User;
+use Ixocreate\Package\Database\Repository\AbstractRepository;
 
 final class UserRepository extends AbstractRepository
 {

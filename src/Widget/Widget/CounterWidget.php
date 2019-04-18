@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Widget\Widget;
+namespace Ixocreate\Package\Admin\Widget\Widget;
 
-use Ixocreate\Contract\Admin\Widget\WidgetInterface;
+use Ixocreate\Admin\Widget\WidgetInterface;
 
 final class CounterWidget implements WidgetInterface
 {

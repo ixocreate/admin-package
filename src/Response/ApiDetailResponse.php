@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Response;
+namespace Ixocreate\Package\Admin\Response;
 
-use Ixocreate\Contract\Resource\ResourceInterface;
+use Ixocreate\Package\Resource\ResourceInterface;
 
 class ApiDetailResponse extends ApiSuccessResponse
 {

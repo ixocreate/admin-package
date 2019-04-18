@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Config\Client\Provider;
+namespace Ixocreate\Package\Admin\Config\Client\Provider;
 
-use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Permission\Permission;
-use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\UserInterface;
+use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Package\Admin\Permission\Permission;
+use Ixocreate\Admin\ClientConfigProviderInterface;
+use Ixocreate\Admin\UserInterface;
 
 final class NavigationProvider implements ClientConfigProviderInterface
 {

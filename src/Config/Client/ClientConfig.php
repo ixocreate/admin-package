@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Config\Client;
+namespace Ixocreate\Package\Admin\Config\Client;
 
 final class ClientConfig implements \JsonSerializable
 {

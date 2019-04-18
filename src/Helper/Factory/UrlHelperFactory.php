@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Helper\Factory;
+namespace Ixocreate\Package\Admin\Helper\Factory;
 
-use Ixocreate\Admin\Helper\UrlHelper;
-use Ixocreate\Admin\Router\AdminRouter;
-use Ixocreate\Contract\ServiceManager\FactoryInterface;
-use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\Package\Admin\Helper\UrlHelper;
+use Ixocreate\Package\Admin\Router\AdminRouter;
+use Ixocreate\ServiceManager\FactoryInterface;
+use Ixocreate\ServiceManager\ServiceManagerInterface;
 
 final class UrlHelperFactory implements FactoryInterface
 {

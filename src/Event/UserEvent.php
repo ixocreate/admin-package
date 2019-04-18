@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Event;
+namespace Ixocreate\Package\Admin\Event;
 
-use Ixocreate\Admin\Entity\User;
-use Ixocreate\Event\Event;
+use Ixocreate\Package\Admin\Entity\User;
+use Ixocreate\Package\Event\Event;
 
 class UserEvent extends Event
 {

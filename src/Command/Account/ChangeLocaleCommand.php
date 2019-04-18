@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Command\Account;
+namespace Ixocreate\Package\Admin\Command\Account;
 
-use Ixocreate\Admin\Repository\UserRepository;
-use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\Contract\Filter\FilterableInterface;
-use Ixocreate\Contract\Validation\ValidatableInterface;
-use Ixocreate\Contract\Validation\ViolationCollectorInterface;
+use Ixocreate\Package\Admin\Repository\UserRepository;
+use Ixocreate\Package\CommandBus\Command\AbstractCommand;
+use Ixocreate\Package\Filter\FilterableInterface;
+use Ixocreate\Package\Validation\ValidatableInterface;
+use Ixocreate\Package\Validation\ViolationCollectorInterface;
 
 final class ChangeLocaleCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {

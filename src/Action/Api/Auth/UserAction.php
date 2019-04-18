@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Api\Auth;
+namespace Ixocreate\Package\Admin\Action\Api\Auth;
 
-use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Package\Admin\Entity\User;
+use Ixocreate\Package\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

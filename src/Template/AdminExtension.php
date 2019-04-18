@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Template;
+namespace Ixocreate\Package\Admin\Template;
 
-use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Router\AdminRouter;
-use Ixocreate\Contract\Template\ExtensionInterface;
+use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Package\Admin\Router\AdminRouter;
+use Ixocreate\Template\ExtensionInterface;
 use PackageVersions\Versions;
 
 class AdminExtension implements ExtensionInterface

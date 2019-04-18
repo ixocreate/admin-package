@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Widget;
+namespace Ixocreate\Package\Admin\Widget;
 
-use Ixocreate\Contract\Admin\DashboardWidgetInterface;
-use Ixocreate\Contract\Admin\Widget\WidgetCollectorInterface;
-use Ixocreate\Contract\Admin\Widget\WidgetInterface;
+use Ixocreate\Admin\DashboardWidgetInterface;
+use Ixocreate\Admin\Widget\WidgetCollectorInterface;
+use Ixocreate\Admin\Widget\WidgetInterface;
 use Zend\Stdlib\SplPriorityQueue;
 
 final class WidgetCollector implements WidgetCollectorInterface

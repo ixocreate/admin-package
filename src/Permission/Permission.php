@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Permission;
+namespace Ixocreate\Package\Admin\Permission;
 
-use Ixocreate\Admin\Entity\User;
+use Ixocreate\Package\Admin\Entity\User;
 
 final class Permission
 {

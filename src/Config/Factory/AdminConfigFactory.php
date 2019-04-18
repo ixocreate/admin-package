@@ -7,15 +7,15 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Config\Factory;
+namespace Ixocreate\Package\Admin\Config\Factory;
 
-use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Config\AdminProjectConfig;
-use Ixocreate\Asset\Asset;
+use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Package\Admin\Config\AdminProjectConfig;
+use Ixocreate\Package\Asset\Asset;
 use Ixocreate\Config\Config;
-use Ixocreate\Contract\ServiceManager\FactoryInterface;
-use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
-use Ixocreate\ProjectUri\ProjectUri;
+use Ixocreate\ServiceManager\FactoryInterface;
+use Ixocreate\ServiceManager\ServiceManagerInterface;
+use Ixocreate\Package\ProjectUri\ProjectUri;
 use Zend\Diactoros\Uri;
 
 final class AdminConfigFactory implements FactoryInterface

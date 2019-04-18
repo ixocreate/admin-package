@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace IxocreateTest\Admin;
+namespace Ixocreate\Test\Admin;
 
 use PHPUnit\Framework\TestCase;
 

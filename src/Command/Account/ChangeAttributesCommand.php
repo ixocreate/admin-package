@@ -7,16 +7,16 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Command\Account;
+namespace Ixocreate\Package\Admin\Command\Account;
 
-use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Repository\UserRepository;
-use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\CommonTypes\Entity\SchemaType;
-use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
-use Ixocreate\Entity\Type\Type;
-use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Package\Admin\Entity\User;
+use Ixocreate\Package\Admin\Repository\UserRepository;
+use Ixocreate\Package\CommandBus\Command\AbstractCommand;
+use Ixocreate\Package\Type\Entity\SchemaType;
+use Ixocreate\Package\Schema\AdditionalSchemaInterface;
+use Ixocreate\Package\Entity\Type\Type;
+use Ixocreate\Package\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 
 class ChangeAttributesCommand extends AbstractCommand
 {

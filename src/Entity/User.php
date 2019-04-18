@@ -7,24 +7,24 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Entity;
+namespace Ixocreate\Package\Admin\Entity;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Ixocreate\Admin\Type\RoleType;
-use Ixocreate\Admin\Type\StatusType;
-use Ixocreate\CommonTypes\Entity\DateTimeType;
-use Ixocreate\CommonTypes\Entity\EmailType;
-use Ixocreate\CommonTypes\Entity\SchemaType;
-use Ixocreate\CommonTypes\Entity\UuidType;
-use Ixocreate\Contract\Admin\RoleInterface;
-use Ixocreate\Contract\Admin\UserInterface;
-use Ixocreate\Contract\Entity\DatabaseEntityInterface;
-use Ixocreate\Contract\Type\TypeInterface;
-use Ixocreate\Entity\Entity\Definition;
-use Ixocreate\Entity\Entity\DefinitionCollection;
-use Ixocreate\Entity\Entity\EntityInterface;
-use Ixocreate\Entity\Entity\EntityTrait;
+use Ixocreate\Package\Admin\Type\RoleType;
+use Ixocreate\Package\Admin\Type\StatusType;
+use Ixocreate\Package\Type\Entity\DateTimeType;
+use Ixocreate\Package\Type\Entity\EmailType;
+use Ixocreate\Package\Type\Entity\SchemaType;
+use Ixocreate\Package\Type\Entity\UuidType;
+use Ixocreate\Admin\RoleInterface;
+use Ixocreate\Admin\UserInterface;
+use Ixocreate\Entity\DatabaseEntityInterface;
+use Ixocreate\Package\Type\TypeInterface;
+use Ixocreate\Package\Entity\Definition;
+use Ixocreate\Package\Entity\DefinitionCollection;
+use Ixocreate\Package\Entity\EntityInterface;
+use Ixocreate\Package\Entity\EntityTrait;
 
 final class User implements EntityInterface, DatabaseEntityInterface, UserInterface
 {

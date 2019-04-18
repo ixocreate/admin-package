@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin;
+namespace Ixocreate\Package\Admin;
 
-use Ixocreate\Admin\BootstrapItem\AdminBootstrapItem;
-use Ixocreate\Contract\Application\ConfiguratorRegistryInterface;
-use Ixocreate\Contract\Application\PackageInterface;
-use Ixocreate\Contract\Application\ServiceRegistryInterface;
-use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\Package\Admin\BootstrapItem\AdminBootstrapItem;
+use Ixocreate\Application\ConfiguratorRegistryInterface;
+use Ixocreate\Application\PackageInterface;
+use Ixocreate\Application\ServiceRegistryInterface;
+use Ixocreate\ServiceManager\ServiceManagerInterface;
 
 class Package implements PackageInterface
 {
@@ -82,9 +82,9 @@ class Package implements PackageInterface
     public function getDependencies(): ?array
     {
         return [
-            \Ixocreate\Media\Package::class,
-            \Ixocreate\Cms\Package::class,
-            \Ixocreate\Intl\Package::class,
+            \Ixocreate\Package\Media\Package::class,
+            \Ixocreate\Package\Cms\Package::class,
+            \Ixocreate\Package\Intl\Package::class,
         ];
     }
 }

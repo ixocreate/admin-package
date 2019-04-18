@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Admin;
+namespace Ixocreate\Package\Admin;
 
-use Ixocreate\Database\Repository\RepositoryConfigurator;
+use Ixocreate\Package\Database\Repository\RepositoryConfigurator;
 
 /** @var RepositoryConfigurator $repository */
 
-$repository->addDirectory( __DIR__ . '/../src/Repository/');
+$repository->addDirectory(__DIR__ . '/../src/Repository/');

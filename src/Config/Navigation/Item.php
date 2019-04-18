@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Config\Navigation;
+namespace Ixocreate\Package\Admin\Config\Navigation;
 
 use Zend\Stdlib\SplPriorityQueue;
 

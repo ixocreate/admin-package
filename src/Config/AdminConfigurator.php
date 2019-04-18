@@ -7,19 +7,19 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Config;
+namespace Ixocreate\Package\Admin\Config;
 
-use Ixocreate\Admin\Config\Client\ClientConfigProviderSubManager;
-use Ixocreate\Admin\Config\Navigation\Group;
-use Ixocreate\Admin\Role\RoleSubManager;
-use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
-use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
-use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\Widget\DashboardWidgetProviderInterface;
-use Ixocreate\Contract\Application\ConfiguratorInterface;
-use Ixocreate\Contract\Application\ServiceRegistryInterface;
-use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
-use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Package\Admin\Config\Client\ClientConfigProviderSubManager;
+use Ixocreate\Package\Admin\Config\Navigation\Group;
+use Ixocreate\Package\Admin\Role\RoleSubManager;
+use Ixocreate\Package\Admin\Schema\User\LocaleAttributesSchema;
+use Ixocreate\Package\Admin\Widget\DashboardWidgetProviderSubManager;
+use Ixocreate\Admin\ClientConfigProviderInterface;
+use Ixocreate\Admin\Widget\DashboardWidgetProviderInterface;
+use Ixocreate\Application\ConfiguratorInterface;
+use Ixocreate\Application\ServiceRegistryInterface;
+use Ixocreate\Package\Schema\AdditionalSchemaInterface;
+use Ixocreate\Package\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\ServiceManager\Factory\AutowireFactory;
 use Ixocreate\ServiceManager\SubManager\SubManagerConfigurator;
 use Zend\Stdlib\SplPriorityQueue;
@@ -89,7 +89,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         );
         $this->roleSubManagerConfigurator = new SubManagerConfigurator(
             RoleSubManager::class,
-            \Ixocreate\Contract\Admin\RoleInterface::class
+            \Ixocreate\Admin\RoleInterface::class
         );
         $this->dashboardWidgetSubManagerConfigurator = new SubManagerConfigurator(
             DashboardWidgetProviderSubManager::class,

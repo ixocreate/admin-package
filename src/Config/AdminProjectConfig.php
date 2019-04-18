@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Config;
+namespace Ixocreate\Package\Admin\Config;
 
-use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
-use Ixocreate\Contract\Application\SerializableServiceInterface;
+use Ixocreate\Package\Admin\Schema\User\LocaleAttributesSchema;
+use Ixocreate\Application\SerializableServiceInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
 final class AdminProjectConfig implements SerializableServiceInterface

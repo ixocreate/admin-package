@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Helper;
+namespace Ixocreate\Package\Admin\Helper;
 
 final class UrlHelper extends \Zend\Expressive\Helper\UrlHelper
 {

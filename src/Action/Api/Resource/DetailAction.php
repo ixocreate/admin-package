@@ -7,18 +7,18 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Api\Resource;
+namespace Ixocreate\Package\Admin\Action\Api\Resource;
 
-use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Response\ApiDetailResponse;
-use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
-use Ixocreate\Contract\Admin\Resource\Action\DetailActionAwareInterface;
-use Ixocreate\Contract\Resource\ResourceInterface;
-use Ixocreate\Database\Repository\Factory\RepositorySubManager;
-use Ixocreate\Database\Repository\RepositoryInterface;
-use Ixocreate\Entity\Entity\EntityInterface;
-use Ixocreate\Resource\SubManager\ResourceSubManager;
-use Ixocreate\Schema\Builder;
+use Ixocreate\Package\Admin\Entity\User;
+use Ixocreate\Package\Admin\Response\ApiDetailResponse;
+use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
+use Ixocreate\Admin\Resource\Action\DetailActionAwareInterface;
+use Ixocreate\Package\Resource\ResourceInterface;
+use Ixocreate\Package\Database\Repository\Factory\RepositorySubManager;
+use Ixocreate\Package\Database\Repository\RepositoryInterface;
+use Ixocreate\Package\Entity\EntityInterface;
+use Ixocreate\Package\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Package\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace IxocreateMigration;
+namespace Ixocreate\Migration;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Ixocreate\CommonTypes\Entity\SchemaType;
+use Ixocreate\Package\Type\Entity\SchemaType;
 
 final class Version20181130114739 extends AbstractMigration
 {

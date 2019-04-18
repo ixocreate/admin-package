@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Admin;
+namespace Ixocreate\Package\Admin;
 
-use Ixocreate\ApplicationConsole\ConsoleConfigurator;
+use Ixocreate\Application\Console\ConsoleConfigurator;
 
 /** @var ConsoleConfigurator $console */
 

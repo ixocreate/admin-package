@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Widget;
+namespace Ixocreate\Package\Admin\Widget;
 
 use Ixocreate\ServiceManager\SubManager\SubManager;
 

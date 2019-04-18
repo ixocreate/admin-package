@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace IxocreateMigration;
+namespace Ixocreate\Migration;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\Migrations\AbstractMigration;
-use Ixocreate\Admin\Type\RoleType;
-use Ixocreate\Admin\Type\StatusType;
-use Ixocreate\CommonTypes\Entity\DateTimeType;
-use Ixocreate\CommonTypes\Entity\EmailType;
-use Ixocreate\CommonTypes\Entity\UuidType;
+use Ixocreate\Package\Admin\Type\RoleType;
+use Ixocreate\Package\Admin\Type\StatusType;
+use Ixocreate\Package\Type\Entity\DateTimeType;
+use Ixocreate\Package\Type\Entity\EmailType;
+use Ixocreate\Package\Type\Entity\UuidType;
 
 class Version20180221130347 extends AbstractMigration
 {

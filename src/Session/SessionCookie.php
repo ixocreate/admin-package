@@ -7,14 +7,14 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Session;
+namespace Ixocreate\Package\Admin\Session;
 
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
-use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Entity\SessionData;
-use Ixocreate\CommonTypes\Entity\UuidType;
+use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Package\Admin\Entity\SessionData;
+use Ixocreate\Package\Type\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

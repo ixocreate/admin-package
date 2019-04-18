@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Config\Client;
+namespace Ixocreate\Package\Admin\Config\Client;
 
-use Ixocreate\Admin\Config\AdminProjectConfig;
-use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\UserInterface;
+use Ixocreate\Package\Admin\Config\AdminProjectConfig;
+use Ixocreate\Admin\ClientConfigProviderInterface;
+use Ixocreate\Admin\UserInterface;
 
 final class ClientConfigGenerator
 {

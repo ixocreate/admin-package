@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Api\Config;
+namespace Ixocreate\Package\Admin\Action\Api\Config;
 
-use Ixocreate\Admin\Config\Client\ClientConfigGenerator;
-use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Package\Admin\Config\Client\ClientConfigGenerator;
+use Ixocreate\Package\Admin\Entity\User;
+use Ixocreate\Package\Admin\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

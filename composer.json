@@ -1,6 +1,6 @@
 {
-    "name": "ixocreate/admin",
-    "description": "IXOCREATE Admin",
+    "name": "ixocreate/admin-package",
+    "description": "IXOCREATE Admin Package",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -15,39 +15,24 @@
         "ext-json": "*",
         "dflydev/fig-cookies": "^1.0",
         "firebase/php-jwt": "^5.0",
-        "ixocreate/admin-frontend": "dev-develop",
-        "ixocreate/application-http": "dev-develop",
-        "ixocreate/asset": "dev-develop",
-        "ixocreate/command-bus": "dev-develop",
-        "ixocreate/common-types": "dev-develop",
-        "ixocreate/config": "dev-develop",
-        "ixocreate/database": "dev-develop",
-        "ixocreate/entity": "dev-develop",
-        "ixocreate/event": "dev-develop",
-        "ixocreate/intl": "dev-develop",
-        "ixocreate/media-contract": "dev-develop",
-        "ixocreate/resource": "dev-develop",
-        "ixocreate/schema": "dev-develop",
-        "ixocreate/servicemanager": "dev-develop",
-        "ixocreate/template": "dev-develop",
+        "ixocreate/application": "dev-consolidate",
         "ramsey/uuid": "^3.7",
         "yzalis/identicon": "^1.2",
-        "swiftmailer/swiftmailer": "^6.0"
     },
     "require-dev": {
-        "ixocreate/coding-standard": "^1.0.1",
+        "ixocreate/coding-standard": "^1.0",
         "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpunit": "^7.0"
     },
     "autoload": {
         "psr-4": {
-            "Ixocreate\\Admin\\": "src/"
+            "Ixocreate\\Package\\Admin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "IxocreateTest\\Admin\\": "tests/src/",
-            "IxocreateMisc\\Admin\\": "tests/misc/"
+            "Ixocreate\\Test\\Admin\\": "tests/src/",
+            "Ixocreate\\Misc\\Admin\\": "tests/misc/"
         }
     },
     "config": {

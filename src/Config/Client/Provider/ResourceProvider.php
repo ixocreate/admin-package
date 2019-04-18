@@ -7,24 +7,24 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Config\Client\Provider;
+namespace Ixocreate\Package\Admin\Config\Client\Provider;
 
-use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\Resource\AdditionalSchemasInterface;
-use Ixocreate\Contract\Admin\Resource\Permission\CanCreateInterface;
-use Ixocreate\Contract\Admin\Resource\Permission\CanDeleteInterface;
-use Ixocreate\Contract\Admin\Resource\Permission\CanEditInterface;
-use Ixocreate\Contract\Admin\Resource\Permission\CanViewInterface;
-use Ixocreate\Contract\Admin\Resource\Schema\CreateSchemaAwareInterface;
-use Ixocreate\Contract\Admin\Resource\Schema\ListSchemaAwareInterface;
-use Ixocreate\Contract\Admin\Resource\Schema\UpdateSchemaAwareInterface;
-use Ixocreate\Contract\Admin\UserInterface;
-use Ixocreate\Contract\Resource\ResourceInterface;
-use Ixocreate\Contract\Schema\SchemaAwareInterface;
-use Ixocreate\Resource\SubManager\ResourceSubManager;
-use Ixocreate\Schema\Builder;
-use Ixocreate\Schema\Listing\ListSchema;
-use Ixocreate\Schema\Schema;
+use Ixocreate\Admin\ClientConfigProviderInterface;
+use Ixocreate\Admin\Resource\AdditionalSchemasInterface;
+use Ixocreate\Admin\Resource\Permission\CanCreateInterface;
+use Ixocreate\Admin\Resource\Permission\CanDeleteInterface;
+use Ixocreate\Admin\Resource\Permission\CanEditInterface;
+use Ixocreate\Admin\Resource\Permission\CanViewInterface;
+use Ixocreate\Admin\Resource\Schema\CreateSchemaAwareInterface;
+use Ixocreate\Admin\Resource\Schema\ListSchemaAwareInterface;
+use Ixocreate\Admin\Resource\Schema\UpdateSchemaAwareInterface;
+use Ixocreate\Admin\UserInterface;
+use Ixocreate\Package\Resource\ResourceInterface;
+use Ixocreate\Package\Schema\SchemaAwareInterface;
+use Ixocreate\Package\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Package\Schema\Builder;
+use Ixocreate\Package\Schema\Listing\ListSchema;
+use Ixocreate\Package\Schema\Schema;
 
 final class ResourceProvider implements ClientConfigProviderInterface
 {

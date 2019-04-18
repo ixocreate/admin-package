@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Router\Factory;
+namespace Ixocreate\Package\Admin\Router\Factory;
 
-use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Router\AdminRouter;
-use Ixocreate\Contract\ServiceManager\FactoryInterface;
-use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Package\Admin\Router\AdminRouter;
+use Ixocreate\ServiceManager\FactoryInterface;
+use Ixocreate\ServiceManager\ServiceManagerInterface;
 
 final class AdminRouterFactory implements FactoryInterface
 {

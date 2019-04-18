@@ -7,16 +7,16 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Api\User;
+namespace Ixocreate\Package\Admin\Action\Api\User;
 
 use Doctrine\Common\Collections\Criteria;
-use Ixocreate\Admin\Repository\UserRepository;
-use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Contract\Schema\ElementInterface;
-use Ixocreate\Entity\Entity\EntityInterface;
-use Ixocreate\Schema\Listing\DateTimeElement;
-use Ixocreate\Schema\Listing\ListSchema;
-use Ixocreate\Schema\Listing\TextElement;
+use Ixocreate\Package\Admin\Repository\UserRepository;
+use Ixocreate\Package\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Package\Schema\ElementInterface;
+use Ixocreate\Package\Entity\Entity\EntityInterface;
+use Ixocreate\Package\Schema\Listing\DateTimeElement;
+use Ixocreate\Package\Schema\Listing\ListSchema;
+use Ixocreate\Package\Schema\Listing\TextElement;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
