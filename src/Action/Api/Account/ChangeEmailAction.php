@@ -7,12 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Action\Account;
+namespace Ixocreate\Admin\Package\Action\Account;
 
-use Ixocreate\Package\Admin\Command\Account\ChangeEmailCommand;
-use Ixocreate\Package\Admin\Entity\User;
-use Ixocreate\Package\Admin\Response\ApiErrorResponse;
-use Ixocreate\Package\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Package\Command\Account\ChangeEmailCommand;
+use Ixocreate\Admin\Package\Entity\User;
+use Ixocreate\Admin\Package\Response\ApiErrorResponse;
+use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
 use Ixocreate\CommandBus\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

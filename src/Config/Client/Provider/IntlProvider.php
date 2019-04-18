@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Config\Client\Provider;
+namespace Ixocreate\Admin\Package\Config\Client\Provider;
 
 use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\UserInterface;
-use Ixocreate\Package\Intl\LocaleManager;
+use Ixocreate\Intl\Package\LocaleManager;
 
 final class IntlProvider implements ClientConfigProviderInterface
 {

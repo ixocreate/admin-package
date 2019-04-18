@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Action\Api\Session;
+namespace Ixocreate\Admin\Package\Action\Api\Session;
 
-use Ixocreate\Package\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

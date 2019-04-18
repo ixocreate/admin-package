@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin;
+namespace Ixocreate\Admin\Package;
 
-use Ixocreate\Package\Admin\Type\RoleType;
-use Ixocreate\Package\Admin\Type\StatusType;
-use Ixocreate\Package\Entity\Type\TypeConfigurator;
+use Ixocreate\Admin\Package\Type\RoleType;
+use Ixocreate\Admin\Package\Type\StatusType;
+use Ixocreate\Entity\Package\Type\TypeConfigurator;
 
 /** @var TypeConfigurator $type */
 

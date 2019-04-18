@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Helper\Factory;
+namespace Ixocreate\Admin\Package\Helper\Factory;
 
-use Ixocreate\Package\Admin\Helper\UrlHelper;
-use Ixocreate\Package\Admin\Router\AdminRouter;
+use Ixocreate\Admin\Package\Helper\UrlHelper;
+use Ixocreate\Admin\Package\Router\AdminRouter;
 use Ixocreate\ServiceManager\FactoryInterface;
 use Ixocreate\ServiceManager\ServiceManagerInterface;
 

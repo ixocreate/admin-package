@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Config\Navigation;
+namespace Ixocreate\Admin\Package\Config\Navigation;
 
 class SubItem
 {

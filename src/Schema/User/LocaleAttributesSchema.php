@@ -7,16 +7,16 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Schema\User;
+namespace Ixocreate\Admin\Package\Schema\User;
 
 use DateTimeZone;
-use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Package\Config\AdminConfig;
 use Ixocreate\Collection\Collection;
-use Ixocreate\Package\Schema\AdditionalSchemaInterface;
-use Ixocreate\Package\Schema\BuilderInterface;
-use Ixocreate\Package\Schema\SchemaInterface;
-use Ixocreate\Package\Schema\Elements\SelectElement;
-use Ixocreate\Package\Schema\Schema;
+use Ixocreate\Schema\Package\AdditionalSchemaInterface;
+use Ixocreate\Schema\Package\BuilderInterface;
+use Ixocreate\Schema\Package\SchemaInterface;
+use Ixocreate\Schema\Package\Elements\SelectElement;
+use Ixocreate\Schema\Package\Schema;
 
 final class LocaleAttributesSchema implements AdditionalSchemaInterface
 {

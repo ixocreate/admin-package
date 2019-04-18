@@ -7,13 +7,13 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Action\Api\User;
+namespace Ixocreate\Admin\Package\Action\Api\User;
 
-use Ixocreate\Package\Admin\Command\User\UpdateUserCommand;
-use Ixocreate\Package\Admin\Entity\User;
-use Ixocreate\Package\Admin\Repository\UserRepository;
-use Ixocreate\Package\Admin\Response\ApiErrorResponse;
-use Ixocreate\Package\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Package\Command\User\UpdateUserCommand;
+use Ixocreate\Admin\Package\Entity\User;
+use Ixocreate\Admin\Package\Repository\UserRepository;
+use Ixocreate\Admin\Package\Response\ApiErrorResponse;
+use Ixocreate\Admin\Package\Response\ApiSuccessResponse;
 use Ixocreate\CommandBus\CommandBus;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

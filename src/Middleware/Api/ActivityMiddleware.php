@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Middleware\Api;
+namespace Ixocreate\Admin\Package\Middleware\Api;
 
-use Ixocreate\Package\Admin\Entity\User;
-use Ixocreate\Package\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Package\Entity\User;
+use Ixocreate\Admin\Package\Repository\UserRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

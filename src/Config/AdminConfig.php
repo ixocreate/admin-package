@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Config;
+namespace Ixocreate\Admin\Package\Config;
 
-use Ixocreate\Package\Asset\Asset;
+use Ixocreate\Asset\Package\Asset;
 use Ixocreate\Http\SegmentProviderInterface;
 use Psr\Http\Message\UriInterface;
 

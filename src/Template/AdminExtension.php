@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Template;
+namespace Ixocreate\Admin\Package\Template;
 
-use Ixocreate\Package\Admin\Config\AdminConfig;
-use Ixocreate\Package\Admin\Router\AdminRouter;
+use Ixocreate\Admin\Package\Config\AdminConfig;
+use Ixocreate\Admin\Package\Router\AdminRouter;
 use Ixocreate\Template\ExtensionInterface;
 use PackageVersions\Versions;
 

@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin;
+namespace Ixocreate\Admin\Package;
 
-use Ixocreate\Package\Admin\Config\Client\Provider\IntlProvider;
-use Ixocreate\Package\Admin\Config\Client\Provider\NavigationProvider;
-use Ixocreate\Package\Admin\Config\Client\Provider\ProjectProvider;
-use Ixocreate\Package\Admin\Config\Client\Provider\ResourceProvider;
-use Ixocreate\Package\Admin\Config\Client\Provider\RoutesProvider;
-use Ixocreate\Package\Admin\Role\AdministratorRole;
+use Ixocreate\Admin\Package\Config\Client\Provider\IntlProvider;
+use Ixocreate\Admin\Package\Config\Client\Provider\NavigationProvider;
+use Ixocreate\Admin\Package\Config\Client\Provider\ProjectProvider;
+use Ixocreate\Admin\Package\Config\Client\Provider\ResourceProvider;
+use Ixocreate\Admin\Package\Config\Client\Provider\RoutesProvider;
+use Ixocreate\Admin\Package\Role\AdministratorRole;
 
-/** @var \Ixocreate\Package\Admin\Config\AdminConfigurator $admin */
+/** @var \Ixocreate\Admin\Package\Config\AdminConfigurator $admin */
 
 $admin->addRole(AdministratorRole::class);
 

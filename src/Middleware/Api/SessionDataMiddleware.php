@@ -7,11 +7,11 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Middleware\Api;
+namespace Ixocreate\Admin\Package\Middleware\Api;
 
 use Firebase\JWT\JWT;
-use Ixocreate\Package\Admin\Config\AdminConfig;
-use Ixocreate\Package\Admin\Entity\SessionData;
+use Ixocreate\Admin\Package\Config\AdminConfig;
+use Ixocreate\Admin\Package\Entity\SessionData;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

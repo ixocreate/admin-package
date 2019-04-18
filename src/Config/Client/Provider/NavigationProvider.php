@@ -7,10 +7,10 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Config\Client\Provider;
+namespace Ixocreate\Admin\Package\Config\Client\Provider;
 
-use Ixocreate\Package\Admin\Config\AdminConfig;
-use Ixocreate\Package\Admin\Permission\Permission;
+use Ixocreate\Admin\Package\Config\AdminConfig;
+use Ixocreate\Admin\Package\Permission\Permission;
 use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\UserInterface;
 

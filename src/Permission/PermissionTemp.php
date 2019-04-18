@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Permission;
+namespace Ixocreate\Admin\Package\Permission;
 
 use Ixocreate\Admin\RoleInterface;
 

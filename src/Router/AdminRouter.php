@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Router;
+namespace Ixocreate\Admin\Package\Router;
 
-use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Package\Config\AdminConfig;
 use Zend\Expressive\Router\FastRouteRouter;
 
 final class AdminRouter extends FastRouteRouter

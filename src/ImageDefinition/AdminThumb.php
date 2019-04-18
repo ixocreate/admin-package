@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\ImageDefinition;
+namespace Ixocreate\Admin\Package\ImageDefinition;
 
-use Ixocreate\Package\Media\ImageDefinitionInterface;
+use Ixocreate\Media\Package\ImageDefinitionInterface;
 
 final class AdminThumb implements ImageDefinitionInterface
 {

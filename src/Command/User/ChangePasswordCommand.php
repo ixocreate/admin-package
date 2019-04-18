@@ -7,18 +7,18 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Command\User;
+namespace Ixocreate\Admin\Package\Command\User;
 
-use Ixocreate\Package\Admin\Config\AdminConfig;
-use Ixocreate\Package\Admin\Entity\User;
-use Ixocreate\Package\Admin\Event\UserEvent;
-use Ixocreate\Package\Admin\Repository\UserRepository;
-use Ixocreate\Package\CommandBus\Command\AbstractCommand;
+use Ixocreate\Admin\Package\Config\AdminConfig;
+use Ixocreate\Admin\Package\Entity\User;
+use Ixocreate\Admin\Package\Event\UserEvent;
+use Ixocreate\Admin\Package\Repository\UserRepository;
+use Ixocreate\CommandBus\Package\Command\AbstractCommand;
 use Ixocreate\Admin\UserInterface;
-use Ixocreate\Package\Filter\FilterableInterface;
+use Ixocreate\Filter\Package\FilterableInterface;
 use Ixocreate\Validation\ValidatableInterface;
 use Ixocreate\Validation\ViolationCollectorInterface;
-use Ixocreate\Package\Event\EventDispatcher;
+use Ixocreate\Event\Package\EventDispatcher;
 
 class ChangePasswordCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {

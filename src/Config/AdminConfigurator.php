@@ -7,19 +7,19 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Config;
+namespace Ixocreate\Admin\Package\Config;
 
-use Ixocreate\Package\Admin\Config\Client\ClientConfigProviderSubManager;
-use Ixocreate\Package\Admin\Config\Navigation\Group;
-use Ixocreate\Package\Admin\Role\RoleSubManager;
-use Ixocreate\Package\Admin\Schema\User\LocaleAttributesSchema;
-use Ixocreate\Package\Admin\Widget\DashboardWidgetProviderSubManager;
+use Ixocreate\Admin\Package\Config\Client\ClientConfigProviderSubManager;
+use Ixocreate\Admin\Package\Config\Navigation\Group;
+use Ixocreate\Admin\Package\Role\RoleSubManager;
+use Ixocreate\Admin\Package\Schema\User\LocaleAttributesSchema;
+use Ixocreate\Admin\Package\Widget\DashboardWidgetProviderSubManager;
 use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderInterface;
 use Ixocreate\Application\ConfiguratorInterface;
 use Ixocreate\Application\ServiceRegistryInterface;
-use Ixocreate\Package\Schema\AdditionalSchemaInterface;
-use Ixocreate\Package\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\Package\AdditionalSchemaInterface;
+use Ixocreate\Schema\Package\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\ServiceManager\Factory\AutowireFactory;
 use Ixocreate\ServiceManager\SubManager\SubManagerConfigurator;
 use Zend\Stdlib\SplPriorityQueue;

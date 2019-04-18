@@ -7,18 +7,18 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Command\User;
+namespace Ixocreate\Admin\Package\Command\User;
 
-use Ixocreate\Package\Admin\Config\AdminConfig;
-use Ixocreate\Package\Admin\Entity\User;
-use Ixocreate\Package\Admin\Event\UserEvent;
-use Ixocreate\Package\Admin\Repository\UserRepository;
-use Ixocreate\Package\CommandBus\Command\AbstractCommand;
-use Ixocreate\Package\Type\Entity\SchemaType;
-use Ixocreate\Package\Schema\AdditionalSchemaInterface;
-use Ixocreate\Package\Entity\Type\Type;
-use Ixocreate\Package\Event\EventDispatcher;
-use Ixocreate\Package\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Admin\Package\Config\AdminConfig;
+use Ixocreate\Admin\Package\Entity\User;
+use Ixocreate\Admin\Package\Event\UserEvent;
+use Ixocreate\Admin\Package\Repository\UserRepository;
+use Ixocreate\CommandBus\Package\Command\AbstractCommand;
+use Ixocreate\Type\Package\Entity\SchemaType;
+use Ixocreate\Schema\Package\AdditionalSchemaInterface;
+use Ixocreate\Entity\Package\Type\Type;
+use Ixocreate\Event\Package\EventDispatcher;
+use Ixocreate\Schema\Package\AdditionalSchema\AdditionalSchemaSubManager;
 
 class UpdateUserCommand extends AbstractCommand
 {

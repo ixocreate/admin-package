@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin;
+namespace Ixocreate\Admin\Package;
 
 use Ixocreate\Application\Console\ConsoleConfigurator;
 

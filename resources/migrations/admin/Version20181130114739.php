@@ -5,7 +5,7 @@ namespace Ixocreate\Migration;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
-use Ixocreate\Package\Type\Entity\SchemaType;
+use Ixocreate\Type\Package\Entity\SchemaType;
 
 final class Version20181130114739 extends AbstractMigration
 {

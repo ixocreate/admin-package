@@ -7,16 +7,16 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Command\Account;
+namespace Ixocreate\Admin\Package\Command\Account;
 
 use Doctrine\Common\Collections\Criteria;
-use Ixocreate\Package\Admin\Repository\UserRepository;
-use Ixocreate\Package\CommandBus\Command\AbstractCommand;
-use Ixocreate\Package\Type\Entity\EmailType;
-use Ixocreate\Package\Filter\FilterableInterface;
-use Ixocreate\Package\Validation\ValidatableInterface;
-use Ixocreate\Package\Validation\ViolationCollectorInterface;
-use Ixocreate\Package\Entity\Type\Type;
+use Ixocreate\Admin\Package\Repository\UserRepository;
+use Ixocreate\CommandBus\Package\Command\AbstractCommand;
+use Ixocreate\Type\Package\Entity\EmailType;
+use Ixocreate\Filter\Package\FilterableInterface;
+use Ixocreate\Validation\Package\ValidatableInterface;
+use Ixocreate\Validation\Package\ViolationCollectorInterface;
+use Ixocreate\Entity\Package\Type\Type;
 
 final class ChangeEmailCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {

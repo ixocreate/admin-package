@@ -10,8 +10,8 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Resource\Schema;
 
 use Ixocreate\Admin\UserInterface;
-use Ixocreate\Package\Schema\BuilderInterface;
-use Ixocreate\Package\Schema\SchemaInterface;
+use Ixocreate\Schema\Package\BuilderInterface;
+use Ixocreate\Schema\Package\SchemaInterface;
 
 interface UpdateSchemaAwareInterface
 {

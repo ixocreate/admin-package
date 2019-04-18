@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Config\Client;
+namespace Ixocreate\Admin\Package\Config\Client;
 
 use Ixocreate\ServiceManager\SubManager\SubManager;
 

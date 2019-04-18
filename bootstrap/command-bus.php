@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin;
+namespace Ixocreate\Admin\Package;
 
-/** @var \Ixocreate\Package\CommandBus\Configurator $commandBus */
+/** @var \Ixocreate\CommandBus\Package\Configurator $commandBus */
 
 $commandBus->addCommandDirectory(__DIR__ . '/../src/Command', true);

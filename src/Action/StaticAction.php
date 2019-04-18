@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Action;
+namespace Ixocreate\Admin\Package\Action;
 
-use Ixocreate\Package\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Package\Config\AdminConfig;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

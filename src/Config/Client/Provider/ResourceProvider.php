@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Config\Client\Provider;
+namespace Ixocreate\Admin\Package\Config\Client\Provider;
 
 use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\Resource\AdditionalSchemasInterface;
@@ -19,12 +19,12 @@ use Ixocreate\Admin\Resource\Schema\CreateSchemaAwareInterface;
 use Ixocreate\Admin\Resource\Schema\ListSchemaAwareInterface;
 use Ixocreate\Admin\Resource\Schema\UpdateSchemaAwareInterface;
 use Ixocreate\Admin\UserInterface;
-use Ixocreate\Package\Resource\ResourceInterface;
-use Ixocreate\Package\Schema\SchemaAwareInterface;
-use Ixocreate\Package\Resource\SubManager\ResourceSubManager;
-use Ixocreate\Package\Schema\Builder;
-use Ixocreate\Package\Schema\Listing\ListSchema;
-use Ixocreate\Package\Schema\Schema;
+use Ixocreate\Resource\Package\ResourceInterface;
+use Ixocreate\Schema\Package\SchemaAwareInterface;
+use Ixocreate\Resource\Package\SubManager\ResourceSubManager;
+use Ixocreate\Schema\Package\Builder;
+use Ixocreate\Schema\Package\Listing\ListSchema;
+use Ixocreate\Schema\Package\Schema;
 
 final class ResourceProvider implements ClientConfigProviderInterface
 {

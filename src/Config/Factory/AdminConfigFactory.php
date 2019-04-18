@@ -7,15 +7,15 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Package\Admin\Config\Factory;
+namespace Ixocreate\Admin\Package\Config\Factory;
 
-use Ixocreate\Package\Admin\Config\AdminConfig;
-use Ixocreate\Package\Admin\Config\AdminProjectConfig;
-use Ixocreate\Package\Asset\Asset;
+use Ixocreate\Admin\Package\Config\AdminConfig;
+use Ixocreate\Admin\Package\Config\AdminProjectConfig;
+use Ixocreate\Asset\Package\Asset;
 use Ixocreate\Config\Config;
 use Ixocreate\ServiceManager\FactoryInterface;
 use Ixocreate\ServiceManager\ServiceManagerInterface;
-use Ixocreate\Package\ProjectUri\ProjectUri;
+use Ixocreate\Application\Uri\ApplicationUri;
 use Zend\Diactoros\Uri;
 
 final class AdminConfigFactory implements FactoryInterface
@@ -35,8 +35,8 @@ final class AdminConfigFactory implements FactoryInterface
 
         $uri = new Uri($config->get("admin.uri"));
         if (empty($uri->getHost())) {
-            /** @var ProjectUri $projectUri */
-            $projectUri = $container->get(ProjectUri::class);
+            /** @var ApplicationUri $projectUri */
+            $projectUri = $container->get(ApplicationUri::class);
 
             $uri = $uri->withPath($projectUri->getMainUri()->getPath() . '/' . $uri->getPath());
             $uri = $uri->withHost($projectUri->getMainUri()->getHost());
