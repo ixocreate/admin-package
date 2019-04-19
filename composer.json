@@ -17,6 +17,8 @@
         "firebase/php-jwt": "^5.0",
         "ixocreate/application": "^0.1",
         "ixocreate/admin-frontend": "^0.1",
+        "ixocreate/command-bus-package": "^0.1",
+        "ixocreate/database-package": "^0.1",
         "ramsey/uuid": "^3.7",
         "yzalis/identicon": "^1.2"
     },
