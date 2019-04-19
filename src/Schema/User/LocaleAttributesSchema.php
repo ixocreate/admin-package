@@ -14,9 +14,9 @@ use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Collection\Collection;
 use Ixocreate\Schema\AdditionalSchemaInterface;
 use Ixocreate\Schema\BuilderInterface;
-use Ixocreate\Schema\SchemaInterface;
 use Ixocreate\Schema\Elements\SelectElement;
 use Ixocreate\Schema\Schema;
+use Ixocreate\Schema\SchemaInterface;
 
 final class LocaleAttributesSchema implements AdditionalSchemaInterface
 {

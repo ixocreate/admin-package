@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config\Client;
 
-use Ixocreate\Admin\Config\AdminProjectConfig;
 use Ixocreate\Admin\ClientConfigProviderInterface;
+use Ixocreate\Admin\Config\AdminProjectConfig;
 use Ixocreate\Admin\UserInterface;
 
 final class ClientConfigGenerator

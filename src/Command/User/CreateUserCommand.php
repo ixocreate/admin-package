@@ -17,15 +17,15 @@ use Ixocreate\Admin\Event\UserEvent;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\Type\Entity\EmailType;
-use Ixocreate\Type\Entity\SchemaType;
 use Ixocreate\CommandBus\CommandInterface;
-use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Validation\ValidatableInterface;
-use Ixocreate\Validation\ViolationCollectorInterface;
 use Ixocreate\Entity\Type\Type;
 use Ixocreate\Event\EventDispatcher;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\AdditionalSchemaInterface;
+use Ixocreate\Type\Entity\EmailType;
+use Ixocreate\Type\Entity\SchemaType;
+use Ixocreate\Validation\ValidatableInterface;
+use Ixocreate\Validation\ViolationCollectorInterface;
 
 final class CreateUserCommand extends AbstractCommand implements CommandInterface, ValidatableInterface
 {

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
+
 declare(strict_types=1);
 
 namespace Ixocreate\Admin;
@@ -18,7 +24,6 @@ use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
 use Ixocreate\Application\Service\ServiceManagerConfigurator;
 
 /** @var ServiceManagerConfigurator $serviceManager */
-
 $serviceManager->addFactory(AdminConfig::class, AdminConfigFactory::class);
 $serviceManager->addFactory(AdminRouter::class, AdminRouterFactory::class);
 $serviceManager->addFactory(ServerUrlHelper::class, ServerUrlHelperFactory::class);

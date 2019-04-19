@@ -9,12 +9,12 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config\Client\Provider;
 
+use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\UserInterface;
 use Ixocreate\Application\Http\Pipe\Config\SegmentConfig;
 use Ixocreate\Application\Http\Pipe\Config\SegmentPipeConfig;
 use Ixocreate\Application\Http\Pipe\PipeConfig;
-use Ixocreate\Admin\ClientConfigProviderInterface;
-use Ixocreate\Admin\UserInterface;
 
 final class RoutesProvider implements ClientConfigProviderInterface
 {

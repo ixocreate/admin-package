@@ -12,12 +12,12 @@ namespace Ixocreate\Admin\Type;
 use Doctrine\DBAL\Types\StringType;
 use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\Admin\RoleInterface;
+use Ixocreate\Entity\Type\AbstractType;
 use Ixocreate\Schema\BuilderInterface;
 use Ixocreate\Schema\ElementInterface;
 use Ixocreate\Schema\ElementProviderInterface;
-use Ixocreate\Type\DatabaseTypeInterface;
-use Ixocreate\Entity\Type\AbstractType;
 use Ixocreate\Schema\Elements\SelectElement;
+use Ixocreate\Type\DatabaseTypeInterface;
 
 final class RoleType extends AbstractType implements DatabaseTypeInterface, ElementProviderInterface
 {
