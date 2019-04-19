@@ -15,7 +15,7 @@
         "ext-json": "*",
         "dflydev/fig-cookies": "^1.0",
         "firebase/php-jwt": "^5.0",
-        "ixocreate/application": "dev-consolidate",
+        "ixocreate/application": "dev-develop",
         "ixocreate/admin-frontend": "dev-develop",
         "ramsey/uuid": "^3.7",
         "yzalis/identicon": "^1.2"
