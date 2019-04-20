@@ -11,11 +11,11 @@ namespace Ixocreate\Admin\Config\Factory;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Config\AdminProjectConfig;
-use Ixocreate\Asset\Asset;
 use Ixocreate\Application\Config\Config;
+use Ixocreate\Application\Uri\ApplicationUri;
+use Ixocreate\Asset\Asset;
 use Ixocreate\ServiceManager\FactoryInterface;
 use Ixocreate\ServiceManager\ServiceManagerInterface;
-use Ixocreate\Application\Uri\ApplicationUri;
 use Zend\Diactoros\Uri;
 
 final class AdminConfigFactory implements FactoryInterface

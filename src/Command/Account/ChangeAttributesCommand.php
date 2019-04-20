@@ -13,10 +13,10 @@ use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\Type\Entity\SchemaType;
-use Ixocreate\Schema\AdditionalSchemaInterface;
 use Ixocreate\Entity\Type\Type;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\AdditionalSchemaInterface;
+use Ixocreate\Type\Entity\SchemaType;
 
 class ChangeAttributesCommand extends AbstractCommand
 {

@@ -10,13 +10,13 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Resource\Action\DetailActionAwareInterface;
 use Ixocreate\Admin\Response\ApiDetailResponse;
 use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
-use Ixocreate\Admin\Resource\Action\DetailActionAwareInterface;
-use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
 use Ixocreate\Database\Repository\RepositoryInterface;
 use Ixocreate\Entity\EntityInterface;
+use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Resource\ResourceSubManager;
 use Ixocreate\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;

@@ -15,13 +15,19 @@
         "ext-json": "*",
         "dflydev/fig-cookies": "^1.0",
         "firebase/php-jwt": "^5.0",
-        "ixocreate/application": "dev-develop",
-        "ixocreate/admin-frontend": "dev-develop",
+        "ixocreate/application": "^0.1",
+        "ixocreate/admin-frontend": "^0.1",
+        "ixocreate/command-bus-package": "^0.1",
+        "ixocreate/database-package": "^0.1",
+        "ixocreate/event-package": "^0.1",
+        "ixocreate/filter-package": "^0.1",
+        "ixocreate/intl-package": "^0.1",
+        "ixocreate/template-package": "^0.1",
         "ramsey/uuid": "^3.7",
         "yzalis/identicon": "^1.2"
     },
     "require-dev": {
-        "ixocreate/coding-standard": "^1.0",
+        "ixocreate/coding-standard": "^2.0",
         "php-coveralls/php-coveralls": "^2.1",
         "phpunit/phpunit": "^7.0"
     },

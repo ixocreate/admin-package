@@ -10,8 +10,6 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Resource\Widgets;
 
 use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Admin\Widget\WidgetCollector;
 use Ixocreate\Admin\Resource\WidgetPosition\AboveCreateWidgetInterface;
 use Ixocreate\Admin\Resource\WidgetPosition\AboveEditWidgetInterface;
 use Ixocreate\Admin\Resource\WidgetPosition\AboveListWidgetInterface;
@@ -19,6 +17,8 @@ use Ixocreate\Admin\Resource\WidgetPosition\BelowCreateWidgetInterface;
 use Ixocreate\Admin\Resource\WidgetPosition\BelowEditWidgetInterface;
 use Ixocreate\Admin\Resource\WidgetPosition\BelowListWidgetInterface;
 use Ixocreate\Admin\Resource\Widgets\WidgetsInterface;
+use Ixocreate\Admin\Response\ApiSuccessResponse;
+use Ixocreate\Admin\Widget\WidgetCollector;
 use Ixocreate\Resource\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

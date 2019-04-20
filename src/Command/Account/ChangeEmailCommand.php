@@ -12,11 +12,11 @@ namespace Ixocreate\Admin\Command\Account;
 use Doctrine\Common\Collections\Criteria;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\Type\Entity\EmailType;
+use Ixocreate\Entity\Type\Type;
 use Ixocreate\Filter\FilterableInterface;
+use Ixocreate\Type\Entity\EmailType;
 use Ixocreate\Validation\ValidatableInterface;
 use Ixocreate\Validation\ViolationCollectorInterface;
-use Ixocreate\Entity\Type\Type;
 
 final class ChangeEmailCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {

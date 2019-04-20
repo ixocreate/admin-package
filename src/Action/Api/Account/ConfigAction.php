@@ -11,8 +11,8 @@ namespace Ixocreate\Admin\Action\Account;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Schema\AdditionalSchemaInterface;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\AdditionalSchemaInterface;
 use Ixocreate\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

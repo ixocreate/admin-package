@@ -10,8 +10,8 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Response\ApiDetailResponse;
 use Ixocreate\Admin\Resource\DefaultValueInterface;
+use Ixocreate\Admin\Response\ApiDetailResponse;
 use Ixocreate\Resource\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

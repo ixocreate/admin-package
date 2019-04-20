@@ -13,12 +13,12 @@ use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Event\UserEvent;
 use Ixocreate\Admin\Repository\UserRepository;
-use Ixocreate\CommandBus\Command\AbstractCommand;
 use Ixocreate\Admin\UserInterface;
+use Ixocreate\CommandBus\Command\AbstractCommand;
+use Ixocreate\Event\EventDispatcher;
 use Ixocreate\Filter\FilterableInterface;
 use Ixocreate\Validation\ValidatableInterface;
 use Ixocreate\Validation\ViolationCollectorInterface;
-use Ixocreate\Event\EventDispatcher;
 
 class ChangePasswordCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {

@@ -10,12 +10,12 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Type;
 
 use Doctrine\DBAL\Types\StringType;
+use Ixocreate\Entity\Type\AbstractType;
 use Ixocreate\Schema\BuilderInterface;
 use Ixocreate\Schema\ElementInterface;
 use Ixocreate\Schema\ElementProviderInterface;
-use Ixocreate\Type\DatabaseTypeInterface;
-use Ixocreate\Entity\Type\AbstractType;
 use Ixocreate\Schema\Elements\SelectElement;
+use Ixocreate\Type\DatabaseTypeInterface;
 
 final class StatusType extends AbstractType implements DatabaseTypeInterface, ElementProviderInterface
 {

@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config;
 
-use Ixocreate\Asset\Asset;
 use Ixocreate\Application\Http\SegmentProviderInterface;
+use Ixocreate\Asset\Asset;
 use Psr\Http\Message\UriInterface;
 
 final class AdminConfig implements SegmentProviderInterface

@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOCREATE GmbH
+ * @license MIT License
+ */
+
 declare(strict_types=1);
 
 namespace Ixocreate\Admin;
@@ -11,7 +17,6 @@ use Ixocreate\Admin\Config\Client\Provider\RoutesProvider;
 use Ixocreate\Admin\Role\AdministratorRole;
 
 /** @var AdminConfigurator $admin */
-
 $admin->addRole(AdministratorRole::class);
 
 $admin->addClientProvider(ProjectProvider::class);
@@ -23,7 +28,7 @@ $admin->addClientProvider(ResourceProvider::class);
 $admin->setName("IXOCREATE");
 $admin->setAuthor("IXOLIT GmbH");
 $admin->setDescription("IXOCREATE");
-$admin->setCopyright(date("Y"));
+$admin->setCopyright(\date("Y"));
 $admin->setPoweredBy(true);
 
 $admin->setDefaultLocale('en_US');
