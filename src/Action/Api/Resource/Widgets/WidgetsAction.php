@@ -9,23 +9,21 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Resource\Widgets;
 
-use Ixocreate\Admin\Dashboard\DashboardWidgetCollector;
-use Ixocreate\Admin\Dashboard\DashboardWidgetProviderSubManager;
 use Ixocreate\Admin\Entity\User;
-use Ixocreate\Admin\Repository\UserRepository;
+use Ixocreate\Admin\Resource\WidgetPosition\AboveCreateWidgetInterface;
+use Ixocreate\Admin\Resource\WidgetPosition\AboveEditWidgetInterface;
+use Ixocreate\Admin\Resource\WidgetPosition\AboveListWidgetInterface;
+use Ixocreate\Admin\Resource\WidgetPosition\BelowCreateWidgetInterface;
+use Ixocreate\Admin\Resource\WidgetPosition\BelowEditWidgetInterface;
+use Ixocreate\Admin\Resource\WidgetPosition\BelowListWidgetInterface;
+use Ixocreate\Admin\Resource\Widgets\WidgetsInterface;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Contract\Resource\Widgets\Positions\AboveCreateWidgetsInterface;
-use Ixocreate\Contract\Resource\Widgets\Positions\AboveEditWidgetsInterface;
-use Ixocreate\Contract\Resource\Widgets\Positions\AboveListWidgetsInterface;
-use Ixocreate\Contract\Resource\Widgets\Positions\BelowCreateWidgetsInterface;
-use Ixocreate\Contract\Resource\Widgets\Positions\BelowEditWidgetsInterface;
-use Ixocreate\Contract\Resource\Widgets\Positions\BelowListWidgetsInterface;
-use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Admin\Widget\WidgetCollector;
+use Ixocreate\Resource\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Ixocreate\Contract\Resource\Widgets\WidgetsInterface;
 
 class WidgetsAction implements MiddlewareInterface
 {
@@ -35,22 +33,12 @@ class WidgetsAction implements MiddlewareInterface
     private $resourceSubManager;
 
     /**
-     * @var DashboardWidgetProviderSubManager
-     */
-    private $dashboardWidgetSubManager;
-
-    private $userRepository;
-
-    /**
      * WidgetsAction constructor.
      * @param ResourceSubManager $resourceSubManager
-     * @param DashboardWidgetProviderSubManager $dashboardWidgetSubManager
      */
-    public function __construct(ResourceSubManager $resourceSubManager, DashboardWidgetProviderSubManager $dashboardWidgetSubManager, UserRepository $userRepository)
+    public function __construct(ResourceSubManager $resourceSubManager)
     {
         $this->resourceSubManager = $resourceSubManager;
-        $this->dashboardWidgetSubManager = $dashboardWidgetSubManager;
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -60,7 +48,7 @@ class WidgetsAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $collector = new DashboardWidgetCollector();
+        $collector = new WidgetCollector();
 
         $user = $request->getAttribute(User::class);
 
@@ -72,26 +60,26 @@ class WidgetsAction implements MiddlewareInterface
 
         switch ($type) {
             case 'list':
-                if ($position === 'above' && $resource instanceof  AboveListWidgetsInterface) {
+                if ($position === 'above' && $resource instanceof  AboveListWidgetInterface) {
                     $resource->receiveAboveListWidgets($user, $collector);
                 }
-                if ($position === 'below' && $resource instanceof BelowListWidgetsInterface) {
-                    $resource->receiveAboveListWidgets($user, $collector);
+                if ($position === 'below' && $resource instanceof BelowListWidgetInterface) {
+                    $resource->receiveBelowListWidgets($user, $collector);
                 }
                 break;
             case 'create':
-                if ($position === 'above' && $resource instanceof AboveCreateWidgetsInterface) {
+                if ($position === 'above' && $resource instanceof AboveCreateWidgetInterface) {
                     $resource->receiveAboveCreateWidgets($user, $collector);
                 }
-                if ($position === 'below' && $resource instanceof BelowCreateWidgetsInterface) {
+                if ($position === 'below' && $resource instanceof BelowCreateWidgetInterface) {
                     $resource->receiveBelowCreateWidgets($user, $collector);
                 }
                 break;
             case 'edit':
-                if ($position === 'above' && $resource instanceof AboveEditWidgetsInterface) {
+                if ($position === 'above' && $resource instanceof AboveEditWidgetInterface) {
                     $resource->receiveAboveEditWidgets($user, $collector, $request->getAttribute('id'));
                 }
-                if ($position === 'below' && $resource instanceof BelowEditWidgetsInterface) {
+                if ($position === 'below' && $resource instanceof BelowEditWidgetInterface) {
                     $resource->receiveBelowEditWidgets($user, $collector, $request->getAttribute('id'));
                 }
                 break;

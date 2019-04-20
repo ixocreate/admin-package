@@ -11,11 +11,11 @@ namespace Ixocreate\Admin\Config\Factory;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Config\AdminProjectConfig;
+use Ixocreate\Application\Config\Config;
+use Ixocreate\Application\Uri\ApplicationUri;
 use Ixocreate\Asset\Asset;
-use Ixocreate\Config\Config;
-use Ixocreate\Contract\ServiceManager\FactoryInterface;
-use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
-use Ixocreate\ProjectUri\ProjectUri;
+use Ixocreate\ServiceManager\FactoryInterface;
+use Ixocreate\ServiceManager\ServiceManagerInterface;
 use Zend\Diactoros\Uri;
 
 final class AdminConfigFactory implements FactoryInterface
@@ -35,13 +35,13 @@ final class AdminConfigFactory implements FactoryInterface
 
         $uri = new Uri($config->get("admin.uri"));
         if (empty($uri->getHost())) {
-            /** @var ProjectUri $projectUri */
-            $projectUri = $container->get(ProjectUri::class);
+            /** @var ApplicationUri $projectUri */
+            $projectUri = $container->get(ApplicationUri::class);
 
-            $uri = $uri->withPath($projectUri->getMainUrl()->getPath() . '/' . $uri->getPath());
-            $uri = $uri->withHost($projectUri->getMainUrl()->getHost());
-            $uri = $uri->withScheme($projectUri->getMainUrl()->getScheme());
-            $uri = $uri->withPort($projectUri->getMainUrl()->getPort());
+            $uri = $uri->withPath($projectUri->getMainUri()->getPath() . '/' . $uri->getPath());
+            $uri = $uri->withHost($projectUri->getMainUri()->getHost());
+            $uri = $uri->withScheme($projectUri->getMainUri()->getScheme());
+            $uri = $uri->withPort($projectUri->getMainUri()->getPort());
         }
 
         return new AdminConfig($container->get(AdminProjectConfig::class), $uri, $container->get(Asset::class));

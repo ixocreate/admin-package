@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Role;
 
-use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Admin\RoleInterface;
 
 final class AdministratorRole implements RoleInterface
 {

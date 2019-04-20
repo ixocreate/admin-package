@@ -9,9 +9,9 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config\Client\Provider;
 
+use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Admin\UserInterface;
 
 final class ProjectProvider implements ClientConfigProviderInterface
 {
@@ -25,11 +25,16 @@ final class ProjectProvider implements ClientConfigProviderInterface
         $this->adminConfig = $adminConfig;
     }
 
+    public static function serviceName(): string
+    {
+        return 'project';
+    }
+
     /**
-     * @param RoleInterface|null $role
+     * @param UserInterface|null $user
      * @return array
      */
-    public function clientConfig(?RoleInterface $role = null): array
+    public function clientConfig(?UserInterface $user = null): array
     {
         return [
             'author' => $this->adminConfig->author(),
@@ -41,11 +46,8 @@ final class ProjectProvider implements ClientConfigProviderInterface
             'loginMessage' => $this->adminConfig->loginMessage(),
             'icon' => $this->adminConfig->icon(),
             'logo' => $this->adminConfig->logo(),
+            'loginUrl' => (string) $this->adminConfig->uri() . '/login',
+            'logoutUrl' => (string) $this->adminConfig->uri() . '/logout',
         ];
-    }
-
-    public static function serviceName(): string
-    {
-        return 'project';
     }
 }

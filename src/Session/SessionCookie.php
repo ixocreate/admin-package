@@ -12,21 +12,22 @@ namespace Ixocreate\Admin\Session;
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
+use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\SessionData;
-use Ixocreate\CommonTypes\Entity\UuidType;
+use Ixocreate\Type\Entity\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class SessionCookie
 {
-    public function createSessionCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData): ResponseInterface
+    public function createSessionCookie(ServerRequestInterface $request, ResponseInterface $response, AdminConfig $adminConfig, SessionData $sessionData): ResponseInterface
     {
         $data = [
-            'xsrfToken' => (string) $sessionData->xsrfToken()->getValue(),
+            'xsrfToken' => (string) $sessionData->xsrfToken()->value(),
         ];
 
         if ($sessionData->userId() instanceof UuidType) {
-            $data['userId'] = $sessionData->userId()->getValue();
+            $data['userId'] = $sessionData->userId()->value();
         }
 
         $jwt = JWT::encode(
@@ -38,11 +39,11 @@ final class SessionCookie
                 'exp' => \time() + 31536000,
                 'data' => $data,
             ],
-            'secret_key',
+            $adminConfig->secret(),
             'HS512'
         );
 
-        $cookie = SetCookie::create("kiwiSid")
+        $cookie = SetCookie::create("ixoSid")
             ->withValue($jwt)
             ->withPath("/")
             ->withHttpOnly(true)
@@ -54,7 +55,7 @@ final class SessionCookie
     public function createXsrfCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData): ResponseInterface
     {
         $cookie = SetCookie::create("XSRF-TOKEN")
-            ->withValue($sessionData->xsrfToken()->getValue())
+            ->withValue($sessionData->xsrfToken()->value())
             ->withPath("/")
             ->withHttpOnly(false)
             ->withSecure(($request->getUri()->getScheme() === "https"));

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <?php
+    /** @var \Ixocreate\Admin\Config\AdminConfig $adminConfig */
+    $adminConfig = $this->admin()->getAdminConfig();
+    $assets = $this->admin()->assetsPaths();
+    ?>
+    <meta charset="utf-8">
+    <title><?= $adminConfig->name() ?></title>
+    <base href="/<?= ltrim($adminConfig->uri()->getPath(), '/') ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="description" content="<?= $adminConfig->description() ?>">
+    <meta name="author" content="<?= $adminConfig->author() ?>">
+    <link rel="shortcut icon" href="<?= $adminConfig->icon() ?>">
+    <?php foreach ($assets['styles'] as $style): ?>
+        <link href="<?= $style ?>" rel="stylesheet"/>
+    <?php endforeach ?>
+</head>
+<body>
+<div class="auth" <?= !empty($adminConfig->background()) ? 'style="background-image: url(' . $adminConfig->background() . ')"' : '' ?>>
+    <div class="auth-content">
+        <div class="auth-box">
+            <?php if (!empty($adminConfig->loginMessage())): ?>
+                <div class="auth-message"><?= $adminConfig->loginMessage() ?></div>
+            <?php endif; ?>
+            <?php if(!empty($adminConfig->loginLogo())): ?>
+                <img class="auth-logo" alt="<?= $adminConfig->name() ?> Logo" src="<?= $adminConfig->loginLogo() ?>">
+            <?php endif ?>
+            <?= $this->section('content') ?>
+        </div>
+    </div>
+</div>
+</body>
+</html>

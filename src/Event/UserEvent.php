@@ -18,6 +18,8 @@ class UserEvent extends Event
 
     public const EVENT_UPDATE = 'admin-user.update';
 
+    public const EVENT_CHANGE_PASSWORD = 'admin-user.change-password';
+
     /**
      * @var User
      */

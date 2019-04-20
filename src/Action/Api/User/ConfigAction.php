@@ -14,14 +14,14 @@ use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Admin\Type\RoleType;
 use Ixocreate\Admin\Type\StatusType;
-use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
-use Ixocreate\Contract\Schema\SchemaInterface;
-use Ixocreate\Entity\Type\TypeSubManager;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\AdditionalSchemaInterface;
 use Ixocreate\Schema\Builder;
 use Ixocreate\Schema\Elements\TextElement;
 use Ixocreate\Schema\ElementSubManager;
 use Ixocreate\Schema\Schema;
+use Ixocreate\Schema\SchemaInterface;
+use Ixocreate\Type\TypeSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -38,11 +38,6 @@ final class ConfigAction implements MiddlewareInterface
      * @var TypeSubManager
      */
     private $typeSubManager;
-
-    /**
-     * @var ElementSubManager
-     */
-    private $elementSubManager;
 
     /**
      * @var UserRepository
@@ -78,7 +73,6 @@ final class ConfigAction implements MiddlewareInterface
     ) {
         $this->builder = $builder;
         $this->typeSubManager = $typeSubManager;
-        $this->elementSubManager = $elementSubManager;
         $this->userRepository = $userRepository;
         $this->additionalSchemaSubManager = $additionalSchemaSubManager;
         $this->adminConfig = $adminConfig;
@@ -118,9 +112,11 @@ final class ConfigAction implements MiddlewareInterface
                     ->withRequired(true)
                     ->withLabel("Password Repeat")
             )
-            ->withAddedElement($this->typeSubManager->get(RoleType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('role')->withLabel('Role'))
             ->withAddedElement(
-                $this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status')
+                $this->typeSubManager->get(RoleType::class)->provideElement($this->builder)->withRequired(true)->withName('role')->withLabel('Role')
+            )
+            ->withAddedElement(
+                $this->typeSubManager->get(StatusType::class)->provideElement($this->builder)->withRequired(true)->withName('status')->withLabel('Status')
         );
 
         if ($this->receiveUserAttributesSchema() !== null) {
@@ -143,8 +139,8 @@ final class ConfigAction implements MiddlewareInterface
                     ->withRequired(true)
                     ->withLabel("Email")
             )
-            ->withAddedElement($this->typeSubManager->get(RoleType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('role')->withLabel('Role'))
-            ->withAddedElement($this->typeSubManager->get(StatusType::class)->schemaElement($this->elementSubManager)->withRequired(true)->withName('status')->withLabel('Status'));
+            ->withAddedElement($this->typeSubManager->get(RoleType::class)->provideElement($this->builder)->withRequired(true)->withName('role')->withLabel('Role'))
+            ->withAddedElement($this->typeSubManager->get(StatusType::class)->provideElement($this->builder)->withRequired(true)->withName('status')->withLabel('Status'));
 
         if ($this->receiveUserAttributesSchema() !== null) {
             foreach (($this->receiveUserAttributesSchema()->additionalSchema($this->builder))->elements() as $element) {

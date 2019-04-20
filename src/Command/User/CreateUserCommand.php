@@ -17,16 +17,15 @@ use Ixocreate\Admin\Event\UserEvent;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\CommonTypes\Entity\EmailType;
-use Ixocreate\CommonTypes\Entity\SchemaType;
-use Ixocreate\Contract\CommandBus\CommandInterface;
-use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
-use Ixocreate\Contract\Validation\ValidatableInterface;
-use Ixocreate\Contract\Validation\ViolationCollectorInterface;
+use Ixocreate\CommandBus\CommandInterface;
 use Ixocreate\Entity\Type\Type;
 use Ixocreate\Event\EventDispatcher;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
-use Ramsey\Uuid\Uuid;
+use Ixocreate\Schema\AdditionalSchemaInterface;
+use Ixocreate\Type\Entity\EmailType;
+use Ixocreate\Type\Entity\SchemaType;
+use Ixocreate\Validation\ValidatableInterface;
+use Ixocreate\Validation\ViolationCollectorInterface;
 
 final class CreateUserCommand extends AbstractCommand implements CommandInterface, ValidatableInterface
 {
@@ -86,6 +85,12 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
         $identicon = new Identicon(new ImageMagickGenerator());
         $avatar = $identicon->getImageDataUri($this->data()['email']);
 
+        if (!empty($this->data()['passwordHash'])) {
+            $password = $this->data()['passwordHash'];
+        } else {
+            $password = \password_hash($this->data()['password'], PASSWORD_DEFAULT);
+        }
+
         $type = null;
 
         $additionalSchema = $this->receiveUserAttributesSchema();
@@ -107,8 +112,7 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
         $user = new User([
             'id' => $this->uuid(),
             'email' => $this->data()['email'],
-            'password' =>  \password_hash($this->data()['password'], PASSWORD_DEFAULT),
-            'hash' => Uuid::uuid4()->toString(),
+            'password' =>  $password,
             'role' => $this->data()['role'],
             'avatar' => $avatar,
             'createdAt' => $this->createdAt(),
@@ -151,12 +155,12 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
             $violationCollector->add('email', 'email.invalid', 'Email is invalid');
         }
 
-        if (empty($this->data()['password']) || empty($this->data()['passwordRepeat'])) {
-            $violationCollector->add("password", "password.invalid", "Password is invalid");
-        }
-
-        if ($this->data()['password'] !== $this->data()['passwordRepeat']) {
-            $violationCollector->add("password", "password.doesnt-match", "Password and repeated password doesn't match");
+        if (empty($this->data()['passwordHash'])) {
+            if (empty($this->data()['password']) || empty($this->data()['passwordRepeat'])) {
+                $violationCollector->add("password", "password.invalid", "Password is invalid");
+            } elseif ($this->data()['password'] !== $this->data()['passwordRepeat']) {
+                $violationCollector->add("password", "password.doesnt-match", "Password and repeated password doesn't match");
+            }
         }
 
         if (!$this->roleSubManager->has($this->data()['role'])) {

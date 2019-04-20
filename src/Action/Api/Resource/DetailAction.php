@@ -9,13 +9,15 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Api\Resource;
 
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Resource\Action\DetailActionAwareInterface;
 use Ixocreate\Admin\Response\ApiDetailResponse;
-use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
-use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
 use Ixocreate\Database\Repository\RepositoryInterface;
-use Ixocreate\Entity\Entity\EntityInterface;
-use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Entity\EntityInterface;
+use Ixocreate\Resource\ResourceInterface;
+use Ixocreate\Resource\ResourceSubManager;
 use Ixocreate\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -60,14 +62,13 @@ final class DetailAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var AdminAwareInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
         $middlewarePipe = new MiddlewarePipe();
 
-        if (!empty($resource->detailAction())) {
+        if ($resource instanceof DetailActionAwareInterface) {
             /** @var MiddlewareInterface $action */
-            $action = $this->middlewareSubManager->get($resource->detailAction());
+            $action = $this->middlewareSubManager->get($resource->detailAction($request->getAttribute(User::class)));
             $middlewarePipe->pipe($action);
         }
 
@@ -78,7 +79,7 @@ final class DetailAction implements MiddlewareInterface
         return $middlewarePipe->process($request, $handler);
     }
 
-    private function handleRequest(AdminAwareInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
+    private function handleRequest(ResourceInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());

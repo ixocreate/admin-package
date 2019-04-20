@@ -11,8 +11,8 @@ namespace Ixocreate\Admin\Router\Factory;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Router\AdminRouter;
-use Ixocreate\Contract\ServiceManager\FactoryInterface;
-use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\ServiceManager\FactoryInterface;
+use Ixocreate\ServiceManager\ServiceManagerInterface;
 
 final class AdminRouterFactory implements FactoryInterface
 {

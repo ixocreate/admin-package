@@ -10,15 +10,19 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Doctrine\Common\Collections\Criteria;
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Resource\Action\IndexActionAwareInterface;
+use Ixocreate\Admin\Resource\Schema\ListSchemaAwareInterface;
 use Ixocreate\Admin\Response\ApiListResponse;
-use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
-use Ixocreate\Contract\Resource\AdminAwareInterface;
-use Ixocreate\Contract\Schema\Listing\ElementInterface;
+use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
 use Ixocreate\Database\EntityManager\Factory\EntityManagerSubManager;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
 use Ixocreate\Database\Repository\RepositoryInterface;
-use Ixocreate\Entity\Entity\EntityInterface;
-use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Entity\EntityInterface;
+use Ixocreate\Resource\ResourceInterface;
+use Ixocreate\Resource\ResourceSubManager;
+use Ixocreate\Schema\Listing\ElementInterface;
+use Ixocreate\Schema\Listing\ListSchemaInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -62,14 +66,13 @@ final class IndexAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var AdminAwareInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute("resource"));
 
         $middlewarePipe = new MiddlewarePipe();
 
-        if (!empty($resource->indexAction())) {
+        if ($resource instanceof IndexActionAwareInterface) {
             /** @var MiddlewareInterface $action */
-            $action = $this->middlewareSubManager->get($resource->indexAction());
+            $action = $this->middlewareSubManager->get($resource->indexAction($request->getAttribute(User::class)));
             $middlewarePipe->pipe($action);
         }
 
@@ -80,20 +83,41 @@ final class IndexAction implements MiddlewareInterface
         return $middlewarePipe->process($request, $handler);
     }
 
-    private function handleRequest(AdminAwareInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
+    private function handleRequest(ResourceInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
-        $listSchema = $resource->listSchema();
+        if (!($resource instanceof ListSchemaAwareInterface)) {
+            return new ApiListResponse($resource, [], ['count' => 0]);
+        }
+
+        /** @var ListSchemaInterface $listSchema */
+        $listSchema = $resource->listSchema($request->getAttribute(User::class));
 
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
         $criteria = new Criteria();
-        $sorting = null;
-
+        /**
+         * apply soft deletes
+         * TODO: make this overridable so deleted items can be listed as well
+         */
+        if (\method_exists($repository->getEntityName(), 'deletedAt')) {
+            $criteria->andWhere(Criteria::expr()->isNull('deletedAt'));
+        }
+        /**
+         * extract limit, offset, filters and sorts from query string
+         */
         //?sort[column1]=ASC&sort[column2]=DESC&filter[column1]=test&filter[column2]=foobar
         $queryParams = $request->getQueryParams();
+        $sorting = [];
+        $filterExpressions = [];
         foreach ($queryParams as $key => $value) {
-            if (\mb_substr($key, 0, 4) === "sort") {
-                $sorting = [];
+            /**
+             * TODO: why not use $key === 'sort' and $key === 'filter'? legacy code depending on it? -> TBD
+             */
+            if ($key === 'orderBy') {
+                $sorting[$value] = $queryParams['orderDirection'] ?? 'asc';
+            } elseif ($key === 'orderDirection') {
+                // see orderBy
+            } elseif (\mb_substr($key, 0, 4) === "sort") {
                 foreach ($value as $sortName => $sortValue) {
                     if (!$listSchema->has($sortName)) {
                         continue;
@@ -113,56 +137,58 @@ final class IndexAction implements MiddlewareInterface
                     if (!$element->searchable()) {
                         continue;
                     }
-
-                    $criteria->orWhere(Criteria::expr()->contains($element->name(), $filterValue));
+                    $filterExpressions[] = $criteria::expr()->contains($element->name(), $filterValue);
                 }
             } elseif ($key === "search" && \is_string($value)) {
                 foreach ($listSchema->elements() as $element) {
                     if (!$element->searchable()) {
                         continue;
                     }
-                    $criteria->orWhere(Criteria::expr()->contains($element->name(), $value));
+                    $filterExpressions[] = $criteria::expr()->contains($element->name(), $value);
                 }
                 continue;
             } elseif ($key === "offset") {
-                $value = (int) $value;
+                $value = (int)$value;
                 if (!empty($value)) {
                     $criteria->setFirstResult($value);
                 }
                 continue;
             } elseif ($key === "limit") {
-                $value = (int) $value;
+                $value = (int)$value;
                 if (!empty($value)) {
                     $criteria->setMaxResults(\min($value, 500));
                 }
                 continue;
             }
         }
-
-        if (empty($sorting) && !empty($resource->listSchema()->defaultSorting())) {
-            $criteria->orderBy([$resource->listSchema()->defaultSorting()['sorting'] => $resource->listSchema()->defaultSorting()['direction']]);
+        /**
+         * apply collected filters
+         */
+        if (!empty($filterExpressions)) {
+            $criteria->andWhere(Criteria::expr()->andX(...$filterExpressions));
+        }
+        /**
+         * apply collected sorts
+         */
+        if (empty($sorting) && !empty($listSchema->defaultSorting())) {
+            $criteria->orderBy([$listSchema->defaultSorting()['sorting'] => $listSchema->defaultSorting()['direction']]);
         } elseif (!empty($sorting)) {
             $criteria->orderBy($sorting);
         }
-
         $result = $repository->matching($criteria);
         $items = [];
-        //TODO Collection
+        /**
+         * TODO: Collection
+         */
         /** @var EntityInterface $entity */
         foreach ($result as $entity) {
-            if (\method_exists($entity, 'deletedAt') && $entity->deletedAt() !== null) {
-                continue;
-            }
-
             $items[] = $entity->toPublicArray();
         }
-
         $count = $repository->count($criteria);
-
-        if (\method_exists($repository->getEntityName(), 'deletedAt')) {
-            $count = $repository->count(['deletedAt' => null]);
-        }
-
+        /**
+         * TODO: add active constraints to meta
+         * this way it is clear for the consumer which constraints were actually applied
+         */
         return new ApiListResponse($resource, $items, ['count' => $count]);
     }
 }

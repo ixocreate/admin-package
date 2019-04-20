@@ -9,10 +9,10 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config\Client\Provider;
 
+use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\Admin\Permission\PermissionTemp;
-use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Admin\Permission\Permission;
+use Ixocreate\Admin\UserInterface;
 
 final class NavigationProvider implements ClientConfigProviderInterface
 {
@@ -27,16 +27,24 @@ final class NavigationProvider implements ClientConfigProviderInterface
     }
 
     /**
-     * @param RoleInterface|null $role
+     * @return string
+     */
+    public static function serviceName(): string
+    {
+        return 'navigation';
+    }
+
+    /**
+     * @param UserInterface|null $user
      * @return array
      */
-    public function clientConfig(?RoleInterface $role = null): array
+    public function clientConfig(?UserInterface $user = null): array
     {
-        if (empty($role)) {
+        if (empty($user)) {
             return [];
         }
 
-        $permission = new PermissionTemp($role);
+        $permission = new Permission($user);
 
         $navigation = [];
 
@@ -60,10 +68,5 @@ final class NavigationProvider implements ClientConfigProviderInterface
         }
 
         return $navigation;
-    }
-
-    public static function serviceName(): string
-    {
-        return 'navigation';
     }
 }

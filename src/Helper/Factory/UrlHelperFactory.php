@@ -11,8 +11,8 @@ namespace Ixocreate\Admin\Helper\Factory;
 
 use Ixocreate\Admin\Helper\UrlHelper;
 use Ixocreate\Admin\Router\AdminRouter;
-use Ixocreate\Contract\ServiceManager\FactoryInterface;
-use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\ServiceManager\FactoryInterface;
+use Ixocreate\ServiceManager\ServiceManagerInterface;
 
 final class UrlHelperFactory implements FactoryInterface
 {

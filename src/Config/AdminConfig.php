@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config;
 
+use Ixocreate\Application\Http\SegmentProviderInterface;
 use Ixocreate\Asset\Asset;
-use Ixocreate\Contract\Http\SegmentProviderInterface;
 use Psr\Http\Message\UriInterface;
 
 final class AdminConfig implements SegmentProviderInterface
@@ -32,6 +32,7 @@ final class AdminConfig implements SegmentProviderInterface
 
     /**
      * AdminConfig constructor.
+     *
      * @param AdminProjectConfig $adminProjectConfig
      * @param UriInterface $uri
      */
@@ -42,6 +43,17 @@ final class AdminConfig implements SegmentProviderInterface
         $this->asset = $asset;
     }
 
+    /**
+     * @return string
+     */
+    public function secret(): string
+    {
+        return $this->adminProjectConfig->secret();
+    }
+
+    /**
+     * @return string
+     */
     public function author(): string
     {
         return $this->adminProjectConfig->author();
@@ -80,26 +92,54 @@ final class AdminConfig implements SegmentProviderInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function logo(): string
+    public function logo(): array
     {
-        return $this->asset->getUrl($this->adminProjectConfig->logo());
+        if (empty($this->adminProjectConfig->logo()['image'])) {
+            return [
+                'image' => null,
+                'width' => null,
+                'height' => null,
+            ];
+        }
+        return [
+            'image' => $this->asset->getUrl($this->adminProjectConfig->logo()['image']),
+            'width' => $this->adminProjectConfig->logo()['width'],
+            'height' => $this->adminProjectConfig->logo()['height'],
+        ];
     }
 
     /**
      * @return string
      */
-    public function icon(): string
+    public function loginLogo(): ?string
     {
+        if (empty($this->adminProjectConfig->loginLogo())) {
+            return null;
+        }
+        return $this->asset->getUrl($this->adminProjectConfig->loginLogo());
+    }
+
+    /**
+     * @return string
+     */
+    public function icon(): ?string
+    {
+        if (empty($this->adminProjectConfig->icon())) {
+            return null;
+        }
         return $this->asset->getUrl($this->adminProjectConfig->icon());
     }
 
     /**
      * @return string
      */
-    public function background(): string
+    public function background(): ?string
     {
+        if (empty($this->adminProjectConfig->background())) {
+            return null;
+        }
         return $this->asset->getUrl($this->adminProjectConfig->background());
     }
 
@@ -152,6 +192,30 @@ final class AdminConfig implements SegmentProviderInterface
     }
 
     /**
+     * @return string
+     */
+    public function localeAttributesSchema(): ?string
+    {
+        return $this->adminProjectConfig->localeAttributesSchema();
+    }
+
+    /**
+     * @return string
+     */
+    public function defaultLocale(): ?string
+    {
+        return $this->adminProjectConfig->defaultLocale();
+    }
+
+    /**
+     * @return string
+     */
+    public function defaultTimezone(): ?string
+    {
+        return $this->adminProjectConfig->defaultTimezone();
+    }
+
+    /**
      * @return UriInterface
      * @deprecated
      */
@@ -181,6 +245,6 @@ final class AdminConfig implements SegmentProviderInterface
      */
     public function getSegment(): string
     {
-        return (string) $this->uri();
+        return (string)$this->uri();
     }
 }

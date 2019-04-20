@@ -10,12 +10,13 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Command\Account;
 
 use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\CommonTypes\Entity\SchemaType;
-use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
 use Ixocreate\Entity\Type\Type;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\AdditionalSchemaInterface;
+use Ixocreate\Type\Entity\SchemaType;
 
 class ChangeAttributesCommand extends AbstractCommand
 {
@@ -55,29 +56,21 @@ class ChangeAttributesCommand extends AbstractCommand
     {
         $data = $this->data();
 
-        $entity = $this->userRepository->find($data['userId']);
+        /** @var User $user */
+        $user = $this->userRepository->find($data['userId']);
 
         $additionalSchema = $this->receiveAdditionalSchema();
 
         if ($additionalSchema !== null) {
-            $content = [
-                '__receiver__' => [
-                    'receiver' => AdditionalSchemaSubManager::class,
-                    'options' => [
-                        'additionalSchema' => $additionalSchema::serviceName(),
-                    ],
-                ],
-                '__value__' => $data,
-            ];
+            $type = Type::create($data['data'], SchemaType::class, [
+                'provider' => ['class' => AdditionalSchemaSubManager::class, 'name' => $additionalSchema::serviceName()],
+            ]);
 
-            $type = (Type::create($content, SchemaType::class))->convertToDatabaseValue();
-
-            $entity = $entity->with('accountAttributes', $type);
+            $user = $user->with('accountAttributes', $type);
+            $user = $user->with('updatedAt', new \DateTimeImmutable());
         }
 
-        $entity = $entity->with('updatedAt', new \DateTimeImmutable());
-
-        $this->userRepository->save($entity);
+        $this->userRepository->save($user);
 
         return true;
     }

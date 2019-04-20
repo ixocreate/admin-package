@@ -9,7 +9,9 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config;
 
-use Ixocreate\Contract\Application\SerializableServiceInterface;
+use Ixocreate\Admin\AdminConfigurator;
+use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
+use Ixocreate\Application\Service\SerializableServiceInterface;
 use Symfony\Component\Finder\SplFileInfo;
 
 final class AdminProjectConfig implements SerializableServiceInterface
@@ -36,12 +38,18 @@ final class AdminProjectConfig implements SerializableServiceInterface
     ];
 
     private $config = [
+        'secret'        => '',
         'author'        => '',
         'copyright'     => '',
         'description'   => '',
         'name'          => '',
         'poweredBy'     => true,
-        'logo'          => '',
+        'logo'          => [
+            'image' => '',
+            'width' => 0,
+            'height' => 0,
+        ],
+        'loginLogo'     => '',
         'icon'          => '',
         'background'    => '',
         'loginMessage' => '',
@@ -51,7 +59,11 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'clientConfigProvider' => [],
         'userAttributesSchema' => null,
         'accountAttributesSchema' => null,
+        'localeAttributesSchema' => LocaleAttributesSchema::class,
+        'defaultLocale' => 'en_US',
+        'defaultTimezone' => 'UTC',
         'googleMapApiKey' => null,
+        'sessionTimeout' => 7200,
     ];
 
     /**
@@ -62,6 +74,8 @@ final class AdminProjectConfig implements SerializableServiceInterface
     {
         $this->config = $adminConfigurator->toArray();
         $this->config['adminBuildPath'] = \rtrim($this->config['adminBuildPath'], '/') . '/';
+
+        // TODO: check if secret is set
 
         $items = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->adminBuildPath()), \RecursiveIteratorIterator::LEAVES_ONLY);
         /** @var SplFileInfo $file */
@@ -81,6 +95,14 @@ final class AdminProjectConfig implements SerializableServiceInterface
                 'filesize' => $file->getSize(),
             ];
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function secret(): string
+    {
+        return $this->config['secret'];
     }
 
     /**
@@ -124,11 +146,19 @@ final class AdminProjectConfig implements SerializableServiceInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function logo(): string
+    public function logo(): array
     {
         return $this->config['logo'];
+    }
+
+    /**
+     * @return string
+     */
+    public function loginLogo(): string
+    {
+        return $this->config['loginLogo'];
     }
 
     /**
@@ -198,6 +228,30 @@ final class AdminProjectConfig implements SerializableServiceInterface
     /**
      * @return string
      */
+    public function localeAttributesSchema(): ?string
+    {
+        return $this->config['localeAttributesSchema'];
+    }
+
+    /**
+     * @return string
+     */
+    public function defaultLocale(): string
+    {
+        return $this->config['defaultLocale'];
+    }
+
+    /**
+     * @return string
+     */
+    public function defaultTimezone(): string
+    {
+        return $this->config['defaultTimezone'];
+    }
+
+    /**
+     * @return string
+     */
     public function loginMessage(): string
     {
         return $this->config['loginMessage'];
@@ -209,6 +263,14 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function googleMapApiKey(): ?string
     {
         return $this->config['googleMapApiKey'];
+    }
+
+    /**
+     * @return int
+     */
+    public function sessionTimeout(): int
+    {
+        return $this->config['sessionTimeout'];
     }
 
     /**

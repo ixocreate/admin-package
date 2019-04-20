@@ -10,26 +10,21 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action;
 
 use Ixocreate\Admin\Config\AdminConfig;
+use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Router\AdminRouter;
-use Ixocreate\ProjectUri\ProjectUri;
 use Ixocreate\Template\TemplateResponse;
-use PackageVersions\Versions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Zend\Diactoros\Response\RedirectResponse;
 
-class IndexAction implements MiddlewareInterface
+final class IndexAction implements MiddlewareInterface
 {
     /**
      * @var AdminConfig
      */
-    protected $adminConfig;
-
-    /**
-     * @var ProjectUri
-     */
-    protected $projectUri;
+    private $adminConfig;
 
     /**
      * @var AdminRouter
@@ -54,53 +49,11 @@ class IndexAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        return new TemplateResponse('admin::index', [
-            'assets' => $this->assetsPaths(),
-            'adminConfig' => $this->adminConfig,
-        ]);
-    }
-
-    /**
-     * @return array
-     */
-    private function assetsPaths()
-    {
-        $scripts = [
-            'runtime' => null,
-            'polyfills' => null,
-            'scripts' => null,
-            'main' => null,
-        ];
-
-        $styles = [
-            'styles' => null,
-        ];
-
-
-        foreach (\array_keys($this->adminConfig->adminBuildFiles()) as $name) {
-            foreach ($scripts as $scriptName => $value) {
-                if ($value !== null) {
-                    continue;
-                }
-                if (\mb_substr($name, 0, \mb_strlen($scriptName)) === $scriptName) {
-                    $scripts[$scriptName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' . Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
-
-                    continue 2;
-                }
-            }
-
-            foreach ($styles as $stylesName => $value) {
-                if ($value !== null) {
-                    continue;
-                }
-
-                if (\mb_substr($name, 0, \mb_strlen($stylesName)) === $stylesName) {
-                    $styles[$stylesName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' . Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
-                    continue 2;
-                }
-            }
+        $user = $request->getAttribute(User::class);
+        if ($user === null) {
+            return new RedirectResponse($this->adminRouter->generateUri('admin.login'));
         }
 
-        return ['scripts' => $scripts, 'styles' => $styles];
+        return new TemplateResponse('admin::index', []);
     }
 }

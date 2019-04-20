@@ -1,9 +1,11 @@
 <!doctype html>
-<?php
-/** @var \Ixocreate\Admin\Config\AdminConfig $adminConfig */
-?>
 <html lang="en">
 <head>
+    <?php
+    /** @var \Ixocreate\Admin\Config\AdminConfig $adminConfig */
+    $adminConfig = $this->admin()->getAdminConfig();
+    $assets = $this->admin()->assetsPaths();
+    ?>
     <meta charset="utf-8">
     <title><?= $adminConfig->name() ?></title>
     <base href="/<?= ltrim($adminConfig->uri()->getPath(), '/')?>">
@@ -16,26 +18,28 @@
         <link href="<?= $style ?>" rel="stylesheet"/>
     <?php endforeach ?>
     <?php if (!empty($adminConfig->googleMapApiKey())): ?>
-        <script src="http://maps.googleapis.com/maps/api/js?key=<?= $adminConfig->googleMapApiKey() ?>&libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<?= $adminConfig->googleMapApiKey() ?>&libraries=places"></script>
     <?php endif; ?>
 </head>
 <body class="app">
 <script>
-    window.__kiwi = <?= json_encode([
+    window.__ixo = <?= json_encode([
         'googleApiKey' => $adminConfig->googleMapApiKey(),
         'project' => [
-                'author' => $adminConfig->author(),
-                'name' => $adminConfig->name(),
-                'poweredBy' => $adminConfig->poweredBy(),
-                'copyright' => $adminConfig->copyright(),
-                'description' => $adminConfig->description(),
-                'background' => $adminConfig->background(),
-                'icon' => $adminConfig->icon(),
-                'logo' => $adminConfig->logo(),
+            'author' => $adminConfig->author(),
+            'name' => $adminConfig->name(),
+            'poweredBy' => $adminConfig->poweredBy(),
+            'copyright' => $adminConfig->copyright(),
+            'description' => $adminConfig->description(),
+            'background' => $adminConfig->background(),
+            'icon' => $adminConfig->icon(),
+            'logo' => $adminConfig->logo(),
+            'loginUrl' => $this->admin()->generateUri('admin.login'),
+            'logoutUrl' => $this->admin()->generateUri('admin.logout'),
         ],
         'routes' => [
             'session' => rtrim($adminConfig->uri()->getPath(), '/') . '/session',
-            'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config', //TODO use url helper
+            'config' => rtrim($adminConfig->uri()->getPath(), '/') . '/api/config',
         ]
     ]) ?>;
 </script>

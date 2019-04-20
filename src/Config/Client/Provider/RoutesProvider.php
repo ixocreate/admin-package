@@ -9,12 +9,12 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config\Client\Provider;
 
+use Ixocreate\Admin\ClientConfigProviderInterface;
 use Ixocreate\Admin\Config\AdminConfig;
-use Ixocreate\ApplicationHttp\Pipe\Config\SegmentConfig;
-use Ixocreate\ApplicationHttp\Pipe\Config\SegmentPipeConfig;
-use Ixocreate\ApplicationHttp\Pipe\PipeConfig;
-use Ixocreate\Contract\Admin\ClientConfigProviderInterface;
-use Ixocreate\Contract\Admin\RoleInterface;
+use Ixocreate\Admin\UserInterface;
+use Ixocreate\Application\Http\Pipe\Config\SegmentConfig;
+use Ixocreate\Application\Http\Pipe\Config\SegmentPipeConfig;
+use Ixocreate\Application\Http\Pipe\PipeConfig;
 
 final class RoutesProvider implements ClientConfigProviderInterface
 {
@@ -39,11 +39,16 @@ final class RoutesProvider implements ClientConfigProviderInterface
         $this->adminConfig = $adminConfig;
     }
 
+    public static function serviceName(): string
+    {
+        return 'routes';
+    }
+
     /**
-     * @param RoleInterface|null $role
+     * @param UserInterface|null $user
      * @return array
      */
-    public function clientConfig(?RoleInterface $role = null): array
+    public function clientConfig(?UserInterface $user = null): array
     {
         $routes = [];
         $pipeConfig = null;
@@ -86,10 +91,5 @@ final class RoutesProvider implements ClientConfigProviderInterface
             $routes[$routeName] = \rtrim((string)$this->adminConfig->uri()->getPath(), '/') . '/api' . $route['path'];
         }
         return $routes;
-    }
-
-    public static function serviceName(): string
-    {
-        return 'routes';
     }
 }

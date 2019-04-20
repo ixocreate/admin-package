@@ -11,20 +11,22 @@ namespace Ixocreate\Admin\Entity;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
+use Ixocreate\Admin\RoleInterface;
 use Ixocreate\Admin\Type\RoleType;
 use Ixocreate\Admin\Type\StatusType;
-use Ixocreate\CommonTypes\Entity\DateTimeType;
-use Ixocreate\CommonTypes\Entity\EmailType;
-use Ixocreate\CommonTypes\Entity\SchemaType;
-use Ixocreate\CommonTypes\Entity\UuidType;
-use Ixocreate\Contract\Entity\DatabaseEntityInterface;
-use Ixocreate\Contract\Type\TypeInterface;
-use Ixocreate\Entity\Entity\Definition;
-use Ixocreate\Entity\Entity\DefinitionCollection;
-use Ixocreate\Entity\Entity\EntityInterface;
-use Ixocreate\Entity\Entity\EntityTrait;
+use Ixocreate\Admin\UserInterface;
+use Ixocreate\Database\DatabaseEntityInterface;
+use Ixocreate\Entity\Definition;
+use Ixocreate\Entity\DefinitionCollection;
+use Ixocreate\Entity\EntityInterface;
+use Ixocreate\Entity\EntityTrait;
+use Ixocreate\Type\Entity\DateTimeType;
+use Ixocreate\Type\Entity\EmailType;
+use Ixocreate\Type\Entity\SchemaType;
+use Ixocreate\Type\Entity\UuidType;
+use Ixocreate\Type\TypeInterface;
 
-final class User implements EntityInterface, DatabaseEntityInterface
+final class User implements EntityInterface, DatabaseEntityInterface, UserInterface
 {
     use EntityTrait;
 
@@ -34,7 +36,7 @@ final class User implements EntityInterface, DatabaseEntityInterface
 
     private $password;
 
-    private $hash;
+    private $status;
 
     private $role;
 
@@ -48,11 +50,23 @@ final class User implements EntityInterface, DatabaseEntityInterface
 
     private $lastLoginAt;
 
-    private $status;
+    private $lastActivityAt;
+
+    private $lastPasswordChangeAt;
 
     private $userAttributes;
 
     private $accountAttributes;
+
+    private $locale;
+
+    private $numberLocale;
+
+    private $dateLocale;
+
+    private $timeLocale;
+
+    private $timezone;
 
     public function id(): UuidType
     {
@@ -69,9 +83,9 @@ final class User implements EntityInterface, DatabaseEntityInterface
         return $this->password;
     }
 
-    public function hash(): UuidType
+    public function status(): StatusType
     {
-        return $this->hash;
+        return $this->status;
     }
 
     public function role(): RoleType
@@ -104,9 +118,14 @@ final class User implements EntityInterface, DatabaseEntityInterface
         return $this->lastLoginAt;
     }
 
-    public function status(): StatusType
+    public function lastActivityAt():? DateTimeType
     {
-        return $this->status;
+        return $this->lastActivityAt;
+    }
+
+    public function lastPasswordChangeAt():? DateTimeType
+    {
+        return $this->lastPasswordChangeAt;
     }
 
     public function userAttributes():? SchemaType
@@ -119,22 +138,61 @@ final class User implements EntityInterface, DatabaseEntityInterface
         return $this->accountAttributes;
     }
 
+    public function locale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function numberLocale(): ?string
+    {
+        return $this->numberLocale;
+    }
+
+    public function dateLocale(): ?string
+    {
+        return $this->dateLocale;
+    }
+
+    public function timeLocale(): ?string
+    {
+        return $this->timeLocale;
+    }
+
+    public function timezone(): ?string
+    {
+        return $this->timezone;
+    }
+
+    /**
+     * @return RoleInterface
+     */
+    public function getRole(): RoleInterface
+    {
+        return $this->role()->getRole();
+    }
+
     protected static function createDefinitions() : DefinitionCollection
     {
         return new DefinitionCollection([
             new Definition("id", UuidType::class, false, true),
             new Definition("email", EmailType::class, false, true),
             new Definition("password", TypeInterface::TYPE_STRING, false, false),
-            new Definition("hash", UuidType::class, false, false),
+            new Definition("status", StatusType::class, false, true),
             new Definition("role", RoleType::class, false, true),
             new Definition("avatar", TypeInterface::TYPE_STRING, false, true),
             new Definition("createdAt", DateTimeType::class, false, true),
             new Definition("updatedAt", DateTimeType::class, false, true),
             new Definition("deletedAt", DateTimeType::class, true, false),
             new Definition("lastLoginAt", DateTimeType::class, true, true),
-            new Definition("status", StatusType::class, false, true),
+            new Definition("lastActivityAt", DateTimeType::class, true, true),
+            new Definition("lastPasswordChangeAt", DateTimeType::class, true, true),
             new Definition("userAttributes", SchemaType::class, true, true),
             new Definition("accountAttributes", SchemaType::class, true, true),
+            new Definition("locale", TypeInterface::TYPE_STRING, true, true),
+            new Definition("numberLocale", TypeInterface::TYPE_STRING, true, true),
+            new Definition("dateLocale", TypeInterface::TYPE_STRING, true, true),
+            new Definition("timeLocale", TypeInterface::TYPE_STRING, true, true),
+            new Definition("timezone", TypeInterface::TYPE_STRING, true, true),
         ]);
     }
 
@@ -142,21 +200,27 @@ final class User implements EntityInterface, DatabaseEntityInterface
     {
         $builder->setTable('admin_user');
 
-        $builder->createField('id', UuidType::class)
+        $builder->createField('id', UuidType::serviceName())
             ->makePrimaryKey()
             ->build();
 
         $builder->addField('email', EmailType::serviceName());
         $builder->addField('password', Type::STRING);
-        $builder->addField('hash', UuidType::serviceName());
+        $builder->addField('status', StatusType::serviceName());
         $builder->addField('role', RoleType::serviceName());
         $builder->addField('avatar', Type::TEXT);
         $builder->addField('createdAt', DateTimeType::serviceName());
-        $builder->addField('lastLoginAt', DateTimeType::serviceName());
         $builder->addField('updatedAt', DateTimeType::serviceName());
         $builder->addField('deletedAt', DateTimeType::serviceName());
-        $builder->addField('status', StatusType::serviceName());
+        $builder->addField('lastLoginAt', DateTimeType::serviceName());
+        $builder->addField('lastActivityAt', DateTimeType::serviceName());
+        $builder->addField('lastPasswordChangeAt', DateTimeType::serviceName());
         $builder->addField('userAttributes', SchemaType::serviceName());
         $builder->addField('accountAttributes', SchemaType::serviceName());
+        $builder->addField('locale', Type::STRING);
+        $builder->addField('numberLocale', Type::STRING);
+        $builder->addField('dateLocale', Type::STRING);
+        $builder->addField('timeLocale', Type::STRING);
+        $builder->addField('timezone', Type::STRING);
     }
 }

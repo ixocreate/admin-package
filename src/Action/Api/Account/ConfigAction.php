@@ -11,8 +11,8 @@ namespace Ixocreate\Admin\Action\Account;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Contract\Schema\AdditionalSchemaInterface;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Schema\AdditionalSchemaInterface;
 use Ixocreate\Schema\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -61,15 +61,22 @@ class ConfigAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $accountAttributesSchema = $this->receiveAccountAttributesSchema();
+        $data = [
+            'accountAttributesSchema' => null,
+            'localeAttributesSchema' => null,
+        ];
 
+        $accountAttributesSchema = $this->receiveAccountAttributesSchema();
         if ($accountAttributesSchema !== null) {
-            return new ApiSuccessResponse([
-                'accountAttributesSchema' => $accountAttributesSchema->additionalSchema($this->builder),
-            ]);
+            $data['accountAttributesSchema'] = $accountAttributesSchema->additionalSchema($this->builder);
         }
 
-        return new ApiSuccessResponse();
+        $localeAttributesSchema = $this->receiveLocaleAttributesSchema();
+        if ($localeAttributesSchema !== null) {
+            $data['localeAttributesSchema'] = $localeAttributesSchema->additionalSchema($this->builder);
+        }
+
+        return new ApiSuccessResponse($data);
     }
 
     /**
@@ -81,6 +88,19 @@ class ConfigAction implements MiddlewareInterface
 
         if (!empty($this->adminConfig->accountAttributesSchema())) {
             $schema = $this->additionalSchemaSubManager->get($this->adminConfig->accountAttributesSchema());
+        }
+        return $schema;
+    }
+
+    /**
+     * @return AdditionalSchemaInterface|null
+     */
+    private function receiveLocaleAttributesSchema(): ?AdditionalSchemaInterface
+    {
+        $schema = null;
+
+        if (!empty($this->adminConfig->localeAttributesSchema())) {
+            $schema = $this->additionalSchemaSubManager->get($this->adminConfig->localeAttributesSchema());
         }
         return $schema;
     }

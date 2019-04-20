@@ -11,15 +11,15 @@ namespace Ixocreate\Admin\Type;
 
 use Doctrine\DBAL\Types\StringType;
 use Ixocreate\Admin\Role\RoleSubManager;
-use Ixocreate\Contract\Admin\RoleInterface;
-use Ixocreate\Contract\Schema\ElementInterface;
-use Ixocreate\Contract\Type\DatabaseTypeInterface;
-use Ixocreate\Contract\Type\SchemaElementInterface;
+use Ixocreate\Admin\RoleInterface;
 use Ixocreate\Entity\Type\AbstractType;
+use Ixocreate\Schema\BuilderInterface;
+use Ixocreate\Schema\ElementInterface;
+use Ixocreate\Schema\ElementProviderInterface;
 use Ixocreate\Schema\Elements\SelectElement;
-use Ixocreate\Schema\ElementSubManager;
+use Ixocreate\Type\DatabaseTypeInterface;
 
-final class RoleType extends AbstractType implements DatabaseTypeInterface, SchemaElementInterface
+final class RoleType extends AbstractType implements DatabaseTypeInterface, ElementProviderInterface
 {
     /**
      * @var RoleSubManager
@@ -61,10 +61,10 @@ final class RoleType extends AbstractType implements DatabaseTypeInterface, Sche
         return 'role';
     }
 
-    public function schemaElement(ElementSubManager $elementSubManager): ElementInterface
+    public function provideElement(BuilderInterface $builder): ElementInterface
     {
         /** @var SelectElement $element */
-        $element = $elementSubManager->get(SelectElement::class);
+        $element = $builder->get(SelectElement::class);
 
         $options = [];
         foreach ($this->roleSubManager->getServices() as $service) {

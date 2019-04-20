@@ -9,13 +9,15 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Action\Api\Resource;
 
+use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Resource\Action\DeleteActionAwareInterface;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\ApplicationHttp\Middleware\MiddlewareSubManager;
-use Ixocreate\Contract\Resource\AdminAwareInterface;
+use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
 use Ixocreate\Database\Repository\RepositoryInterface;
-use Ixocreate\Entity\Entity\EntityInterface;
-use Ixocreate\Resource\SubManager\ResourceSubManager;
+use Ixocreate\Entity\EntityInterface;
+use Ixocreate\Resource\ResourceInterface;
+use Ixocreate\Resource\ResourceSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -52,14 +54,13 @@ final class DeleteAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        /** @var AdminAwareInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
         $middlewarePipe = new MiddlewarePipe();
 
-        if (!empty($resource->deleteAction())) {
+        if ($resource instanceof DeleteActionAwareInterface) {
             /** @var MiddlewareInterface $action */
-            $action = $this->middlewareSubManager->get($resource->deleteAction());
+            $action = $this->middlewareSubManager->get($resource->deleteAction($request->getAttribute(User::class)));
             $middlewarePipe->pipe($action);
         }
 
@@ -70,7 +71,7 @@ final class DeleteAction implements MiddlewareInterface
         return $middlewarePipe->process($request, $handler);
     }
 
-    private function handleRequest(AdminAwareInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
+    private function handleRequest(ResourceInterface $resource, ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
@@ -78,7 +79,18 @@ final class DeleteAction implements MiddlewareInterface
         /** @var EntityInterface $entity */
         $entity = $repository->find($request->getAttribute("id"));
 
-        $repository->remove($entity);
+        if (\method_exists($entity, 'deletedAt')) {
+            //if(!$entity->deletedAt()) {
+            $repository->save($entity->with('deletedAt', new \DateTimeImmutable()));
+        /**
+         * TODO: implement permanent deletion
+         */
+            //} else {
+            //$repository->remove($entity);
+            //}
+        } else {
+            $repository->remove($entity);
+        }
 
         return new ApiSuccessResponse();
     }

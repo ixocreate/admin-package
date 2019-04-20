@@ -9,11 +9,10 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin;
 
-use Ixocreate\Admin\BootstrapItem\AdminBootstrapItem;
-use Ixocreate\Contract\Application\ConfiguratorRegistryInterface;
-use Ixocreate\Contract\Application\PackageInterface;
-use Ixocreate\Contract\Application\ServiceRegistryInterface;
-use Ixocreate\Contract\ServiceManager\ServiceManagerInterface;
+use Ixocreate\Application\Configurator\ConfiguratorRegistryInterface;
+use Ixocreate\Application\Package\PackageInterface;
+use Ixocreate\Application\Service\ServiceRegistryInterface;
+use Ixocreate\ServiceManager\ServiceManagerInterface;
 
 class Package implements PackageInterface
 {
@@ -47,7 +46,9 @@ class Package implements PackageInterface
      */
     public function getConfigProvider(): ?array
     {
-        return null;
+        return [
+            ConfigProvider::class,
+        ];
     }
 
     /**
@@ -71,7 +72,7 @@ class Package implements PackageInterface
      */
     public function getConfigDirectory(): ?string
     {
-        return __DIR__ . '/../config/';
+        return null;
     }
 
     /**
