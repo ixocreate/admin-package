@@ -22,6 +22,7 @@
         "ixocreate/event-package": "^0.1",
         "ixocreate/filter-package": "^0.1",
         "ixocreate/intl-package": "^0.1",
+        "ixocreate/resource-package": "^0.1",
         "ixocreate/template-package": "^0.1",
         "ramsey/uuid": "^3.7",
         "yzalis/identicon": "^1.2"
