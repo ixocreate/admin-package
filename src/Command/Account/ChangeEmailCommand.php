@@ -16,7 +16,7 @@ use Ixocreate\Entity\Type\Type;
 use Ixocreate\Filter\FilterableInterface;
 use Ixocreate\Type\Entity\EmailType;
 use Ixocreate\Validation\ValidatableInterface;
-use Ixocreate\Validation\ViolationCollectorInterface;
+use Ixocreate\Validation\Violation\ViolationCollectorInterface;
 
 final class ChangeEmailCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {

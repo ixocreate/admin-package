@@ -13,7 +13,7 @@ use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\Command\AbstractCommand;
 use Ixocreate\Filter\FilterableInterface;
 use Ixocreate\Validation\ValidatableInterface;
-use Ixocreate\Validation\ViolationCollectorInterface;
+use Ixocreate\Validation\Violation\ViolationCollectorInterface;
 
 final class ChangeLocaleCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {

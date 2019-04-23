@@ -24,7 +24,7 @@ use Ixocreate\Schema\AdditionalSchemaInterface;
 use Ixocreate\Type\Entity\EmailType;
 use Ixocreate\Type\Entity\SchemaType;
 use Ixocreate\Validation\ValidatableInterface;
-use Ixocreate\Validation\ViolationCollectorInterface;
+use Ixocreate\Validation\Violation\ViolationCollectorInterface;
 
 final class CreateUserCommand extends AbstractCommand implements ValidatableInterface
 {

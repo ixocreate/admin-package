@@ -18,7 +18,7 @@ use Ixocreate\CommandBus\Command\AbstractCommand;
 use Ixocreate\Event\EventDispatcher;
 use Ixocreate\Filter\FilterableInterface;
 use Ixocreate\Validation\ValidatableInterface;
-use Ixocreate\Validation\ViolationCollectorInterface;
+use Ixocreate\Validation\Violation\ViolationCollectorInterface;
 
 class ChangePasswordCommand extends AbstractCommand implements FilterableInterface, ValidatableInterface
 {
