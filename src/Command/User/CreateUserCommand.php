@@ -17,7 +17,6 @@ use Ixocreate\Admin\Event\UserEvent;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\CommandBus\CommandInterface;
 use Ixocreate\Entity\Type\Type;
 use Ixocreate\Event\EventDispatcher;
 use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
@@ -27,7 +26,7 @@ use Ixocreate\Type\Entity\SchemaType;
 use Ixocreate\Validation\ValidatableInterface;
 use Ixocreate\Validation\ViolationCollectorInterface;
 
-final class CreateUserCommand extends AbstractCommand implements CommandInterface, ValidatableInterface
+final class CreateUserCommand extends AbstractCommand implements ValidatableInterface
 {
     /**
      * @var UserRepository
@@ -56,6 +55,7 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
 
     /**
      * CreateUserCommand constructor.
+     *
      * @param UserRepository $userRepository
      * @param RoleSubManager $roleSubManager
      * @param EventDispatcher $eventDispatcher
@@ -77,8 +77,8 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
     }
 
     /**
-     * @throws \Exception
      * @return bool
+     * @throws \Exception
      */
     public function execute(): bool
     {
@@ -112,7 +112,7 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
         $user = new User([
             'id' => $this->uuid(),
             'email' => $this->data()['email'],
-            'password' =>  $password,
+            'password' => $password,
             'role' => $this->data()['role'],
             'avatar' => $avatar,
             'createdAt' => $this->createdAt(),
@@ -159,7 +159,8 @@ final class CreateUserCommand extends AbstractCommand implements CommandInterfac
             if (empty($this->data()['password']) || empty($this->data()['passwordRepeat'])) {
                 $violationCollector->add("password", "password.invalid", "Password is invalid");
             } elseif ($this->data()['password'] !== $this->data()['passwordRepeat']) {
-                $violationCollector->add("password", "password.doesnt-match", "Password and repeated password doesn't match");
+                $violationCollector->add("password", "password.doesnt-match",
+                    "Password and repeated password doesn't match");
             }
         }
 
