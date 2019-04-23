@@ -77,8 +77,8 @@ final class CreateUserCommand extends AbstractCommand implements ValidatableInte
     }
 
     /**
-     * @return bool
      * @throws \Exception
+     * @return bool
      */
     public function execute(): bool
     {
@@ -159,8 +159,11 @@ final class CreateUserCommand extends AbstractCommand implements ValidatableInte
             if (empty($this->data()['password']) || empty($this->data()['passwordRepeat'])) {
                 $violationCollector->add("password", "password.invalid", "Password is invalid");
             } elseif ($this->data()['password'] !== $this->data()['passwordRepeat']) {
-                $violationCollector->add("password", "password.doesnt-match",
-                    "Password and repeated password doesn't match");
+                $violationCollector->add(
+                    "password",
+                    "password.doesnt-match",
+                    "Password and repeated password doesn't match"
+                );
             }
         }
 
