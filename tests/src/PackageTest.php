@@ -20,53 +20,27 @@ use PHPUnit\Framework\TestCase;
 class PackageTest extends TestCase
 {
     /**
-     * @var Package
+     * @covers \Ixocreate\Admin\Package
      */
-    private $package;
-
-    public function setUp()
-    {
-        $this->package = new Package();
-    }
-
-    /**
-     * @covers \Ixocreate\Asset\Package
-     */
-    public function testConfigure()
+    public function testPackage()
     {
         $configuratorRegistry = $this->getMockBuilder(ConfiguratorRegistryInterface::class)->getMock();
-        $configuratorRegistry->method('get')->willThrowException(new \InvalidArgumentException('Fail: Package::configure not empty!'));
-        $configuratorRegistry->method('add')->willThrowException(new \InvalidArgumentException('Fail: Package::configure not empty!'));
-
         $serviceRegistry = $this->getMockBuilder(ServiceRegistryInterface::class)->getMock();
-        $serviceRegistry->method('get')->willThrowException(new \InvalidArgumentException('Fail: Package::addService not empty!'));
-        $serviceRegistry->method('add')->willThrowException(new \InvalidArgumentException('Fail: Package::addService not empty!'));
-
         $serviceManager = $this->getMockBuilder(ServiceManagerInterface::class)->getMock();
-        $serviceManager->method('get')->willThrowException(new \InvalidArgumentException('Fail: Package::boot not empty!'));
-        $serviceManager->method('build')->willThrowException(new \InvalidArgumentException('Fail: Package::boot not empty!'));
-        $serviceManager->method('getServiceManagerConfig')->willThrowException(new \InvalidArgumentException('Fail: Package::boot not empty!'));
-        $serviceManager->method('getServiceManagerSetup')->willThrowException(new \InvalidArgumentException('Fail: Package::boot not empty!'));
-        $serviceManager->method('getFactoryResolver')->willThrowException(new \InvalidArgumentException('Fail: Package::boot not empty!'));
-        $serviceManager->method('getServices')->willThrowException(new \InvalidArgumentException('Fail: Package::boot not empty!'));
 
-        $test = new Package();
+        $package = new Package();
+        $package->configure($configuratorRegistry);
+        $package->addServices($serviceRegistry);
+        $package->boot($serviceManager);
 
-        $test->configure($configuratorRegistry);
-        $test->addServices($serviceRegistry);
-        $test->boot($serviceManager);
-
-        $this->assertSame([ConfigProvider::class], $this->package->getConfigProvider());
-        $this->assertSame([AdminBootstrapItem::class], $this->package->getBootstrapItems());
-        $this->assertSame(
-            \dirname(\dirname(__DIR__)) . '/src/../bootstrap',
-            $this->package->getBootstrapDirectory()
-        );
-        $this->assertNull($this->package->getConfigDirectory());
+        $this->assertSame([ConfigProvider::class], $package->getConfigProvider());
+        $this->assertSame([AdminBootstrapItem::class], $package->getBootstrapItems());
+        $this->assertDirectoryExists($package->getBootstrapDirectory());
+        $this->assertNull($package->getConfigDirectory());
         $this->assertSame([
             \Ixocreate\Media\Package::class,
             \Ixocreate\Cms\Package::class,
             \Ixocreate\Intl\Package::class,
-        ], $this->package->getDependencies());
+        ], $package->getDependencies());
     }
 }
