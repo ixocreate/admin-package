@@ -1,6 +1,8 @@
 # Release Notes
 
 ## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.2.1...develop)
+### Changed
+- Upgrade to Database/Entity/Schema Package v0.3
 
 ## [v0.2.1 (2019-04-23)](https://github.com/ixocreate/admin-package/compare/0.2.0...0.2.1)
 

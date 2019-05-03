@@ -12,19 +12,19 @@ namespace Ixocreate\Admin\Entity;
 use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Ixocreate\Admin\RoleInterface;
-use Ixocreate\Admin\Type\RoleType;
-use Ixocreate\Admin\Type\StatusType;
+use Ixocreate\Admin\Schema\Type\RoleType;
+use Ixocreate\Admin\Schema\Type\StatusType;
 use Ixocreate\Admin\UserInterface;
 use Ixocreate\Database\DatabaseEntityInterface;
 use Ixocreate\Entity\Definition;
 use Ixocreate\Entity\DefinitionCollection;
 use Ixocreate\Entity\EntityInterface;
 use Ixocreate\Entity\EntityTrait;
-use Ixocreate\Type\Entity\DateTimeType;
-use Ixocreate\Type\Entity\EmailType;
-use Ixocreate\Type\Entity\SchemaType;
-use Ixocreate\Type\Entity\UuidType;
-use Ixocreate\Type\TypeInterface;
+use Ixocreate\Schema\Type\DateTimeType;
+use Ixocreate\Schema\Type\EmailType;
+use Ixocreate\Schema\Type\SchemaType;
+use Ixocreate\Schema\Type\TypeInterface;
+use Ixocreate\Schema\Type\UuidType;
 
 final class User implements EntityInterface, DatabaseEntityInterface, UserInterface
 {

@@ -18,7 +18,7 @@ use Ixocreate\Database\Repository\RepositoryInterface;
 use Ixocreate\Entity\EntityInterface;
 use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Resource\ResourceSubManager;
-use Ixocreate\Schema\Builder;
+use Ixocreate\Schema\Builder\Builder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

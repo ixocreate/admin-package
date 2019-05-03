@@ -13,8 +13,8 @@ use DateTimeZone;
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Collection\Collection;
 use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Schema\BuilderInterface;
-use Ixocreate\Schema\Elements\SelectElement;
+use Ixocreate\Schema\Builder\BuilderInterface;
+use Ixocreate\Schema\Element\SelectElement;
 use Ixocreate\Schema\Schema;
 use Ixocreate\Schema\SchemaInterface;
 

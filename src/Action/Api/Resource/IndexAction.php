@@ -21,8 +21,8 @@ use Ixocreate\Database\Repository\RepositoryInterface;
 use Ixocreate\Entity\EntityInterface;
 use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Resource\ResourceSubManager;
-use Ixocreate\Schema\Listing\ElementInterface;
-use Ixocreate\Schema\Listing\ListSchemaInterface;
+use Ixocreate\Schema\ListElement\ListElementInterface;
+use Ixocreate\Schema\ListSchema\ListSchemaInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -132,7 +132,7 @@ final class IndexAction implements MiddlewareInterface
                     if (!$listSchema->has($filterName)) {
                         continue;
                     }
-                    /** @var ElementInterface $element */
+                    /** @var ListElementInterface $element */
                     $element = $listSchema->elements()[$filterName];
                     if (!$element->searchable()) {
                         continue;

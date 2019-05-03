@@ -21,8 +21,8 @@ use Ixocreate\Admin\Resource\Schema\UpdateSchemaAwareInterface;
 use Ixocreate\Admin\UserInterface;
 use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Resource\ResourceSubManager;
-use Ixocreate\Schema\Builder;
-use Ixocreate\Schema\Listing\ListSchema;
+use Ixocreate\Schema\Builder\Builder;
+use Ixocreate\Schema\ListSchema\ListSchema;
 use Ixocreate\Schema\Schema;
 use Ixocreate\Schema\SchemaAwareInterface;
 

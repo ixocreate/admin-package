@@ -13,10 +13,10 @@ use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\Entity\Type\Type;
-use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Type\Entity\SchemaType;
+use Ixocreate\Schema\SchemaSubManager;
+use Ixocreate\Schema\Type\SchemaType;
+use Ixocreate\Schema\Type\Type;
 
 class ChangeAttributesCommand extends AbstractCommand
 {
@@ -26,7 +26,7 @@ class ChangeAttributesCommand extends AbstractCommand
     private $adminConfig;
 
     /**
-     * @var AdditionalSchemaSubManager
+     * @var SchemaSubManager
      */
     private $additionalSchemaSubManager;
 
@@ -38,10 +38,10 @@ class ChangeAttributesCommand extends AbstractCommand
     /**
      * ChangeAttributesCommand constructor.
      * @param AdminConfig $adminConfig
-     * @param AdditionalSchemaSubManager $additionalSchemaSubManager
+     * @param SchemaSubManager $additionalSchemaSubManager
      * @param UserRepository $userRepository
      */
-    public function __construct(AdminConfig $adminConfig, AdditionalSchemaSubManager $additionalSchemaSubManager, UserRepository $userRepository)
+    public function __construct(AdminConfig $adminConfig, SchemaSubManager $additionalSchemaSubManager, UserRepository $userRepository)
     {
         $this->adminConfig = $adminConfig;
         $this->additionalSchemaSubManager = $additionalSchemaSubManager;
@@ -63,7 +63,7 @@ class ChangeAttributesCommand extends AbstractCommand
 
         if ($additionalSchema !== null) {
             $type = Type::create($data['data'], SchemaType::class, [
-                'provider' => ['class' => AdditionalSchemaSubManager::class, 'name' => $additionalSchema::serviceName()],
+                'provider' => ['class' => SchemaSubManager::class, 'name' => $additionalSchema::serviceName()],
             ]);
 
             $user = $user->with('accountAttributes', $type);

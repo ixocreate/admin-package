@@ -7,15 +7,15 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Type;
+namespace Ixocreate\Admin\Schema\Type;
 
 use Doctrine\DBAL\Types\StringType;
-use Ixocreate\Entity\Type\AbstractType;
-use Ixocreate\Schema\BuilderInterface;
-use Ixocreate\Schema\ElementInterface;
-use Ixocreate\Schema\ElementProviderInterface;
-use Ixocreate\Schema\Elements\SelectElement;
-use Ixocreate\Type\DatabaseTypeInterface;
+use Ixocreate\Schema\Builder\BuilderInterface;
+use Ixocreate\Schema\Element\ElementInterface;
+use Ixocreate\Schema\Element\ElementProviderInterface;
+use Ixocreate\Schema\Element\SelectElement;
+use Ixocreate\Schema\Type\AbstractType;
+use Ixocreate\Schema\Type\DatabaseTypeInterface;
 
 final class StatusType extends AbstractType implements DatabaseTypeInterface, ElementProviderInterface
 {

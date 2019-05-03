@@ -7,11 +7,9 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin;
+namespace Ixocreate\Admin\Schema\Type;
 
-use Ixocreate\Admin\Type\RoleType;
-use Ixocreate\Admin\Type\StatusType;
-use Ixocreate\Type\TypeConfigurator;
+use Ixocreate\Schema\Type\TypeConfigurator;
 
 /** @var TypeConfigurator $type */
 $type->addType(RoleType::class);

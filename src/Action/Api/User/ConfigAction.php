@@ -12,16 +12,16 @@ namespace Ixocreate\Admin\Action\Api\User;
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Admin\Type\RoleType;
-use Ixocreate\Admin\Type\StatusType;
-use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
+use Ixocreate\Admin\Schema\Type\RoleType;
+use Ixocreate\Admin\Schema\Type\StatusType;
 use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Schema\Builder;
-use Ixocreate\Schema\Elements\TextElement;
-use Ixocreate\Schema\ElementSubManager;
+use Ixocreate\Schema\Builder\Builder;
+use Ixocreate\Schema\Element\ElementSubManager;
+use Ixocreate\Schema\Element\TextElement;
 use Ixocreate\Schema\Schema;
 use Ixocreate\Schema\SchemaInterface;
-use Ixocreate\Type\TypeSubManager;
+use Ixocreate\Schema\SchemaSubManager;
+use Ixocreate\Schema\Type\TypeSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -45,7 +45,7 @@ final class ConfigAction implements MiddlewareInterface
     private $userRepository;
 
     /**
-     * @var AdditionalSchemaSubManager
+     * @var SchemaSubManager
      */
     private $additionalSchemaSubManager;
 
@@ -60,7 +60,7 @@ final class ConfigAction implements MiddlewareInterface
      * @param TypeSubManager $typeSubManager
      * @param ElementSubManager $elementSubManager
      * @param UserRepository $userRepository
-     * @param AdditionalSchemaSubManager $additionalSchemaSubManager
+     * @param SchemaSubManager $additionalSchemaSubManager
      * @param AdminConfig $adminConfig
      */
     public function __construct(
@@ -68,7 +68,7 @@ final class ConfigAction implements MiddlewareInterface
         TypeSubManager $typeSubManager,
         ElementSubManager $elementSubManager,
         UserRepository $userRepository,
-        AdditionalSchemaSubManager $additionalSchemaSubManager,
+        SchemaSubManager $additionalSchemaSubManager,
         AdminConfig $adminConfig
     ) {
         $this->builder = $builder;

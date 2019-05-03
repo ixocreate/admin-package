@@ -17,12 +17,12 @@ use Ixocreate\Admin\Event\UserEvent;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\Entity\Type\Type;
 use Ixocreate\Event\EventDispatcher;
-use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Type\Entity\EmailType;
-use Ixocreate\Type\Entity\SchemaType;
+use Ixocreate\Schema\SchemaSubManager;
+use Ixocreate\Schema\Type\EmailType;
+use Ixocreate\Schema\Type\SchemaType;
+use Ixocreate\Schema\Type\Type;
 use Ixocreate\Validation\ValidatableInterface;
 use Ixocreate\Validation\Violation\ViolationCollectorInterface;
 
@@ -49,7 +49,7 @@ final class CreateUserCommand extends AbstractCommand implements ValidatableInte
     private $adminConfig;
 
     /**
-     * @var AdditionalSchemaSubManager
+     * @var SchemaSubManager
      */
     private $additionalSchemaSubManager;
 
@@ -60,14 +60,14 @@ final class CreateUserCommand extends AbstractCommand implements ValidatableInte
      * @param RoleSubManager $roleSubManager
      * @param EventDispatcher $eventDispatcher
      * @param AdminConfig $adminConfig
-     * @param AdditionalSchemaSubManager $additionalSchemaSubManager
+     * @param SchemaSubManager $additionalSchemaSubManager
      */
     public function __construct(
         UserRepository $userRepository,
         RoleSubManager $roleSubManager,
         EventDispatcher $eventDispatcher,
         AdminConfig $adminConfig,
-        AdditionalSchemaSubManager $additionalSchemaSubManager
+        SchemaSubManager $additionalSchemaSubManager
     ) {
         $this->userRepository = $userRepository;
         $this->roleSubManager = $roleSubManager;
@@ -98,7 +98,7 @@ final class CreateUserCommand extends AbstractCommand implements ValidatableInte
         if ($additionalSchema !== null) {
             $content = [
                 '__receiver__' => [
-                    'receiver' => AdditionalSchemaSubManager::class,
+                    'receiver' => SchemaSubManager::class,
                     'options' => [
                         'additionalSchema' => $additionalSchema::serviceName(),
                     ],

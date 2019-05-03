@@ -11,9 +11,9 @@ namespace Ixocreate\Admin\Action\Account;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
-use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Schema\Builder;
+use Ixocreate\Schema\Builder\Builder;
+use Ixocreate\Schema\SchemaSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -32,7 +32,7 @@ class ConfigAction implements MiddlewareInterface
     private $builder;
 
     /**
-     * @var AdditionalSchemaSubManager
+     * @var SchemaSubManager
      */
     private $additionalSchemaSubManager;
 
@@ -40,9 +40,9 @@ class ConfigAction implements MiddlewareInterface
      * ConfigAction constructor.
      * @param AdminConfig $adminConfig
      * @param Builder $builder
-     * @param AdditionalSchemaSubManager $additionalSchemaSubManager
+     * @param SchemaSubManager $additionalSchemaSubManager
      */
-    public function __construct(AdminConfig $adminConfig, Builder $builder, AdditionalSchemaSubManager $additionalSchemaSubManager)
+    public function __construct(AdminConfig $adminConfig, Builder $builder, SchemaSubManager $additionalSchemaSubManager)
     {
         $this->adminConfig = $adminConfig;
         $this->builder = $builder;
