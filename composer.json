@@ -13,7 +13,7 @@
         "ext-json": "*",
         "dflydev/fig-cookies": "^1.0",
         "firebase/php-jwt": "^5.0",
-        "ixocreate/application": "^0.1",
+        "ixocreate/application": "^0.2",
         "ixocreate/admin-frontend": "^0.1",
         "ixocreate/command-bus-package": "^0.2",
         "ixocreate/database-package": "^0.1",
