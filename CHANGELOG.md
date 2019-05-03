@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.2.1...develop)
 ### Changed
-- Upgrade to Database/Entity/Schema Package v0.3
+- Upgrade to Resource Package v0.2
 - Upgrade Publish config to Application v0.2
 ### Added
 - noindex to admin templates
