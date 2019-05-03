@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.2.1...develop)
 
+### Changed
+- Upgrade Publish config
+- add noindex to admin templates
+
 ## [v0.2.1 (2019-04-23)](https://github.com/ixocreate/admin-package/compare/0.2.0...0.2.1)
 
 ### Fixed
