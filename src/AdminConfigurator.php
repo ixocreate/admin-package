@@ -19,8 +19,8 @@ use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
 use Ixocreate\Application\Configurator\ConfiguratorInterface;
 use Ixocreate\Application\Service\ServiceRegistryInterface;
 use Ixocreate\Application\Service\SubManagerConfigurator;
-use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\Schema\AdditionalSchemaInterface;
+use Ixocreate\Schema\SchemaSubManager;
 use Ixocreate\ServiceManager\Factory\AutowireFactory;
 use Zend\Stdlib\SplPriorityQueue;
 
@@ -96,7 +96,7 @@ final class AdminConfigurator implements ConfiguratorInterface
             DashboardWidgetProviderInterface::class
         );
         $this->additionalSchemaSubManagerConfigurator = new SubManagerConfigurator(
-            AdditionalSchemaSubManager::class,
+            SchemaSubManager::class,
             AdditionalSchemaInterface::class
         );
 

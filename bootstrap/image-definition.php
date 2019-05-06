@@ -7,9 +7,8 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin;
+namespace Ixocreate\Admin\ImageDefinition;
 
-use Ixocreate\Admin\ImageDefinition\AdminThumb;
 use Ixocreate\Media\ImageDefinition\ImageDefinitionConfigurator;
 
 /** @var ImageDefinitionConfigurator $imageDefinition */

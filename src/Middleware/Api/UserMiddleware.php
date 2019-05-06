@@ -13,7 +13,7 @@ use Ixocreate\Admin\Entity\SessionData;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Repository\UserRepository;
-use Ixocreate\Type\Entity\UuidType;
+use Ixocreate\Schema\Type\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;

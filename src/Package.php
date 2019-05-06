@@ -64,7 +64,7 @@ class Package implements PackageInterface
      */
     public function getBootstrapDirectory(): ?string
     {
-        return __DIR__ . '/../bootstrap/';
+        return __DIR__ . '/../bootstrap';
     }
 
     /**

@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Resource;
 
 use Ixocreate\Admin\UserInterface;
-use Ixocreate\Schema\BuilderInterface;
+use Ixocreate\Schema\Builder\BuilderInterface;
 
 interface AdditionalSchemasInterface
 {

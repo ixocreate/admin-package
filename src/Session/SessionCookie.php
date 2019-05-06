@@ -14,7 +14,7 @@ use Dflydev\FigCookies\SetCookie;
 use Firebase\JWT\JWT;
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\SessionData;
-use Ixocreate\Type\Entity\UuidType;
+use Ixocreate\Schema\Type\UuidType;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

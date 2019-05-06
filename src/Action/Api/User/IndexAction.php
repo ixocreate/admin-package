@@ -13,10 +13,10 @@ use Doctrine\Common\Collections\Criteria;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Entity\EntityInterface;
-use Ixocreate\Schema\ElementInterface;
-use Ixocreate\Schema\Listing\DateTimeElement;
-use Ixocreate\Schema\Listing\ListSchema;
-use Ixocreate\Schema\Listing\TextElement;
+use Ixocreate\Schema\Element\ElementInterface;
+use Ixocreate\Schema\ListElement\DateTimeListElement;
+use Ixocreate\Schema\ListElement\TextListElement;
+use Ixocreate\Schema\ListSchema\ListSchema;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -37,12 +37,12 @@ final class IndexAction implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $listSchema = (new ListSchema())
-            ->withAddedElement(new TextElement('email', 'Email'))
-            ->withAddedElement(new TextElement('role', 'Role'))
-            ->withAddedElement(new DateTimeElement('createdAt', 'Created', true, false))
-            ->withAddedElement(new DateTimeElement('updatedAt', 'Updated', true, false))
-            ->withAddedElement(new DateTimeElement('lastLoginAt', 'Last Login', true, false))
-            ->withAddedElement(new DateTimeElement('lastActivityAt', 'Last Activity', true, false))
+            ->withAddedElement(new TextListElement('email', 'Email'))
+            ->withAddedElement(new TextListElement('role', 'Role'))
+            ->withAddedElement(new DateTimeListElement('createdAt', 'Created', true, false))
+            ->withAddedElement(new DateTimeListElement('updatedAt', 'Updated', true, false))
+            ->withAddedElement(new DateTimeListElement('lastLoginAt', 'Last Login', true, false))
+            ->withAddedElement(new DateTimeListElement('lastActivityAt', 'Last Activity', true, false))
             ->withDefaultSorting('createdAt', 'desc');
 
         $criteria = new Criteria();

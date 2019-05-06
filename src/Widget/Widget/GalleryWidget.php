@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Widget\Widget;
 
 use Ixocreate\Admin\Widget\WidgetInterface;
-use Ixocreate\Media\Type\ImageType;
+use Ixocreate\Media\Schema\Type\ImageType;
 
 final class GalleryWidget implements WidgetInterface
 {

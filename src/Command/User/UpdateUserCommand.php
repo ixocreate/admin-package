@@ -14,11 +14,11 @@ use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Event\UserEvent;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\Entity\Type\Type;
 use Ixocreate\Event\EventDispatcher;
-use Ixocreate\Schema\AdditionalSchema\AdditionalSchemaSubManager;
 use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Type\Entity\SchemaType;
+use Ixocreate\Schema\SchemaSubManager;
+use Ixocreate\Schema\Type\SchemaType;
+use Ixocreate\Schema\Type\Type;
 
 class UpdateUserCommand extends AbstractCommand
 {
@@ -28,7 +28,7 @@ class UpdateUserCommand extends AbstractCommand
     private $adminConfig;
 
     /**
-     * @var AdditionalSchemaSubManager
+     * @var SchemaSubManager
      */
     private $additionalSchemaSubManager;
 
@@ -45,13 +45,13 @@ class UpdateUserCommand extends AbstractCommand
     /**
      * UpdateUserCommand constructor.
      * @param AdminConfig $adminConfig
-     * @param AdditionalSchemaSubManager $additionalSchemaSubManager
+     * @param SchemaSubManager $additionalSchemaSubManager
      * @param UserRepository $userRepository
      * @param EventDispatcher $eventDispatcher
      */
     public function __construct(
         AdminConfig $adminConfig,
-        AdditionalSchemaSubManager $additionalSchemaSubManager,
+        SchemaSubManager $additionalSchemaSubManager,
         UserRepository $userRepository,
         EventDispatcher $eventDispatcher
     ) {
@@ -83,7 +83,7 @@ class UpdateUserCommand extends AbstractCommand
         if ($additionalSchema !== null) {
             $content = [
                 '__receiver__' => [
-                    'receiver' => AdditionalSchemaSubManager::class,
+                    'receiver' => SchemaSubManager::class,
                     'options' => [
                         'additionalSchema' => $additionalSchema::serviceName(),
                     ],

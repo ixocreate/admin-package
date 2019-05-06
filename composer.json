@@ -8,21 +8,18 @@
             "name": "IXOCREATE"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "php": "^7.1",
         "ext-json": "*",
         "dflydev/fig-cookies": "^1.0",
         "firebase/php-jwt": "^5.0",
-        "ixocreate/application": "^0.1",
+        "ixocreate/application": "^0.2",
         "ixocreate/admin-frontend": "^0.1",
         "ixocreate/command-bus-package": "^0.2",
-        "ixocreate/database-package": "^0.1",
         "ixocreate/event-package": "^0.1",
         "ixocreate/filter-package": "^0.1",
         "ixocreate/intl-package": "^0.1",
-        "ixocreate/resource-package": "^0.1",
+        "ixocreate/resource-package": "^0.2",
         "ixocreate/template-package": "^0.1",
         "ramsey/uuid": "^3.7",
         "yzalis/identicon": "^1.2"

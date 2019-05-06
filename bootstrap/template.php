@@ -7,9 +7,8 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin;
+namespace Ixocreate\Admin\Template;
 
-use Ixocreate\Admin\Template\AdminExtension;
 use Ixocreate\Template\TemplateConfigurator;
 
 /** @var TemplateConfigurator $template */

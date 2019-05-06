@@ -12,9 +12,9 @@ namespace Ixocreate\Admin\Command\Account;
 use Doctrine\Common\Collections\Criteria;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\Command\AbstractCommand;
-use Ixocreate\Entity\Type\Type;
 use Ixocreate\Filter\FilterableInterface;
-use Ixocreate\Type\Entity\EmailType;
+use Ixocreate\Schema\Type\EmailType;
+use Ixocreate\Schema\Type\Type;
 use Ixocreate\Validation\ValidatableInterface;
 use Ixocreate\Validation\Violation\ViolationCollectorInterface;
 
