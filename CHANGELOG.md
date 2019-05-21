@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.0...develop)
 
+## [v0.3.1 (2019-05-21)](https://github.com/ixocreate/admin-package/compare/0.3.0...0.3.1)
+### Added
+- Asset package dependency
+
 ## [v0.3.0 (2019-05-06)](https://github.com/ixocreate/admin-package/compare/0.2.1...0.3.0)
 ### Changed
 - Upgrade to Resource Package v0.2
