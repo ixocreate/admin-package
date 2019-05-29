@@ -37,7 +37,7 @@ final class XsrfProtectionMiddleware implements MiddlewareInterface
             return $this->createInvalidXsrfTokenResponse();
         }
 
-        $xsrfToken = \implode("", $request->getHeader("X-XSRF-TOKEN"));
+        $xsrfToken = \implode('', $request->getHeader('X-XSRF-TOKEN'));
 
         if ($request->getCookieParams()['XSRF-TOKEN'] !== $xsrfToken) {
             return $this->createInvalidXsrfTokenResponse();
@@ -57,6 +57,6 @@ final class XsrfProtectionMiddleware implements MiddlewareInterface
 
     private function createInvalidXsrfTokenResponse(): ApiErrorResponse
     {
-        return new ApiErrorResponse("invalid_xsrf", [], 400);
+        return new ApiErrorResponse('invalid_xsrf', [], 400);
     }
 }

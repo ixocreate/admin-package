@@ -32,7 +32,7 @@ final class EnforceApiResponseMiddleware implements MiddlewareInterface
         }
 
         if (!($response instanceof ApiErrorResponse) && !($response instanceof ApiSuccessResponse)) {
-            $response = new ApiErrorResponse("bad_request", [], 400);
+            $response = new ApiErrorResponse('bad_request', [], 400);
         }
 
         return $response;

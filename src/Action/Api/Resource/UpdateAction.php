@@ -77,7 +77,7 @@ final class UpdateAction implements MiddlewareInterface
         $repository = $this->repositorySubManager->get($resource->repository());
 
         /** @var EntityInterface $entity */
-        $entity = $repository->find($request->getAttribute("id"));
+        $entity = $repository->find($request->getAttribute('id'));
 
         $data = $request->getParsedBody();
         foreach ($data as $name => $value) {

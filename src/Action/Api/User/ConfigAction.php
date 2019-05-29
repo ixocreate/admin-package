@@ -97,17 +97,17 @@ final class ConfigAction implements MiddlewareInterface
             ->withAddedElement(
                 $this->builder->create(TextElement::class, 'email')
                     ->withRequired(true)
-                    ->withLabel("Email")
+                    ->withLabel('Email')
             )
             ->withAddedElement(
                 $this->builder->create(TextElement::class, 'password')
                     ->withRequired(true)
-                    ->withLabel("Password")
+                    ->withLabel('Password')
             )
             ->withAddedElement(
                 $this->builder->create(TextElement::class, 'passwordRepeat')
                     ->withRequired(true)
-                    ->withLabel("Password Repeat")
+                    ->withLabel('Password Repeat')
             )
             ->withAddedElement(
                 $this->typeSubManager->get(RoleType::class)->provideElement($this->builder)->withRequired(true)->withName('role')->withLabel('Role')
@@ -134,7 +134,7 @@ final class ConfigAction implements MiddlewareInterface
             ->withAddedElement(
                 $this->builder->create(TextElement::class, 'email')
                     ->withRequired(true)
-                    ->withLabel("Email")
+                    ->withLabel('Email')
             )
             ->withAddedElement($this->typeSubManager->get(RoleType::class)->provideElement($this->builder)->withRequired(true)->withName('role')->withLabel('Role'))
             ->withAddedElement($this->typeSubManager->get(StatusType::class)->provideElement($this->builder)->withRequired(true)->withName('status')->withLabel('Status'));

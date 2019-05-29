@@ -92,7 +92,7 @@ final class DetailAction implements MiddlewareInterface
         $repository = $this->repositorySubManager->get($resource->repository());
 
         /** @var EntityInterface $entity */
-        $entity = $repository->find($request->getAttribute("id"));
+        $entity = $repository->find($request->getAttribute('id'));
 
         return new ApiDetailResponse(
             $resource,

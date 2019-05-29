@@ -55,8 +55,8 @@ class WidgetsAction implements MiddlewareInterface
         /** @var WidgetsInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
-        $position = $request->getAttribute("position");
-        $type = $request->getAttribute("type");
+        $position = $request->getAttribute('position');
+        $type = $request->getAttribute('type');
 
         switch ($type) {
             case 'list':

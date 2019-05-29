@@ -69,12 +69,12 @@ final class CreateUserCommand extends Command implements CommandInterface
             }
         } else {
             $password = \mb_substr(\base64_encode(\sha1(\uniqid())), 0, 10);
-            $output->writeln("Password: " . $password);
+            $output->writeln('Password: ' . $password);
         }
 
         $data = [
-            'email' => $input->getArgument("email"),
-            'role' => $input->getArgument("role"),
+            'email' => $input->getArgument('email'),
+            'role' => $input->getArgument('role'),
             'password' => $password,
             'passwordRepeat' => $password,
             'status' => 'active',
@@ -89,6 +89,6 @@ final class CreateUserCommand extends Command implements CommandInterface
 
     public static function getCommandName()
     {
-        return "admin:create-user";
+        return 'admin:create-user';
     }
 }

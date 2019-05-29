@@ -70,7 +70,7 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
      */
     public static function serviceName(): string
     {
-        return "localeAttributes";
+        return 'localeAttributes';
     }
 
     /**

@@ -48,8 +48,8 @@ final class SessionData implements EntityInterface
     protected static function createDefinitions() : DefinitionCollection
     {
         return new DefinitionCollection([
-            new Definition("userId", UuidType::class, true, true),
-            new Definition("xsrfToken", UuidType::class, false, true),
+            new Definition('userId', UuidType::class, true, true),
+            new Definition('xsrfToken', UuidType::class, false, true),
         ]);
     }
 }

@@ -34,7 +34,7 @@ final class DeleteAction implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var EntityInterface $entity */
-        $entity = $this->userRepository->find($request->getAttribute("id"));
+        $entity = $this->userRepository->find($request->getAttribute('id'));
 
         if ($entity === null) {
             return new ApiErrorResponse('admin_user_notfound', 'User not found');

@@ -33,7 +33,7 @@ final class AdminConfigFactory implements FactoryInterface
         /** @var Config $config */
         $config = $container->get(Config::class);
 
-        $uri = new Uri($config->get("admin.uri"));
+        $uri = new Uri($config->get('admin.uri'));
         if (empty($uri->getHost())) {
             /** @var ApplicationUri $projectUri */
             $projectUri = $container->get(ApplicationUri::class);

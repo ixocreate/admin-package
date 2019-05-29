@@ -47,7 +47,7 @@ final class LoginAction implements MiddlewareInterface
     {
         $data = $request->getParsedBody();
         if (empty($data['email']) || empty($data['password'])) {
-            return new ApiErrorResponse("invalid_credentials", ['Empty e-mail or password!']);
+            return new ApiErrorResponse('invalid_credentials', ['Empty e-mail or password!']);
         }
 
         /** @var User $user */
@@ -55,11 +55,11 @@ final class LoginAction implements MiddlewareInterface
         if (empty($user)) {
             // dummy verify to prevent timing analysis
             \password_verify('password', '$2y$10$Uw3MyeyL91oOwt9axt4hYeP5yyY9P487G5DEUVnVsdzMdnXCmeXYS');
-            return new ApiErrorResponse("invalid_credentials", ['Invalid e-mail or password!']);
+            return new ApiErrorResponse('invalid_credentials', ['Invalid e-mail or password!']);
         }
 
         if (!\password_verify($data['password'], $user->password())) {
-            return new ApiErrorResponse("invalid_credentials", ['Invalid e-mail or password!']);
+            return new ApiErrorResponse('invalid_credentials', ['Invalid e-mail or password!']);
         }
 
         $response = new ApiSuccessResponse();

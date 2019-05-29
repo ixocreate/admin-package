@@ -38,11 +38,11 @@ final class ChangeLocaleCommand extends AbstractCommand implements FilterableInt
     {
         $user = $this->userRepository->find($this->dataValue('userId'));
 
-        $user = $user->with("locale", $this->dataValue("locale"));
-        $user = $user->with("numberLocale", $this->dataValue("numberLocale"));
-        $user = $user->with("dateLocale", $this->dataValue("dateLocale"));
-        $user = $user->with("timeLocale", $this->dataValue("timeLocale"));
-        $user = $user->with("timezone", $this->dataValue("timezone"));
+        $user = $user->with('locale', $this->dataValue('locale'));
+        $user = $user->with('numberLocale', $this->dataValue('numberLocale'));
+        $user = $user->with('dateLocale', $this->dataValue('dateLocale'));
+        $user = $user->with('timeLocale', $this->dataValue('timeLocale'));
+        $user = $user->with('timezone', $this->dataValue('timezone'));
         $this->userRepository->save($user);
 
         return true;
@@ -66,7 +66,7 @@ final class ChangeLocaleCommand extends AbstractCommand implements FilterableInt
      */
     public static function serviceName(): string
     {
-        return "admin.account-change-locale";
+        return 'admin.account-change-locale';
     }
 
     /**
@@ -76,11 +76,11 @@ final class ChangeLocaleCommand extends AbstractCommand implements FilterableInt
     {
         $user = $this->userRepository->find($this->dataValue('userId'));
         if (empty($user)) {
-            $violationCollector->add("user", "invalid_user");
+            $violationCollector->add('user', 'invalid_user');
         }
 
-        //if (!empty($this->dataValue("locale")) && !in_array($this->dataValue("locale"), \Locale::)) {
-        //    $violationCollector->add("locale", "invalid_locale");
+        //if (!empty($this->dataValue('locale')) && !in_array($this->dataValue('locale'), \Locale::)) {
+        //    $violationCollector->add('locale', 'invalid_locale');
         //}
     }
 }

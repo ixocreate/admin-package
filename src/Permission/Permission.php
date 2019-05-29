@@ -36,7 +36,7 @@ final class Permission
             return true;
         }
 
-        if (\in_array("*", $role->getPermissions())) {
+        if (\in_array('*', $role->getPermissions())) {
             return true;
         }
 

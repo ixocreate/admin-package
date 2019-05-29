@@ -28,7 +28,7 @@ final class StatusType extends AbstractType implements DatabaseTypeInterface, El
     {
         if (!\in_array($value, ['active', 'inactive'])) {
             //TODO Exception
-            throw new \Exception("invalid type");
+            throw new \Exception('invalid type');
         }
 
         return $value;

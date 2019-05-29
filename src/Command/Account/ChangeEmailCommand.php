@@ -41,7 +41,7 @@ final class ChangeEmailCommand extends AbstractCommand implements FilterableInte
     {
         $user = $this->userRepository->find($this->dataValue('userId'));
 
-        $user = $user->with("email", $this->dataValue("email"));
+        $user = $user->with('email', $this->dataValue('email'));
         $this->userRepository->save($user);
 
         return true;
@@ -62,7 +62,7 @@ final class ChangeEmailCommand extends AbstractCommand implements FilterableInte
      */
     public static function serviceName(): string
     {
-        return "admin.account-change-email";
+        return 'admin.account-change-email';
     }
 
     /**
@@ -72,27 +72,27 @@ final class ChangeEmailCommand extends AbstractCommand implements FilterableInte
     {
         $user = $this->userRepository->find($this->dataValue('userId'));
         if (empty($user)) {
-            $violationCollector->add("user", "invalid_user");
+            $violationCollector->add('user', 'invalid_user');
         }
 
         try {
-            Type::create($this->dataValue("email"), EmailType::class);
+            Type::create($this->dataValue('email'), EmailType::class);
         } catch (\Exception $exception) {
-            $violationCollector->add("email", "invalid_email");
+            $violationCollector->add('email', 'invalid_email');
         }
 
-        if ($this->dataValue("email") !== $this->dataValue("emailRepeat")) {
-            $violationCollector->add("emailRepeat", "invalid_email");
+        if ($this->dataValue('email') !== $this->dataValue('emailRepeat')) {
+            $violationCollector->add('emailRepeat', 'invalid_email');
         }
 
         $criteria = Criteria::create();
-        $criteria->where(Criteria::expr()->eq('email', $this->dataValue("email")));
-        $criteria->andWhere(Criteria::expr()->neq("id", $user->id()));
+        $criteria->where(Criteria::expr()->eq('email', $this->dataValue('email')));
+        $criteria->andWhere(Criteria::expr()->neq('id', $user->id()));
         $criteria->setMaxResults(1);
 
         $result = $this->userRepository->matching($criteria);
         if ($result->count() > 0) {
-            $violationCollector->add("email", "email_already_taken");
+            $violationCollector->add('email', 'email_already_taken');
         }
     }
 }

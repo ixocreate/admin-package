@@ -77,7 +77,7 @@ class ChangeAttributesCommand extends AbstractCommand
 
     public static function serviceName(): string
     {
-        return "admin.account-change-attributes";
+        return 'admin.account-change-attributes';
     }
 
     /**
