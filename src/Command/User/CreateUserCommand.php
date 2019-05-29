@@ -162,7 +162,7 @@ final class CreateUserCommand extends AbstractCommand implements ValidatableInte
                 $violationCollector->add(
                     'password',
                     'password.doesnt-match',
-                    'Password and repeated password doesn't match'
+                    'Password and repeated password doesn\'t match'
                 );
             }
         }
