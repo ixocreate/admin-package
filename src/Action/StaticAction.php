@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -40,21 +40,21 @@ final class StaticAction implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $file = $this->adminConfig->adminBuildPath() . $request->getAttribute("file", "");
+        $file = $this->adminConfig->adminBuildPath() . $request->getAttribute('file', '');
 
         if (!(\file_exists($file) && !\is_dir($file))) {
             return new Response\EmptyResponse(404);
         }
 
-        if (empty($this->adminConfig->adminBuildFiles()[$request->getAttribute("file", "")])) {
+        if (empty($this->adminConfig->adminBuildFiles()[$request->getAttribute('file', '')])) {
             return new Response\EmptyResponse(404);
         }
 
-        $fileInfo = $this->adminConfig->adminBuildFiles()[$request->getAttribute("file", "")];
+        $fileInfo = $this->adminConfig->adminBuildFiles()[$request->getAttribute('file', '')];
 
         $response = new Response(new Stream($file));
-        $response = $response->withAddedHeader("Content-Type", $fileInfo['contentType']);
-        $response = $response->withAddedHeader("Content-Length", $fileInfo['filesize']);
+        $response = $response->withAddedHeader('Content-Type', $fileInfo['contentType']);
+        $response = $response->withAddedHeader('Content-Length', $fileInfo['filesize']);
 
         return $response;
     }

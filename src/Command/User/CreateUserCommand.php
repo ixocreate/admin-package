@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -149,7 +149,7 @@ final class CreateUserCommand extends AbstractCommand implements ValidatableInte
             ]);
 
             if ($count > 0) {
-                $violationCollector->add("email", "email.already-in-use", "Email is already in use");
+                $violationCollector->add('email', 'email.already-in-use', 'Email is already in use');
             }
         } catch (\Exception $e) {
             $violationCollector->add('email', 'email.invalid', 'Email is invalid');
@@ -157,18 +157,18 @@ final class CreateUserCommand extends AbstractCommand implements ValidatableInte
 
         if (empty($this->data()['passwordHash'])) {
             if (empty($this->data()['password']) || empty($this->data()['passwordRepeat'])) {
-                $violationCollector->add("password", "password.invalid", "Password is invalid");
+                $violationCollector->add('password', 'password.invalid', 'Password is invalid');
             } elseif ($this->data()['password'] !== $this->data()['passwordRepeat']) {
                 $violationCollector->add(
-                    "password",
-                    "password.doesnt-match",
-                    "Password and repeated password doesn't match"
+                    'password',
+                    'password.doesnt-match',
+                    'Password and repeated password doesn\'t match'
                 );
             }
         }
 
         if (!$this->roleSubManager->has($this->data()['role'])) {
-            $violationCollector->add("role", "role.invalid", "Role is invalid");
+            $violationCollector->add('role', 'role.invalid', 'Role is invalid');
         }
     }
 

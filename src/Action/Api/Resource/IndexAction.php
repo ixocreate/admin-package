@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -66,7 +66,7 @@ final class IndexAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $resource = $this->resourceSubManager->get($request->getAttribute("resource"));
+        $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
         $middlewarePipe = new MiddlewarePipe();
 
@@ -117,14 +117,14 @@ final class IndexAction implements MiddlewareInterface
                 $sorting[$value] = $queryParams['orderDirection'] ?? 'asc';
             } elseif ($key === 'orderDirection') {
                 // see orderBy
-            } elseif (\mb_substr($key, 0, 4) === "sort") {
+            } elseif (\mb_substr($key, 0, 4) === 'sort') {
                 foreach ($value as $sortName => $sortValue) {
                     if (!$listSchema->has($sortName)) {
                         continue;
                     }
                     $sorting[$sortName] = $sortValue;
                 }
-            } elseif (\mb_substr($key, 0, 6) === "filter") {
+            } elseif (\mb_substr($key, 0, 6) === 'filter') {
                 foreach ($value as $filterName => $filterValue) {
                     if (!\is_string($filterValue)) {
                         continue;
@@ -139,7 +139,7 @@ final class IndexAction implements MiddlewareInterface
                     }
                     $filterExpressions[] = $criteria::expr()->contains($element->name(), $filterValue);
                 }
-            } elseif ($key === "search" && \is_string($value)) {
+            } elseif ($key === 'search' && \is_string($value)) {
                 foreach ($listSchema->elements() as $element) {
                     if (!$element->searchable()) {
                         continue;
@@ -147,13 +147,13 @@ final class IndexAction implements MiddlewareInterface
                     $filterExpressions[] = $criteria::expr()->contains($element->name(), $value);
                 }
                 continue;
-            } elseif ($key === "offset") {
+            } elseif ($key === 'offset') {
                 $value = (int)$value;
                 if (!empty($value)) {
                     $criteria->setFirstResult($value);
                 }
                 continue;
-            } elseif ($key === "limit") {
+            } elseif ($key === 'limit') {
                 $value = (int)$value;
                 if (!empty($value)) {
                     $criteria->setMaxResults(\min($value, 500));

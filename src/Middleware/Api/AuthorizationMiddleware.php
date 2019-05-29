@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -56,7 +56,7 @@ final class AuthorizationMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        if ($user->status()->value() !== "active") {
+        if ($user->status()->value() !== 'active') {
             return $handler->handle($request);
         }
 

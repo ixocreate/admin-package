@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -38,7 +38,7 @@ final class ChangePasswordCommand extends AbstractCommand implements FilterableI
     {
         $user = $this->userRepository->find($this->dataValue('userId'));
 
-        $user = $user->with("password", \password_hash($this->dataValue("password"), PASSWORD_DEFAULT));
+        $user = $user->with('password', \password_hash($this->dataValue('password'), PASSWORD_DEFAULT));
         $this->userRepository->save($user);
 
         return true;
@@ -60,7 +60,7 @@ final class ChangePasswordCommand extends AbstractCommand implements FilterableI
      */
     public static function serviceName(): string
     {
-        return "admin.account-change-email";
+        return 'admin.account-change-email';
     }
 
     /**
@@ -70,23 +70,23 @@ final class ChangePasswordCommand extends AbstractCommand implements FilterableI
     {
         $user = $this->userRepository->find($this->dataValue('userId'));
         if (empty($user)) {
-            $violationCollector->add("user", "invalid_user");
+            $violationCollector->add('user', 'invalid_user');
         }
 
-        if (empty($this->dataValue("passwordOld"))) {
-            $violationCollector->add("passwordOld", "invalid_password_old");
+        if (empty($this->dataValue('passwordOld'))) {
+            $violationCollector->add('passwordOld', 'invalid_password_old');
         }
 
-        if (empty($this->dataValue("password"))) {
-            $violationCollector->add("password", "invalid_password");
+        if (empty($this->dataValue('password'))) {
+            $violationCollector->add('password', 'invalid_password');
         }
 
-        if ($this->dataValue("password") !== $this->dataValue("passwordRepeat")) {
-            $violationCollector->add("password", "invalid_password");
+        if ($this->dataValue('password') !== $this->dataValue('passwordRepeat')) {
+            $violationCollector->add('password', 'invalid_password');
         }
 
-        if (!\password_verify($this->dataValue("passwordOld"), $user->password())) {
-            $violationCollector->add("passwordOld", "invalid_password_old");
+        if (!\password_verify($this->dataValue('passwordOld'), $user->password())) {
+            $violationCollector->add('passwordOld', 'invalid_password_old');
         }
     }
 }

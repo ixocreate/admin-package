@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -34,7 +34,7 @@ final class DetailAction implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         /** @var User $entity */
-        $entity = $this->userRepository->find($request->getAttribute("id"));
+        $entity = $this->userRepository->find($request->getAttribute('id'));
 
         if ($entity === null || $entity->deletedAt() !== null) {
             return new ApiErrorResponse('admin_user_notfound', 'User not found');

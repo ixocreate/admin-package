@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -18,7 +18,7 @@ use Ixocreate\Database\Repository\RepositoryInterface;
 use Ixocreate\Entity\EntityInterface;
 use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Resource\ResourceSubManager;
-use Ixocreate\Schema\Builder\Builder;
+use Ixocreate\Schema\Builder\BuilderInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -39,7 +39,7 @@ final class DetailAction implements MiddlewareInterface
     private $middlewareSubManager;
 
     /**
-     * @var Builder
+     * @var BuilderInterface
      */
     private $builder;
 
@@ -48,10 +48,17 @@ final class DetailAction implements MiddlewareInterface
      */
     private $resourceSubManager;
 
+    /**
+     * DetailAction constructor.
+     * @param RepositorySubManager $repositorySubManager
+     * @param MiddlewareSubManager $middlewareSubManager
+     * @param BuilderInterface $builder
+     * @param ResourceSubManager $resourceSubManager
+     */
     public function __construct(
         RepositorySubManager $repositorySubManager,
         MiddlewareSubManager $middlewareSubManager,
-        Builder $builder,
+        BuilderInterface $builder,
         ResourceSubManager $resourceSubManager
     ) {
         $this->repositorySubManager = $repositorySubManager;
@@ -85,7 +92,7 @@ final class DetailAction implements MiddlewareInterface
         $repository = $this->repositorySubManager->get($resource->repository());
 
         /** @var EntityInterface $entity */
-        $entity = $repository->find($request->getAttribute("id"));
+        $entity = $repository->find($request->getAttribute('id'));
 
         return new ApiDetailResponse(
             $resource,

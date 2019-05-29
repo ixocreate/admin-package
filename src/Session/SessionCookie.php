@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -43,22 +43,22 @@ final class SessionCookie
             'HS512'
         );
 
-        $cookie = SetCookie::create("ixoSid")
+        $cookie = SetCookie::create('ixoSid')
             ->withValue($jwt)
-            ->withPath("/")
+            ->withPath('/')
             ->withHttpOnly(true)
-            ->withSecure(($request->getUri()->getScheme() === "https"));
+            ->withSecure(($request->getUri()->getScheme() === 'https'));
 
         return FigResponseCookies::set($response, $cookie);
     }
 
     public function createXsrfCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData): ResponseInterface
     {
-        $cookie = SetCookie::create("XSRF-TOKEN")
+        $cookie = SetCookie::create('XSRF-TOKEN')
             ->withValue($sessionData->xsrfToken()->value())
-            ->withPath("/")
+            ->withPath('/')
             ->withHttpOnly(false)
-            ->withSecure(($request->getUri()->getScheme() === "https"));
+            ->withSecure(($request->getUri()->getScheme() === 'https'));
 
         return FigResponseCookies::set($response, $cookie);
     }

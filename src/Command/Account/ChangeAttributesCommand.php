@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -77,7 +77,7 @@ class ChangeAttributesCommand extends AbstractCommand
 
     public static function serviceName(): string
     {
-        return "admin.account-change-attributes";
+        return 'admin.account-change-attributes';
     }
 
     /**

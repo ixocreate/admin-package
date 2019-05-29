@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -88,7 +88,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
                 continue;
             }
 
-            $name = \str_replace($this->adminBuildPath(), "", $name);
+            $name = \str_replace($this->adminBuildPath(), '', $name);
 
             $this->config['adminBuildFiles'][$name] = [
                 'contentType' => $this->getContentType($file->getExtension()),

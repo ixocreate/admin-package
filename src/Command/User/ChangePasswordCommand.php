@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -107,22 +107,22 @@ class ChangePasswordCommand extends AbstractCommand implements FilterableInterfa
         if (empty($this->dataValue('user')) || !$this->dataValue('user') instanceof UserInterface) {
             $user = $this->userRepository->find($this->dataValue('userId'));
             if (empty($user)) {
-                $violationCollector->add("user", "invalid_user");
+                $violationCollector->add('user', 'invalid_user');
             }
         }
 
-        if ($this->dataValue("skipPasswordOld") === true) {
-            if (empty($this->dataValue("passwordOld"))) {
-                $violationCollector->add("passwordOld", "invalid_password_old");
-            } elseif (!\password_verify($this->dataValue("passwordOld"), $user->password())) {
-                $violationCollector->add("passwordOld", "invalid_password_old");
+        if ($this->dataValue('skipPasswordOld') === true) {
+            if (empty($this->dataValue('passwordOld'))) {
+                $violationCollector->add('passwordOld', 'invalid_password_old');
+            } elseif (!\password_verify($this->dataValue('passwordOld'), $user->password())) {
+                $violationCollector->add('passwordOld', 'invalid_password_old');
             }
         }
 
-        if (empty($this->dataValue("password"))) {
-            $violationCollector->add("password", "invalid_password");
-        } elseif ($this->dataValue("password") !== $this->dataValue("passwordRepeat")) {
-            $violationCollector->add("password", "invalid_password");
+        if (empty($this->dataValue('password'))) {
+            $violationCollector->add('password', 'invalid_password');
+        } elseif ($this->dataValue('password') !== $this->dataValue('passwordRepeat')) {
+            $violationCollector->add('password', 'invalid_password');
         }
     }
 

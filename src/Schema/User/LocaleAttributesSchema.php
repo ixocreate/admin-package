@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -70,7 +70,7 @@ final class LocaleAttributesSchema implements AdditionalSchemaInterface
      */
     public static function serviceName(): string
     {
-        return "localeAttributes";
+        return 'localeAttributes';
     }
 
     /**

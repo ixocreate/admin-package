@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -55,8 +55,8 @@ class WidgetsAction implements MiddlewareInterface
         /** @var WidgetsInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
-        $position = $request->getAttribute("position");
-        $type = $request->getAttribute("type");
+        $position = $request->getAttribute('position');
+        $type = $request->getAttribute('type');
 
         switch ($type) {
             case 'list':

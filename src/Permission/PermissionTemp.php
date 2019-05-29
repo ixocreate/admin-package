@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -29,7 +29,7 @@ final class PermissionTemp
             return true;
         }
 
-        if (\in_array("*", $this->role->getPermissions())) {
+        if (\in_array('*', $this->role->getPermissions())) {
             return true;
         }
 

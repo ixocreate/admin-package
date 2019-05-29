@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -36,7 +36,7 @@ final class Permission
             return true;
         }
 
-        if (\in_array("*", $role->getPermissions())) {
+        if (\in_array('*', $role->getPermissions())) {
             return true;
         }
 

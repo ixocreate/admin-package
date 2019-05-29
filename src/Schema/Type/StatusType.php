@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -28,7 +28,7 @@ final class StatusType extends AbstractType implements DatabaseTypeInterface, El
     {
         if (!\in_array($value, ['active', 'inactive'])) {
             //TODO Exception
-            throw new \Exception("invalid type");
+            throw new \Exception('invalid type');
         }
 
         return $value;

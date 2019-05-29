@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -12,7 +12,7 @@ namespace Ixocreate\Admin\Action\Account;
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Schema\Builder\Builder;
+use Ixocreate\Schema\Builder\BuilderInterface;
 use Ixocreate\Schema\SchemaSubManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -27,7 +27,7 @@ class ConfigAction implements MiddlewareInterface
     private $adminConfig;
 
     /**
-     * @var Builder
+     * @var BuilderInterface
      */
     private $builder;
 
@@ -39,10 +39,10 @@ class ConfigAction implements MiddlewareInterface
     /**
      * ConfigAction constructor.
      * @param AdminConfig $adminConfig
-     * @param Builder $builder
+     * @param BuilderInterface $builder
      * @param SchemaSubManager $additionalSchemaSubManager
      */
-    public function __construct(AdminConfig $adminConfig, Builder $builder, SchemaSubManager $additionalSchemaSubManager)
+    public function __construct(AdminConfig $adminConfig, BuilderInterface $builder, SchemaSubManager $additionalSchemaSubManager)
     {
         $this->adminConfig = $adminConfig;
         $this->builder = $builder;

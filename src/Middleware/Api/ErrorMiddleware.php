@@ -1,7 +1,7 @@
 <?php
 /**
  * @link https://github.com/ixocreate
- * @copyright IXOCREATE GmbH
+ * @copyright IXOLIT GmbH
  * @license MIT License
  */
 
@@ -45,7 +45,7 @@ final class ErrorMiddleware implements MiddlewareInterface
     private function handleThrowable(\Throwable $e, ServerRequestInterface $request): ResponseInterface
     {
         // TODO: only expose error message in local env
-        return new ApiErrorResponse("server-error", [$e->getMessage() . " :: " . $e->getFile() . ':' . $e->getLine() . '---' . $e->getTraceAsString()], 500);
+        return new ApiErrorResponse('server-error', [$e->getMessage() . ' :: ' . $e->getFile() . ':' . $e->getLine() . '---' . $e->getTraceAsString()], 500);
     }
 
     private function createErrorHandler(): callable
