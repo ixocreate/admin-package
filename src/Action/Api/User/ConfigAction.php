@@ -15,8 +15,7 @@ use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Admin\Schema\Type\RoleType;
 use Ixocreate\Admin\Schema\Type\StatusType;
 use Ixocreate\Schema\AdditionalSchemaInterface;
-use Ixocreate\Schema\Builder\Builder;
-use Ixocreate\Schema\Element\ElementSubManager;
+use Ixocreate\Schema\Builder\BuilderInterface;
 use Ixocreate\Schema\Element\TextElement;
 use Ixocreate\Schema\Schema;
 use Ixocreate\Schema\SchemaInterface;
@@ -30,7 +29,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 final class ConfigAction implements MiddlewareInterface
 {
     /**
-     * @var Builder
+     * @var BuilderInterface
      */
     private $builder;
 
@@ -56,17 +55,15 @@ final class ConfigAction implements MiddlewareInterface
 
     /**
      * ConfigAction constructor.
-     * @param Builder $builder
+     * @param BuilderInterface $builder
      * @param TypeSubManager $typeSubManager
-     * @param ElementSubManager $elementSubManager
      * @param UserRepository $userRepository
      * @param SchemaSubManager $additionalSchemaSubManager
      * @param AdminConfig $adminConfig
      */
     public function __construct(
-        Builder $builder,
+        BuilderInterface $builder,
         TypeSubManager $typeSubManager,
-        ElementSubManager $elementSubManager,
         UserRepository $userRepository,
         SchemaSubManager $additionalSchemaSubManager,
         AdminConfig $adminConfig

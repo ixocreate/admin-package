@@ -21,7 +21,7 @@ use Ixocreate\Admin\Resource\Schema\UpdateSchemaAwareInterface;
 use Ixocreate\Admin\UserInterface;
 use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Resource\ResourceSubManager;
-use Ixocreate\Schema\Builder\Builder;
+use Ixocreate\Schema\Builder\BuilderInterface;
 use Ixocreate\Schema\ListSchema\ListSchema;
 use Ixocreate\Schema\Schema;
 use Ixocreate\Schema\SchemaAwareInterface;
@@ -34,11 +34,11 @@ final class ResourceProvider implements ClientConfigProviderInterface
     private $resourceSubManager;
 
     /**
-     * @var Builder
+     * @var BuilderInterface
      */
     private $builder;
 
-    public function __construct(ResourceSubManager $resourceSubManager, Builder $builder)
+    public function __construct(ResourceSubManager $resourceSubManager, BuilderInterface $builder)
     {
         $this->resourceSubManager = $resourceSubManager;
         $this->builder = $builder;
