@@ -1,6 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.0...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.2...develop)
+
+## [v0.3.2 (2019-05-29)](https://github.com/ixocreate/admin-package/compare/0.3.1...0.3.2)
+### Changed
+- Builder dependencies to BuilderInterface
+### Fixed
+- User create violation message escaping
 
 ## [v0.3.1 (2019-05-21)](https://github.com/ixocreate/admin-package/compare/0.3.0...0.3.1)
 ### Added
