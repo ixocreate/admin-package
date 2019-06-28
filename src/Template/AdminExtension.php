@@ -73,6 +73,20 @@ class AdminExtension implements ExtensionInterface
             'styles' => null,
         ];
 
+        $version = \sha1(\uniqid());
+
+        try {
+            $version = Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
+        } catch (\Exception $exception) {
+            try {
+                $version = Versions::getVersion('ixocreate/admin-frontend');
+            } catch (\Exception $exception) {
+            }
+        }
+
+        if (\mb_strpos($version, '@') !== false) {
+            $version = \mb_substr($version, \mb_strpos($version, '@') + 1);
+        }
 
         foreach (\array_keys($this->adminConfig->adminBuildFiles()) as $name) {
             foreach ($scripts as $scriptName => $value) {
@@ -80,7 +94,7 @@ class AdminExtension implements ExtensionInterface
                     continue;
                 }
                 if (\mb_substr($name, 0, \mb_strlen($scriptName)) === $scriptName) {
-                    $scripts[$scriptName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' . Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
+                    $scripts[$scriptName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' . $version;
 
                     continue 2;
                 }
@@ -92,7 +106,7 @@ class AdminExtension implements ExtensionInterface
                 }
 
                 if (\mb_substr($name, 0, \mb_strlen($stylesName)) === $stylesName) {
-                    $styles[$stylesName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' . Versions::getVersion(Versions::ROOT_PACKAGE_NAME);
+                    $styles[$stylesName] = $this->adminRouter->generateUri('admin.static', ['file' => $name]) . '?v=' . $version;
                     continue 2;
                 }
             }
