@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.3...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.4...develop)
+
+## [v0.3.4 (2019-06-28)](https://github.com/ixocreate/admin-package/compare/0.3.3...0.3.4)
+### Fixed
+- ImageDefinition namespace
 
 ## [v0.3.3 (2019-06-28)](https://github.com/ixocreate/admin-package/compare/0.3.2...0.3.3)
 ### Fixed
