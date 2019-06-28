@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.2...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.3...develop)
+
+## [v0.3.3 (2019-06-28)](https://github.com/ixocreate/admin-package/compare/0.3.2...0.3.3)
+### Fixed
+- Version string appending to admin assets
 
 ## [v0.3.2 (2019-05-29)](https://github.com/ixocreate/admin-package/compare/0.3.1...0.3.2)
 ### Changed
