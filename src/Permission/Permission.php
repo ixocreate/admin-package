@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Permission;
 
-use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Permission\Voter\VoterInterface;
 use Ixocreate\Admin\Permission\Voter\VoterSubManager;
 use Ixocreate\Admin\RoleInterface;
@@ -72,7 +71,6 @@ final class Permission
             if (!$voter->vote($this->user, $subject, $params)) {
                 return false;
             }
-
         }
 
         if ($counter > 0) {

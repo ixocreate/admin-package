@@ -79,6 +79,7 @@ final class AdminConfigurator implements ConfiguratorInterface
      * @var SubManagerConfigurator
      */
     private $additionalSchemaSubManagerConfigurator;
+
     /**
      * @var SubManagerConfigurator
      */

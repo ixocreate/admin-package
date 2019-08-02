@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link https://github.com/ixocreate
+ * @copyright IXOLIT GmbH
+ * @license MIT License
+ */
+
 declare(strict_types=1);
 
 namespace Ixocreate\Test\Admin\Permission;
@@ -28,13 +34,13 @@ class PermissionTest extends TestCase
                 case 'own-article':
                     $mock->method('supports')->willReturn(true);
                     $mock->method('vote')->willReturnCallback(function ($user, $subject) {
-                        return ($subject instanceof DateTimeInterface);
+                        return $subject instanceof DateTimeInterface;
                     });
                     break;
                 case 'special-check':
                     $mock->method('supports')->willReturn(true);
                     $mock->method('vote')->willReturnCallback(function ($user, $subject) {
-                        return ($subject instanceof DateTimeInterface);
+                        return $subject instanceof DateTimeInterface;
                     });
                     break;
                 case 'something-else':
@@ -51,8 +57,7 @@ class PermissionTest extends TestCase
 
     private function createUser(RoleInterface $role): UserInterface
     {
-        return new class ($role) implements UserInterface
-        {
+        return new class($role) implements UserInterface {
             /**
              * @var RoleInterface
              */
@@ -75,9 +80,7 @@ class PermissionTest extends TestCase
 
     private function createAdminRole(): RoleInterface
     {
-        return new class implements RoleInterface, VoterProviderInterface
-        {
-
+        return new class() implements RoleInterface, VoterProviderInterface {
             public static function serviceName(): string
             {
                 return 'test-role';
@@ -97,7 +100,7 @@ class PermissionTest extends TestCase
             public function getPermissions(): array
             {
                 return [
-                    '*'
+                    '*',
                 ];
             }
 
@@ -107,7 +110,7 @@ class PermissionTest extends TestCase
             public function voters(): array
             {
                 return [
-                    'own-article'
+                    'own-article',
                 ];
             }
         };
@@ -115,9 +118,7 @@ class PermissionTest extends TestCase
 
     private function createUserRole(): RoleInterface
     {
-        return new class implements RoleInterface, VoterProviderInterface
-        {
-
+        return new class() implements RoleInterface, VoterProviderInterface {
             public static function serviceName(): string
             {
                 return 'test-role';
@@ -140,7 +141,7 @@ class PermissionTest extends TestCase
                     'users.*',
                     'resource.index',
                     'resource.view',
-                    'some.thing.to'
+                    'some.thing.to',
                 ];
             }
 
@@ -152,7 +153,7 @@ class PermissionTest extends TestCase
                 return [
                     'own-article',
                     'special-check',
-                    'something-else'
+                    'something-else',
                 ];
             }
         };
@@ -160,9 +161,7 @@ class PermissionTest extends TestCase
 
     private function createGuestRole(): RoleInterface
     {
-        return new class implements RoleInterface
-        {
-
+        return new class() implements RoleInterface {
             public static function serviceName(): string
             {
                 return 'test-role';
@@ -190,9 +189,7 @@ class PermissionTest extends TestCase
 
     private function createSomethingElseRole(): RoleInterface
     {
-        return new class implements RoleInterface, VoterProviderInterface
-        {
-
+        return new class() implements RoleInterface, VoterProviderInterface {
             public static function serviceName(): string
             {
                 return 'test-role';
@@ -222,7 +219,7 @@ class PermissionTest extends TestCase
             public function voters(): array
             {
                 return [
-                    'something-else'
+                    'something-else',
                 ];
             }
         };
@@ -271,7 +268,6 @@ class PermissionTest extends TestCase
 
         $permission = new Permission($this->createUser($this->createUserRole()));
         $this->assertTrue($permission->can(new DateTime()));
-
     }
 
     public function testNoSupport()
