@@ -2,7 +2,7 @@
 
 ## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.6...develop)
 
-## [v0.3.5 (2019-07-18)](https://github.com/ixocreate/admin-package/compare/0.3.5...0.3.6)
+## [v0.3.6 (2019-08-02)](https://github.com/ixocreate/admin-package/compare/0.3.5...0.3.6)
 ### Added
 - added advanced permission system
 
