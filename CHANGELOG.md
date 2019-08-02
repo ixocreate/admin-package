@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.6...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.7...develop)
+
+## [v0.3.7 (2019-08-02)](https://github.com/ixocreate/admin-package/compare/0.3.6...0.3.7)
+### Fix
+- added missing VoterSubManager
 
 ## [v0.3.6 (2019-08-02)](https://github.com/ixocreate/admin-package/compare/0.3.5...0.3.6)
 ### Added
