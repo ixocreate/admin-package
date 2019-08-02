@@ -7,11 +7,12 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Test\Application;
+namespace Ixocreate\Test\Admin;
 
 use Ixocreate\Admin\AdminBootstrapItem;
 use Ixocreate\Admin\ConfigProvider;
 use Ixocreate\Admin\Package;
+use Ixocreate\Admin\Permission\Voter\VoterSubManager;
 use Ixocreate\Application\Configurator\ConfiguratorRegistryInterface;
 use Ixocreate\Application\Service\ServiceRegistryInterface;
 use Ixocreate\ServiceManager\ServiceManagerInterface;
@@ -27,6 +28,7 @@ class PackageTest extends TestCase
         $configuratorRegistry = $this->getMockBuilder(ConfiguratorRegistryInterface::class)->getMock();
         $serviceRegistry = $this->getMockBuilder(ServiceRegistryInterface::class)->getMock();
         $serviceManager = $this->getMockBuilder(ServiceManagerInterface::class)->getMock();
+        $serviceManager->method('get')->willReturn($this->createMock(VoterSubManager::class));
 
         $package = new Package();
         $package->configure($configuratorRegistry);
