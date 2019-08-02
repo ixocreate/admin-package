@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin;
 
+use Ixocreate\Admin\Permission\Permission;
+use Ixocreate\Admin\Permission\Voter\VoterSubManager;
 use Ixocreate\Application\Configurator\ConfiguratorRegistryInterface;
 use Ixocreate\Application\Package\PackageInterface;
 use Ixocreate\Application\Service\ServiceRegistryInterface;
@@ -56,7 +58,7 @@ class Package implements PackageInterface
      */
     public function boot(ServiceManagerInterface $serviceManager): void
     {
-        //
+        Permission::initialize($serviceManager->get(VoterSubManager::class));
     }
 
     /**

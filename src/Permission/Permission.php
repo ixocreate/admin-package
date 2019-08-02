@@ -9,29 +9,79 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Permission;
 
-use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Permission\Voter\VoterInterface;
+use Ixocreate\Admin\Permission\Voter\VoterSubManager;
+use Ixocreate\Admin\RoleInterface;
+use Ixocreate\Admin\UserInterface;
+use Ixocreate\Admin\VoterProviderInterface;
 
 final class Permission
 {
     /**
-     * @var User
+     * @var UserInterface
      */
     private $user;
 
-    public function __construct(User $user)
+    /**
+     * @var VoterSubManager
+     */
+    private static $voterSubManager;
+
+    public function __construct(UserInterface $user)
     {
         $this->user = $user;
     }
 
-    public function withUser(User $user): Permission
+    /**
+     * @param VoterSubManager $voterSubManager
+     */
+    public static function initialize(VoterSubManager $voterSubManager): void
+    {
+        self::$voterSubManager = $voterSubManager;
+    }
+
+    public function withUser(UserInterface $user): Permission
     {
         return new Permission($user);
     }
 
-    public function can(string $permission): bool
+    public function can($subject, array $params = []): bool
     {
-        $role = $this->user->role()->getRole();
+        $role = $this->user->getRole();
 
+        if (\is_string($subject)) {
+            return $this->evaluateString($role, $subject);
+        }
+
+        if (!($role instanceof VoterProviderInterface)) {
+            return false;
+        }
+
+        $counter = 0;
+
+        foreach ($role->voters() as $voter) {
+            /** @var VoterInterface $voter */
+            $voter = self::$voterSubManager->get($voter);
+
+            if (!$voter->supports($subject)) {
+                continue;
+            }
+
+            $counter++;
+            if (!$voter->vote($this->user, $subject, $params)) {
+                return false;
+            }
+        }
+
+        if ($counter > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function evaluateString(RoleInterface $role, string $permission): bool
+    {
         if (\in_array($permission, $role->getPermissions())) {
             return true;
         }

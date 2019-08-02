@@ -12,6 +12,8 @@ namespace Ixocreate\Admin;
 use Ixocreate\Admin\Config\AdminProjectConfig;
 use Ixocreate\Admin\Config\Client\ClientConfigProviderSubManager;
 use Ixocreate\Admin\Config\Navigation\Group;
+use Ixocreate\Admin\Permission\Voter\VoterInterface;
+use Ixocreate\Admin\Permission\Voter\VoterSubManager;
 use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\Admin\Schema\User\LocaleAttributesSchema;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderInterface;
@@ -79,6 +81,11 @@ final class AdminConfigurator implements ConfiguratorInterface
     private $additionalSchemaSubManagerConfigurator;
 
     /**
+     * @var SubManagerConfigurator
+     */
+    private $voterSubManagerConfigurator;
+
+    /**
      * AdminConfigurator constructor.
      */
     public function __construct()
@@ -98,6 +105,10 @@ final class AdminConfigurator implements ConfiguratorInterface
         $this->additionalSchemaSubManagerConfigurator = new SubManagerConfigurator(
             SchemaSubManager::class,
             AdditionalSchemaInterface::class
+        );
+        $this->voterSubManagerConfigurator = new SubManagerConfigurator(
+            VoterSubManager::class,
+            VoterInterface::class
         );
 
         $this->addLocaleAttributesSchema(LocaleAttributesSchema::class);
@@ -302,6 +313,24 @@ final class AdminConfigurator implements ConfiguratorInterface
     }
 
     /**
+     * @param string $voter
+     * @param string $factory
+     */
+    public function addVoter(string $voter, string $factory = AutowireFactory::class): void
+    {
+        $this->voterSubManagerConfigurator->addFactory($voter, $factory);
+    }
+
+    /**
+     * @param string $directory
+     * @param bool $recursive
+     */
+    public function addVoterDirectory(string $directory, bool $recursive = true): void
+    {
+        $this->voterSubManagerConfigurator->addDirectory($directory, $recursive);
+    }
+
+    /**
      * @param string $name
      * @param int $priority
      * @return Group
@@ -384,5 +413,6 @@ final class AdminConfigurator implements ConfiguratorInterface
         $this->roleSubManagerConfigurator->registerService($serviceRegistry);
         $this->dashboardWidgetSubManagerConfigurator->registerService($serviceRegistry);
         $this->additionalSchemaSubManagerConfigurator->registerService($serviceRegistry);
+        $this->voterSubManagerConfigurator->registerService($serviceRegistry);
     }
 }

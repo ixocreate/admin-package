@@ -1,6 +1,14 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.4...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.6...develop)
+
+## [v0.3.6 (2019-08-02)](https://github.com/ixocreate/admin-package/compare/0.3.5...0.3.6)
+### Added
+- added advanced permission system
+
+## [v0.3.5 (2019-07-18)](https://github.com/ixocreate/admin-package/compare/0.3.4...0.3.5)
+### Changed
+- move AdminThumb definition to media-package
 
 ## [v0.3.4 (2019-06-28)](https://github.com/ixocreate/admin-package/compare/0.3.3...0.3.4)
 ### Fixed
