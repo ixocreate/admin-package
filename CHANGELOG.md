@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.7...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.8...develop)
+
+## [v0.3.8 (2019-08-03)](https://github.com/ixocreate/admin-package/compare/0.3.7...0.3.8)
+### Changed
+- composer update
 
 ## [v0.3.7 (2019-08-02)](https://github.com/ixocreate/admin-package/compare/0.3.6...0.3.7)
 ### Fix

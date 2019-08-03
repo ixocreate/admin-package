@@ -55,7 +55,7 @@ final class SessionCookie
     public function createXsrfCookie(ServerRequestInterface $request, ResponseInterface $response, SessionData $sessionData): ResponseInterface
     {
         $cookie = SetCookie::create('XSRF-TOKEN')
-            ->withValue($sessionData->xsrfToken()->value())
+            ->withValue((string) $sessionData->xsrfToken()->value())
             ->withPath('/')
             ->withHttpOnly(false)
             ->withSecure(($request->getUri()->getScheme() === 'https'));
