@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.8...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.9...develop)
+
+## [v0.3.9 (2019-08-13)](https://github.com/ixocreate/admin-package/compare/0.3.8...0.3.9)
+### Fixed
+- fix path generation in AdminConfig
 
 ## [v0.3.8 (2019-08-03)](https://github.com/ixocreate/admin-package/compare/0.3.7...0.3.8)
 ### Changed
