@@ -14,7 +14,7 @@
     "require": {
         "php": "^7.1",
         "ext-json": "*",
-        "dflydev/fig-cookies": "^2.0",
+        "dflydev/fig-cookies": "^1.0",
         "firebase/php-jwt": "^5.0",
         "ixocreate/application": "^0.2",
         "ixocreate/admin-frontend": "^0.1",
