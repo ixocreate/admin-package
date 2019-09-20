@@ -18,7 +18,7 @@
         "firebase/php-jwt": "^5.0",
         "ixocreate/application": "^0.2",
         "ixocreate/admin-frontend": "^0.1",
-        "ixocreate/asset-package": "^0.1",
+        "ixocreate/asset-package": "^0.2",
         "ixocreate/command-bus-package": "^0.2",
         "ixocreate/event-package": "^0.1",
         "ixocreate/filter-package": "^0.1",
