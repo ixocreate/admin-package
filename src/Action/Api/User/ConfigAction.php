@@ -114,7 +114,7 @@ final class ConfigAction implements MiddlewareInterface
             )
             ->withAddedElement(
                 $this->typeSubManager->get(StatusType::class)->provideElement($this->builder)->withRequired(true)->withName('status')->withLabel('Status')
-        );
+            );
 
         if ($this->receiveUserAttributesSchema() !== null) {
             foreach (($this->receiveUserAttributesSchema()->additionalSchema($this->builder))->elements() as $element) {
