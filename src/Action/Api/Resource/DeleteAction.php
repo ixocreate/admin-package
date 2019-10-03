@@ -10,7 +10,9 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Resource\Action\DeleteActionAwareInterface;
+use Ixocreate\Admin\Response\ApiErrorResponse;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
@@ -55,6 +57,12 @@ final class DeleteAction implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
+
+        /** @var Permission $permission */
+        $permission = $request->getAttribute(Permission::class);
+        if (!$permission->can('resource.' . $resource->serviceName() . '.delete')) {
+            return new ApiErrorResponse('forbidden', [], 403);
+        }
 
         $middlewarePipe = new MiddlewarePipe();
 

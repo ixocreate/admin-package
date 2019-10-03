@@ -1,6 +1,8 @@
 # Release Notes
 
 ## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.11...develop)
+### Added
+- added permission to resource
 
 ## [v0.3.11 (2019-09-20)](https://github.com/ixocreate/admin-package/compare/0.3.10...0.3.11)
 ### Changed

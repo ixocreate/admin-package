@@ -11,8 +11,10 @@ namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Doctrine\Common\Collections\Criteria;
 use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Resource\Action\IndexActionAwareInterface;
 use Ixocreate\Admin\Resource\Schema\ListSchemaAwareInterface;
+use Ixocreate\Admin\Response\ApiErrorResponse;
 use Ixocreate\Admin\Response\ApiListResponse;
 use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
 use Ixocreate\Database\EntityManager\Factory\EntityManagerSubManager;
@@ -66,7 +68,14 @@ final class IndexAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        /** @var ResourceInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
+
+        /** @var Permission $permission */
+        $permission = $request->getAttribute(Permission::class);
+        if (!$permission->can('resource.' . $resource->serviceName() . '.index')) {
+            return new ApiErrorResponse('forbidden', [], 403);
+        }
 
         $middlewarePipe = new MiddlewarePipe();
 

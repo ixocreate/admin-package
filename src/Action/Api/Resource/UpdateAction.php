@@ -10,7 +10,9 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Resource\Action\UpdateActionAwareInterface;
+use Ixocreate\Admin\Response\ApiErrorResponse;
 use Ixocreate\Admin\Response\ApiSuccessResponse;
 use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
 use Ixocreate\Database\Repository\Factory\RepositorySubManager;
@@ -57,6 +59,12 @@ final class UpdateAction implements MiddlewareInterface
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
 
         $middlewarePipe = new MiddlewarePipe();
+
+        /** @var Permission $permission */
+        $permission = $request->getAttribute(Permission::class);
+        if (!$permission->can('resource.' . $resource->serviceName() . '.update')) {
+            return new ApiErrorResponse('forbidden', [], 403);
+        }
 
         if ($resource instanceof UpdateActionAwareInterface) {
             /** @var MiddlewareInterface $action */

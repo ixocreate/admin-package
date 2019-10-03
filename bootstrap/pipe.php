@@ -55,11 +55,11 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->before(AuthorizationGuardMiddleware::class);
             $group->before(ActivityMiddleware::class);
 
-            $group->get('/config', ConfigAction::class, "admin.api.config");
+            $group->get('/config', ConfigAction::class, "admin.api.basic.config");
 
-            $group->get('/auth/user', UserAction::class, "admin.api.auth.user");
+            $group->get('/auth/user', UserAction::class, "admin.api.basic.auth.user");
 
-            $group->get('/user', \Ixocreate\Admin\Action\Api\User\IndexAction::class, 'admin.api.user.index');
+            $group->get('/user', \Ixocreate\Admin\Action\Api\User\IndexAction::class, 'admin.api.edituser.user.index');
             $group->post('/user', \Ixocreate\Admin\Action\Api\User\CreateAction::class, 'admin.api.user.create');
             $group->get('/user/{id}', \Ixocreate\Admin\Action\Api\User\DetailAction::class, 'admin.api.user.detail');
             $group->get('/user/config', \Ixocreate\Admin\Action\Api\User\ConfigAction::class, 'admin.api.user.config');
@@ -67,7 +67,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->delete('/user/{id}', \Ixocreate\Admin\Action\Api\User\DeleteAction::class, 'admin.api.user.delete');
             $group->post('/user/resetPassword', ChangeEmailAction::class, 'admin.api.user.resetPassword');
 
-            $group->get('/account/config', \Ixocreate\Admin\Action\Account\ConfigAction::class, 'admin.api.account.config');
+            $group->get('/account/config', \Ixocreate\Admin\Action\Account\ConfigAction::class, 'admin.api.basic.account.config');
             $group->patch('/account/email', ChangeEmailAction::class, 'admin.api.account.email');
             $group->patch('/account/locale', ChangeLocaleAction::class, 'admin.api.account.locale');
             $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
