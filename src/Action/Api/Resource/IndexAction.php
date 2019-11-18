@@ -11,8 +11,10 @@ namespace Ixocreate\Admin\Action\Api\Resource;
 
 use Doctrine\Common\Collections\Criteria;
 use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Resource\Action\IndexActionAwareInterface;
 use Ixocreate\Admin\Resource\Schema\ListSchemaAwareInterface;
+use Ixocreate\Admin\Response\ApiErrorResponse;
 use Ixocreate\Admin\Response\ApiListResponse;
 use Ixocreate\Application\Http\Middleware\MiddlewareSubManager;
 use Ixocreate\Database\EntityManager\Factory\EntityManagerSubManager;
@@ -66,7 +68,14 @@ final class IndexAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        /** @var ResourceInterface $resource */
         $resource = $this->resourceSubManager->get($request->getAttribute('resource'));
+
+        /** @var Permission $permission */
+        $permission = $request->getAttribute(Permission::class);
+        if (!$permission->can('resource.' . $resource->serviceName() . '.index')) {
+            return new ApiErrorResponse('forbidden', [], 403);
+        }
 
         $middlewarePipe = new MiddlewarePipe();
 
@@ -94,7 +103,29 @@ final class IndexAction implements MiddlewareInterface
 
         /** @var RepositoryInterface $repository */
         $repository = $this->repositorySubManager->get($resource->repository());
+
+        $queryParams = $request->getQueryParams();
+        $items = [];
+
+        /**
+         * Apply preselected item values filter from query string
+         * ?preselectFilter=id&preselectFilterValues[0]=id1&preselectFilterValues[1]=id2
+         */
+        if (($queryParams['preselectFilter'] ?? null) && !empty($queryParams['preselectFilterValues'] ?? null)) {
+            $criteria = new Criteria();
+            $criteria->where(Criteria::expr()->in($queryParams['preselectFilter'], $queryParams['preselectFilterValues']));
+            $result = $repository->matching($criteria);
+            foreach ($result as $entity) {
+                $items[] = $entity->toPublicArray();
+            }
+        }
+
+        /**
+         * Apply limit, offset, filters and sorts from query string
+         * ?sort[column1]=ASC&sort[column2]=DESC&filter[column1]=test&filter[column2]=foobar
+         */
         $criteria = new Criteria();
+
         /**
          * apply soft deletes
          * TODO: make this overridable so deleted items can be listed as well
@@ -102,16 +133,12 @@ final class IndexAction implements MiddlewareInterface
         if (\method_exists($repository->getEntityName(), 'deletedAt')) {
             $criteria->andWhere(Criteria::expr()->isNull('deletedAt'));
         }
-        /**
-         * extract limit, offset, filters and sorts from query string
-         */
-        //?sort[column1]=ASC&sort[column2]=DESC&filter[column1]=test&filter[column2]=foobar
-        $queryParams = $request->getQueryParams();
+
         $sorting = [];
         $filterExpressions = [];
         foreach ($queryParams as $key => $value) {
             /**
-             * TODO: why not use $key === 'sort' and $key === 'filter'? legacy code depending on it? -> TBD
+             * TODO: simplify elseif chain? $key === 'sort' and $key === 'filter'? legacy code depending on it?
              */
             if ($key === 'orderBy') {
                 $sorting[$value] = $queryParams['orderDirection'] ?? 'asc';
@@ -161,12 +188,14 @@ final class IndexAction implements MiddlewareInterface
                 continue;
             }
         }
+
         /**
          * apply collected filters
          */
         if (!empty($filterExpressions)) {
             $criteria->andWhere(Criteria::expr()->andX(...$filterExpressions));
         }
+
         /**
          * apply collected sorts
          */
@@ -176,7 +205,7 @@ final class IndexAction implements MiddlewareInterface
             $criteria->orderBy($sorting);
         }
         $result = $repository->matching($criteria);
-        $items = [];
+
         /**
          * TODO: Collection
          */
@@ -185,6 +214,7 @@ final class IndexAction implements MiddlewareInterface
             $items[] = $entity->toPublicArray();
         }
         $count = $repository->count($criteria);
+
         /**
          * TODO: add active constraints to meta
          * this way it is clear for the consumer which constraints were actually applied

@@ -40,4 +40,4 @@ $contentGroup->add("Media", ['admin.api.media.index'], 'fa fa-image', '/media', 
 $contentGroup->add("Translation", ['admin.api.translation.index'], 'fa fa-globe', '/translation', 500);
 
 $admin->addNavigationGroup("Settings", 1000)
-    ->add('Users', ['admin.api.user.index'], 'fa fa-users', '/admin-user', 1000);
+    ->add('Users', ['admin.api.edituser.user.index'], 'fa fa-users', '/admin-user', 1000);

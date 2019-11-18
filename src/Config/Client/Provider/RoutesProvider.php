@@ -85,8 +85,15 @@ final class RoutesProvider implements ClientConfigProviderInterface
             if (\mb_substr($route['name'], 0, 10) !== 'admin.api.') {
                 continue;
             }
+            if (\mb_substr($route['name'], 0, 16) === 'admin.api.basic.') {
+                $routeName = \mb_substr($route['name'], 16);
+            } elseif (\mb_substr($route['name'], 0, 19) === 'admin.api.edituser.') {
+                $routeName = \mb_substr($route['name'], 19);
+            } else {
+                $routeName = \mb_substr($route['name'], 10);
+            }
 
-            $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', \mb_substr($route['name'], 10))));
+            $routeName = \str_replace(' ', '', \ucwords(\str_replace('.', ' ', $routeName)));
             $routeName[0] = \mb_strtolower($routeName[0]);
             $routes[$routeName] = \rtrim((string)$this->adminConfig->uri()->getPath(), '/') . '/api' . $route['path'];
         }
