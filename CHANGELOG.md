@@ -1,9 +1,13 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.11...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.12...develop)
+
+## [v0.3.12 (2019-11-18)](https://github.com/ixocreate/admin-package/compare/0.3.11...0.3.12)
 ### Added
 - added permission to resource
-
+### Changed
+- accept preselected item values in index action for resource selects that filter out missing items on the client side
+  
 ## [v0.3.11 (2019-09-20)](https://github.com/ixocreate/admin-package/compare/0.3.10...0.3.11)
 ### Changed
 - Update to Asset Package v0.2  
