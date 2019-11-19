@@ -30,10 +30,6 @@ final class ProjectProvider implements ClientConfigProviderInterface
         return 'project';
     }
 
-    /**
-     * @param UserInterface|null $user
-     * @return array
-     */
     public function clientConfig(?UserInterface $user = null): array
     {
         return [

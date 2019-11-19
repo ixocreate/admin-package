@@ -34,13 +34,6 @@ final class LogoutAction implements MiddlewareInterface
      */
     private $adminRouter;
 
-    /**
-     * IndexAction constructor.
-     * @param AdminConfig $adminConfig
-     * @param AdminRouter $adminRouter
-     * @param ApplicationConfig $applicationConfig
-     * @param UserRepository $userRepository
-     */
     public function __construct(AdminConfig $adminConfig, AdminRouter $adminRouter, ApplicationConfig $applicationConfig, UserRepository $userRepository)
     {
         $this->adminConfig = $adminConfig;

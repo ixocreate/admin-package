@@ -13,6 +13,7 @@ use Firebase\JWT\JWT;
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\SessionData;
 use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Middleware\TemplateVariablesMiddleware;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Admin\Session\SessionCookie;
@@ -49,6 +50,7 @@ final class LoginAction implements MiddlewareInterface
 
     /**
      * IndexAction constructor.
+     *
      * @param AdminConfig $adminConfig
      * @param AdminRouter $adminRouter
      * @param ApplicationConfig $applicationConfig
@@ -114,12 +116,19 @@ final class LoginAction implements MiddlewareInterface
             }
         }
 
-        $response = new TemplateResponse('admin::auth/login', [
-            'csrf' => $csrf,
-            'errors' => $errors,
-        ]);
-
-        return $response;
+        return new TemplateResponse(
+            'admin::auth/login',
+            [
+                'errors' => $errors,
+            ],
+            \array_merge(
+                $request->getAttribute(TemplateVariablesMiddleware::GLOBAL_DATA, []),
+                [
+                    'title' => 'Login',
+                    'csrf' => $csrf,
+                ]
+            )
+        );
     }
 
     private function getUser(string $email, string $password): ?User

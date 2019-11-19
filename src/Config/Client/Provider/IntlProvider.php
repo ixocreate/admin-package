@@ -30,10 +30,6 @@ final class IntlProvider implements ClientConfigProviderInterface
         return 'intl';
     }
 
-    /**
-     * @param UserInterface|null $user
-     * @return array
-     */
     public function clientConfig(?UserInterface $user = null): array
     {
         if (empty($user)) {

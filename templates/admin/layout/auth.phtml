@@ -11,7 +11,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title><?= (($title ?? null) ? $title . ' - ' : '') . $project->name() ?></title>
+    <title><?= ($title ?? null) ? $title . ' - ' . $project->name() : $project->name() ?></title>
     <base href="/<?= ltrim($project->uri()->getPath(), '/') ?>">
     <meta name="author" content="<?= $project->author() ?>">
     <meta name="description" content="<?= $project->description() ?>">
@@ -22,28 +22,27 @@
     <?php foreach ($styles as $style): ?>
         <link href="<?= $this->asset($style) ?>" rel="stylesheet">
     <?php endforeach ?>
-    <?php foreach (($pluginStyles ?? []) as $style): ?>
-        <link href="<?= $this->asset($style) ?>" rel="stylesheet">
-    <?php endforeach ?>
 </head>
 <body>
-<?= $this->section('content') ?>
-<script>
-  window.config = <?= json_encode($config) ?>;
-  window.config.googleApiKey = '<?= $project->googleMapApiKey() ?>'
-</script>
+<div class="auth" <?= !empty($project->background()) ? 'style="background-image: url(' . $project->background() . ')"' : '' ?>>
+    <div class="auth-content">
+        <div class="auth-box">
+            <?php if (!empty($project->loginMessage())): ?>
+                <div class="auth-message"><?= $project->loginMessage() ?></div>
+            <?php endif; ?>
+            <?php if(!empty($project->loginLogo())): ?>
+                <img class="auth-logo" alt="<?= $project->name() ?> Logo" src="<?= $project->loginLogo() ?>">
+            <?php endif ?>
+            <?= $this->section('content') ?>
+        </div>
+    </div>
+</div>
+<?php /*
+// do not output scripts gathered via TemplateVariablesMiddleware here as it would expose the javascript application
+// TODO: move/split the middleware or find another way of injecting them
 <?php foreach ($scripts as $script): ?>
     <script type="text/javascript" src="<?= $this->asset($script) ?>"></script>
 <?php endforeach ?>
-<script>
-  window.IXO = new IxocreateFactory(config)
-</script>
-<?php foreach (($pluginScripts ?? []) as $script): ?>
-    <script type="text/javascript" src="<?= $this->asset($script) ?>"></script>
-<?php endforeach ?>
-<?= $this->section('scripts') ?>
-<script>
-  IXO.run()
-</script>
+*/?>
 </body>
 </html>

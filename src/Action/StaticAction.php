@@ -24,20 +24,11 @@ final class StaticAction implements MiddlewareInterface
      */
     private $adminConfig;
 
-    /**
-     * IndexAction constructor.
-     * @param AdminConfig $adminConfig
-     */
     public function __construct(AdminConfig $adminConfig)
     {
         $this->adminConfig = $adminConfig;
     }
 
-    /**
-     * @param ServerRequestInterface $request
-     * @param RequestHandlerInterface $handler
-     * @return ResponseInterface
-     */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $file = $this->adminConfig->adminBuildPath() . $request->getAttribute('file', '');

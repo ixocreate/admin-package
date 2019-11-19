@@ -26,18 +26,11 @@ final class NavigationProvider implements ClientConfigProviderInterface
         $this->adminConfig = $adminConfig;
     }
 
-    /**
-     * @return string
-     */
     public static function serviceName(): string
     {
         return 'navigation';
     }
 
-    /**
-     * @param UserInterface|null $user
-     * @return array
-     */
     public function clientConfig(?UserInterface $user = null): array
     {
         if (empty($user)) {

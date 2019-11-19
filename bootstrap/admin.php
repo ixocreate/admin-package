@@ -14,6 +14,7 @@ use Ixocreate\Admin\Config\Client\Provider\NavigationProvider;
 use Ixocreate\Admin\Config\Client\Provider\ProjectProvider;
 use Ixocreate\Admin\Config\Client\Provider\ResourceProvider;
 use Ixocreate\Admin\Config\Client\Provider\RoutesProvider;
+use Ixocreate\Admin\Config\Client\Provider\TranslationsProvider;
 use Ixocreate\Admin\Role\AdministratorRole;
 
 /** @var AdminConfigurator $admin */
@@ -24,6 +25,7 @@ $admin->addClientProvider(NavigationProvider::class);
 $admin->addClientProvider(RoutesProvider::class);
 $admin->addClientProvider(IntlProvider::class);
 $admin->addClientProvider(ResourceProvider::class);
+$admin->addClientProvider(TranslationsProvider::class);
 
 $admin->setName("IXOCREATE");
 $admin->setAuthor("IXOLIT GmbH");

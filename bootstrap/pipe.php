@@ -35,6 +35,9 @@ use Ixocreate\Admin\Middleware\Api\EnforceApiResponseMiddleware;
 use Ixocreate\Admin\Middleware\Api\ErrorMiddleware;
 use Ixocreate\Admin\Middleware\Api\SessionDataMiddleware;
 use Ixocreate\Admin\Middleware\Api\XsrfProtectionMiddleware;
+use Ixocreate\Admin\Middleware\RedirectAuthorizedMiddleware;
+use Ixocreate\Admin\Middleware\RedirectGuestsMiddleware;
+use Ixocreate\Admin\Middleware\TemplateVariablesMiddleware;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Application\Http\Pipe\GroupPipeConfigurator;
 use Ixocreate\Application\Http\Pipe\PipeConfigurator;
@@ -55,7 +58,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->before(AuthorizationGuardMiddleware::class);
             $group->before(ActivityMiddleware::class);
 
-            $group->get('/config', ConfigAction::class, "admin.api.basic.config");
+            // $group->get('/config', ConfigAction::class, "admin.api.basic.config");
 
             $group->get('/auth/user', UserAction::class, "admin.api.basic.auth.user");
 
@@ -95,16 +98,24 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
     $pipe->group('admin.root')(function (GroupPipeConfigurator $group) {
         $group->before(SessionDataMiddleware::class);
         $group->before(AuthorizationMiddleware::class);
+        $group->before(TemplateVariablesMiddleware::class);
 
-        $group->get('[/]', IndexAction::class, "admin.index", -1 * PHP_INT_MAX);
+        $group->group("admin.authorized")(function (GroupPipeConfigurator $group) {
+            $group->before(RedirectGuestsMiddleware::class);
 
-        $group->get('/session', SessionAction::class, "admin.session");
+            $group->get('[/]', IndexAction::class, "admin.index", -1 * PHP_INT_MAX);
+            $group->any('/logout', LogoutAction::class, "admin.logout");
+        });
 
+        $group->group("admin.guest")(function (GroupPipeConfigurator $group) {
+            $group->before(RedirectAuthorizedMiddleware::class);
+
+            $group->any('/login', LoginAction::class, "admin.login");
+            $group->any('/lost-password', LostPasswordAction::class, "admin.lost-password");
+            $group->any('/recover-password', RecoverPasswordAction::class, "admin.recover-password");
+        });
+
+        // $group->get('/session', SessionAction::class, "admin.session");
         $group->get('/static/{file:.*}', StaticAction::class, "admin.static");
-
-        $group->any('/login', LoginAction::class, "admin.login");
-        $group->any('/logout', LogoutAction::class, "admin.logout");
-        $group->any('/lost-password', LostPasswordAction::class, "admin.lost-password");
-        $group->any('/recover-password', RecoverPasswordAction::class, "admin.recover-password");
     });
 });

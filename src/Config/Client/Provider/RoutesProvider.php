@@ -28,11 +28,6 @@ final class RoutesProvider implements ClientConfigProviderInterface
      */
     private $adminConfig;
 
-    /**
-     * RoutesProvider constructor.
-     * @param PipeConfig $pipeConfig
-     * @param AdminConfig $adminConfig
-     */
     public function __construct(PipeConfig $pipeConfig, AdminConfig $adminConfig)
     {
         $this->pipeConfig = $pipeConfig;
@@ -44,10 +39,6 @@ final class RoutesProvider implements ClientConfigProviderInterface
         return 'routes';
     }
 
-    /**
-     * @param UserInterface|null $user
-     * @return array
-     */
     public function clientConfig(?UserInterface $user = null): array
     {
         $routes = [];

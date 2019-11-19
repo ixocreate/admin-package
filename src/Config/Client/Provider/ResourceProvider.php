@@ -49,10 +49,6 @@ final class ResourceProvider implements ClientConfigProviderInterface
         return 'resources';
     }
 
-    /**
-     * @param UserInterface|null $user
-     * @return array
-     */
     public function clientConfig(?UserInterface $user = null): array
     {
         if (empty($user)) {

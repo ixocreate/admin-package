@@ -14,6 +14,7 @@ use Firebase\JWT\JWT;
 use Ixocreate\Admin\Command\User\ChangePasswordCommand;
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Middleware\TemplateVariablesMiddleware;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\CommandBus\CommandBus;
 use Ixocreate\Template\TemplateResponse;
@@ -94,11 +95,20 @@ final class RecoverPasswordAction implements MiddlewareInterface
             }
         }
 
-        return new TemplateResponse('admin::auth/recover-password', [
-            'errors' => $errors,
-            'success' => $success,
-            'validToken' => $validToken,
-            'csrf' => '',
-        ]);
+        return new TemplateResponse(
+            'admin::auth/lost-password',
+            [
+                'errors' => $errors,
+                'success' => $success,
+                'validToken' => $validToken,
+            ],
+            \array_merge(
+                $request->getAttribute(TemplateVariablesMiddleware::GLOBAL_DATA, []),
+                [
+                    'title' => 'Lost Password',
+                    'csrf' => '',
+                ]
+            )
+        );
     }
 }

@@ -12,6 +12,7 @@ namespace Ixocreate\Admin\Action\Auth;
 use Firebase\JWT\JWT;
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\User;
+use Ixocreate\Admin\Middleware\TemplateVariablesMiddleware;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Template\Renderer;
@@ -43,11 +44,6 @@ final class LostPasswordAction implements MiddlewareInterface
      */
     private $renderer;
 
-    /**
-     * IndexAction constructor.
-     * @param AdminConfig $adminConfig
-     * @param AdminRouter $adminRouter
-     */
     public function __construct(AdminConfig $adminConfig, AdminRouter $adminRouter, UserRepository $userRepository, Renderer $renderer)
     {
         $this->adminConfig = $adminConfig;
@@ -59,6 +55,7 @@ final class LostPasswordAction implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $csrf = '';
+        $errors = [];
 
         if ($request->getMethod() == 'POST') {
             $data = $request->getParsedBody();
@@ -92,11 +89,19 @@ final class LostPasswordAction implements MiddlewareInterface
             $csrf = $token;
         }
 
-        $templateData = [
-
-        ];
-
-        return new TemplateResponse('admin::auth/lost-password', ['csrf' => $csrf]);
+        return new TemplateResponse(
+            'admin::auth/lost-password',
+            [
+                'errors' => $errors,
+            ],
+            \array_merge(
+                $request->getAttribute(TemplateVariablesMiddleware::GLOBAL_DATA, []),
+                [
+                    'title' => 'Lost Password',
+                    'csrf' => $csrf,
+                ]
+            )
+        );
     }
 
     private function sendEmail(User $user, $token, $minutes)
