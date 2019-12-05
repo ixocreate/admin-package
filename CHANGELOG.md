@@ -1,6 +1,8 @@
 # Release Notes
 
 ## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.12...develop)
+### Fixed
+- Wrap preselect values for resource select as array
 
 ## [v0.3.12 (2019-11-18)](https://github.com/ixocreate/admin-package/compare/0.3.11...0.3.12)
 ### Added
