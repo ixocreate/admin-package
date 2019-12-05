@@ -113,7 +113,11 @@ final class IndexAction implements MiddlewareInterface
          */
         if (($queryParams['preselectFilter'] ?? null) && !empty($queryParams['preselectFilterValues'] ?? null)) {
             $criteria = new Criteria();
-            $criteria->where(Criteria::expr()->in($queryParams['preselectFilter'], $queryParams['preselectFilterValues']));
+            $preselectFilterValues = $queryParams['preselectFilterValues'];
+            if(!\is_array($preselectFilterValues)) {
+                $preselectFilterValues = [$preselectFilterValues];
+            }
+            $criteria->where(Criteria::expr()->in($queryParams['preselectFilter'], $preselectFilterValues));
             $result = $repository->matching($criteria);
             foreach ($result as $entity) {
                 $items[] = $entity->toPublicArray();
