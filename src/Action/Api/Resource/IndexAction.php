@@ -114,7 +114,7 @@ final class IndexAction implements MiddlewareInterface
         if (($queryParams['preselectFilter'] ?? null) && !empty($queryParams['preselectFilterValues'] ?? null)) {
             $criteria = new Criteria();
             $preselectFilterValues = $queryParams['preselectFilterValues'];
-            if(!\is_array($preselectFilterValues)) {
+            if (!\is_array($preselectFilterValues)) {
                 $preselectFilterValues = [$preselectFilterValues];
             }
             $criteria->where(Criteria::expr()->in($queryParams['preselectFilter'], $preselectFilterValues));
