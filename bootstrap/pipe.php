@@ -25,6 +25,7 @@ use Ixocreate\Admin\Action\Auth\LogoutAction;
 use Ixocreate\Admin\Action\Auth\LostPasswordAction;
 use Ixocreate\Admin\Action\Auth\RecoverPasswordAction;
 use Ixocreate\Admin\Action\IndexAction;
+use Ixocreate\Admin\Action\Resource\CustomButtons\CustomButtonsAction;
 use Ixocreate\Admin\Action\Resource\Widgets\WidgetsAction;
 use Ixocreate\Admin\Action\StaticAction;
 use Ixocreate\Admin\Config\AdminConfig;
@@ -87,6 +88,7 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
                 $group->post('/resource/{resource}', CreateAction::class, 'admin.api.resource.create', PHP_INT_MAX * -1);
                 $group->delete('/resource/{resource}/{id}', DeleteAction::class, 'admin.api.resource.delete', PHP_INT_MAX * -1);
                 $group->get('/resource/{resource}/widget/{position}/{type}[/{id}]', WidgetsAction::class, 'admin.api.resource.widgets', PHP_INT_MAX * -1);
+                $group->get('/resource/{resource}/custombutton/{type}[/{id}]', CustomButtonsAction::class, 'admin.api.resource.custombutton', PHP_INT_MAX * -1);
             });
         });
     });
