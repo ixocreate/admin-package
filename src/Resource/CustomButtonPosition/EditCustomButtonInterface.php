@@ -14,5 +14,5 @@ use Ixocreate\Admin\UserInterface;
 
 interface EditCustomButtonInterface
 {
-    public function receiveAboveEditCustomButtons(UserInterface $user, CustomButtonCollectorInterface $customButtonCollector, string $id): void;
+    public function receiveEditCustomButtons(UserInterface $user, CustomButtonCollectorInterface $customButtonCollector, string $id): void;
 }

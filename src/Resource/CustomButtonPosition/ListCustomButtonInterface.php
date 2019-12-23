@@ -14,5 +14,5 @@ use Ixocreate\Admin\UserInterface;
 
 interface ListCustomButtonInterface
 {
-    public function receiveAboveListCustomButtons(UserInterface $user, CustomButtonCollectorInterface $customButtonCollector): void;
+    public function receiveListCustomButtons(UserInterface $user, CustomButtonCollectorInterface $customButtonCollector): void;
 }

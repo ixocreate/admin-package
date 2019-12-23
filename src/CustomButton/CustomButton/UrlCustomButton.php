@@ -27,6 +27,7 @@ final class UrlCustomButton implements CustomButtonInterface
     private $title = '';
     private $icon = '';
     private $link = '';
+    private $target = 'self';
 
     /**
      * @return int
@@ -34,6 +35,14 @@ final class UrlCustomButton implements CustomButtonInterface
     public function size(): int
     {
         return $this->size;
+    }
+
+    /**
+     * @return string
+     */
+    public function target(): string
+    {
+        return $this->target;
     }
 
     /**
@@ -121,6 +130,18 @@ final class UrlCustomButton implements CustomButtonInterface
     }
 
     /**
+     * @param string $target
+     * @return UrlCustomButton
+     */
+    public function withTarget(string $target): UrlCustomButton
+    {
+        $customButton = clone $this;
+        $customButton->target = $target;
+
+        return $customButton;
+    }
+
+    /**
      * @param string $title
      * @return UrlCustomButton
      */
@@ -172,6 +193,7 @@ final class UrlCustomButton implements CustomButtonInterface
             'title' => $this->title(),
             'link' => $this->link(),
             'icon' => $this->icon(),
+            'target' => $this->target(),
         ];
     }
 }
