@@ -1,8 +1,12 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.13...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.14...develop)
 
-## [v0.3.12 (2019-12-05)](https://github.com/ixocreate/admin-package/compare/0.3.12...0.3.13)
+## [v0.3.14 (2020-02-17](https://github.com/ixocreate/admin-package/compare/0.3.13...0.3.14)
+### Changed
+- update dflydev/fig-cookies
+
+## [v0.3.13 (2019-12-05)](https://github.com/ixocreate/admin-package/compare/0.3.12...0.3.13)
 ### Fixed
 - Wrap preselect values for resource select as array
 
