@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.14...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.15...develop)
+
+## [v0.3.15 (2020-02-21](https://github.com/ixocreate/admin-package/compare/0.3.14...0.3.15)
+### Fixed
+- Do not use AND instead of OR for search in index query to accommodate to multiple searchable fields in list definition
 
 ## [v0.3.14 (2020-02-17](https://github.com/ixocreate/admin-package/compare/0.3.13...0.3.14)
 ### Changed

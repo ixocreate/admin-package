@@ -140,6 +140,7 @@ final class IndexAction implements MiddlewareInterface
 
         $sorting = [];
         $filterExpressions = [];
+        $searchExpressions = [];
         foreach ($queryParams as $key => $value) {
             /**
              * TODO: simplify elseif chain? $key === 'sort' and $key === 'filter'? legacy code depending on it?
@@ -175,7 +176,7 @@ final class IndexAction implements MiddlewareInterface
                     if (!$element->searchable()) {
                         continue;
                     }
-                    $filterExpressions[] = $criteria::expr()->contains($element->name(), $value);
+                    $searchExpressions[] = $criteria::expr()->contains($element->name(), $value);
                 }
                 continue;
             } elseif ($key === 'offset') {
@@ -198,6 +199,13 @@ final class IndexAction implements MiddlewareInterface
          */
         if (!empty($filterExpressions)) {
             $criteria->andWhere(Criteria::expr()->andX(...$filterExpressions));
+        }
+
+        /**
+         * apply collected search expressions
+         */
+        if (!empty($searchExpressions)) {
+            $criteria->andWhere(Criteria::expr()->orX(...$searchExpressions));
         }
 
         /**
