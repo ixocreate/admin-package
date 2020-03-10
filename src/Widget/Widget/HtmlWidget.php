@@ -27,7 +27,7 @@ final class HtmlWidget implements WidgetInterface
      * @var array
      */
     private $data = [
-        'html' => ''
+        'html' => '',
     ];
 
     /**
@@ -85,7 +85,6 @@ final class HtmlWidget implements WidgetInterface
 
         return $widget;
     }
-
 
     /**
      * @return array
