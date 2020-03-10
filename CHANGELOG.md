@@ -1,6 +1,8 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.16...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.17...develop)
+
+## [v0.3.17 (2020-03-10](https://github.com/ixocreate/admin-package/compare/0.3.16...0.3.17)
 ### Changed
 - Accept dflydev/fig-cookies ^1.0|^2.0
 
