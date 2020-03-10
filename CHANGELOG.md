@@ -1,6 +1,10 @@
 # Release Notes
 
-## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.15...develop)
+## [Unreleased](https://github.com/ixocreate/admin-package/compare/0.3.16...develop)
+
+## [v0.3.16 (2020-03-10](https://github.com/ixocreate/admin-package/compare/0.3.15...0.3.16)
+### Added
+- HtmlWidget
 
 ## [v0.3.15 (2020-02-21](https://github.com/ixocreate/admin-package/compare/0.3.14...0.3.15)
 ### Fixed
