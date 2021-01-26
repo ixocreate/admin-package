@@ -25,7 +25,7 @@ use stdClass;
  */
 class PermissionTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $voterSubManager = $this->createMock(VoterSubManager::class);
         $voterSubManager->method('get')->willReturnCallback(function ($requestedName) {

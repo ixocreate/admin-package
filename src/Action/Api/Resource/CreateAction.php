@@ -20,13 +20,13 @@ use Ixocreate\Database\Repository\RepositoryInterface;
 use Ixocreate\Entity\EntityInterface;
 use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Resource\ResourceSubManager;
+use Laminas\Stratigility\Middleware\CallableMiddlewareDecorator;
+use Laminas\Stratigility\MiddlewarePipe;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Ramsey\Uuid\Uuid;
-use Zend\Stratigility\Middleware\CallableMiddlewareDecorator;
-use Zend\Stratigility\MiddlewarePipe;
 
 final class CreateAction implements MiddlewareInterface
 {

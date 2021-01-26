@@ -122,7 +122,6 @@ final class StatisticOverviewWidget implements WidgetInterface
     }
 
     /**
-     * @param string $icon
      * @param string $title
      * @param string $counter
      * @param string $color

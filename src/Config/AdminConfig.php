@@ -35,6 +35,7 @@ final class AdminConfig implements SegmentProviderInterface
      *
      * @param AdminProjectConfig $adminProjectConfig
      * @param UriInterface $uri
+     * @param Asset $asset
      */
     public function __construct(AdminProjectConfig $adminProjectConfig, UriInterface $uri, Asset $asset)
     {

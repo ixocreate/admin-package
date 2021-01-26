@@ -11,26 +11,28 @@
             "role": "Developer"
         }
     ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
-        "php": "^7.1",
+        "php": "^7.2 || ^8.0",
         "ext-json": "*",
-        "dflydev/fig-cookies": "^1.0|^2.0",
+        "dflydev/fig-cookies": "^3.0",
         "firebase/php-jwt": "^5.0",
-        "ixocreate/application": "^0.2",
+        "ixocreate/application": "dev-develop",
         "ixocreate/admin-frontend": "^0.1",
-        "ixocreate/asset-package": "^0.2",
-        "ixocreate/command-bus-package": "^0.2",
-        "ixocreate/event-package": "^0.1",
-        "ixocreate/filter-package": "^0.1",
-        "ixocreate/intl-package": "^0.1",
-        "ixocreate/resource-package": "^0.2",
-        "ixocreate/template-package": "^0.1",
-        "ramsey/uuid": "^3.7",
-        "yzalis/identicon": "^1.2"
+        "ixocreate/asset-package": "dev-develop",
+        "ixocreate/command-bus-package": "dev-develop",
+        "ixocreate/event-package": "dev-develop",
+        "ixocreate/filter-package": "dev-develop",
+        "ixocreate/intl-package": "dev-develop",
+        "ixocreate/resource-package": "dev-develop",
+        "ixocreate/template-package": "dev-develop",
+        "ramsey/uuid": "^4.0",
+        "yzalis/identicon": "^2.0"
     },
     "require-dev": {
         "ixocreate/coding-standard": "^2.0",
-        "ixocreate/test": "dev-develop"
+        "ixocreate/test": "^0.1"
     },
     "autoload": {
         "psr-4": {

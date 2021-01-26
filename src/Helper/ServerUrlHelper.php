@@ -9,6 +9,6 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Helper;
 
-class ServerUrlHelper extends \Zend\Expressive\Helper\ServerUrlHelper
+class ServerUrlHelper extends \Mezzio\Helper\ServerUrlHelper
 {
 }

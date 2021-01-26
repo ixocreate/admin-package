@@ -38,7 +38,7 @@ use Ixocreate\Admin\Middleware\Api\XsrfProtectionMiddleware;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Application\Http\Pipe\GroupPipeConfigurator;
 use Ixocreate\Application\Http\Pipe\PipeConfigurator;
-use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
+use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
 
 /** @var PipeConfigurator $pipe */
 $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe) {

@@ -11,45 +11,19 @@ namespace Ixocreate\Admin;
 
 use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Permission\Voter\VoterSubManager;
-use Ixocreate\Application\Configurator\ConfiguratorRegistryInterface;
+use Ixocreate\Application\Package\BootInterface;
 use Ixocreate\Application\Package\PackageInterface;
-use Ixocreate\Application\Service\ServiceRegistryInterface;
 use Ixocreate\ServiceManager\ServiceManagerInterface;
 
-class Package implements PackageInterface
+class Package implements PackageInterface, BootInterface
 {
     /**
-     * @param ConfiguratorRegistryInterface $configuratorRegistry
+     * @return array
      */
-    public function configure(ConfiguratorRegistryInterface $configuratorRegistry): void
-    {
-    }
-
-    /**
-     * @param ServiceRegistryInterface $serviceRegistry
-     */
-    public function addServices(ServiceRegistryInterface $serviceRegistry): void
-    {
-        //
-    }
-
-    /**
-     * @return array|null
-     */
-    public function getBootstrapItems(): ?array
+    public function getBootstrapItems(): array
     {
         return [
             AdminBootstrapItem::class,
-        ];
-    }
-
-    /**
-     * @return array|null
-     */
-    public function getConfigProvider(): ?array
-    {
-        return [
-            ConfigProvider::class,
         ];
     }
 
@@ -70,17 +44,9 @@ class Package implements PackageInterface
     }
 
     /**
-     * @return null|string
+     * @return array
      */
-    public function getConfigDirectory(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * @return array|null
-     */
-    public function getDependencies(): ?array
+    public function getDependencies(): array
     {
         return [
             \Ixocreate\Media\Package::class,

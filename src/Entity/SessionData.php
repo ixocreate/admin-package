@@ -38,7 +38,7 @@ final class SessionData implements EntityInterface
     }
 
     /**
-     * @return string
+     * @return UuidType
      */
     public function xsrfToken() : UuidType
     {

@@ -26,6 +26,7 @@ final class SessionDataMiddleware implements MiddlewareInterface
 
     /**
      * SessionDataMiddleware constructor.
+     * @param AdminConfig $adminConfig
      */
     public function __construct(AdminConfig $adminConfig)
     {

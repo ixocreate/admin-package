@@ -9,8 +9,8 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config\Client;
 
-use Ixocreate\ServiceManager\SubManager\SubManager;
+use Ixocreate\ServiceManager\SubManager\AbstractSubManager;
 
-final class ClientConfigProviderSubManager extends SubManager
+final class ClientConfigProviderSubManager extends AbstractSubManager
 {
 }

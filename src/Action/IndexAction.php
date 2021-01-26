@@ -13,11 +13,11 @@ use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Template\TemplateResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response\RedirectResponse;
 
 final class IndexAction implements MiddlewareInterface
 {

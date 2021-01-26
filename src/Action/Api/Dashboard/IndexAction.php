@@ -45,7 +45,7 @@ final class IndexAction implements MiddlewareInterface
     {
         $collector = new WidgetCollector();
 
-        $services = $this->dashboardWidgetSubManager->getServices();
+        $services = $this->dashboardWidgetSubManager->services();
         if (!empty($services)) {
             foreach ($services as $serviceName) {
                 /** @var WidgetProviderInterface $provider */

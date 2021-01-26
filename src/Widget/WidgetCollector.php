@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Widget;
 
 use Ixocreate\Admin\DashboardWidgetInterface;
-use Zend\Stdlib\SplPriorityQueue;
+use Laminas\Stdlib\SplPriorityQueue;
 
 final class WidgetCollector implements WidgetCollectorInterface
 {

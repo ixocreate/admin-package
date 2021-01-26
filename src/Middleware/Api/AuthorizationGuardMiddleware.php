@@ -14,11 +14,11 @@ use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Permission\Permission;
 use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Response\ApiErrorResponse;
+use Mezzio\Router\RouteResult;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Router\RouteResult;
 
 final class AuthorizationGuardMiddleware implements MiddlewareInterface
 {
@@ -35,6 +35,7 @@ final class AuthorizationGuardMiddleware implements MiddlewareInterface
     /**
      * AuthorizationGuardMiddleware constructor.
      * @param UserRepository $userRepository
+     * @param AdminProjectConfig $adminProjectConfig
      */
     public function __construct(UserRepository $userRepository, AdminProjectConfig $adminProjectConfig)
     {

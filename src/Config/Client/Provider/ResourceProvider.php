@@ -61,7 +61,7 @@ final class ResourceProvider implements ClientConfigProviderInterface
 
         $resources = [];
 
-        foreach ($this->resourceSubManager->getServices() as $service) {
+        foreach ($this->resourceSubManager->services() as $service) {
             /** @var ResourceInterface $resource */
             $resource = $this->resourceSubManager->get($service);
 

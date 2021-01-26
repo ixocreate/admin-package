@@ -44,9 +44,11 @@ final class LostPasswordAction implements MiddlewareInterface
     private $renderer;
 
     /**
-     * IndexAction constructor.
+     * LostPasswordAction constructor.
      * @param AdminConfig $adminConfig
      * @param AdminRouter $adminRouter
+     * @param UserRepository $userRepository
+     * @param Renderer $renderer
      */
     public function __construct(AdminConfig $adminConfig, AdminRouter $adminRouter, UserRepository $userRepository, Renderer $renderer)
     {
@@ -119,9 +121,5 @@ final class LostPasswordAction implements MiddlewareInterface
 
         $mailer = new \Swift_Mailer($transport);
         $result = $mailer->send($message);
-    }
-
-    private function getUser($email)
-    {
     }
 }

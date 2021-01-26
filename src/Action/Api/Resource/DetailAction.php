@@ -21,12 +21,12 @@ use Ixocreate\Entity\EntityInterface;
 use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Resource\ResourceSubManager;
 use Ixocreate\Schema\Builder\BuilderInterface;
+use Laminas\Stratigility\Middleware\CallableMiddlewareDecorator;
+use Laminas\Stratigility\MiddlewarePipe;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Stratigility\Middleware\CallableMiddlewareDecorator;
-use Zend\Stratigility\MiddlewarePipe;
 
 final class DetailAction implements MiddlewareInterface
 {

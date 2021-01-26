@@ -20,11 +20,11 @@ use Ixocreate\Admin\Widget\DashboardWidgetProviderInterface;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
 use Ixocreate\Application\Configurator\ConfiguratorInterface;
 use Ixocreate\Application\Service\ServiceRegistryInterface;
-use Ixocreate\Application\Service\SubManagerConfigurator;
+use Ixocreate\Application\ServiceManager\SubManagerConfigurator;
 use Ixocreate\Schema\AdditionalSchemaInterface;
 use Ixocreate\Schema\SchemaSubManager;
 use Ixocreate\ServiceManager\Factory\AutowireFactory;
-use Zend\Stdlib\SplPriorityQueue;
+use Laminas\Stdlib\SplPriorityQueue;
 
 final class AdminConfigurator implements ConfiguratorInterface
 {
@@ -164,6 +164,8 @@ final class AdminConfigurator implements ConfiguratorInterface
 
     /**
      * @param string $logo
+     * @param int $width
+     * @param int $height
      */
     public function setLogo(string $logo, int $width, int $height): void
     {

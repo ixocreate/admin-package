@@ -10,11 +10,11 @@ declare(strict_types=1);
 namespace Ixocreate\Admin\Middleware\Api;
 
 use Ixocreate\Admin\Response\ApiErrorResponse;
+use Laminas\Stratigility\Exception\MissingResponseException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Stratigility\Exception\MissingResponseException;
 
 final class ErrorMiddleware implements MiddlewareInterface
 {

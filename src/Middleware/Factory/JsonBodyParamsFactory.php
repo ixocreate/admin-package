@@ -11,8 +11,7 @@ namespace Ixocreate\Admin\Middleware\Factory;
 
 use Ixocreate\ServiceManager\FactoryInterface;
 use Ixocreate\ServiceManager\ServiceManagerInterface;
-use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
-use Zend\Expressive\Helper\BodyParams\JsonStrategy;
+use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
 
 final class JsonBodyParamsFactory implements FactoryInterface
 {
@@ -25,8 +24,6 @@ final class JsonBodyParamsFactory implements FactoryInterface
     public function __invoke(ServiceManagerInterface $container, $requestedName, array $options = null)
     {
         $bodyParamsFactory = new BodyParamsMiddleware();
-        //$bodyParamsFactory->clearStrategies();
-        //$bodyParamsFactory->addStrategy(new JsonStrategy());
 
         return $bodyParamsFactory;
     }

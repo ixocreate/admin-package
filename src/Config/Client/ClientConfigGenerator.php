@@ -37,7 +37,7 @@ final class ClientConfigGenerator
     }
 
     /**
-     * @param UserInterface $user
+     * @param UserInterface|null $user
      * @return ClientConfig
      */
     public function generate(?UserInterface $user = null): ClientConfig

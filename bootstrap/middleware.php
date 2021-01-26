@@ -11,7 +11,7 @@ namespace Ixocreate\Admin;
 
 use Ixocreate\Admin\Middleware\Factory\JsonBodyParamsFactory;
 use Ixocreate\Application\Http\Middleware\MiddlewareConfigurator;
-use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
+use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
 
 /** @var MiddlewareConfigurator $middleware */
 $middleware->addMiddleware(BodyParamsMiddleware::class, JsonBodyParamsFactory::class);

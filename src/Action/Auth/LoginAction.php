@@ -18,12 +18,12 @@ use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Admin\Session\SessionCookie;
 use Ixocreate\Application\ApplicationConfig;
 use Ixocreate\Template\TemplateResponse;
+use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Ramsey\Uuid\Uuid;
-use Zend\Diactoros\Response\RedirectResponse;
 
 final class LoginAction implements MiddlewareInterface
 {

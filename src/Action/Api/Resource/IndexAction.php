@@ -25,12 +25,12 @@ use Ixocreate\Resource\ResourceInterface;
 use Ixocreate\Resource\ResourceSubManager;
 use Ixocreate\Schema\ListElement\ListElementInterface;
 use Ixocreate\Schema\ListSchema\ListSchemaInterface;
+use Laminas\Stratigility\Middleware\CallableMiddlewareDecorator;
+use Laminas\Stratigility\MiddlewarePipe;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Stratigility\Middleware\CallableMiddlewareDecorator;
-use Zend\Stratigility\MiddlewarePipe;
 
 final class IndexAction implements MiddlewareInterface
 {

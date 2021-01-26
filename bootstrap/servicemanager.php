@@ -22,7 +22,7 @@ use Ixocreate\Admin\Role\RoleSubManager;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Admin\Router\Factory\AdminRouterFactory;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
-use Ixocreate\Application\Service\ServiceManagerConfigurator;
+use Ixocreate\Application\ServiceManager\ServiceManagerConfigurator;
 
 /** @var ServiceManagerConfigurator $serviceManager */
 $serviceManager->addFactory(AdminConfig::class, AdminConfigFactory::class);

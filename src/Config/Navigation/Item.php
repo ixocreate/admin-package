@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Config\Navigation;
 
-use Zend\Stdlib\SplPriorityQueue;
+use Laminas\Stdlib\SplPriorityQueue;
 
 final class Item extends SubItem
 {

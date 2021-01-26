@@ -67,7 +67,7 @@ final class RoleType extends AbstractType implements DatabaseTypeInterface, Elem
         $element = $builder->get(SelectElement::class);
 
         $options = [];
-        foreach ($this->roleSubManager->getServices() as $service) {
+        foreach ($this->roleSubManager->services() as $service) {
             /** @var RoleInterface $role */
             $role = $this->roleSubManager->get($service);
             $options[$role::serviceName()] = $role->getLabel();

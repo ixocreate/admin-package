@@ -16,7 +16,7 @@ use Ixocreate\Application\Uri\ApplicationUri;
 use Ixocreate\Asset\Asset;
 use Ixocreate\ServiceManager\FactoryInterface;
 use Ixocreate\ServiceManager\ServiceManagerInterface;
-use Zend\Diactoros\Uri;
+use Laminas\Diactoros\Uri;
 
 final class AdminConfigFactory implements FactoryInterface
 {
