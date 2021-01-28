@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin\Console;
 
+use Ixocreate\Admin\Command\User\ChangePasswordCommand;
+use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Application\Console\CommandInterface;
 use Ixocreate\CommandBus\CommandBus;
 use Symfony\Component\Console\Command\Command;
@@ -19,7 +21,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 
-final class CreateUserCommand extends Command implements CommandInterface
+final class ResetPasswordCommand extends Command implements CommandInterface
 {
     /**
      * @var CommandBus
@@ -27,12 +29,18 @@ final class CreateUserCommand extends Command implements CommandInterface
     private $commandBus;
 
     /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
      * CreateUserCommand constructor.
      * @param CommandBus $commandBus
      */
-    public function __construct(CommandBus $commandBus)
+    public function __construct(CommandBus $commandBus, UserRepository $userRepository)
     {
         $this->commandBus = $commandBus;
+        $this->userRepository = $userRepository;
         parent::__construct(self::getCommandName());
     }
 
@@ -40,11 +48,10 @@ final class CreateUserCommand extends Command implements CommandInterface
     {
         $this
             ->addArgument('email', InputArgument::REQUIRED, 'Email address')
-            ->addArgument('role', InputArgument::REQUIRED, 'Role')
             ->addOption('password', 'p', InputOption::VALUE_OPTIONAL, 'set password', false)
         ;
 
-        $this->setDescription('Creates a new admin user. Password can be generated or set by a parameter');
+        $this->setDescription('Reset password of an admin user');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
@@ -72,17 +79,24 @@ final class CreateUserCommand extends Command implements CommandInterface
             $output->writeln('Password: ' . $password);
         }
 
+        $user = $this->userRepository->findOneBy(['email' => $input->getArgument('email')]);
+        if ($user === null) {
+            $output->writeln('<error>user not found</error>');
+            return 2;
+        }
+
         $data = [
-            'email' => $input->getArgument('email'),
-            'role' => $input->getArgument('role'),
+            'user' => $user,
             'password' => $password,
             'passwordRepeat' => $password,
-            'status' => 'active',
+            'skipPasswordOld' => true,
         ];
 
-        $result = $this->commandBus->command(\Ixocreate\Admin\Command\User\CreateUserCommand::class, $data);
+        $result = $this->commandBus->command(ChangePasswordCommand::class, $data);
 
         if (!$result->isSuccessful()) {
+            $output->writeln('<error>error updating password</error>');
+            \var_dump($result->messages());
             return 1;
         }
 
@@ -91,6 +105,6 @@ final class CreateUserCommand extends Command implements CommandInterface
 
     public static function getCommandName()
     {
-        return 'admin:create-user';
+        return 'admin:reset-password';
     }
 }

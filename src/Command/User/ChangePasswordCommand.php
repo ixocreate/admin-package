@@ -91,6 +91,7 @@ class ChangePasswordCommand extends AbstractCommand implements FilterableInterfa
     public function filter(): FilterableInterface
     {
         $newData = [];
+        $newData['user'] = $this->dataValue('user');
         $newData['userId'] = (string) $this->dataValue('userId');
         $newData['password'] = (string) $this->dataValue('password');
         $newData['passwordRepeat'] = (string) $this->dataValue('passwordRepeat');
