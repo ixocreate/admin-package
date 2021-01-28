@@ -83,8 +83,10 @@ final class CreateUserCommand extends Command implements CommandInterface
         $result = $this->commandBus->command(\Ixocreate\Admin\Command\User\CreateUserCommand::class, $data);
 
         if (!$result->isSuccessful()) {
-            //
+            return 1;
         }
+
+        return 0;
     }
 
     public static function getCommandName()

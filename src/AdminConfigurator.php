@@ -53,6 +53,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'defaultTimezone' => 'UTC',
         'googleMapApiKey' => null,
         'sessionTimeout' => 7200,
+        'uri' => '/admin'
     ];
 
     /**
@@ -380,6 +381,14 @@ final class AdminConfigurator implements ConfiguratorInterface
     public function setSessionTimeout(int $sessionTimeout): void
     {
         $this->config['sessionTimeout'] = $sessionTimeout;
+    }
+
+    /**
+     * @param string $uri
+     */
+    public function setUri(string $uri): void
+    {
+        $this->config['uri'] = $uri;
     }
 
     /**

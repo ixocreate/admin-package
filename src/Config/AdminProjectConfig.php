@@ -37,34 +37,7 @@ final class AdminProjectConfig implements SerializableServiceInterface
         'woff2' => 'font/woff2',
     ];
 
-    private $config = [
-        'secret'        => '',
-        'author'        => '',
-        'copyright'     => '',
-        'description'   => '',
-        'name'          => '',
-        'poweredBy'     => true,
-        'logo'          => [
-            'image' => '',
-            'width' => 0,
-            'height' => 0,
-        ],
-        'loginLogo'     => '',
-        'icon'          => '',
-        'background'    => '',
-        'loginMessage' => '',
-        'adminBuildPath'=> __DIR__ . '/../../../admin-frontend/build/',
-        'adminBuildFiles' => [],
-        'navigation'    => [],
-        'clientConfigProvider' => [],
-        'userAttributesSchema' => null,
-        'accountAttributesSchema' => null,
-        'localeAttributesSchema' => LocaleAttributesSchema::class,
-        'defaultLocale' => 'en_US',
-        'defaultTimezone' => 'UTC',
-        'googleMapApiKey' => null,
-        'sessionTimeout' => 7200,
-    ];
+    private $config;
 
     /**
      * AdminConfig constructor.
@@ -271,6 +244,14 @@ final class AdminProjectConfig implements SerializableServiceInterface
     public function sessionTimeout(): int
     {
         return $this->config['sessionTimeout'];
+    }
+
+    /**
+     * @return string
+     */
+    public function uri(): string
+    {
+        return $this->config['uri'];
     }
 
     /**

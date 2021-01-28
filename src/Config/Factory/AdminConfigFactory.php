@@ -11,7 +11,6 @@ namespace Ixocreate\Admin\Config\Factory;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Config\AdminProjectConfig;
-use Ixocreate\Application\Config\Config;
 use Ixocreate\Application\Uri\ApplicationUri;
 use Ixocreate\Asset\Asset;
 use Ixocreate\ServiceManager\FactoryInterface;
@@ -30,10 +29,10 @@ final class AdminConfigFactory implements FactoryInterface
      */
     public function __invoke(ServiceManagerInterface $container, $requestedName, array $options = null)
     {
-        /** @var Config $config */
-        $config = $container->get(Config::class);
+        /** @var AdminProjectConfig $config */
+        $config = $container->get(AdminProjectConfig::class);
 
-        $uri = new Uri($config->get('admin.uri'));
+        $uri = new Uri($config->uri());
         if (empty($uri->getHost())) {
             /** @var ApplicationUri $projectUri */
             $projectUri = $container->get(ApplicationUri::class);
@@ -44,6 +43,6 @@ final class AdminConfigFactory implements FactoryInterface
             $uri = $uri->withPort($projectUri->getMainUri()->getPort());
         }
 
-        return new AdminConfig($container->get(AdminProjectConfig::class), $uri, $container->get(Asset::class));
+        return new AdminConfig($config, $uri, $container->get(Asset::class));
     }
 }
