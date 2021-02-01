@@ -169,7 +169,11 @@ final class IndexAction implements MiddlewareInterface
                     if (!$element->searchable()) {
                         continue;
                     }
-                    $filterExpressions[] = $criteria::expr()->contains($element->name(), $filterValue);
+                    if ($element->type() === 'select') {
+                        $filterExpressions[] = $criteria::expr()->eq($element->name(), $filterValue);
+                    } else {
+                        $filterExpressions[] = $criteria::expr()->contains($element->name(), $filterValue);
+                    }
                 }
             } elseif ($key === 'search' && \is_string($value)) {
                 foreach ($listSchema->elements() as $element) {
