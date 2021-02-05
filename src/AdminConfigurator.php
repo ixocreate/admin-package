@@ -53,7 +53,7 @@ final class AdminConfigurator implements ConfiguratorInterface
         'defaultTimezone' => 'UTC',
         'googleMapApiKey' => null,
         'sessionTimeout' => 7200,
-        'uri' => '/admin'
+        'uri' => '/admin',
     ];
 
     /**
