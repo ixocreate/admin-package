@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Account;
+namespace Ixocreate\Admin\Action\Api\Account;
 
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Response\ApiSuccessResponse;

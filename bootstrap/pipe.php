@@ -9,11 +9,12 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin;
 
-use Ixocreate\Admin\Action\Account\ChangeEmailAction;
-use Ixocreate\Admin\Action\Account\ChangeLocaleAction;
-use Ixocreate\Admin\Action\Account\ChangePasswordAction;
+use Ixocreate\Admin\Action\Api\Account\ChangeEmailAction;
+use Ixocreate\Admin\Action\Api\Account\ChangeLocaleAction;
+use Ixocreate\Admin\Action\Api\Account\ChangePasswordAction;
 use Ixocreate\Admin\Action\Api\Auth\UserAction;
 use Ixocreate\Admin\Action\Api\Config\ConfigAction;
+use Ixocreate\Admin\Action\Api\Resource\Widgets\WidgetsAction;
 use Ixocreate\Admin\Action\Api\Resource\CreateAction;
 use Ixocreate\Admin\Action\Api\Resource\DefaultValueAction;
 use Ixocreate\Admin\Action\Api\Resource\DeleteAction;
@@ -25,7 +26,6 @@ use Ixocreate\Admin\Action\Auth\LogoutAction;
 use Ixocreate\Admin\Action\Auth\LostPasswordAction;
 use Ixocreate\Admin\Action\Auth\RecoverPasswordAction;
 use Ixocreate\Admin\Action\IndexAction;
-use Ixocreate\Admin\Action\Resource\Widgets\WidgetsAction;
 use Ixocreate\Admin\Action\StaticAction;
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Middleware\Api\ActivityMiddleware;
@@ -67,13 +67,13 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
             $group->delete('/user/{id}', \Ixocreate\Admin\Action\Api\User\DeleteAction::class, 'admin.api.user.delete');
             $group->post('/user/resetPassword', ChangeEmailAction::class, 'admin.api.user.resetPassword');
 
-            $group->get('/account/config', \Ixocreate\Admin\Action\Account\ConfigAction::class, 'admin.api.basic.account.config');
+            $group->get('/account/config', \Ixocreate\Admin\Action\Api\Account\ConfigAction::class, 'admin.api.basic.account.config');
             $group->patch('/account/email', ChangeEmailAction::class, 'admin.api.account.email');
             $group->patch('/account/locale', ChangeLocaleAction::class, 'admin.api.account.locale');
             $group->patch('/account/password', ChangePasswordAction::class, 'admin.api.account.password');
             $group->patch(
                 '/account/attributes',
-                \Ixocreate\Admin\Action\Account\ChangeAttributesAction::class,
+                \Ixocreate\Admin\Action\Api\Account\ChangeAttributesAction::class,
                 'admin.api.account.attributes'
             );
 

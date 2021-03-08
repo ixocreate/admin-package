@@ -9,7 +9,10 @@ declare(strict_types=1);
 
 namespace Ixocreate\Admin;
 
+use Ixocreate\Admin\Console\CreateUserCommand;
+use Ixocreate\Admin\Console\ResetPasswordCommand;
 use Ixocreate\Application\Console\ConsoleConfigurator;
 
 /** @var ConsoleConfigurator $console */
-$console->addDirectory(__DIR__ . '/../src/Console', true);
+$console->addCommand(CreateUserCommand::class);
+$console->addCommand(ResetPasswordCommand::class);
