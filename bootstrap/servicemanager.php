@@ -23,6 +23,7 @@ use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Admin\Router\Factory\AdminRouterFactory;
 use Ixocreate\Admin\Widget\DashboardWidgetProviderSubManager;
 use Ixocreate\Application\ServiceManager\ServiceManagerConfigurator;
+use Ixocreate\Schema\SchemaSubManager;
 
 /** @var ServiceManagerConfigurator $serviceManager */
 $serviceManager->addFactory(AdminConfig::class, AdminConfigFactory::class);
@@ -35,3 +36,4 @@ $serviceManager->addSubManager(RoleSubManager::class);
 $serviceManager->addSubManager(ClientConfigProviderSubManager::class);
 $serviceManager->addSubManager(DashboardWidgetProviderSubManager::class);
 $serviceManager->addSubManager(VoterSubManager::class);
+$serviceManager->addSubManager(SchemaSubManager::class);

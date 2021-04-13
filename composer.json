@@ -11,28 +11,26 @@
             "role": "Developer"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "php": "^7.2 || ^8.0",
         "ext-json": "*",
         "dflydev/fig-cookies": "^3.0",
         "firebase/php-jwt": "^5.0",
-        "ixocreate/application": "dev-develop",
+        "ixocreate/application": "^0.3.0",
         "ixocreate/admin-frontend": "^0.1",
-        "ixocreate/asset-package": "dev-develop",
-        "ixocreate/command-bus-package": "dev-develop",
-        "ixocreate/event-package": "dev-develop",
-        "ixocreate/filter-package": "dev-develop",
-        "ixocreate/intl-package": "dev-develop",
-        "ixocreate/resource-package": "dev-develop",
-        "ixocreate/template-package": "dev-develop",
+        "ixocreate/asset-package": "^0.3.0",
+        "ixocreate/command-bus-package": "^0.3.0",
+        "ixocreate/event-package": "^0.2.0",
+        "ixocreate/filter-package": "^0.2.0",
+        "ixocreate/intl-package": "^0.2.0",
+        "ixocreate/resource-package": "^0.3.0",
+        "ixocreate/template-package": "^0.2.0",
         "ramsey/uuid": "^4.0",
         "yzalis/identicon": "^2.0"
     },
     "require-dev": {
         "ixocreate/coding-standard": "^2.0",
-        "ixocreate/test": "^0.1"
+        "ixocreate/test": "^0.2"
     },
     "autoload": {
         "psr-4": {
