@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Account;
+namespace Ixocreate\Admin\Action\Api\Account;
 
 use Ixocreate\Admin\Command\Account\ChangeAttributesCommand;
 use Ixocreate\Admin\Entity\User;

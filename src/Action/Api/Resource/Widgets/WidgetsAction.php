@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-namespace Ixocreate\Admin\Action\Resource\Widgets;
+namespace Ixocreate\Admin\Action\Api\Resource\Widgets;
 
 use Ixocreate\Admin\Entity\User;
 use Ixocreate\Admin\Resource\WidgetPosition\AboveCreateWidgetInterface;
