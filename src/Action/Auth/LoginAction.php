@@ -76,8 +76,16 @@ final class LoginAction implements MiddlewareInterface
             'HS512'
         );
 
+        if(method_exists($this->applicationConfig, 'getLoginTypes')) {
+            $useCredentials = !empty($this->applicationConfig->getLoginTypes()['credentials']);
+            $useGoogle = !empty($this->applicationConfig->getLoginTypes()['google']);
+        } else {
+            $useCredentials = true;
+            $useGoogle = false;
+        }
+
         $errors = [];
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST' && $useCredentials) {
             $data = $request->getParsedBody();
 
             try {
@@ -117,6 +125,9 @@ final class LoginAction implements MiddlewareInterface
         $response = new TemplateResponse('admin::auth/login', [
             'csrf' => $csrf,
             'errors' => $errors,
+            'useCredentials' => $useCredentials,
+            'useGoogle' => $useGoogle,
+            'googleStartUrl' => $this->adminRouter->generateUri('admin.google-auth-start'),
         ]);
 
         return $response;

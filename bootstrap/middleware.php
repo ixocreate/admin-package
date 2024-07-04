@@ -62,6 +62,8 @@ $middleware->addMiddleware(Api\User\DetailAction::class);
 $middleware->addMiddleware(Api\User\IndexAction::class);
 $middleware->addMiddleware(Api\User\UpdateAction::class);
 $middleware->addMiddleware(Auth\LoginAction::class);
+$middleware->addMiddleware(Auth\GoogleAuthStartAction::class);
+$middleware->addMiddleware(Auth\GoogleAuthCallbackAction::class);
 $middleware->addMiddleware(Auth\LogoutAction::class);
 $middleware->addMiddleware(Auth\LostPasswordAction::class);
 $middleware->addMiddleware(Auth\RecoverPasswordAction::class);

@@ -21,6 +21,8 @@ use Ixocreate\Admin\Action\Api\Resource\DetailAction;
 use Ixocreate\Admin\Action\Api\Resource\UpdateAction;
 use Ixocreate\Admin\Action\Api\Resource\Widgets\WidgetsAction;
 use Ixocreate\Admin\Action\Api\Session\SessionAction;
+use Ixocreate\Admin\Action\Auth\GoogleAuthCallbackAction;
+use Ixocreate\Admin\Action\Auth\GoogleAuthStartAction;
 use Ixocreate\Admin\Action\Auth\LoginAction;
 use Ixocreate\Admin\Action\Auth\LogoutAction;
 use Ixocreate\Admin\Action\Auth\LostPasswordAction;
@@ -106,5 +108,8 @@ $pipe->segmentPipe(AdminConfig::class, 2000000)(function (PipeConfigurator $pipe
         $group->any('/logout', LogoutAction::class, "admin.logout");
         $group->any('/lost-password', LostPasswordAction::class, "admin.lost-password");
         $group->any('/recover-password', RecoverPasswordAction::class, "admin.recover-password");
+
+        $group->any('/google-auth-start', GoogleAuthStartAction::class, "admin.google-auth-start");
+        $group->any('/google-auth-callback', GoogleAuthCallbackAction::class, "admin.google-auth-callback");
     });
 });

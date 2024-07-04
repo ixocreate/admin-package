@@ -60,6 +60,10 @@ final class AuthorizationMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
+        if ($user->deletedAt() !== null) {
+            return $handler->handle($request);
+        }
+
         return $handler->handle(
             $request
             ->withAttribute(User::class, $user)

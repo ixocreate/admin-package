@@ -16,6 +16,7 @@
         "ext-json": "*",
         "dflydev/fig-cookies": "^3.0",
         "firebase/php-jwt": "^5.0",
+        "google/apiclient": "^2.0",
         "ixocreate/application": "^0.3.0",
         "ixocreate/admin-frontend": "^0.1",
         "ixocreate/asset-package": "^0.3.0",
