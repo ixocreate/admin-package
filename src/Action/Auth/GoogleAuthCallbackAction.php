@@ -44,8 +44,9 @@ final class GoogleAuthCallbackAction implements MiddlewareInterface {
 
         if ($googleHelper->isAllowed()) {
             try {
-                if (isset($_GET['code'])) {
-                    $googleUser = $googleHelper->getUser($_GET['code']);
+                $queryParams = $request->getQueryParams();
+                if (isset($queryParams['code'])) {
+                    $googleUser = $googleHelper->getUser($queryParams['code']);
                     if ($googleHelper->userIsAllowed($googleUser)) {
                         $user = $this->getUser($googleUser);
                         $sessionData = new SessionData([
@@ -63,6 +64,8 @@ final class GoogleAuthCallbackAction implements MiddlewareInterface {
                         $this->userRepository->flush($this->userRepository->save($user));
 
                         return $response;
+                    } else {
+                        return new RedirectResponse($this->adminRouter->generateUri('admin.login') . '?' . \http_build_query(['error' => 'User not allowed to log in']));
                     }
                 }
             } catch (\Throwable $e) {
@@ -70,7 +73,7 @@ final class GoogleAuthCallbackAction implements MiddlewareInterface {
             }
         }
 
-        return new RedirectResponse($this->adminRouter->generateUri('admin.login'));
+        return new RedirectResponse($this->adminRouter->generateUri('admin.login') . '?' . \http_build_query(['error' => 'Google login failed']));
     }
 
     private function getUser(GoogleUser $googleUser): ?User {

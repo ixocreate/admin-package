@@ -64,6 +64,8 @@ final class LoginAction implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        $queryParams = $request->getQueryParams();
+
         $csrf = JWT::encode(
             [
                 'iat' => \time(),
@@ -85,6 +87,9 @@ final class LoginAction implements MiddlewareInterface
         }
 
         $errors = [];
+        if(!empty($queryParams['error'])) {
+            $errors[] = $queryParams['error'];
+        }
         if ($request->getMethod() == 'POST' && $useCredentials) {
             $data = $request->getParsedBody();
 
