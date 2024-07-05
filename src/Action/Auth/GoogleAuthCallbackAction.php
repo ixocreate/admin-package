@@ -40,7 +40,7 @@ final class GoogleAuthCallbackAction implements MiddlewareInterface {
      * @throws Exception
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface {
-        $googleHelper = new GoogleAuthHelper($this->applicationConfig, $this->adminConfig);
+        $googleHelper = new GoogleAuthHelper($this->applicationConfig, $this->adminConfig, $this->applicationUri);
 
         if ($googleHelper->isAllowed()) {
             try {
