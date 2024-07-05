@@ -14,14 +14,17 @@ use GuzzleHttp\Client;
 use Ixocreate\Admin\Config\AdminConfig;
 use Ixocreate\Admin\Entity\GoogleUser;
 use Ixocreate\Application\ApplicationConfig;
+use Ixocreate\Application\Uri\ApplicationUri;
 
 class GoogleAuthHelper {
     private ApplicationConfig $applicationConfig;
     private AdminConfig $adminConfig;
+    private ApplicationUri $applicationUri;
 
-    public function __construct(ApplicationConfig $applicationConfig, AdminConfig $adminConfig) {
+    public function __construct(ApplicationConfig $applicationConfig, AdminConfig $adminConfig, ApplicationUri $applicationUri) {
         $this->applicationConfig = $applicationConfig;
         $this->adminConfig = $adminConfig;
+        $this->applicationUri = $applicationUri;
     }
 
     public function isAllowed(): bool {
@@ -42,11 +45,12 @@ class GoogleAuthHelper {
      */
     public function getClient(): \Google_Client {
         $this->throwIfNotAllowed();
+        $redirectUri = $this->applicationUri->getMainUrl() . $this->adminConfig->uri()->getPath() . '/google-auth-callback';
 
         $client = new \Google_Client();
         $client->setClientId($this->getClientId());
         $client->setClientSecret($this->getClientSecret());
-        $client->setRedirectUri((empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]" . $this->adminConfig->uri()->getPath() . '/google-auth-callback');
+        $client->setRedirectUri($redirectUri);
         $client->addScope('https://www.googleapis.com/auth/userinfo.email');
         $client->addScope('https://www.googleapis.com/auth/userinfo.profile');
         if ($this->getAllowedGroups() > 0) {

@@ -13,6 +13,7 @@ use Ixocreate\Admin\Repository\UserRepository;
 use Ixocreate\Admin\Router\AdminRouter;
 use Ixocreate\Admin\Session\SessionCookie;
 use Ixocreate\Application\ApplicationConfig;
+use Ixocreate\Application\Uri\ApplicationUri;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -25,12 +26,14 @@ final class GoogleAuthCallbackAction implements MiddlewareInterface {
     private AdminRouter $adminRouter;
     private ApplicationConfig $applicationConfig;
     private UserRepository $userRepository;
+    private ApplicationUri $applicationUri;
 
-    public function __construct(AdminConfig $adminConfig, AdminRouter $adminRouter, UserRepository $userRepository, ApplicationConfig $applicationConfig) {
+    public function __construct(AdminConfig $adminConfig, AdminRouter $adminRouter, UserRepository $userRepository, ApplicationConfig $applicationConfig, ApplicationUri $applicationUri) {
         $this->adminConfig = $adminConfig;
         $this->adminRouter = $adminRouter;
         $this->userRepository = $userRepository;
         $this->applicationConfig = $applicationConfig;
+        $this->applicationUri = $applicationUri;
     }
 
     /**
